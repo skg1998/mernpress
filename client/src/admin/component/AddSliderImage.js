@@ -13,19 +13,25 @@ const useStyles = (theme) => ({
   });
 
 class AddSlidderImage extends Component {
-    state = {
-        files: []
-    };
-
+  constructor() {
+    super();
+    this.state = {
+      files:[]
+    }
+  }
     handleSubmit = event => {
         event.preventDefault();
-        const slidderImage = {
-            files: this.state.files
+        const { files } = this.state;
+
+        console.log("files",files);
+
+        let formData = new FormData();
+
+        for (let i = 0; i < files.length; i++) {
+          formData.append(`files[${i}]`, files[i])
         }
 
-        console.log("slidderImage",slidderImage);
-
-        Api.AddSlider(slidderImage).then((data) => {
+        Api.AddSlider(formData).then((data) => {
             if (data.error) {
               console.log(data.error)
             } else {
@@ -33,33 +39,10 @@ class AddSlidderImage extends Component {
             }
           })
     }
-
-    fileData = () => { 
-        if (this.state.files[0]) { 
-          return ( 
-            <div> 
-              <h2>File Details:</h2> 
-              <p>File Name: {this.state.files[0].name}</p> 
-              <p>File Type: {this.state.files[0].type}</p> 
-              <p> 
-                Last Modified:{" "} 
-                {this.state.files[0].lastModifiedDate.toDateString()} 
-              </p> 
-            </div> 
-          ); 
-        } else { 
-          return ( 
-            <div> 
-              <br /> 
-              <h4>Choose Image before upload </h4> 
-            </div> 
-          ); 
-        } 
-      }; 
     
     handleChange = (e) => {
         this.setState({
-            files: [...this.state.files, ...e.target.files] 
+            files: e.target.files 
         });
     }
 
@@ -90,7 +73,6 @@ class AddSlidderImage extends Component {
                     </form>
                 </Card>
             </Grid> 
-            {this.fileData()}
         </div>
         );
   }

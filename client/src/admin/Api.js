@@ -108,18 +108,14 @@ export const AddShop = () => {
 
 
 export const AddSlider = (data) => {
-    console.log(data.files)
-    var submitData = qs.stringify({
-        "images": data.files
-    });
-    console.log("submitData",submitData)
+    console.log("data",data)
     const configs = {
         method: 'post',
         url: BASE_URL + "slidder/",
         headers: { 
             Accept: "application/json",
         },
-        data : submitData
+        data : data
       };
 
     return new Promise((resolve, reject) => {
