@@ -2,6 +2,7 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
+var bodyParser = require('body-parser')
 var logger = require("morgan");
 var compress = require("compression");
 var cors = require("cors");
@@ -29,6 +30,12 @@ mongoose.connect(
 );
 
 var app = express();  
+
+// support parsing of application/json type post data
+app.use(bodyParser.json());
+
+//support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

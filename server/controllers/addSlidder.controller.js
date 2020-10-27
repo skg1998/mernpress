@@ -5,8 +5,8 @@ const formidable =( 'formidable')
 const fs =( 'fs')
 
 const addImageSlidder = (req, res, next) => {
-    const obj = JSON.parse(JSON.stringify(req.body)); 
-    console.log(obj);
+//     const obj = JSON.parse(JSON.stringify(req.body)); 
+//     console.log(obj);
     let form = new formidable.IncomingForm()
     form.keepExtensions = true
     form.parse(req, (err, fields, files) => {
@@ -26,7 +26,8 @@ const addImageSlidder = (req, res, next) => {
             error: errorHandler.getErrorMessage(err)
           })
         }
-        res.json(result)
+        res.status(200).json(result)
+
       })
     })
   }
