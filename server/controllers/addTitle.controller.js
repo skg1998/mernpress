@@ -30,6 +30,60 @@ const addTitle = (req, res, next) => {
   });
 };
 
-module.exports = {
-    addTitle
+const updateTitle = (req,res,next) =>{
+  let form = new formidable.IncomingForm()
+  form.keepExtensions = true
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      return res.status(400).json({
+        message: "Photo could not be uploaded"
+      })
+    }
+    let addtitle = req.addtitle
+    addtitle = _.extend(addtitle, fields)
+    addtitle.updated = Date.now()
+    if(files.image){
+      addtitle.image.data = fs.readFileSync(files.image.path)
+      addtitle.image.contentType = files.image.type
+    }
+    addtitle.save((err, result) => {
+      if (err) {
+        return res.status(400).send({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(result)
+    })
+  })
 }
+
+const deleteTitle = (req,res,next) =>{
+  let title = req.title
+  title.remove((err, deletedtitle) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(deletedtitle)
+  })
+}
+
+const readTitle = (req,res,next) =>{
+  AddTitle.find().exec((err, title) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(title)
+  })
+}
+
+module.exports = {
+    addTitle,
+    updateTitle,
+    deleteTitle,
+    readTitle
+}
+
