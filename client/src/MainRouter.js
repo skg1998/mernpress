@@ -1,43 +1,45 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch,Redirect } from "react-router-dom";
 import Home from "./core/Home";
-import Users from './user/Users';
-import Signup from './user/Signup';
-import Signin from './auth/Signin';
-import Profile from './user/Profile';
-import Menu from './core/Menu';
-import EditProfile from './user/EditProfile';
-import PrivateRoute from './auth/PrivateRoute';
-import NewShop from './shop/NewShop';
-import Shops from './shop/Shops';
-import MyShops from './shop/MyShops';
-import Shop from './shop/Shop'; 
-import EditShop from './shop/EditShop';
-import NewProduct from './product/NewProduct';
-import Product from './product/Product';
-import EditProduct from './product/EditProduct'
-import Cart from './cart/cart';
-import StripeConnect from './user/StripeConnect';
-import ShopOrders from './order/ShopOrders'
-import Admin from './admin/Pages/AdminLogin';
+import Users from './containers/user/Users';
+import Signup from './containers/user/Signup';
+import Signin from './containers/auth/Signin';
+import Profile from './containers/user/Profile';
+import Menu from './components/Navbars/Menu';
+import EditProfile from './containers/user/EditProfile';
+import PrivateRoute from './containers/auth/PrivateRoute';
+import NewShop from './containers/shop/NewShop';
+import Shops from './containers/shop/Shops';
+import MyShops from './containers/shop/MyShops';
+import Shop from './containers/shop/Shop'; 
+import EditShop from './containers/shop/EditShop';
+import NewProduct from './containers/product/NewProduct';
+import Product from './containers/product/Product';
+import EditProduct from './containers/product/EditProduct'
+import Cart from './containers/cart/cart';
+import StripeConnect from './containers/user/StripeConnect';
+import ShopOrders from './containers/order/ShopOrders'
+import AdminLogin from './admin/Pages/AdminLogin';
 import AdminSignup from './admin/Pages/AdminSignup'
-import Dashboard from './admin/Pages/Dashboard';
+import Admin from "./admin/Pages/Admin";
 
 class MainRouter extends Component {
   render() {
     let pathName=window.location.pathname;
     console.log('pathName==>',pathName);
-    let adminpath = pathName==='/admin'
+    let adminloginpath = pathName==='/adminlogin'
     let adminsignupath = pathName === '/adminsignup'
-    let dashboardpath = pathName === '/dashboard'
+    let adminpath = pathName === '/admin'
+    let dashboardpath = pathName === '/admin/dashboard'
+
     return (
       <div>
-        {(adminpath || dashboardpath || adminsignupath) ? "" : <Menu />}
+        {(adminpath || dashboardpath || adminsignupath || adminloginpath) ? "" : <Menu />}
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/admin" component={Admin} />
+          <Route exact path="/adminlogin" component={AdminLogin} />
           <Route exact path="/adminsignup" component={AdminSignup} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route  path="/admin" component={Admin} />
           <Route path="/users" component={Users}/>
           <Route path="/signup" component={Signup}/>
           <Route path="/signin" component={Signin}/>
@@ -54,9 +56,11 @@ class MainRouter extends Component {
           <Route path="/cart" component={Cart}/>
           <Route path="/seller/stripe/connect" component={StripeConnect}/>
           <PrivateRoute path="/seller/orders/:shop/:shopId" component={ShopOrders}/>
+          <Redirect from="/" to="/admin/dashboard" />
         </Switch>
       </div>
     );
   }
 }
+
 export default MainRouter;

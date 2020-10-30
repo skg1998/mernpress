@@ -37,40 +37,13 @@ class AdminLogin extends Component {
             admin: this.state.admin || undefined,
             password:this.state.password || undefined
         }
-        console.log("adminLogin", adminLogin)
-
-        // axios.post('https://localhost:3000/api/v1/title', { adminLogin })
-        // .then(res=>{
-        //     console.log(res);
-        //     console.log(res.data);
-        //     window.location = "/retrieve" 
-        // })
-
         this.setState({redirectToReferrer: true})
     }
-
-    // clickSubmit = () => {
-    //     const user = {
-    //       email: this.state.email || undefined,
-    //       password: this.state.password || undefined
-    //     }
-    
-    //     signin(user).then((data) => {
-    //       if (data.error) {
-    //         this.setState({error: data.error})
-    //       } else {
-    //         auth.authenticate(data, () => {
-    //           this.setState({redirectToReferrer: true})
-    //         })
-    //       }
-    //     })
-    //   }
-
     render() { 
         const { classes } = this.props;
         const {from} = this.props.location.state || {
             from: {
-                pathname: '/dashboard'
+                pathname: '/admin'
             }
         }
 

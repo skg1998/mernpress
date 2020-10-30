@@ -18,10 +18,10 @@ import Person from "@material-ui/icons/Person";
 import Divider from "@material-ui/core/Divider";
 import DeleteUser from "./DeleteUser";
 import auth from "../auth/auth-helper";
-import config from '../config/config';
+import config from '../../config/config';
 import { read } from "./api-user.js";
 import { Redirect, Link } from "react-router-dom";
-import stripeButton from './../assets/images/stripeButton.png';
+import stripeButton from '../../assets/images/stripeButton.png';
 
 
 const styles = theme => ({

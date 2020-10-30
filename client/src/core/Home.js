@@ -2,16 +2,16 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import Suggestions from '../product/Suggestions'
-import {listLatest, listCategories} from '../product/api-product.js'
-import Search from '../product/Search'
-import Categories from '../product/Categories'
-import Slidder from './Slidder'
+import Suggestions from '../containers/product/Suggestions'
+import {listLatest, listCategories} from '../containers/product/api-product.js'
+import Search from '../containers/product/Search'
+import Categories from '../containers/product/Categories'
+import Slidder from '../components/Slidder/Slidder'
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: 30,
+    margin: 15,
   }
 })
 

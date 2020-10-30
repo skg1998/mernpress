@@ -40,8 +40,6 @@ class AdminSignup extends Component {
             password:this.state.password || undefined
         }
 
-        console.log("adminSignup", adminSignup)
-
         Adminsignup(adminSignup).then((data) => {
             if (data.error) {
               this.setState({error: data.error})
@@ -55,7 +53,7 @@ class AdminSignup extends Component {
         const { classes } = this.props;
         const {from} = this.props.location.state || {
             from: {
-                pathname: '/dashboard'
+                pathname: '/adminlogin'
             }
         }
 
@@ -94,7 +92,7 @@ class AdminSignup extends Component {
                         </Grid>
                         <Button  variant="contained" color="primary" type = "submit" style={{ marginTop:'10px',width:'100%'}}> SignUp </Button>
                     </form>
-                    <Link to="/admin">Sing In</Link>
+                    <Link to="/adminlogin">Sing In</Link>
                 </Card>
             </Grid> 
         </div>

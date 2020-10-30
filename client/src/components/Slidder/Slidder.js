@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Button,TextField ,Card ,CardHeader, Grid , withStyles,Paper } from '@material-ui/core';
+import {  Grid , withStyles,Paper } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel'
 
 const useStyles = (theme) => ({
     card: {
         flexGrow: 1,
         maxWidth: "100%",
-        minHeight: "60vh",
+        borderRadius:"25%",
         display: "flex",
         alignItems: "center"
       },
