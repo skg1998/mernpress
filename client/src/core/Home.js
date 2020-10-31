@@ -43,13 +43,13 @@ class Home extends Component {
     return (
       <div className={classes.root}>
         <Slidder />
-        <Grid container spacing={24}>
-          <Grid item xs={8} sm={8}>
-            <Search categories={this.state.categories}/>
-            <Categories categories={this.state.categories}/>
-          </Grid>
-          <Grid item xs={4} sm={4}>
+        <Grid container spacing={2}>
+          <Grid item md={4}>
             <Suggestions products={this.state.suggestions} title={this.state.suggestionTitle}/>
+          </Grid>
+          <Grid item md={8} >
+            {/* <Search categories={this.state.categories}/> */}
+            <Categories categories={this.state.categories}/>
           </Grid>
         </Grid>
       </div>
