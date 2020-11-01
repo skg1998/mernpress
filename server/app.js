@@ -1,24 +1,25 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var bodyParser = require('body-parser')
-var logger = require("morgan");
-var compress = require("compression");
-var cors = require("cors");
-var helmet = require("helmet");
-var config = require("./config/config");
-var mongoose = require("mongoose");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const bodyParser = require('body-parser')
+const logger = require("morgan");
+const compress = require("compression");
+const cors = require("cors");
+const helmet = require("helmet");
+const config = require("./config/config");
+const mongoose = require("mongoose");
 
-var indexRouter = require("./routes/index.routes");
-var usersRouter = require("./routes/users.routes");
-var adminRouter = require('./routes/admin.routes');
+const indexRouter = require("./routes/index.routes");
+const usersRouter = require("./routes/users.routes");
+const adminRouter = require('./routes/admin.routes');
 const authRouter = require("./routes/auth.routes");
 const shopRouter = require("./routes/shop.routes");
 const productRoutes = require("./routes/product.routes");
 const orderRoutes = require("./routes/order.routes");
 const slidderRoutes = require("./routes/addSlidder.routes");
-const TitleRoutes = require("./routes/addTitle.routes")
+const TitleRoutes = require("./routes/addTitle.routes");
+const CategoryRoutes = require("./routes/Category.routes")
 
 const mongoUrl = "mongodb://localhost:27017/lapimenia";
 mongoose.connect(
@@ -59,6 +60,7 @@ app.use('/api/v1/orders', orderRoutes);
 app.use("/api/v1/admin",adminRouter);
 app.use("/api/v1/slidder", slidderRoutes);
 app.use("/api/v1/addtitle",TitleRoutes);
+app.use("api/v1/category",CategoryRoutes);
 
 app.use((err, req, res, next) => {
   if (err.name === "UnauthorizedError") {
@@ -83,3 +85,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+

@@ -16,7 +16,8 @@ const ProductSchema = new mongoose.Schema({
     trim: true
   },
   category: {
-    type: String
+    type: mongoose.Schema.ObjectId,
+    ref:'Category'
   },
   quantity: {
     type: Number,
