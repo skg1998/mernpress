@@ -60,7 +60,7 @@ app.use('/api/v1/orders', orderRoutes);
 app.use("/api/v1/admin",adminRouter);
 app.use("/api/v1/slidder", slidderRoutes);
 app.use("/api/v1/addtitle",TitleRoutes);
-app.use("api/v1/category",CategoryRoutes);
+app.use("/api/v1/category",CategoryRoutes);
 
 app.use((err, req, res, next) => {
   if (err.name === "UnauthorizedError") {

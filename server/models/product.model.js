@@ -1,6 +1,4 @@
 const mongoose = require('mongoose')
-const crypto = require('crypto')
-
 const ProductSchema = new mongoose.Schema({
   name: {
     type: String,

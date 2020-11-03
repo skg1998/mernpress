@@ -13,7 +13,7 @@ router
 
 router
      .route("/:id")
-     .get(addCategoryCtrl.read)  
+     .get(addCategoryCtrl.read);  
 
 router
   .route("/:id")

@@ -30,12 +30,13 @@ const create = (req, res, next) => {
 };
 
 const read = (req,res,next) =>{
-    Category.find().exec((err, category) => {
+    Category.find({}).exec((err, category) => {
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
         })
       }
+      console.log("category",category);
       res.json(category)
     })
 }
@@ -97,4 +98,5 @@ module.exports = {
     update,
     remove
 }
+
 
