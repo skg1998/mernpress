@@ -7,6 +7,8 @@ import {listLatest, listCategories} from '../containers/product/api-product.js'
 import Search from '../containers/product/Search'
 import Categories from '../containers/product/Categories'
 import Slidder from '../components/Slidder/Slidder'
+import ProductSlidder from '../components/Slidder/ProductSlidder'
+import CategorySlidder from '../components/Slidder/CategorySlidder'
 
 const styles = theme => ({
   root: {
@@ -52,6 +54,8 @@ class Home extends Component {
             <Categories categories={this.state.categories}/>
           </Grid>
         </Grid>
+        <CategorySlidder />
+        <ProductSlidder />
       </div>
     )
   }
