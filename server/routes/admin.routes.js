@@ -4,7 +4,15 @@ const adminCtrl = require("../controllers/admin.controller");
 const router = express.Router();
 
 router
-  .route("/")
-  .post(adminCtrl.adminsignup);
+  .route("/signup")
+  .post(adminCtrl.Adminsignup);
+
+router
+  .route("/login")
+  .post(adminCtrl.AdminLogin); 
+
+router
+  .route("/signout")
+  .get(adminCtrl.Adminsignout);  
 
 module.exports = router;

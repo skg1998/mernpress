@@ -1,11 +1,18 @@
-const User = require("../models/user.model");
+const Admin = require("../models/admin.model");
 const _ = require("lodash");
 const errorHandler = require("../helpers/dbErrorHandler");
+const jwt = require("jsonwebtoken");
+const expressJwt = require("express-jwt");
 const config = require('../config/config');
+const jwtSecret = "sdghjak82374ihury83yr3yr2u3h"
 
-const adminsignup = (req, res, next) => {
-    const user = new User(req.body);
-    user.save((err, result) => {
+const Adminsignup = (req, res, next) => {
+  var admin = new Admin({
+      name:req.body.name,
+      email:req.body.email,
+      password:req.body.password
+  });
+  admin.save((err, result) => {
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
@@ -17,20 +24,50 @@ const adminsignup = (req, res, next) => {
     });
   };
 
-const adminLogin = (req,res,next) =>{
-     const user = new User(req.body);
-     user.find()
-     if(user){
-         return res.status(200).json({
-             message : "Admin has Successfully Login"
-         })
-     }else{
-         return res.status(400).json({
-             error :  errorHandler.getErrorMessage(err)
-         });
-     }
-}  
+const AdminLogin = (req, res) => {
+  Admin.findOne(
+    {
+      email: req.body.email
+    },
+    (err, user) => {
+      if (err || !user)
+        return res.status("401").json({
+          error: "User not found"
+        });
+      if (!user.authenticate(req.body.password)) {
+        return res.status("401").send({
+          error: "Email and password don't match."
+        });
+      }
+      const token = jwt.sign(
+        {
+          _id: user._id
+        },
+        // config.jwtSecret
+        jwtSecret
+      );
+      res.cookie("t", token, {
+        expire: new Date() + 9999
+      });
+      return res.json({
+        token,
+        user: { _id: user._id, name: user.name, email: user.email }
+      });
+    }
+  );
+};
+
+
+const Adminsignout = (req, res) => {
+  res.clearCookie("t");
+  return res.status("200").json({
+    message: "signed out"
+  });
+};
 
   module.exports = {
-      adminsignup
+    Adminsignup,
+    AdminLogin,
+    Adminsignout
   };
+

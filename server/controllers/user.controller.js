@@ -1,9 +1,7 @@
 const User = require("../models/user.model");
 const _ = require("lodash");
 const errorHandler = require("../helpers/dbErrorHandler");
-
 const config = require('../config/config');
-
 const stripe = require("stripe");
 const myStripe = stripe(config.stripe_test_secret_key);
 

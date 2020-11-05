@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index.routes");
 const usersRouter = require("./routes/users.routes");
-const adminRouter = require('./routes/admin.routes');
+const AdminRouter = require('./routes/admin.routes');
 const authRouter = require("./routes/auth.routes");
 const shopRouter = require("./routes/shop.routes");
 const productRoutes = require("./routes/product.routes");
@@ -57,7 +57,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/shops/", shopRouter);
 app.use("/api/v1/products/", productRoutes);
 app.use('/api/v1/orders', orderRoutes);
-app.use("/api/v1/admin",adminRouter);
+app.use("/api/v1/admin",AdminRouter);
 app.use("/api/v1/slidder", slidderRoutes);
 app.use("/api/v1/addtitle",TitleRoutes);
 app.use("/api/v1/category",CategoryRoutes);
