@@ -16,7 +16,7 @@ const useStyles = (theme) => ({
 
 class AdminSignup extends Component {
     state = {
-        username:'',
+        name:'',
         email: '',
         password:'',
         redirectToReferrer:false
@@ -35,7 +35,7 @@ class AdminSignup extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const adminSignup = {
-            username: this.state.username || undefined,
+            name: this.state.name || undefined,
             email: this.state.email || undefined,
             password:this.state.password || undefined
         }
@@ -82,7 +82,7 @@ class AdminSignup extends Component {
                     <form onSubmit = { this.handleSubmit } noValidate autoComplete="off">
                         <CardHeader style={{color:'#3f51b5'}} title="Sign Up" />
                         <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="UserName" variant="outlined"  type = "email" name = "username" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
+                            <TextField id="outlined-basic" label="UserName" variant="outlined"  type = "email" name = "name" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField id="outlined-basic" label="Email" variant="outlined"  type = "email" name = "email" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>

@@ -16,7 +16,7 @@ export const AdminSignin = (data) => {
 
     const configs = {
         method: 'post',
-        url: BASE_URL + "users/",
+        url: BASE_URL + "admin/login",
         headers: { 
           'Content-Type': 'application/x-www-form-urlencoded'
         },
@@ -34,14 +34,14 @@ export const AdminSignin = (data) => {
 export const Adminsignup = (data) => {
 
     var submitData = qs.stringify({
-        'username': data.username,
+        'name': data.name,
         'email': data.email,
         'password':data.password,
     });
 
     const configs = {
         method: 'post',
-        url: BASE_URL + "users/",
+        url: BASE_URL + "admin/signup",
         headers: { 
           'Content-Type': 'application/x-www-form-urlencoded'
         },

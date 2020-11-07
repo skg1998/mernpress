@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button,TextField ,Card ,CardHeader, Grid , withStyles } from '@material-ui/core';
 import {Redirect , Link} from 'react-router-dom'
-//import axios from "axios";
+import * as Api from '../Api';
 
 
 const useStyles = (theme) => ({
@@ -16,7 +16,7 @@ const useStyles = (theme) => ({
 
 class AdminLogin extends Component {
     state = {
-        admin: '',
+        email: '',
         password:'',
         redirectToReferrer:false
     };
@@ -34,10 +34,17 @@ class AdminLogin extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const adminLogin = {
-            admin: this.state.admin || undefined,
+            email: this.state.email || undefined,
             password:this.state.password || undefined
         }
-        this.setState({redirectToReferrer: true})
+
+        Api.AdminSignin(adminLogin).then((data) => {
+            if (data.error) {
+              this.setState({error: data.error})
+            } else {
+                this.setState({redirectToReferrer: true})
+            }
+          })
     }
     render() { 
         const { classes } = this.props;
@@ -72,7 +79,7 @@ class AdminLogin extends Component {
                     <form onSubmit = { this.handleSubmit } noValidate autoComplete="off">
                         <CardHeader style={{color:'#3f51b5'}} title="Login" />
                         <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Email" variant="outlined"  type = "email" name = "admin" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
+                            <TextField id="outlined-basic" label="Email" variant="outlined"  type = "email" name = "email" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                         </Grid>
                         <Grid item xs={12}>    
                             <TextField id="outlined-basic" label="Password"  variant="outlined"  type = "password" name = "password" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
