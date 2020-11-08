@@ -1,6 +1,10 @@
 .image-item {
     padding: 10px;
   }
+
+.slidder-image{
+  padding-bottom: 15px;
+}  
   .container {
     margin-top: 20px;
   }
@@ -25,4 +29,27 @@
   }
   .first-carousel-container {
     margin-bottom: 50px;
+  }
+
+  .react-multi-carousel-list{
+     height: 100%;
+     border-radius: 25px;
+  }
+
+  @media only screen and (max-width: 3000px) {
+    .react-multi-carousel-list{
+      height: 350px;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .react-multi-carousel-list{
+      height: 100%;
+    }
+  }
+
+  @media only screen and (max-width: 464px) {
+    .react-multi-carousel-list{
+      height: 100%;
+    }
   }
