@@ -13,7 +13,7 @@ $ # node modules installation (Windows based systems)
 $ # in server folder to run node backend
 $ project_folder/server
 $ npm i
-
+$
 $ # in server folder to run node client (React)
 $ project_folder/client
 $ npm i
