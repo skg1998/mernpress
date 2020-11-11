@@ -1,5 +1,5 @@
 const express = require("express");
-const slidderCtrl = require("../controllers/addSlidder.controller");
+const slidderCtrl = require("../controllers/Slidder.controller");
 
 const router = express.Router();
 

@@ -4,7 +4,7 @@ const errorHandler =( '../helpers/dbErrorHandler')
 const formidable =( 'formidable')
 const fs =( 'fs')
 const profileImage =( '../../client/assets/images/profile-pic.png')
-
+   
 const create = (req, res, next) => {
   let form = new formidable.IncomingForm()
   form.keepExtensions = true

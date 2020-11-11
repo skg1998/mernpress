@@ -1,4 +1,4 @@
-const Slidder =( '../models/addSlidder.model')
+const Slidder =( '../models/Slidder.model')
 const _ =( 'lodash')
 const errorHandler =( '../helpers/dbErrorHandler')
 const formidable =( 'formidable')
