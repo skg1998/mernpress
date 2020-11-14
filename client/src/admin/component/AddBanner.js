@@ -1,51 +1,47 @@
 import React, { Component } from 'react';
-import { Button,TextField ,Card ,CardHeader, Grid , withStyles } from '@material-ui/core';
-//import axios from "axios";
-
+import { Button,Card ,CardHeader, Grid , withStyles } from '@material-ui/core';
+import * as Api from '../Api';
 
 const useStyles = (theme) => ({
     card: {
-        flexGrow: 1,
-        maxWidth: "40%",
-        minHeight: "20vh",
-        display: "flex",
         alignItems: "center"
       },
   });
 
 class AddBanner extends Component {
-    state = {
-        image1: '',
-        image2:'',
-        image:''
-    };
-
+    constructor() {
+        super();
+        this.state = {
+          files:[]
+        }
+      }
     handleSubmit = event => {
         event.preventDefault();
-        const banner = {
-        image1: this.state.image1,
-        image2:this.state.image2,
-        image3:this.state.image3
+        const { files } = this.state;
 
+        console.log("files",files);
+
+        let formData = new FormData();
+
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`files[${i}]`, files[i])
         }
 
-        // axios.post('https://localhost:3000/api/v1/title', { banner })
-        // .then(res=>{
-        //     console.log(res);
-        //     console.log(res.data);
-        //     window.location = "/retrieve" 
-        // })
+        Api.AddBanner(formData).then((data) => {
+            if (data.error) {
+                console.log(data.error)
+            } else {
+                console.log(data)
+            }
+            })
     }
     
-    handleChange = (event) => {
-        const target = event.target;
-        const field =  target.name;
-        const value = target.value
-
+    handleChange = (e) => {
         this.setState({
-            [field]:  value
+            files: e.target.files 
         });
     }
+
 
     render() { 
         const { classes } = this.props;
@@ -57,26 +53,14 @@ class AddBanner extends Component {
                 spacing={0}
                 alignItems="center"
                 justify="center"
-                style={{
-                    position: 'absolute', 
-                    left: '50%', 
-                    top: '50%',
-                    transform: 'translate(-50%, -50%)'
-                }}
             >
                 <Card style={{padding:'20px'}}>
-                    <form onSubmit = { this.handleSubmit } noValidate autoComplete="off">
-                        <CardHeader style={{color:'#3f51b5'}} title="Add Banner" />
+                <form onSubmit = { this.handleSubmit } noValidate autoComplete="off">
+                        <CardHeader style={{color:'#3f51b5'}} title="Add Banner Image" />
                         <Grid item xs={12}>    
-                            <TextField id="outlined-basic"  variant="outlined"  type = "file" name = "image1" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
+                            <input  type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                         </Grid>
-                        <Grid item xs={12}>    
-                            <TextField id="outlined-basic"  variant="outlined"  type = "file" name = "image2" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
-                        </Grid>
-                        <Grid item xs={12}>    
-                            <TextField id="outlined-basic"  variant="outlined"  type = "file" name = "image3" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
-                        </Grid>
-                        <Button  variant="contained" color="primary" type = "submit" style={{ marginTop:'10px',width:'100%'}}> Submit </Button>
+                        <Button  variant="contained" color="primary" type = "submit" style={{ marginTop:'10px',width:'100%'}}> Add Banner Image </Button>
                     </form>
                 </Card>
             </Grid> 

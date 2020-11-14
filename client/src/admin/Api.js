@@ -56,9 +56,19 @@ export const Adminsignup = (data) => {
     })
 }
 
-export const AddBanner = () => {
+export const AddBanner = (data) => {
+    console.log("data",data)
+    const configs = {
+        method: 'post',
+        url: BASE_URL + "banner/",
+        headers: { 
+            Accept: "application/json",
+        },
+        data : data
+      };
+
     return new Promise((resolve, reject) => {
-        axios.post(BASE_URL + "admin/" , config)
+        axios(configs)
             .then(({ status, data }) => {
                 resolve(status == 200 && data ? data : null)
             })
@@ -131,7 +141,7 @@ export const AddTitle = (data) => {
     
     const configs = {
         method: 'post',
-        url: BASE_URL + "addtitle/",
+        url: BASE_URL + "title/",
         headers: { 
             Accept: "application/json",
         },
