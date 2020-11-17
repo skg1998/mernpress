@@ -6,7 +6,7 @@
   padding-bottom: 15px;
 }  
   .container {
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .container-with-dots {
     margin-top: 20px;
@@ -28,7 +28,7 @@
     text-decoration: none;
   }
   .first-carousel-container {
-    margin-bottom: 50px;
+    /* margin-bottom: 20px; */
   }
 
   .react-multi-carousel-list{
@@ -52,4 +52,26 @@
     .react-multi-carousel-list{
       height: 100%;
     }
+  }
+
+
+  .CategoriesBar-root-216 header{
+    top: auto  !important;
+    position: unset !important;
+  }
+
+  .CategoriesBar-root-216 header .react-multi-carousel-list{
+    height:100%
+  }
+
+  /* .first-carousel-container.container ul li{
+      width: 90px;
+  } */
+
+  .CategoriesBar-root-216 .MuiPaper-root .react-multi-carousel-list ul{
+    margin: auto;
+  }
+
+  .CategoriesBar-root-216 .MuiPaper-root .react-multi-carousel-list ul li{
+    width: 90px !important;
   }
