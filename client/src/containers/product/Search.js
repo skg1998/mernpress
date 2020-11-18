@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
 import Divider from '@material-ui/core/Divider'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
@@ -12,31 +11,30 @@ import Products from './Products'
 
 const styles = theme => ({
   card: {
-    margin: 'auto',
-    textAlign: 'center',
-    paddingTop: 10,
-    backgroundColor: '#80808024'
+    backgroundColor: 'white',
+    borderRadius: '25px'
   },
   menu: {
+    padding:5,
     width: 200,
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 130,
-    verticalAlign: 'bottom',
-    marginBottom: '20px'
+    width: 150,
+    backgroundColor: '#459cb3',
+    borderTopLeftRadius: '25px',
+    borderBottomLeftRadius: '25px',
+    boxShadow: 'inset 0 0 10px #000000'
   },
   searchField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     width: 300,
-    marginBottom: '20px'
   },
   searchButton: {
-    minWidth: '20px',
-    height: '30px',
-    padding: '0 8px'
+    backgroundColor: '#459cb3',
+    borderTopRightRadius: '25px',
+    borderBottomRightRadius: '25px',
+    margin: '0px',
+    padding: '12px',
+    boxShadow: 'inset 0 0 10px #000000'
   }
 })
 
@@ -74,8 +72,7 @@ class Search extends Component {
   render() {
     const {classes} = this.props
     return (
-      <div>
-        <Card className={classes.card}>
+        <div className={classes.card}>
           <TextField
             id="select-category"
             select
@@ -110,10 +107,9 @@ class Search extends Component {
           <Button variant="raised" color={'primary'} className={classes.searchButton} onClick={this.search}>
             <SearchIcon/>
           </Button>
-          <Divider/>
+          {/* <Divider/> */}
           <Products products={this.state.results} searched={this.state.searched}/>
-        </Card>
-      </div>
+        </div>
     )
   }
 }
