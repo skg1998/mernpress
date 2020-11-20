@@ -5,10 +5,6 @@ import { Button,TextField ,Card ,CardHeader, Grid , withStyles } from '@material
 
 const useStyles = (theme) => ({
     card: {
-        flexGrow: 1,
-        maxWidth: "40%",
-        minHeight: "20vh",
-        display: "flex",
         alignItems: "center"
       },
   });
@@ -54,12 +50,6 @@ class AddCategory extends Component {
                 spacing={0}
                 alignItems="center"
                 justify="center"
-                style={{
-                    position: 'absolute', 
-                    left: '50%', 
-                    top: '50%',
-                    transform: 'translate(-50%, -50%)'
-                }}
             >
                 <Card style={{padding:'20px'}}>
                     <form onSubmit = { this.handleSubmit } noValidate autoComplete="off">

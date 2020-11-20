@@ -4,6 +4,12 @@ import PagesIcon from '@material-ui/icons/Pages';
 import DashboardPage from "../containers/Dashboard/Dashboard.js";
 import UserProfile from "../containers/UserProfile/UserProfile.js";
 import TableList from "../containers/TableList/TableList.js";
+import AddBanner from "./component/AddBanner";
+import AddCategory from "./component/AddCategory";
+import AddProduct from "./component/AddProduct";
+import AddTitle from "./component/AddProjectTitle"
+import AddShop from "./component/AddShop";
+import AddSlidder from "./component/AddSliderImage"
 
 const dashboardRoutes = [
   {
@@ -11,29 +17,71 @@ const dashboardRoutes = [
     name: "Dashboard",
     icon: Dashboard,
     component: DashboardPage,
-    layout: "/admin"
+    subItem:[],
+    layout: "/admin",
   },
   {
     path: "/user",
     name: "User Profile",
     icon: Person,
     component: UserProfile,
-    layout: "/admin"
+    subItem:[],
+    layout: "/admin",
   },
   {
-    path: "/pages",
-    name: "Pages",
+    path: "/form",
+    name: "Form",
     icon: PagesIcon,
-    component: TableList,
-    layout: "/admin"
+    component: AddTitle,
+    subItem :[
+      {
+        path: "/addTitle",
+        name: "Add Title",
+        icon: PagesIcon,
+        component: AddTitle,
+      },
+      {
+        path: "/addbanner",
+        name: "Add Banner",
+        icon: PagesIcon,
+        component: AddBanner,
+      },
+      {
+        path: "/addcategory",
+        name: "Add Category",
+        icon: PagesIcon,
+        component: AddCategory,
+      },
+      {
+        path: "/addproduct",
+        name: "Add Product",
+        icon: PagesIcon,
+        component: AddProduct,
+      },
+      {
+        path: "/addslidder",
+        name: "Add Slidder",
+        icon: PagesIcon,
+        component: AddSlidder,
+      },
+      {
+        path: "/addshop",
+        name: "Vendors",
+        icon: PagesIcon,
+        component: AddShop,
+      }
+    ],
+    layout: "/admin",
   },
   {
     path: "/table",
     name: "Table List",
     icon: "content_paste",
     component: TableList,
-    layout: "/admin"
+    layout: "/admin",
+    subItem:[]
   }
 ];
 
 export default dashboardRoutes;
+

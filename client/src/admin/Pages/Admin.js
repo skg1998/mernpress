@@ -16,13 +16,24 @@ const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
+        if(prop.subItem.length == 0){
+          return (
+            <Route
+              path={prop.layout + prop.path}
+              component={prop.component}
+              key={key}
+            />
+          );
+        }else{
+          console.log('prop.layout + prop.path + prop.subItem.path',prop.layout + prop.path + prop.subItem.path);
+          return (
+            <Route
+              path={prop.layout + prop.path + prop.subItem.path}
+              component={prop.subItem.component}
+              key={key}
+            />
+          );
+        }
       }
       return null;
     })}
@@ -65,7 +76,7 @@ export default function Admin({ ...rest }) {
       setMobileOpen(false);
     }
   }; 
-
+ 
   React.useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
