@@ -25,11 +25,11 @@ const switchRoutes = (
             />
           );
         }else{
-          console.log('prop.layout + prop.path + prop.subItem.path',prop.layout + prop.path + prop.subItem.path);
+          console.log('prop.layout + prop.path + prop.subItem.path',prop.layout + prop.path + prop.subItem[0].path);
           return (
             <Route
-              path={prop.layout + prop.path + prop.subItem.path}
-              component={prop.subItem.component}
+              path={prop.layout + prop.path + prop.subItem[0].path}
+              component={prop.subItem[0].component}
               key={key}
             />
           );
@@ -40,6 +40,7 @@ const switchRoutes = (
     <Redirect from="/admin" to="/admin/dashboard" />
   </Switch>
 );
+
 
 const useStyles = makeStyles(styles);
 
@@ -123,4 +124,5 @@ export default function Admin({ ...rest }) {
     </div>
   );
 }
+
 

@@ -29,10 +29,9 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/form",
-    name: "Form",
+    path: "/page",
+    name: "Page",
     icon: PagesIcon,
-    component: AddTitle,
     subItem :[
       {
         path: "/addTitle",
@@ -41,7 +40,7 @@ const dashboardRoutes = [
         component: AddTitle,
       },
       {
-        path: "/addbanner",
+        path: "/addbanner", 
         name: "Add Banner",
         icon: PagesIcon,
         component: AddBanner,
