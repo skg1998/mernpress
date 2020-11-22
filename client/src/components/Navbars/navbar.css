@@ -1,10 +1,9 @@
 .main-menu{
   position: fixed;
-  z-index: 99;
+  z-index: 9999;
   width: 100%;
 }
 
-/* navbar */
 .searchbar{
     margin: auto;
     display: inline;
@@ -43,12 +42,11 @@
 .responsive-search-bar header{
   top: auto !important;
   position: sticky;
-  background-color: #459cb3 !important;
+  padding: 5px;
 }
 
 .responsive-search-bar header .Search-card-72{
   display: flex;
-  margin: auto;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -61,4 +59,9 @@
   .responsive-search-bar{
     display: inline;
   }
+}
+
+.CategoriesBar-root-16 header{
+  top: auto !important;
+  position: relative !important;
 }

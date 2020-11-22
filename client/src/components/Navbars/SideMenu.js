@@ -266,7 +266,7 @@ class SideMenu extends React.Component {
       <div style={styles.footer}>
         <div style={styles.line}>
         </div>
-        <div style={styles.text}>{props.title} created by Smashcat &copy; 2017
+        <div style={styles.text}>{props.title} created by Mernpress &copy; 2020
         </div>
       </div>
     )
