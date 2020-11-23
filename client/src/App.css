@@ -28,6 +28,10 @@
   color: #61dafb;
 }
 
+.MuiAppBar-colorPrimary{
+  background-color: #459cb3 !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -37,6 +41,37 @@
   }
 }
 
-.Carousel-root-243{
-  width: inherit !important;
-} 
+.MuiAccordionSummary-root{
+  padding: 0px !important;
+}
+
+.MuiAccordionSummary-expandIcon{
+   color: white !important;
+}
+
+.MuiAccordionSummary-expandIcon:hover{
+  color: white !important;
+}
+
+.MuiAccordionSummary-content{
+  display: block !important;
+}
+
+
+.MuiAccordion-root.MuiPaper-root{
+  background-color: transparent !important;
+}
+
+.MuiAccordionSummary-content.Mui-expanded {
+  margin:0px !important;
+}
+
+.MuiAccordionDetails-root{
+  display: block !important;
+}
+
+
+
+
+
+

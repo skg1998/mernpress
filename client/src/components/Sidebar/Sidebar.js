@@ -6,6 +6,10 @@ import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -21,6 +25,7 @@ export default function Sidebar(props) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   }
   const { color, logo, image, logoText, routes } = props;
+  
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
@@ -36,45 +41,105 @@ export default function Sidebar(props) {
             [" " + classes[color]]: activeRoute(prop.layout + prop.path)
           });
         }
+
         const whiteFontClasses = classNames({
           [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path)
         });
-        return (
-          <NavLink
-            to={prop.layout + prop.path}
-            className={activePro + classes.item}
-            activeClassName="active"
-            key={key}
-          >
-            <ListItem button className={classes.itemLink + listItemClasses}>
-              {typeof prop.icon === "string" ? (
-                <Icon
-                  className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive
+
+        if(prop.subItem.length == 0){
+          return (
+            <NavLink
+              to={prop.layout + prop.path}
+              className={activePro + classes.item}
+              activeClassName="active"
+              key={key}
+            >
+              <ListItem button className={classes.itemLink + listItemClasses}>
+                {typeof prop.icon === "string" ? (
+                  <Icon
+                    className={classNames(classes.itemIcon, whiteFontClasses, {
+                      [classes.itemIconRTL] : props.rtlActive
+                    })}
+                  >
+                    {prop.icon}
+                  </Icon>
+                ) : (
+                  <prop.icon
+                    className={classNames(classes.itemIcon, whiteFontClasses, {
+                      [classes.itemIconRTL]: props.rtlActive
+                    })}
+                  />
+                )}
+                <ListItemText
+                  primary={prop.name}
+                  className={classNames(classes.itemText, whiteFontClasses, {
+                    [classes.itemTextRTL]: props.rtlActive
                   })}
-                >
-                  {prop.icon}
-                </Icon>
-              ) : (
-                <prop.icon
-                  className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive
-                  })}
+                  disableTypography={true}
                 />
-              )}
-              <ListItemText
-                primary={props.rtlActive ? prop.rtlName : prop.name}
-                className={classNames(classes.itemText, whiteFontClasses, {
-                  [classes.itemTextRTL]: props.rtlActive
-                })}
-                disableTypography={true}
-              />
-            </ListItem>
-          </NavLink>
-        );
+              </ListItem>
+            </NavLink>
+          );
+        }else{
+          return (
+            <Accordion className={activePro + classes.item}>
+            <AccordionSummary
+              // expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+            >
+              <ListItem button className={classes.itemLink + listItemClasses}>
+                {typeof prop.icon === "string" ? (
+                  <Icon
+                    className={classNames(classes.itemIcon, whiteFontClasses, {
+                      [classes.itemIconRTL] : props.rtlActive
+                    })}
+                  >
+                    {prop.icon}
+                  </Icon>
+                ) : (
+                  <prop.icon
+                    className={classNames(classes.itemIcon, whiteFontClasses, {
+                      [classes.itemIconRTL]: props.rtlActive
+                    })}
+                  />
+                )}
+                <ListItemText
+                  primary={prop.name}
+                  className={classNames(classes.itemText, whiteFontClasses, {
+                    [classes.itemTextRTL]: props.rtlActive
+                  })}
+                  disableTypography={true}
+                />
+              </ListItem>
+            </AccordionSummary>
+            <AccordionDetails>
+                {prop.subItem.map(e => (
+                    <NavLink
+                    to={prop.layout + prop.path + e.path}
+                    className={activePro + classes.item}
+                    activeClassName="active"
+                    //key={key}
+                  >
+                    <ListItem button className={classes.itemLink + listItemClasses}>
+                      <ListItemText
+                        primary={e.name}
+                        className={classNames(classes.itemText, whiteFontClasses, {
+                          [classes.itemTextRTL]: props.rtlActive
+                        })}
+                        disableTypography={true}
+                      />
+                    </ListItem>
+                  </NavLink>
+                ))}
+            </AccordionDetails>
+          </Accordion>
+          );
+        }
       })}
     </List>
   );
+ 
+
   var brand = (
     <div className={classes.logo}>
       <a
@@ -91,6 +156,8 @@ export default function Sidebar(props) {
       </a>
     </div>
   );
+
+
   return (
     <div>
       <Hidden mdUp implementation="css">

@@ -25,13 +25,17 @@ const switchRoutes = (
             />
           );
         }else{
-          console.log('prop.layout + prop.path + prop.subItem.path',prop.layout + prop.path + prop.subItem[0].path);
+
+          console.log(
+            prop.subItem.map(d => prop.layout + prop.path + d.path) )
           return (
-            <Route
-              path={prop.layout + prop.path + prop.subItem[0].path}
-              component={prop.subItem[0].component}
-              key={key}
-            />
+              prop.subItem.map(e => (
+                <Route
+                path={prop.layout + prop.path + e.path}
+                component={e.component}
+                key={key}
+              /> 
+            ))
           );
         }
       }
