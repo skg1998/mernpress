@@ -12,7 +12,8 @@ import Products from './Products'
 const styles = theme => ({
   card: {
     backgroundColor: 'white',
-    borderRadius: '25px'
+    backgroundColor: '#459cb3',
+    margin:'auto'
   },
   menu: {
     padding:5,
@@ -27,6 +28,7 @@ const styles = theme => ({
   },
   searchField: {
     width: 300,
+    backgroundColor: 'white'
   },
   searchButton: {
     backgroundColor: '#459cb3',

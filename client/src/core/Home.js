@@ -9,7 +9,7 @@ import MainSlidder from '../components/Slidder/MainSlidder'
 import ProductSlidder from '../components/Slidder/ProductSlidder'
 import CategorySlidder from '../components/Slidder/CategorySlidder'
 import CategoriesBar from '../components/Slidder/CategoriesBar'
-
+ 
 const styles = theme => ({
   root: {
     flexGrow: 1,

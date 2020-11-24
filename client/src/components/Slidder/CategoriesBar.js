@@ -79,7 +79,7 @@ class CategoriesBar extends Component {
     };
     return (
       <div className={classes.root}>
-        <AppBar>
+        {/* <AppBar> */}
           <Carousel
             swipeable={true}
             draggable={false}
@@ -95,7 +95,7 @@ class CategoriesBar extends Component {
               return <CircularCard isMoving={this.state.isMoving} {...card} />;
             })}
           </Carousel>
-        </AppBar>
+        {/* </AppBar> */}
       </div>
     );
   }
@@ -103,12 +103,10 @@ class CategoriesBar extends Component {
 
 const styles = () => ({
   root: {
-    textAlign: "center"
+    textAlign: "center",
   },
   title: {
-    // maxWidth: 400,
     margin: "auto",
-    // marginTop: 10
   }
 });
 
