@@ -9,7 +9,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const config = require("./config/config");
 const mongoose = require("mongoose");
-
+ 
 const indexRouter = require("./routes/index.routes");
 const usersRouter = require("./routes/users.routes");
 const AdminRouter = require('./routes/admin.routes');
@@ -56,11 +56,11 @@ app.use("/", indexRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/shops/", shopRouter);
-app.use("/api/v1/products/", productRoutes);
+app.use("/api/v1/products", productRoutes);
 app.use('/api/v1/orders', orderRoutes);
 app.use("/api/v1/admin",AdminRouter);
 app.use("/api/v1/slidder", slidderRoutes);
-app.use("/api/v1/addtitle",TitleRoutes);
+app.use("/api/v1/title",TitleRoutes);
 app.use("/api/v1/category",CategoryRoutes);
 app.use("/api/v1/banner",BannerRoutes);
 
@@ -87,4 +87,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
 

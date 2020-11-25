@@ -30,7 +30,8 @@ const ProductSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  shop: {type: mongoose.Schema.ObjectId, ref: 'Shop'}
+ // shop: {type: mongoose.Schema.ObjectId, ref: 'Shop'}
 })
 
-module.exports =  mongoose.model('Product', ProductSchema)
+module.exports =  mongoose.model('Product', ProductSchema) 
+

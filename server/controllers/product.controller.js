@@ -49,6 +49,7 @@ const photo = (req, res, next) => {
   }
   next()
 }
+
 const defaultPhoto = (req, res) => {
   return res.sendFile(process.cwd()+profileImage)
 }
@@ -204,3 +205,5 @@ module.exports = {
   decreaseQuantity,
   increaseQuantity
 }
+
+ 

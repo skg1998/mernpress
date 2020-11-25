@@ -19,14 +19,19 @@ router
   .route("/:shopId/:productId")
   .delete(authCtrl.requireSignin, shopCtrl.isOwner, productCtrl.remove);
 
+// router
+//   .route("/by/:shopId")
+//   .get(productCtrl.listByShop)
+//   .post(authCtrl.requireSignin, shopCtrl.isOwner, productCtrl.create);
+
 router
-  .route("/by/:shopId")
-  .get(productCtrl.listByShop)
-  .post(authCtrl.requireSignin, shopCtrl.isOwner, productCtrl.create);
+    .route("/")
+    .post(productCtrl.create);
 
 router.param("productId", productCtrl.productByID);
 router.param("shopId", shopCtrl.shopByID);
 
 module.exports = router;
+ 
 
 
