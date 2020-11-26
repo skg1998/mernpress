@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button,TextField ,Card ,CardHeader, Grid , withStyles } from '@material-ui/core';
-//import axios from "axios";
+import * as Api from '../Api';
 
 
 const useStyles = (theme) => ({
@@ -10,24 +10,31 @@ const useStyles = (theme) => ({
   });
 
 class AddCategory extends Component {
-    state = {
-        name: '',
-        image:''
-    };
+    constructor() {
+        super();
+        this.state = {
+            name:"",
+            files:[]
+        }
+      }
 
     handleSubmit = event => {
         event.preventDefault();
-        const addCategory = {
-            name: this.state.name,
-            image:this.state.image
+        const { name, files } = this.state;
+        console.log("files",files);
+        let formData = new FormData();
+        formData.append("name", name);
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`files[${i}]`, files[i])
         }
 
-        // axios.post('https://localhost:3000/api/v1/addCategory', { addCategory })
-        // .then(res=>{
-        //     console.log(res);
-        //     console.log(res.data);
-        //     window.location = "/retrieve" 
-        // })
+        Api.AddCategory(formData).then((data) => {
+            if (data.error) {
+                console.log(data.error)
+            } else {
+                console.log(data)
+            }
+        })
     }
     
     handleChange = (event) => {
@@ -58,7 +65,7 @@ class AddCategory extends Component {
                             <TextField id="outlined-basic" label="Category Name" variant="outlined"  type = "text" name = "name" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                         </Grid>
                         <Grid item xs={12}>    
-                            <TextField id="outlined-basic"  variant="outlined"  type = "file" name = "image" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
+                            <input  type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                         </Grid>
                         <Button  variant="contained" color="primary" type = "submit" style={{ marginTop:'10px',width:'100%'}}> Submit </Button>
                     </form>

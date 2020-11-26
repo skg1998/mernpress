@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button,TextField ,Card ,CardHeader, Grid , withStyles,Select,MenuItem } from '@material-ui/core';
-//import axios from "axios";
+import * as Api from '../Api';
 
 
 const useStyles = (theme) => ({
@@ -12,29 +12,45 @@ const useStyles = (theme) => ({
 class AddProduct extends Component {
     state = {
         name: '',
-        image:'',
+        files:'',
         description:'',
         category:'',
         quantity:'',
-        price:''
+        price:'',
+        fetchCategory:[]
     };
+
+
+    componentDidMount() {
+        Api.Category()
+        .then(categoryData => {
+            console.log(categoryData)
+            this.setState({ fetchCategory: categoryData });
+        });
+    }
 
     handleSubmit = event => {
         event.preventDefault();
-        const addProduct = {
-            name: this.state.name,
-            image:this.state.image,
-            description:this.state.description,
-            category: this.state.category,
-            quantity: this.state.quantity,
-            price: this.state.price
+        const {name, files, description, category, quantity, price} = this.state;
+        let formData = new FormData();
+
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`files[${i}]`, files[i])
         }
 
-        // axios.post('https://localhost:3000/api/v1/title', { addProduct })
-        // .then(res=>{
-        //     console.log(res);
-        //     console.log(res.data);
-        //     window.location = "/retrieve" 
+        formData.append(name)
+        formData.append(description)
+        formData.append(category)
+        formData.append(quantity)
+        formData.append(price)
+
+
+        // Api.addProduct(formData).then((data) => {
+            // if (data.error) {
+            //     console.log(data.error)
+            // } else {
+            //     console.log(data)
+            // }
         // })
     }
     
@@ -66,7 +82,7 @@ class AddProduct extends Component {
                             <TextField  label="Product Name" variant="outlined"  type = "text" name = "name" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                         </Grid>
                         <Grid item xs={12}>    
-                            <TextField   variant="outlined"  type = "file" name = "image" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
+                            <input  type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField  label="Description" variant="outlined"  type = "text" name = "description" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
@@ -80,9 +96,9 @@ class AddProduct extends Component {
                                 style={{marginTop:'10px', width:'100%'}}
                                 >
                                 <MenuItem value=""><em>None</em> </MenuItem>
-                                <MenuItem value={10}>Mobile</MenuItem>
-                                <MenuItem value={20}>laptop</MenuItem>
-                                <MenuItem value={30}>earphones</MenuItem>
+                                {this.state.fetchCategory.map(data =>
+                                    <MenuItem value={data._id}>{data.name}</MenuItem>
+                                )}
                             </Select>
                         </Grid>
                         <Grid item xs={12}>

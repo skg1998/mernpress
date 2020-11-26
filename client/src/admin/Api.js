@@ -2,6 +2,7 @@ import axios from 'axios';
 import qs from 'query-string';
 
 const BASE_URL = '/api/v1/';
+
 let config = {
     headers: {
         Accept: "application/json",
@@ -76,9 +77,19 @@ export const AddBanner = (data) => {
     })
 }
 
-export const AddCategory = () => {
+export const AddCategory = (data) => {
+    console.log("data",data)
+    const configs = {
+        method: 'post',
+        url: BASE_URL + "category/",
+        headers: { 
+            Accept: "application/json",
+        },
+        data : data
+      };
+
     return new Promise((resolve, reject) => {
-        axios.post(BASE_URL + "admin/" , config)
+        axios(configs)
             .then(({ status, data }) => {
                 resolve(status == 200 && data ? data : null)
             })
@@ -156,3 +167,15 @@ export const AddTitle = (data) => {
             .catch(reject)
     })
 }
+
+export const Category = () => {
+    return new Promise((resolve, reject) => {
+        axios.get(BASE_URL + "category/" , config)
+            .then(({ status, data }) => {
+                resolve(status == 200 && data ? data : null)
+            })
+            .catch(reject)
+    })
+}
+
+
