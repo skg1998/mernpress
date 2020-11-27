@@ -7,6 +7,14 @@ const useStyles = (theme) => ({
     card: {
         alignItems: "center"
       },
+      imageupload:{
+        padding : "18.5px 0px",
+        borderRadius: "3px",
+        width: "100%",
+        borderWidth: "1px",
+        borderStyle: 'inset',
+        borderColor: 'rgb(173 173 173 / 76%)'
+    }  
   });
 
 class AddShop extends Component {

@@ -7,6 +7,14 @@ const useStyles = (theme) => ({
     card: {
         alignItems: "center"
       },
+      imageupload:{
+        padding : "18.5px 0px",
+        borderRadius: "3px",
+        width: "100%",
+        borderWidth: "1px",
+        borderStyle: 'inset',
+        borderColor: 'rgb(173 173 173 / 76%)'
+    }  
   });
 
 class AddProduct extends Component {
@@ -82,7 +90,7 @@ class AddProduct extends Component {
                             <TextField  label="Product Name" variant="outlined"  type = "text" name = "name" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                         </Grid>
                         <Grid item xs={12}>    
-                            <input  type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
+                            <input  className={classes.imageupload} type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField  label="Description" variant="outlined"  type = "text" name = "description" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>

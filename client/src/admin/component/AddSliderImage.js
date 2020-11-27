@@ -10,6 +10,14 @@ const useStyles = (theme) => ({
         // display: "flex",
         alignItems: "center"
       },
+      imageupload:{
+        padding : "18.5px 0px",
+        borderRadius: "3px",
+        width: "100%",
+        borderWidth: "1px",
+        borderStyle: 'inset',
+        borderColor: 'rgb(173 173 173 / 76%)'
+    }  
   });
 
 class AddSlidderImage extends Component {
@@ -65,7 +73,7 @@ class AddSlidderImage extends Component {
                   <form onSubmit = { this.handleSubmit } noValidate autoComplete="off">
                       <CardHeader style={{color:'#3f51b5'}} title="Add Slidder Image" />
                       <Grid item xs={12}>    
-                          <input  type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
+                          <input className={classes.imageupload} type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                       </Grid>
                       <Button  variant="contained" color="primary" type = "submit" style={{ marginTop:'10px',width:'100%'}}> Add Slider Image </Button>
                   </form>
