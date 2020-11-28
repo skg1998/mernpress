@@ -46,11 +46,11 @@ class AddProduct extends Component {
             formData.append(`files[${i}]`, files[i])
         }
 
-        formData.append(name)
-        formData.append(description)
-        formData.append(category)
-        formData.append(quantity)
-        formData.append(price)
+        formData.append("name",name)
+        formData.append("description",description)
+        formData.append("category",category)
+        formData.append("quantity",quantity)
+        formData.append("price",price)
 
 
         // Api.addProduct(formData).then((data) => {

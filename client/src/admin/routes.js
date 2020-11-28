@@ -10,6 +10,7 @@ import AddProduct from "./component/AddProduct";
 import AddTitle from "./component/AddProjectTitle"
 import AddShop from "./component/AddShop";
 import AddSlidder from "./component/AddSliderImage"
+import AddBasicDesign from "./component/AddBasicDesign"
 
 const dashboardRoutes = [
   {
@@ -21,11 +22,39 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/user",
-    name: "User Profile",
+    path: "/admin",
+    name: "Admin Profile",
     icon: Person,
     component: UserProfile,
     subItem:[],
+    layout: "/admin",
+  },
+  {
+    path: "/design",
+    name: "Design",
+    icon: PagesIcon,
+    subItem :[
+      {
+        path: "/addbasicdesign",
+        name: "Basic Design",
+        component: AddBasicDesign,
+      },
+      {
+        path: "/addTitle",
+        name: "Title",
+        component: AddTitle,
+      },
+      {
+        path: "/addbanner", 
+        name: "Banner",
+        component: AddBanner,
+      },
+      {
+        path: "/addslidder",
+        name: "Slidder",
+        component: AddSlidder,
+      }
+    ],
     layout: "/admin",
   },
   {
@@ -34,47 +63,31 @@ const dashboardRoutes = [
     icon: PagesIcon,
     subItem :[
       {
-        path: "/addTitle",
-        name: "Add Title",
-        icon: PagesIcon,
-        component: AddTitle,
-      },
-      {
-        path: "/addbanner", 
-        name: "Add Banner",
-        icon: PagesIcon,
-        component: AddBanner,
-      },
-      {
         path: "/addcategory",
         name: "Add Category",
-        icon: PagesIcon,
         component: AddCategory,
       },
       {
         path: "/addproduct",
         name: "Add Product",
-        icon: PagesIcon,
         component: AddProduct,
-      },
-      {
-        path: "/addslidder",
-        name: "Add Slidder",
-        icon: PagesIcon,
-        component: AddSlidder,
       },
       {
         path: "/addshop",
         name: "Vendors",
-        icon: PagesIcon,
+        component: AddShop,
+      },
+      {
+        path: "/addpaymentgetway",
+        name: "PaymentGetway",
         component: AddShop,
       }
     ],
     layout: "/admin",
   },
   {
-    path: "/table",
-    name: "Table List",
+    path: "/user",
+    name: "User List",
     icon: "content_paste",
     component: TableList,
     layout: "/admin",
