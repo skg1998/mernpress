@@ -11,7 +11,7 @@ import Checkout from './Checkout'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: 30,
+    //margin: 30,
   }
 })
 
