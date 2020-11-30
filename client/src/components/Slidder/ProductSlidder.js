@@ -47,18 +47,18 @@ class ProductSlidder extends Component {
       "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
     ];
     const texts = [
-      "Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.",
-      "Fixing CSS load order/style.chunk.css incorrect in Nextjs",
-      "React Carousel with Server Side Rendering Support – Part 1",
-      "React Carousel with Server Side Rendering Support – Part 2",
-      "Flutter Xcode couldn’t find any iOS App Development provisioning profiles"
+      "Appending currency sign to a purchase form in  ",
+      "Fixing CSS load order/style.chunk.css  ",
+      "React Carousel with Server Side Rendering Support ",
+      "React Carousel with Server Side Rendering Support ",
+      "Flutter Xcode couldn’t find any iOS App Development "
     ];
     const fakerData = Array(12)
       .fill(0)
       .map((item, index) => {
         return {
           image: images[index],
-          headline: "w3js -> web front-end studio",
+          headline: "web front-end studio",
           description: texts[index] || texts[0]
         };
       });
@@ -85,10 +85,8 @@ class ProductSlidder extends Component {
           <a  href="#">Product</a>
         </Typography>
         <Carousel
-          /*
-          swipeable={false}
-          draggable={false}
-          */
+          swipeable={true}
+          draggable={true}
           responsive={responsive}
           ssr
           infinite={false}
@@ -101,22 +99,6 @@ class ProductSlidder extends Component {
             return <Card isMoving={this.state.isMoving} {...card} />;
           })}
         </Carousel>
-
-        {/* <Carousel
-          swipeable={false}
-          draggable={false}
-          responsive={responsive}
-          ssr
-          showDots
-          infinite
-          containerClass="container-with-dots"
-          itemClass="image-item"
-          deviceType={this.props.deviceType}
-        >
-          {fakerData.slice(0, 5).map(card => {
-            return <Image url={card.image} alt={card.headline} />;
-          })}
-        </Carousel> */}
       </div>
     );
   }

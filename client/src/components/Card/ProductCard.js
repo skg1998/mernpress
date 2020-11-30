@@ -14,6 +14,10 @@ const styles = {
   },
   media: {
     height: 140
+  },
+  bottombutton:{
+    display:"block",
+    margin:"auto"
   }
 };
 
@@ -36,7 +40,7 @@ const ProductCard = (props) => {
           <Typography component="p">{description}</Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions className={classes.bottombutton}>
         <Button size="small" color="primary">
           Add To Card
         </Button>

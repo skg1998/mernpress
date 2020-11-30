@@ -1,4 +1,3 @@
-
 .image-item {
     padding: 10px;
   }
@@ -41,8 +40,10 @@
 }
 
   @media only screen and (max-width: 3000px) {
-    .react-multi-carousel-list{
+    .react-multi-carousel-list:not(.categories){
       height: 350px;
+      border-radius:25px;
+      margin-bottom: 25px;
     }
   }
 
@@ -62,3 +63,21 @@
   margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
+
+.categories ul{
+  margin-top: 75px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .categories ul{
+    margin-top: 125px;
+  }
+}
+
+@media only screen and (max-width: 464px) {
+  .categories ul{
+    margin-top: 125px;
+  }
+}
+
+

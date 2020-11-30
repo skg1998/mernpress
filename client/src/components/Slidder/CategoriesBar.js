@@ -3,7 +3,6 @@ import { withStyles } from "@material-ui/core/styles";
 import MobileDetect from "mobile-detect";
 import CircularCard from "../Card/CircularCard";
 import Carousel from "react-multi-carousel";
-import AppBar from "@material-ui/core/AppBar";
 import "./style.css";
 import "react-multi-carousel/lib/styles.css";
 
@@ -90,6 +89,7 @@ class CategoriesBar extends Component {
             afterChange={() => this.setState({ isMoving: false })}
             containerClass="first-carousel-container container"
             deviceType={this.props.deviceType}
+            className="categories"
           >
             {fakerData.map(card => {
               return <CircularCard isMoving={this.state.isMoving} {...card} />;

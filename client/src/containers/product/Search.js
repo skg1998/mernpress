@@ -11,7 +11,6 @@ import Products from './Products'
 
 const styles = theme => ({
   card: {
-    backgroundColor: 'white',
     backgroundColor: '#459cb3',
     margin:'auto'
   },
@@ -20,10 +19,9 @@ const styles = theme => ({
     width: 200,
   },
   textField: {
-    width: 150,
     backgroundColor: '#459cb3',
-    borderTopLeftRadius: '25px',
-    borderBottomLeftRadius: '25px',
+    borderTopLeftRadius: '10px',
+    borderBottomLeftRadius: '10px',
     boxShadow: 'inset 0 0 10px #000000'
   },
   searchField: {
@@ -32,8 +30,8 @@ const styles = theme => ({
   },
   searchButton: {
     backgroundColor: '#459cb3',
-    borderTopRightRadius: '25px',
-    borderBottomRightRadius: '25px',
+    borderTopRightRadius: '10px',
+    borderBottomRightRadius: '10px',
     margin: '0px',
     padding: '12px',
     boxShadow: 'inset 0 0 10px #000000'
@@ -78,7 +76,7 @@ class Search extends Component {
           <TextField
             id="select-category"
             select
-            label="Select category"
+            label="All"
             className={classes.textField}
             value={this.state.category}
             onChange={this.handleChange('category')}
