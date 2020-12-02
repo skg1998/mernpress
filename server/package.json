@@ -34,7 +34,8 @@
     "react-hot-loader": "4.12.18",
     "react-router": "5.1.2",
     "react-router-dom": "5.1.2",
-    "stripe": "^7.15.0"
+    "stripe": "^7.15.0",
+    "swagger-ui-express": "^4.1.5"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

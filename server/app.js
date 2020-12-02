@@ -9,6 +9,8 @@ const cors = require("cors");
 const helmet = require("helmet");
 const config = require("./config/config");
 const mongoose = require("mongoose");
+const swaggerUi = require("swagger-ui-express"); 
+const swaggerDocument = require("./swagger.json");
  
 const indexRouter = require("./routes/index.routes");
 const usersRouter = require("./routes/users.routes");
@@ -62,7 +64,10 @@ app.use("/api/v1/admin",AdminRouter);
 app.use("/api/v1/slidder", slidderRoutes);
 app.use("/api/v1/title",TitleRoutes);
 app.use("/api/v1/category",CategoryRoutes);
-app.use("/api/v1/banner",BannerRoutes);
+app.use("/api/v1/banner",BannerRoutes);  
+
+//swagger api
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((err, req, res, next) => {
   if (err.name === "UnauthorizedError") {
