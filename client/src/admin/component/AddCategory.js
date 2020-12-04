@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { Button,TextField ,Card ,CardHeader, Grid , withStyles } from '@material-ui/core';
-import * as Api from '../Api';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
+
+import * as Api from '../Api';
 
 const useStyles = (theme) => ({
     card: {
@@ -16,15 +27,32 @@ const useStyles = (theme) => ({
         borderColor: 'rgb(173 173 173 / 76%)'
     }    
   });
-
 class AddCategory extends Component {
     constructor() {
         super();
         this.state = {
+            id:"",
             name:"",
-            files:[]
+            files:[],
+            categories:[]
         }
       }
+
+      resetFormState = () => {
+        this.setState({
+            id:"",
+            name:"",
+            files:[],
+        });
+     }; 
+     
+    componentDidMount() {
+        Api.Category()
+        .then(categoryData => {
+            console.log(categoryData)
+            this.setState({ categories: categoryData });
+        });
+    }
 
     handleSubmit = event => {
         event.preventDefault();
@@ -55,6 +83,24 @@ class AddCategory extends Component {
         });
     }
 
+    updateUser = key => {
+        let { categories } = this.state;
+        categories[key].updating = true;
+  
+        this.setState({
+           formState: { ...this.state.categories[key], mode: "edit" },
+           categories
+        });
+     };
+  
+     deleteUser = key => {
+        let { categories } = this.state;
+        categories.splice(key, 1);
+        this.setState({
+           categories: [...categories]
+        });
+     };
+
     render() { 
         const { classes } = this.props;
         return (
@@ -79,9 +125,51 @@ class AddCategory extends Component {
                     </form>
                 </Card>
             </Grid> 
+            <CategoriesTable
+               categories={this.state.categories}
+               updateUser={this.updateUser}
+               deleteUser={this.deleteUser}
+            />
         </div>
         );
   }
 }
 
 export default withStyles(useStyles)(AddCategory);
+
+const CategoriesTable = ({ categories = [], updateUser, deleteUser }) => {
+    return (
+        <div>
+        <Paper>
+        <TableContainer>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell align="left">Category</TableCell>
+              <TableCell align="left">Image</TableCell>
+              <TableCell align="left">Create Date</TableCell>
+              <TableCell align="left">Option</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {categories.map((category,key) => (
+              <TableRow key={category.name}>
+                <TableCell component="th" scope="category">{category._id} </TableCell>
+                <TableCell align="left">{category.name}</TableCell>
+                <TableCell align="left"><img src={category.files}/></TableCell>
+                <TableCell align="left">{category.created}</TableCell>
+                <TableCell align="left">
+                    <button onClick={() => updateUser(key)}><EditIcon/></button>
+                    <button onClick={() => deleteUser(key)}><DeleteIcon/></button>
+                    <button onClick={() => deleteUser(key)}><SaveIcon/></button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+        </Paper>
+      </div>
+    );
+ };
