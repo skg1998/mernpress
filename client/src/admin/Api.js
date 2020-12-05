@@ -77,26 +77,6 @@ export const AddBanner = (data) => {
     })
 }
 
-export const AddCategory = (data) => {
-    console.log("data",data)
-    const configs = {
-        method: 'post',
-        url: BASE_URL + "category/",
-        headers: { 
-            Accept: "application/json",
-        },
-        data : data
-      };
-
-    return new Promise((resolve, reject) => {
-        axios(configs)
-            .then(({ status, data }) => {
-                resolve(status == 200 && data ? data : null)
-            })
-            .catch(reject)
-    })
-}
-
 export const AddProduct = () => {
     return new Promise((resolve, reject) => {
         axios.post(BASE_URL + "admin/" , config)
@@ -168,9 +148,50 @@ export const AddTitle = (data) => {
     })
 }
 
+//-----------------------Category Api------------------
+
+export const AddCategory = (data) => {
+    console.log("data",data)
+    const configs = {
+        method: 'post',
+        url: BASE_URL + "category/",
+        headers: { 
+            Accept: "application/json",
+        },
+        data : data
+      };
+
+    return new Promise((resolve, reject) => {
+        axios(configs)
+            .then(({ status, data }) => {
+                resolve(status == 200 && data ? data : null)
+            })
+            .catch(reject)
+    })
+}
+
 export const Category = () => {
     return new Promise((resolve, reject) => {
         axios.get(BASE_URL + "category/" , config)
+            .then(({ status, data }) => {
+                resolve(status == 200 && data ? data : null)
+            })
+            .catch(reject)
+    })
+}
+
+export const DeleteCategoryBy = (id) => {
+    console.log("id",id)
+    const configs = {
+        method: 'delete',
+        url: BASE_URL + "category/",
+        headers: { 
+            Accept: "application/json",
+        },
+        data : id
+      };
+    return new Promise((resolve, reject) => {
+        axios(configs)
             .then(({ status, data }) => {
                 resolve(status == 200 && data ? data : null)
             })

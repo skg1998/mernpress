@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button,TextField ,Card ,CardHeader, Grid , withStyles } from '@material-ui/core';
+import { Button ,TextField , withStyles } from '@material-ui/core';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import * as Api from '../Api';
 
@@ -34,17 +35,10 @@ class AddCategory extends Component {
             id:"",
             name:"",
             files:[],
-            categories:[]
+            categories:[],
+            isAddCategory:false
         }
       }
-
-      resetFormState = () => {
-        this.setState({
-            id:"",
-            name:"",
-            files:[],
-        });
-     }; 
      
     componentDidMount() {
         Api.Category()
@@ -83,7 +77,7 @@ class AddCategory extends Component {
         });
     }
 
-    updateUser = key => {
+    updateCategory = key => {
         let { categories } = this.state;
         categories[key].updating = true;
   
@@ -91,44 +85,48 @@ class AddCategory extends Component {
            formState: { ...this.state.categories[key], mode: "edit" },
            categories
         });
+
      };
   
-     deleteUser = key => {
+     deleteCategory = key => {
         let { categories } = this.state;
         categories.splice(key, 1);
         this.setState({
            categories: [...categories]
         });
+
+        Api.DeleteCategoryBy(key).then((data) => {
+            if (data.error) {
+                console.log(data.error)
+            } else {
+                console.log(data)
+            }
+        })
      };
 
+     resetFormState = () => {
+        this.setState({
+            id:"",
+            name:"",
+            files:[],
+        });
+     };
+     
+    addCategory = () => {
+       this.setState({isAddCategory:!this.state.isAddCategory})
+     }
+
     render() { 
-        const { classes } = this.props;
         return (
         <div > 
-            <Grid
-               container
-                className={classes.card}
-                spacing={0}
-                alignItems="center"
-                justify="center"
-            >
-                <Card style={{padding:'20px'}}>
-                    <form onSubmit = { this.handleSubmit } noValidate autoComplete="off">
-                        <CardHeader style={{color:'#3f51b5'}} title="Add Category" />
-                        <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Category Name" variant="outlined"  type = "text" name = "name" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
-                        </Grid>
-                        <Grid item xs={12}>    
-                            <input className={classes.imageupload}  type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
-                        </Grid>
-                        <Button  variant="contained" color="primary" type = "submit" style={{ marginTop:'10px',width:'100%'}}> Submit </Button>
-                    </form>
-                </Card>
-            </Grid> 
             <CategoriesTable
+               {...this.state}
                categories={this.state.categories}
-               updateUser={this.updateUser}
-               deleteUser={this.deleteUser}
+               updateCategory={this.updateCategory}
+               deleteCategory={this.deleteCategory}
+               handleSubmit={this.handleSubmit}
+               addCategory={this.addCategory}
+               handleChange={this.handleChange}
             />
         </div>
         );
@@ -137,9 +135,10 @@ class AddCategory extends Component {
 
 export default withStyles(useStyles)(AddCategory);
 
-const CategoriesTable = ({ categories = [], updateUser, deleteUser }) => {
+
+const CategoriesTable = ({ categories = [], addCategory, updateCategory,handleChange, deleteCategory ,id, handleSubmit, ...props}) => {
     return (
-        <div>
+        <form onSubmit={()=>handleSubmit()}>
         <Paper>
         <TableContainer>
         <Table aria-label="simple table">
@@ -149,27 +148,46 @@ const CategoriesTable = ({ categories = [], updateUser, deleteUser }) => {
               <TableCell align="left">Category</TableCell>
               <TableCell align="left">Image</TableCell>
               <TableCell align="left">Create Date</TableCell>
-              <TableCell align="left">Option</TableCell>
+              <TableCell align="left"><Button onClick={()=>addCategory()}><AddCircleIcon/></Button></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
+             {props.isAddCategory?<NewCategory id={id} />:""}
             {categories.map((category,key) => (
-              <TableRow key={category.name}>
-                <TableCell component="th" scope="category">{category._id} </TableCell>
-                <TableCell align="left">{category.name}</TableCell>
-                <TableCell align="left"><img src={category.files}/></TableCell>
-                <TableCell align="left">{category.created}</TableCell>
-                <TableCell align="left">
-                    <button onClick={() => updateUser(key)}><EditIcon/></button>
-                    <button onClick={() => deleteUser(key)}><DeleteIcon/></button>
-                    <button onClick={() => deleteUser(key)}><SaveIcon/></button>
-                </TableCell>
-              </TableRow>
+                <TableRow key={category._id}>
+                    <TableCell component="th" scope="category">{category._id} </TableCell>
+                    <TableCell align="left">{category.name}</TableCell>
+                    <TableCell align="left"><img src={category.files}/></TableCell>
+                    <TableCell align="left">{category.created.toString()}</TableCell>
+                    <TableCell align="left">
+                        <Button onClick={() => updateCategory(key)}><EditIcon/></Button>
+                        <Button onClick={() => deleteCategory(key)}><DeleteIcon/></Button>
+                    </TableCell>
+                </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
         </Paper>
-      </div>
+      </form>
     );
  };
+
+
+ const NewCategory = ({id , ...props})=>{
+     return (
+        <TableRow>
+            <TableCell >  </TableCell>
+            <TableCell align="left">
+                <TextField id="outlined-basic" label="Category Name" variant="outlined"  type = "text" name = "name" onChange= {props.handleChange} style={{marginTop:'10px', width:'100%'}}/>
+            </TableCell>
+            <TableCell align="left">
+                <input  type = "file" accept="image/*" multiple name = "files" onChange= {props.handleChange} style={{marginTop:'10px', width:'100%'}}/>
+            </TableCell>
+            <TableCell align="left"> </TableCell>
+            <TableCell align="left">
+                <Button type = "submit"><SaveIcon/></Button>
+            </TableCell>
+        </TableRow>
+     )
+ }
