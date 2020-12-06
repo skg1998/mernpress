@@ -3,7 +3,7 @@ import Person from "@material-ui/icons/Person";
 import PagesIcon from '@material-ui/icons/Pages';
 import DashboardPage from "../containers/Dashboard/Dashboard.js";
 import UserProfile from "../containers/UserProfile/UserProfile.js";
-import TableList from "../containers/TableList/TableList.js";
+import UserList from "../containers/TableList/TableList.js";
 import AddBanner from "./component/AddBanner";
 import AddCategory from "./component/AddCategory";
 import AddProduct from "./component/AddProduct";
@@ -11,6 +11,7 @@ import AddTitle from "./component/AddProjectTitle"
 import AddShop from "./component/AddShop";
 import AddSlidder from "./component/AddSliderImage"
 import AddBasicDesign from "./component/AddBasicDesign"
+import AddPaymentMethod from "./component/AddPaymentMethod"
 
 const dashboardRoutes = [
   {
@@ -80,7 +81,7 @@ const dashboardRoutes = [
       {
         path: "/addpaymentgetway",
         name: "PaymentGetway",
-        component: AddShop,
+        component: AddPaymentMethod,
       }
     ],
     layout: "/admin",
@@ -89,7 +90,7 @@ const dashboardRoutes = [
     path: "/user",
     name: "User List",
     icon: "content_paste",
-    component: TableList,
+    component: UserList,
     layout: "/admin",
     subItem:[]
   }
