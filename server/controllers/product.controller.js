@@ -59,7 +59,7 @@ const profileImage =require( '../../client/assets/images/profile-pic.png')
  *      "message": "Successfully created new product.",
  *      "status": "1"
  * }
- * @apiSampleRequest /api/v1/product/create
+ * @apiSampleRequest /api/v1/product/add-product
  * @apiErrorExample {json} AddProduct error
  * HTTP/1.1 500 Internal Server Error
  */
