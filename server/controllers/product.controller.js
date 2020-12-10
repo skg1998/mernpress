@@ -3,7 +3,6 @@ const _ =require( 'lodash')
 const errorHandler =require( '../helpers/dbErrorHandler')
 const formidable =require( 'formidable')
 const fs =require( 'fs')
-const profileImage =require( '../../client/assets/images/profile-pic.png')
 
 
 // Create Product API
@@ -43,7 +42,6 @@ const profileImage =require( '../../client/assets/images/profile-pic.png')
  *      "requiredShipping" : "",
  *      "dateAvailable" : "",
  *      "status" : "",
- *      "outOfStockStatus" : "",
  *      "sortOrder" : "",
  *      "condition" : "",
  *      "image":[
@@ -78,13 +76,20 @@ const addProduct = (req, res, next) => {
       product.image.data = fs.readFileSync(files.image.path)
       product.image.contentType = files.image.type
     }
+
     product.save((err, result) => {
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
         })
+      }else{
+        const productdata = {
+          status: 1,
+          message: 'Successfully created Product',
+          data: result,
+        }
+        res.status(200).send(productdata);
       }
-      res.json(result)
     })
   })
 }
@@ -116,8 +121,21 @@ const productByID = (req, res, next, id) => {
  * @apiErrorExample {json} productDetail error
  * HTTP/1.1 500 Internal Server Error
  */
-const productDetail = ()=>{
-
+const productDetail = (req,res,next)=>{
+  Product.find({_id : req.param.id},(err,product)=>{
+    if(err){
+      return res.status('400').json({
+        error: "Product not found"
+      })
+    }else{
+      const productdata = {
+        status: 1,
+        message: 'Successfully get Product Detail',
+        data: product,
+      }
+      res.status(200).send(productdata);  
+    }
+  })
 }
 
 // update Product API
@@ -246,7 +264,7 @@ const deleteProduct = (req, res, next) => {
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
  * {
- *      "message": "Successfully get related product list..!!",
+ *      "message": "Successfully get product list..!!",
  *      "status": "1",
  *      "data": {},
  * }
@@ -537,7 +555,8 @@ const photo = (req, res, next) => {
 }
 
 const defaultPhoto = (req, res) => {
-  return res.sendFile(process.cwd()+profileImage)
+  //return res.sendFile(process.cwd() + profileImage)
+  return res.sendFile(process.cwd())
 }
 
 const read = (req, res) => {
