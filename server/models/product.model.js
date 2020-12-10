@@ -1,17 +1,29 @@
 const mongoose = require('mongoose')
 const ProductSchema = new mongoose.Schema({
-  name: {
+  productName: {
     type: String,
     trim: true,
     required: 'Name is required'
   },
   image: {
     data: Buffer,
-    contentType: String
+    contentType: String,
   },
-  description: {
+  productDescription: {
     type: String,
     trim: true
+  },
+  sku:{
+     type:String
+  },
+  metaTagTitle:{
+    type:String
+  },
+  upc:{
+    type:String
+  },
+  modal:{
+   type:String
   },
   category: {
     type: mongoose.Schema.ObjectId,
@@ -25,13 +37,32 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     required: "Price is required"
   },
+  outOfStockStatus:{
+    type:Number
+  },
+  requiredShipping:{
+    type:Number
+  },
+  dateAvailable:{
+    type:String
+  },
+  condition:{
+    type:String
+  },
+  status:{
+    type:Number
+  },
+  sortOrder:{
+    type:Number
+  },
   updated: Date,
   created: {
     type: Date,
     default: Date.now
   },
- // shop: {type: mongoose.Schema.ObjectId, ref: 'Shop'}
+  shop : {type: mongoose.Schema.ObjectId, ref: 'Shop'}
 })
 
 module.exports =  mongoose.model('Product', ProductSchema) 
 
+  

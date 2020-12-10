@@ -5,22 +5,22 @@ const router = express.Router();
 
 router
   .route("/")
-  .post(addCategoryCtrl.create);
+  .post(addCategoryCtrl.addCategory);
 
 router
   .route("/")
-  .get(addCategoryCtrl.read);
+  .get(addCategoryCtrl.categorylist);
 
 router
      .route("/:id")
-     .get(addCategoryCtrl.read);  
+     .get(addCategoryCtrl.categorylistById);  
 
 router
   .route("/:id")
-  .put(addCategoryCtrl.update);    
+  .put(addCategoryCtrl.updateCategory);    
 
 router
   .route("/:id")
-  .delete(addCategoryCtrl.remove);
+  .delete(addCategoryCtrl.deleteCategory);
 
 module.exports = router;  

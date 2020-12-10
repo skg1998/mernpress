@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.route("/").get(productCtrl.list);
 router.route("/:productId").get(productCtrl.read);
+router.route("/productdetail/:productId").get(productCtrl.productDetail);
 router.route("/related/:productId").get(productCtrl.RelatedProduct);
 router.route("/latest/:id").get(productCtrl.listLatest);
 router.route("/categories/:id").get(productCtrl.listCategories);
@@ -27,7 +28,7 @@ router
   .delete( productCtrl.deleteProduct);
 
 router
-  .route("/by/:shopId")
+  .route("/shop/:shopId")
   .post( productCtrl.addProduct);
 
 router.param("productId", productCtrl.productByID);
