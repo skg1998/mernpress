@@ -31,8 +31,6 @@ router
   .route("/shop/:shopId")
   .post( productCtrl.addProduct);
 
-router.param("productId", productCtrl.productByID);
-router.param("shopId", shopCtrl.shopByID);
 
 module.exports = router;
  

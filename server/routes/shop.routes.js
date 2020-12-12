@@ -6,7 +6,7 @@ const shopCtrl = require("../controllers/shop.controller");
 const router = express.Router();
 
 router
-  .route("/by/:userId")
+  .route("/")
   .post(
     authCtrl.requireSignin,
     authCtrl.hasAuthorization,
