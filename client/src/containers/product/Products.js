@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography'
 import GridList  from '@material-ui/core/GridList'
 import { GridListTile, GridListTileBar } from '@material-ui/core/';
 import {Link} from 'react-router-dom'
-// import AddToCart from '../cart/AddToCart'
+import DisplayRating from '../../components/Rating/DisplayRating'
+import AddToCart from '../cart/AddToCart'
 
 const styles = theme => ({
   root: {
@@ -51,6 +52,7 @@ const styles = theme => ({
 class Products extends Component {
   render() {
     const {classes} = this.props
+    console.log("this.props.products",this.props.products)
     return (
       <div className={classes.root}>
       {this.props.products.length > 0 ?
@@ -61,10 +63,15 @@ class Products extends Component {
               <Link to={"/product/"+product._id}><img className={classes.image} src={'/api/v1/products/photo/'+product._id} alt={product.name} /></Link>
               <GridListTileBar className={classes.tileBar}
                 title={<Link to={"/product/"+product._id} className={classes.tileTitle}>{product.name}</Link>}
-                subtitle={<span>$ {product.price}</span>}
-                // actionIcon={
-                //   <AddToCart item={product}/>
-                // }
+                subtitle={
+                 <div>
+                   <span>{<DisplayRating rating={product.sortOrder} nunumReviews={27}/>}</span>
+                   <span>$ {product.price}</span>
+                 </div>
+                }
+                actionIcon={
+                  <AddToCart item={product}/>
+                }
               />
             </GridListTile>
           ))}
