@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button,TextField ,Card ,CardHeader, Grid , withStyles } from '@material-ui/core';
 import {Redirect ,Link} from 'react-router-dom';
-import {Adminsignup} from '../Api';
+import {Adminsignup} from '../../Api';
 
 
 const useStyles = (theme) => ({
