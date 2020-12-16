@@ -14,7 +14,7 @@ import MyShops from './containers/shop/MyShops';
 import Shop from './containers/shop/Shop'; 
 import EditShop from './containers/shop/EditShop';
 import NewProduct from './containers/product/NewProduct';
-import Product from './containers/product/Product';
+import Product from './core/Product';
 import EditProduct from './containers/product/EditProduct'
 import Cart from './containers/cart/cart';
 import StripeConnect from './containers/user/StripeConnect';
