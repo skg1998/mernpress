@@ -3,7 +3,7 @@ const ProductSchema = new mongoose.Schema({
   productName: {
     type: String,
     trim: true,
-    //required: 'Name is required'
+    //required: 'Product Name is required'
   },
   image: {
     data: Buffer,
@@ -31,11 +31,11 @@ const ProductSchema = new mongoose.Schema({
   },
   quantity: {
     type: Number,
-    //required: "Quantity is required"
+    required: "Quantity is required"
   },
   price: {
     type: Number,
-    //required: "Price is required"
+    required: "Price is required"
   },
   outOfStockStatus:{
     type:Number
@@ -60,7 +60,8 @@ const ProductSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  shop : {type: mongoose.Schema.ObjectId, ref: 'Shop'}
+  shop : {type: mongoose.Schema.ObjectId, ref: 'Shop'},
+  review:{type:mongoose.Schema.ObjectId, ref:'Review'}
 })
 
 module.exports =  mongoose.model('Product', ProductSchema) 
