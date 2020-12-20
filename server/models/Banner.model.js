@@ -4,6 +4,9 @@ const BannerSchema = new mongoose.Schema({
     images: [{
         url: String
      }],
+  flag:{
+    default:false
+  },   
   updated: Date,
   created: {
     type: Date,
