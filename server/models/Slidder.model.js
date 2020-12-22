@@ -1,9 +1,13 @@
 const mongoose = require('mongoose')
 
 const SlidderSchema = new mongoose.Schema({
-    images: [{
-        url: String
-     }],
+  images: [{
+      url: String
+    }],
+  flag:{
+    type: Boolean,
+    default:false
+  },   
   updated: Date,
   created: {
     type: Date,
