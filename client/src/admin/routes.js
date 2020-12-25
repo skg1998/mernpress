@@ -12,6 +12,7 @@ import AddShop from "./component/AddShop";
 import AddSlidder from "./component/AddSliderImage"
 import AddBasicDesign from "./component/AddBasicDesign"
 import AddPaymentMethod from "./component/AddPaymentMethod"
+import AddFooter from "./component/AddFooter"
 
 const dashboardRoutes = [
   {
@@ -54,6 +55,11 @@ const dashboardRoutes = [
         path: "/addslidder",
         name: "Slidder",
         component: AddSlidder,
+      },
+      {
+        path: "/addFooter",
+        name: "Footer",
+        component: AddFooter,
       }
     ],
     layout: "/admin",
