@@ -11,11 +11,12 @@ import {Link} from 'react-router-dom'
 import Suggestions from '../containers/product/Suggestions'
 import AddToCart from '../containers/cart/AddToCart'
 import SubmitReview from '../components/Rating/SubmitRating'
+import SEO from '../components/SEO/Seo'
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: 30,
+    //margin: 30,
   },
   flex:{
     display:'flex'
@@ -102,12 +103,13 @@ class Product extends Component {
     const {classes} = this.props
     return (
         <div className={classes.root}>
+          <SEO title="Product-Detail" description="Product detail" />
           <Grid container spacing={40}>
             <Grid item xs={7} sm={7}>
               <Card className={classes.card}>
                 <CardHeader
                   title={this.state.product.name}
-                  subheader={this.state.product.quantity > 0? 'In Stock': 'Out of Stock'}
+                  subheader={this.state.product.quantity > 0 ? 'In Stock': 'Out of Stock'}
                   action={
                     <span className={classes.action}>
                       <AddToCart cartStyle={classes.addCart} item={this.state.product}/>
@@ -135,7 +137,9 @@ class Product extends Component {
             {this.state.suggestions.length > 0 &&
               (<Grid item xs={5} sm={5}>
                 <Suggestions  products={this.state.suggestions} title='Related Products'/>
-              </Grid>)}
+              </Grid>
+              )
+            }
           </Grid>
           <SubmitReview />
         </div>

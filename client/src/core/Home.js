@@ -9,6 +9,8 @@ import MainSlidder from '../components/Slidder/MainSlidder'
 import ProductSlidder from '../components/Slidder/ProductSlidder'
 import CategorySlidder from '../components/Slidder/CategorySlidder'
 import CategoriesBar from '../components/Slidder/CategoriesBar'
+import SEO from '../components/SEO/Seo'
+import Tab from '../components/Tab/Tab'
  
 const styles = theme => ({
   root: {
@@ -48,6 +50,7 @@ class Home extends Component {
     const {classes} = this.props
     return (
       <div>
+        <SEO title="MernPress - Ecommerce site " description="A Multi-vendor ecommerce site" />
         <CategoriesBar className={classes.categories} />
         <div className={classes.root}>
           <MainSlidder />
@@ -57,6 +60,7 @@ class Home extends Component {
             </Grid>
             <Grid item md={8} >
               <Categories categories={this.state.categories}/>
+              <Tab />
             </Grid>
           </Grid>
           <CategorySlidder />

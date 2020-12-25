@@ -23,10 +23,12 @@ const footerStyle = {
     display: "block"
   },
   right: {
+    display:"flex",
     padding: "15px 0",
     margin: "0",
     fontSize: "14px",
-    float: "right!important"
+    float: "right!important",
+    listStyleType:"none"
   },
   footer: {
     bottom: "0",
@@ -49,6 +51,71 @@ const footerStyle = {
     display: "inline-block",
     padding: "0px",
     width: "auto"
+  },
+  paymentMethods:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    color: "#b2b2b2",
+    width: "60%",
+    listStyleType:"none"
+  },
+  credibility:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    color: "#b2b2b2",
+    width: "40%",
+    fontSize: "15px",
+    listStyleType:"none"
+  },
+  topFooter:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingTop: "2em",
+  },
+  logo:{
+    textTransform: "uppercase",
+    fontWeight: "bolder",
+    fontSize: "24px",
+    letterSpacing:" 1.25px",
+    color: "#4c4c4c",
+    textDecoration: "none",
+  },
+  bottomFooter:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  desc:{
+    fontSize:15
+  },
+  socialLinks:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "13%",
+    listStyleType:"none"
+  },
+  links:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "35%",
+    listStyleType:"none"
+  },
+  link:{},
+  lineDiv : {
+    width: "100%",
+    height:" 2px",
+    backgroundColor:" #f5f5f5",
   }
 };
 export default footerStyle;

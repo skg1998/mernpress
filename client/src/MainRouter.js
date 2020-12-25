@@ -5,7 +5,8 @@ import Users from './containers/user/Users';
 import Signup from './containers/user/Signup';
 import Signin from './containers/auth/Signin';
 import Profile from './containers/user/Profile';
-import Menu from './components/Navbars/Menu';
+import Header from './components/Navbars/Header';
+import Footer from './components/Footer/Footer'
 import EditProfile from './containers/user/EditProfile';
 import PrivateRoute from './containers/auth/PrivateRoute';
 import NewShop from './containers/shop/NewShop';
@@ -34,7 +35,7 @@ class MainRouter extends Component {
 
     return (
       <div>
-        {(adminpath || dashboardpath || adminsignupath || adminloginpath) ? "" : <Menu />}
+        {(adminpath || dashboardpath || adminsignupath || adminloginpath) ? "" : <Header />}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/adminlogin" component={AdminLogin} />
@@ -58,6 +59,7 @@ class MainRouter extends Component {
           <PrivateRoute path="/seller/orders/:shop/:shopId" component={ShopOrders}/>
           <Redirect from="/" to="/admin/dashboard" />
         </Switch>
+        <Footer />
       </div>
     );
   }
