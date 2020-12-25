@@ -44,9 +44,6 @@ const ProductCard = (props) => {
         <Button size="small" color="primary">
           Add To Card
         </Button>
-        <Button size="small" color="primary">
-          Buy Now
-        </Button>
       </CardActions>
     </Card>
   </a>
