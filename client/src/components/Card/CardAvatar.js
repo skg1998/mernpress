@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 // core components
 
-import styles from "../../assets/jss/material-dashboard-react/components/cardAvatarStyle.js";
+import styles from "../../assets/jss/mernpress/components/cardAvatarStyle.js";
 
 const useStyles = makeStyles(styles);
 

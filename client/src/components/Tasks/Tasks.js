@@ -12,7 +12,7 @@ import TableCell from "@material-ui/core/TableCell";
 import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import Check from "@material-ui/icons/Check";
-import styles from "../../assets/jss/material-dashboard-react/components/tasksStyle.js";
+import styles from "../../assets/jss/mernpress/components/tasksStyle.js";
 
 const useStyles = makeStyles(styles);
 
@@ -29,10 +29,8 @@ export default function Tasks(props) {
     }
     setChecked(newChecked);
   };
-  const { tasksIndexes, tasks, rtlActive } = props;
-  const tableCellClasses = classnames(classes.tableCell, {
-    [classes.tableCellRTL]: rtlActive
-  });
+  const { tasksIndexes, tasks } = props;
+  const tableCellClasses = classnames(classes.tableCell);
   return (
     <Table className={classes.table}>
       <TableBody>
@@ -98,6 +96,5 @@ export default function Tasks(props) {
 Tasks.propTypes = {
   tasksIndexes: PropTypes.arrayOf(PropTypes.number),
   tasks: PropTypes.arrayOf(PropTypes.node),
-  rtlActive: PropTypes.bool,
   checkedIndexes: PropTypes.array
 };

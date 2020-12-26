@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import styles from "../../assets/jss/material-dashboard-react/components/footerStyle.js";
+import styles from "../../assets/jss/mernpress/components/footerStyle.js";
 import VisaImage from "../../assets/img/Payment/ic_visa.png"
 import MastercardImage from "../../assets/img/Payment/ic_mastercard.png"
 import PaypalImage from "../../assets/img/Payment/ic_paypal.png"

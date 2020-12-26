@@ -15,7 +15,7 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Search from "@material-ui/icons/Search";
 import CustomInput from "../CustomInput/CustomInput.js";
 import Button from "../CustomButtons/Button";
-import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
+import styles from "../../assets/jss/mernpress/components/headerLinksStyle.js";
 
 const useStyles = makeStyles(styles);
 

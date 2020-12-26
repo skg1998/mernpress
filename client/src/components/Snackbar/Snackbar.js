@@ -8,13 +8,13 @@ import IconButton from "@material-ui/core/IconButton";
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
 // core components
-import styles from "../../assets/jss/material-dashboard-react/components/snackbarContentStyle.js";
+import styles from "../../assets/jss/mernpress/components/snackbarContentStyle.js";
 
 const useStyles = makeStyles(styles);
 
 export default function Snackbar(props) {
   const classes = useStyles();
-  const { message, color, close, icon, place, open, rtlActive } = props;
+  const { message, color, close, icon, place, open } = props;
   var action = [];
   const messageClasses = classNames({
     [classes.iconMessage]: icon !== undefined
@@ -54,8 +54,7 @@ export default function Snackbar(props) {
       ContentProps={{
         classes: {
           root: classes.root + " " + classes[color],
-          message: classes.message,
-          action: classNames({ [classes.actionRTL]: rtlActive })
+          message: classes.message
         }
       }}
     />
@@ -69,6 +68,5 @@ Snackbar.propTypes = {
   icon: PropTypes.object,
   place: PropTypes.oneOf(["tl", "tr", "tc", "br", "bl", "bc"]),
   open: PropTypes.bool,
-  rtlActive: PropTypes.bool,
   closeNotification: PropTypes.func
 };

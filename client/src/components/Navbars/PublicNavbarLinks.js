@@ -13,7 +13,7 @@ import Person from "@material-ui/icons/Person";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from "../CustomButtons/Button";
-import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
+import styles from "../../assets/jss/mernpress/components/headerLinksStyle.js";
 
 const useStyles = makeStyles(styles);
 

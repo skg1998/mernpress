@@ -15,7 +15,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
 import AdminNavbarLinks from "../../components/Navbars/AdminNavbarLinks.js";
-import styles from "../../assets/jss/material-dashboard-react/components/sidebarStyle.js";
+import styles from "../../assets/jss/mernpress/components/sidebarStyle.js";
 
 const useStyles = makeStyles(styles);
 

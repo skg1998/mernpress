@@ -7,7 +7,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Clear from "@material-ui/icons/Clear";
 import Check from "@material-ui/icons/Check";
-import styles from "../../assets/jss/material-dashboard-react/components/customInputStyle.js";
+import styles from "../../assets/jss/mernpress/components/customInputStyle.js";
 
 const useStyles = makeStyles(styles);
 
