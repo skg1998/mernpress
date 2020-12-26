@@ -2,7 +2,7 @@ import {
   primaryColor,
   blackColor,
   hexToRgb
-} from "../material-dashboard-react.js";
+} from "../mernpress.js";
 
 const checkboxAdnRadioStyle = {
   root: {

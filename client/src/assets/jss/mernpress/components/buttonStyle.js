@@ -9,7 +9,7 @@ import {
   whiteColor,
   blackColor,
   hexToRgb
-} from "../../material-dashboard-react.js";
+} from "../../mernpress.js";
 
 const buttonStyle = {
   button: {

@@ -7,7 +7,7 @@ import {
   roseColor,
   grayColor,
   defaultFont
-} from "../../material-dashboard-react.js";
+} from "../../mernpress.js";
 
 const tableStyle = theme => ({
   warningTableHeader: {

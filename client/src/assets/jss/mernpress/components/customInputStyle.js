@@ -4,7 +4,7 @@ import {
   successColor,
   grayColor,
   defaultFont
-} from "../../material-dashboard-react.js";
+} from "../../mernpress.js";
 
 const customInputStyle = {
   disabled: {

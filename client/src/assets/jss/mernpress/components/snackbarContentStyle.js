@@ -16,7 +16,7 @@ import {
   primaryColor,
   warningColor,
   hexToRgb
-} from "../../material-dashboard-react.js";
+} from "../../mernpress.js";
 
 const snackbarContentStyle = {
   root: {

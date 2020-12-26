@@ -2,7 +2,7 @@ import {
   drawerWidth,
   transition,
   container
-} from "../../material-dashboard-react";
+} from "../../mernpress";
 
 const appStyle = theme => ({
   wrapper: {

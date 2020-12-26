@@ -6,7 +6,7 @@ import {
   primaryCardHeader,
   roseCardHeader,
   whiteColor
-} from "../../material-dashboard-react.js";
+} from "../../mernpress.js";
 
 const cardHeaderStyle = {
   cardHeader: {

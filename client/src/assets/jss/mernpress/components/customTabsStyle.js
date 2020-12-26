@@ -1,4 +1,4 @@
-import { hexToRgb, whiteColor } from "../../material-dashboard-react.js";
+import { hexToRgb, whiteColor } from "../../mernpress.js";
 
 const customTabsStyle = {
   cardTitle: {

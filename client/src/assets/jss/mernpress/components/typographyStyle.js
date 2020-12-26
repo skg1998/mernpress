@@ -6,7 +6,7 @@ import {
   warningColor,
   dangerColor,
   grayColor
-} from "../../material-dashboard-react.js";
+} from "../../mernpress.js";
 
 const typographyStyle = {
   defaultFontStyle: {

@@ -1,4 +1,4 @@
-import { blackColor, hexToRgb } from "../material-dashboard-react.js";
+import { blackColor, hexToRgb } from "../mernpress.js";
 
 const tooltipStyle = {
   tooltip: {

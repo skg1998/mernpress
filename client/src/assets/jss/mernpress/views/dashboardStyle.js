@@ -3,7 +3,7 @@ import {
   whiteColor,
   grayColor,
   hexToRgb
-} from "../../material-dashboard-react.js";
+} from "../../mernpress.js";
 
 const dashboardStyle = {
   successText: {

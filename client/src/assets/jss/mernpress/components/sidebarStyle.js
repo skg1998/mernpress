@@ -13,7 +13,7 @@ import {
   grayColor,
   blackColor,
   hexToRgb
-} from "../../material-dashboard-react.js";
+} from "../../mernpress.js";
 
 const sidebarStyle = theme => ({
   drawerPaper: {

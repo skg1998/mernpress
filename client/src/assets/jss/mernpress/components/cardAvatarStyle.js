@@ -1,4 +1,4 @@
-import { hexToRgb, blackColor } from "../../material-dashboard-react.js";
+import { hexToRgb, blackColor } from "../../mernpress.js";
 
 const cardAvatarStyle = {
   cardAvatar: {

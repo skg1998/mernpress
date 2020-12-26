@@ -3,7 +3,7 @@ import {
   container,
   primaryColor,
   grayColor
-} from "../../material-dashboard-react";
+} from "../../mernpress";
 
 const footerStyle = {
   block: {

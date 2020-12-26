@@ -2,9 +2,9 @@ import {
   defaultFont,
   dangerColor,
   whiteColor
-} from "../../material-dashboard-react.js";
+} from "../../mernpress.js";
 
-import dropdownStyle from "../../material-dashboard-react/dropdownStyle";
+import dropdownStyle from "../../mernpress/dropdownStyle";
 
 const headerLinksStyle = theme => ({
   ...dropdownStyle(theme),

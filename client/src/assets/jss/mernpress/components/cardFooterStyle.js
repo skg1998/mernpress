@@ -1,4 +1,4 @@
-import { grayColor } from "../../material-dashboard-react.js";
+import { grayColor } from "../../mernpress.js";
 
 const cardFooterStyle = {
   cardFooter: {

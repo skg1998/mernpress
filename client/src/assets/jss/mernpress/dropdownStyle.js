@@ -6,7 +6,7 @@ import {
   blackColor,
   grayColor,
   hexToRgb
-} from "../material-dashboard-react";
+} from "../mernpress";
 
 const dropdownStyle = theme => ({
   buttonLink: {
