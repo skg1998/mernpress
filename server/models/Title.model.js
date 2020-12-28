@@ -6,11 +6,14 @@ const addTitleSchema = new mongoose.Schema({
     trim: true,
     required: 'Name is required'
   },
+
   image: {
     data: Buffer,
     contentType: String
   },
+
   updated: Date,
+  
   created: {
     type: Date,
     default: Date.now

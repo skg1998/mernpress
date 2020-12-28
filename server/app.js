@@ -11,6 +11,7 @@ const config = require("./config/config");
 const mongoose = require("mongoose");
 const swaggerUi = require("swagger-ui-express"); 
 const swaggerDocument = require("./swagger.json");
+require('dotenv').config()
  
 const indexRouter = require("./routes/index.routes");
 const usersRouter = require("./routes/users.routes");
@@ -22,9 +23,10 @@ const orderRoutes = require("./routes/order.routes");
 const slidderRoutes = require("./routes/Slidder.routes");
 const TitleRoutes = require("./routes/Title.routes");
 const CategoryRoutes = require("./routes/Category.routes");
-const BannerRoutes = require("./routes/Banner.routes")
+const BannerRoutes = require("./routes/Banner.routes");
+const ReviewsRoutes = require("./routes/reviews.routes")
 
-const mongoUrl = "mongodb://localhost:27017/lapimenia";
+const mongoUrl = process.env.MONGO_URI_LOCAL;
 mongoose.connect(
   mongoUrl,
   { useUnifiedTopology: true, useNewUrlParser: true , useCreateIndex:true },
@@ -64,7 +66,8 @@ app.use("/api/v1/admin",AdminRouter);
 app.use("/api/v1/slidder", slidderRoutes);
 app.use("/api/v1/title",TitleRoutes);
 app.use("/api/v1/category",CategoryRoutes);
-app.use("/api/v1/banner",BannerRoutes);  
+app.use("/api/v1/banner",BannerRoutes);
+app.use("/api/v1/reviews",ReviewsRoutes);  
 
 //swagger api
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

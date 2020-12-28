@@ -5,12 +5,12 @@
       "description": "Api for MernPress Project",
       "version": "1.0.0"
     },
-    "host": "localhost:3000",
+    "host": "localhost:3002",
     "basePath": "/api/v1",
     "tags": [
       {
-        "name": "user",
-        "description": "User"
+        "name": "users",
+        "description": "Users"
       },
       {
         "name": "admin",
@@ -47,19 +47,19 @@
         "application/json"
     ],
     "paths": {
-      "/user": {
+      "/users": {
         "get": {
           "tags": [
-            "user"
+            "users"
           ],
-          "x-swagger-router-controller": "user",
+          "x-swagger-router-controller": "users",
           "operationId": "GET",
-          "description": "Returns a list of users",
+          "description": "Returns a list of userss",
           "responses": {
             "200": {
-              "description": "User list",
+              "description": "Users list",
               "schema": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/Users"
               }
             },
             "default": {
@@ -72,27 +72,27 @@
         },
         "post": {
           "tags": [
-            "user"
+            "users"
           ],
-          "x-swagger-router-controller": "user",
+          "x-swagger-router-controller": "users",
           "operationId": "POST",
-          "description": "Create user",
+          "description": "Create users",
           "parameters": [
             {
               "name": "body",
               "in": "body",
-              "description": "The user details",
+              "description": "The users details",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/user"
+                "$ref": "#/definitions/users"
               }
             }
           ],
           "responses": {
             "201": {
-              "description": "Newly created user",
+              "description": "Newly created users",
               "schema": {
-                "$ref": "#/definitions/user"
+                "$ref": "#/definitions/users"
               }
             },
             "default": {
@@ -104,28 +104,28 @@
           }
         }
       },
-      "/user/{id}": {
+      "/users/{id}": {
         "get": {
           "tags": [
-            "user"
+            "users"
           ],
-          "x-swagger-router-controller": "user",
+          "x-swagger-router-controller": "users",
           "operationId": "GET",
-          "description": "Fetch a user",
+          "description": "Fetch a users",
           "parameters": [
             {
               "name": "id",
               "in": "path",
-              "description": "The user ID to fetch",
+              "description": "The users ID to fetch",
               "required": true,
               "type": "string"
             }
           ],
           "responses": {
             "200": {
-              "description": "user details",
+              "description": "users details",
               "schema": {
-                "$ref": "#/definitions/user"
+                "$ref": "#/definitions/users"
               }
             },
             "default": {
@@ -138,34 +138,34 @@
         },
         "put": {
           "tags": [
-            "user"
+            "users"
           ],
-          "x-swagger-router-controller": "user",
+          "x-swagger-router-controller": "users",
           "operationId": "PUT",
-          "description": "Update a user",
+          "description": "Update a users",
           "parameters": [
             {
               "name": "id",
               "in": "path",
-              "description": "The user ID to update",
+              "description": "The users ID to update",
               "required": true,
               "type": "integer"
             },
             {
               "name": "body",
               "in": "body",
-              "description": "The user details for the update",
+              "description": "The users details for the update",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/user"
+                "$ref": "#/definitions/users"
               }
             }
           ],
           "responses": {
             "200": {
-              "description": "Updated user details",
+              "description": "Updated users details",
               "schema": {
-                "$ref": "#/definitions/user"
+                "$ref": "#/definitions/users"
               }
             },
             "default": {
@@ -203,189 +203,7 @@
           }
         }
       },
-      "user": {
-        "required": ["name"],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "permissions": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                  "finance",
-                  "accounts",
-                  "sales",
-                  "leads"
-              ]
-            },
-            "uniqueItems": true
-          }
-        }
-      }
-    },
-    "paths": {
-      "/admin": {
-        "get": {
-          "tags": [
-            "admin"
-          ],
-          "x-swagger-router-controller": "admin",
-          "operationId": "GET",
-          "description": "Returns a list of admins",
-          "responses": {
-            "200": {
-              "description": "admin list",
-              "schema": {
-                "$ref": "#/definitions/admin"
-              }
-            },
-            "default": {
-              "description": "Unexpected error",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        },
-        "post": {
-          "tags": [
-            "admin"
-          ],
-          "x-swagger-router-controller": "admin",
-          "operationId": "POST",
-          "description": "Create admin",
-          "parameters": [
-            {
-              "name": "body",
-              "in": "body",
-              "description": "The admin details",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/admin"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "Newly created admin",
-              "schema": {
-                "$ref": "#/definitions/admin"
-              }
-            },
-            "default": {
-              "description": "Unexpected error",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        }
-      },
-      "/admin/{id}": {
-        "get": {
-          "tags": [
-            "admin"
-          ],
-          "x-swagger-router-controller": "admin",
-          "operationId": "GET",
-          "description": "Fetch a admin",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "description": "The admin ID to fetch",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "admin details",
-              "schema": {
-                "$ref": "#/definitions/admin"
-              }
-            },
-            "default": {
-              "description": "Unexpected error",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        },
-        "put": {
-          "tags": [
-            "admin"
-          ],
-          "x-swagger-router-controller": "admin",
-          "operationId": "PUT",
-          "description": "Update a admin",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "description": "The admin ID to update",
-              "required": true,
-              "type": "integer"
-            },
-            {
-              "name": "body",
-              "in": "body",
-              "description": "The admin details for the update",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/admin"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Updated admin details",
-              "schema": {
-                "$ref": "#/definitions/admin"
-              }
-            },
-            "default": {
-              "description": "Unexpected error",
-              "schema": {
-                "$ref": "#/definitions/Error"
-              }
-            }
-          }
-        }
-      }
-    },
-    "definitions": {
-      "Error": {
-        "required": ["code", "message"],
-        "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          }
-        }
-      },
-      "Success": {
-        "required": ["code", "message"],
-        "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          }
-        }
-      },
-      "admin": {
+      "users": {
         "required": ["name"],
         "properties": {
           "id": {

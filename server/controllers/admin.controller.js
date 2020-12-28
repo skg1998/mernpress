@@ -4,8 +4,33 @@ const errorHandler = require("../helpers/dbErrorHandler");
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 const config = require('../config/config');
-const jwtSecret = "sdghjak82374ihury83yr3yr2u3h"
+//const jwtSecret = "sdghjak82374ihury83yr3yr2u3h"
+const jwtSecret = process.env.JWT_SECRET
 
+//Admin Signup API
+/**
+ * @api {get} /api/v1/admin/signup Admin Register API
+ * @apiGroup Admin
+ * @apiHeader  Authorization
+ * @apiParam (Request body)  name Admin name
+ * @apiParam (Request body)  email Admin  email
+ * @apiParam (Request body)  password Admin password
+ * @apiParamExample {json} Input
+ * {
+ *      "name" : "",
+ *      "email" : "",
+ *      "password" : ""
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * {
+ *      "message": "Successfully signed up!",
+ *      "status": "1"
+ * }
+ * @apiSampleRequest /api/v1/admin/signup
+ * @apiErrorExample {json} Admin error
+ * HTTP/1.1 500 Internal Server Error
+ */
 const Adminsignup = (req, res, next) => {
   var admin = new Admin({
       name:req.body.name,
@@ -24,6 +49,29 @@ const Adminsignup = (req, res, next) => {
     });
   };
 
+//Admin Login API
+/**
+ * @api {get} /api/v1/admin/Login Admin Login API
+ * @apiGroup Admin
+ * @apiHeader  Authorization
+ * @apiParam (Request body)  email Admin  email
+ * @apiParam (Request body)  password Admin password
+ * @apiParamExample {json} Input
+ * {
+ *      "email" : "",
+ *      "password" : ""
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * {
+ *      "message": "Successfully Login!",
+ *      "data":{},
+ *      "status": "1"
+ * }
+ * @apiSampleRequest /api/v1/admin/Login
+ * @apiErrorExample {json} Admin error
+ * HTTP/1.1 500 Internal Server Error
+ */  
 const AdminLogin = (req, res) => {
   Admin.findOne(
     {
@@ -57,7 +105,21 @@ const AdminLogin = (req, res) => {
   );
 };
 
-
+//Admin Logout API
+/**
+ * @api {get} /api/v1/admin/logout Admin Logout API
+ * @apiGroup Admin
+ * @apiHeader  Authorization
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * {
+ *      "message": "Successfully Logout!",
+ *      "status": "1"
+ * }
+ * @apiSampleRequest /api/v1/admin/logout
+ * @apiErrorExample {json} Admin error
+ * HTTP/1.1 500 Internal Server Error
+ */
 const Adminsignout = (req, res) => {
   res.clearCookie("t");
   return res.status("200").json({

@@ -20,6 +20,19 @@ const AdminSchema = new mongoose.Schema({
   },
   salt: String,
   updated: Date,
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+  resetPasswordToken: {
+      type: String,
+      required: false
+  },
+
+  resetPasswordExpires: {
+      type: Date,
+      required: false
+  },
   created: {
     type: Date,
     default: Date.now

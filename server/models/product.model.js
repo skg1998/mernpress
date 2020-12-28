@@ -3,7 +3,7 @@ const ProductSchema = new mongoose.Schema({
   productName: {
     type: String,
     trim: true,
-    //required: 'Product Name is required'
+    required: 'Product Name is required'
   },
   image: {
     data: Buffer,
@@ -46,9 +46,9 @@ const ProductSchema = new mongoose.Schema({
   dateAvailable:{
     type:String
   },
-  condition:{
+  condition:[{
     type:String
-  },
+  }],
   status:{
     type:Number
   },
