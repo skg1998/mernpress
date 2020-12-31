@@ -7,8 +7,7 @@ const logger = require("morgan");
 const compress = require("compression");
 const cors = require("cors");
 const helmet = require("helmet");
-const config = require("./config/config");
-const mongoose = require("mongoose");
+const connectDB = require("./config/db");
 const swaggerUi = require("swagger-ui-express"); 
 const swaggerDocument = require("./swagger.json");
 require('dotenv').config()
@@ -26,16 +25,10 @@ const CategoryRoutes = require("./routes/Category.routes");
 const BannerRoutes = require("./routes/Banner.routes");
 const ReviewsRoutes = require("./routes/reviews.routes")
 
-const mongoUrl = process.env.MONGO_URI_LOCAL;
-mongoose.connect(
-  mongoUrl,
-  { useUnifiedTopology: true, useNewUrlParser: true , useCreateIndex:true },
-  () => {
-    console.log("MongoDb connected...");
-  }
-);
+var app = express(); 
 
-var app = express();  
+// open mongoose connection
+connectDB();
 
 // support parsing of application/json type post data
 app.use(bodyParser.json());
