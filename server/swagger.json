@@ -35,6 +35,14 @@
       {
         "name": "banner",
         "description": "Banner"
+      },
+      {
+        "name": "slidder",
+        "description": "Slidder"
+      },
+      {
+        "name": "review",
+        "description": "Review"
       }
     ],
     "schemes": [
@@ -175,8 +183,389 @@
               }
             }
           }
+        },
+        "delete": {
+          "tags": [
+            "users"
+          ],
+          "x-swagger-router-controller": "users",
+          "operationId": "PUT",
+          "description": "Update a users",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The users ID to update",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "The users details for the update",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/users"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Updated users details",
+              "schema": {
+                "$ref": "#/definitions/users"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/admin": {
+        "get": {
+          "tags": [
+            "admin"
+          ],
+          "x-swagger-router-controller": "admin",
+          "operationId": "GET",
+          "description": "Returns a list of admin",
+          "responses": {
+            "200": {
+              "description": "Users list",
+              "schema": {
+                "$ref": "#/definitions/Admin"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "admin"
+          ],
+          "x-swagger-router-controller": "admin",
+          "operationId": "POST",
+          "description": "Create users",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "The admin details",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Admin"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Newly created admin",
+              "schema": {
+                "$ref": "#/definitions/admin"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/admin/{id}": {
+        "get": {
+          "tags": [
+            "admin"
+          ],
+          "x-swagger-router-controller": "admin",
+          "operationId": "GET",
+          "description": "Fetch a admin",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The admin ID to fetch",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "admin details",
+              "schema": {
+                "$ref": "#/definitions/admin"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "admin"
+          ],
+          "x-swagger-router-controller": "admin",
+          "operationId": "PUT",
+          "description": "Update a admin",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The admin ID to update",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "The admin details for the update",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/admin"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Updated admin details",
+              "schema": {
+                "$ref": "#/definitions/admin"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "admin"
+          ],
+          "x-swagger-router-controller": "admin",
+          "operationId": "PUT",
+          "description": "Update a admin",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The admin ID to update",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "The admin details for the update",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/admin"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Updated admin details",
+              "schema": {
+                "$ref": "#/definitions/admin"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/shops": {
+        "get": {
+          "tags": [
+            "shops"
+          ],
+          "x-swagger-router-controller": "shops",
+          "operationId": "GET",
+          "description": "Returns a list of shops",
+          "responses": {
+            "200": {
+              "description": "Users list",
+              "schema": {
+                "$ref": "#/definitions/shops"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "shops"
+          ],
+          "x-swagger-router-controller": "shops",
+          "operationId": "POST",
+          "description": "Create users",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "The shops details",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/shops"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Newly created shops",
+              "schema": {
+                "$ref": "#/definitions/shops"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/shops/{id}": {
+        "get": {
+          "tags": [
+            "shops"
+          ],
+          "x-swagger-router-controller": "shops",
+          "operationId": "GET",
+          "description": "Fetch a shops",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The shops ID to fetch",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "shops details",
+              "schema": {
+                "$ref": "#/definitions/shops"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "shops"
+          ],
+          "x-swagger-router-controller": "shops",
+          "operationId": "PUT",
+          "description": "Update a shops",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The shops ID to update",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "The shops details for the update",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/shops"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Updated shops details",
+              "schema": {
+                "$ref": "#/definitions/shops"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "shops"
+          ],
+          "x-swagger-router-controller": "shops",
+          "operationId": "PUT",
+          "description": "Update a shops",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The shops ID to update",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "The shops details for the update",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/shops"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Updated shops details",
+              "schema": {
+                "$ref": "#/definitions/shops"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
         }
       }
+      
     },
     "definitions": {
       "Error": {
@@ -204,6 +593,54 @@
         }
       },
       "users": {
+        "required": ["name"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                  "finance",
+                  "accounts",
+                  "sales",
+                  "leads"
+              ]
+            },
+            "uniqueItems": true
+          }
+        }
+      },
+      "admin": {
+        "required": ["name"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                  "finance",
+                  "accounts",
+                  "sales",
+                  "leads"
+              ]
+            },
+            "uniqueItems": true
+          }
+        }
+      },
+      "shops": {
         "required": ["name"],
         "properties": {
           "id": {
