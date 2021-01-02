@@ -1,37 +1,55 @@
 import React from 'react'
-import { Switch, Route } from "react-router-dom";
-import AppBar from '@material-ui/core/AppBar'
 import SideMenu from './SideMenu';
 import './navbar.css';
 
 const routes =[
   {
-    path: "/",
-    name: "Home",
-  },
-  {
-    path: "/category",
-    name: "Category",
+    name: "MernPress",
+    logo: "MernPress",
+    style:"",
+    route:[
+      {
+        path: "/",
+        name: "Home",
+      },
+      {
+        path: "/category",
+        name: "Shop by Category",
+      },
+      {
+        path: "/category",
+        name: "Today deals",
+      },
+      {
+        path: "/category",
+        name: "Your Order",
+      },
+      {
+        path: "/category",
+        name: "Buy Agains",
+      },
+      {
+        path: "/category",
+        name: "Your wishList",
+      },
+      {
+        path: "/category",
+        name: "Buy Agains",
+      },
+      {
+        path: "/category",
+        name: "Your Acount",
+      },
+      {
+        path: "/category",
+        name: "Sell on yourSelf",
+      },{
+        path: "/category",
+        name: "Setting",
+      }
+    ]
   }
 ]
-
-const switchRoutes = (
-  <Switch>
-    {routes.map((prop, key) => {
-      if (prop.layout === "/") {
-          return (
-            <Route
-              path={prop.path}
-              component={prop.component}
-              key={key}
-            />
-          );
-        }
-      return null;
-    })}
-  </Switch>
-);
-
 
 const Header = ({...rest}) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -41,13 +59,11 @@ const Header = ({...rest}) => {
 
   return(
     <div className="main-menu">
-    <AppBar position="static">
-    <SideMenu
-        routes={routes}
-        handleDrawerToggle={handleDrawerToggle}
-        {...rest}
+      <SideMenu
+          routes={routes}
+          handleDrawerToggle={handleDrawerToggle}
+          {...rest}
       />
-    </AppBar>
   </div>
   )
 }
@@ -55,3 +71,4 @@ const Header = ({...rest}) => {
 export default Header
 
 
+  
