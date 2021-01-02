@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button,TextField ,Card ,CardHeader, Grid , withStyles } from '@material-ui/core';
 import {Redirect , Link} from 'react-router-dom'
+import SEO from "../../components/SEO/Seo"
 import * as Api from '../../Api';
 
 
@@ -62,6 +63,7 @@ class AdminLogin extends Component {
 
         return (
         <div > 
+            <SEO title="Admin - Login " description="A Multi-vendor ecommerce site" />
             <Grid
                container
                 className={classes.card}

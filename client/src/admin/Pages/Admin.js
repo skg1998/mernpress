@@ -7,9 +7,10 @@ import Navbar from "../../components/Navbars/Navbar";
 import Footer from "../../components/Footer/Footer.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import routes from "../routes";
-import styles from "../../assets/jss/material-dashboard-react/layouts/adminStyle.js";
+import styles from "../../assets/jss/mernpress/layouts/adminStyle.js";
 import bgImage from "../../assets/img/sidebar-2.jpg";
 import logo from "../../assets/img/reactlogo.png";
+import SEO from "../../components/SEO/Seo"
 let ps;
 
 const switchRoutes = (
@@ -100,6 +101,7 @@ export default function Admin({ ...rest }) {
   }, [mainPanel]);
   return (
     <div className={classes.wrapper}>
+      <SEO title="Admin - MernPress " description="A Multi-vendor ecommerce site" />
       <Sidebar
         routes={routes}
         logoText={"MernPress"}
