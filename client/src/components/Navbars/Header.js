@@ -41,7 +41,7 @@ const routes =[
         name: "Your Acount",
       },
       {
-        path: "/category",
+        path: "/adminsignup",
         name: "Sell on yourSelf",
       },{
         path: "/category",
@@ -55,7 +55,7 @@ const Header = ({...rest}) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen); 
-  };
+  }; 
 
   return(
     <div className="main-menu">

@@ -14,6 +14,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from "../CustomButtons/Button";
 import styles from "../../assets/jss/mernpress/components/headerLinksStyle.js";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
@@ -46,7 +47,8 @@ export default function PublicNavbarLinks() {
           <span className={classes.notifications}>5</span>
         </Button>
       </div>
-
+      
+      
       <Button
         color={window.innerWidth > 959 ? "transparent" : "white"}
         justIcon={window.innerWidth > 959}
@@ -54,11 +56,13 @@ export default function PublicNavbarLinks() {
         aria-label="Cart"
         className={classes.buttonLink}
       >
-        <ShoppingCartIcon className={classes.icons} />
+        <Link to="/cart">
+          <ShoppingCartIcon className={classes.icons} />
+        </Link>
         <Hidden mdUp implementation="css">
           <p className={classes.linkText}>Cart</p>
         </Hidden>
-      </Button>
+      </Button>  
 
       <div className={classes.manager}>
         <Button

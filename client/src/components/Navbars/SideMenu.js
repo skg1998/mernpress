@@ -51,7 +51,7 @@ function SideMenu(props) {
           {
             props.routes.map((items)=>(
               items.route.map((item,index)=>(
-                <ListItem button key={index} >
+                <ListItem className={classes.listitem} button key={index} >
                       <Link to={item.path}>
                         <ListItemText primary={ item.name} />
                       </Link>
