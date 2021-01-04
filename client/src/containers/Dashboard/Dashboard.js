@@ -37,7 +37,7 @@ import {
   completedTasksChart
 } from "../variables/charts";
 
-import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import styles from "../../assets/jss/mernpress/views/dashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 

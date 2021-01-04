@@ -5,7 +5,7 @@ import { indigo, pink } from "@material-ui/core/colors";
 import MainRouter from "./MainRouter";
 import { BrowserRouter } from "react-router-dom";
 
-function App() {
+const App = () =>{
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>

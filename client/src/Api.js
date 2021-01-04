@@ -9,6 +9,8 @@ let config = {
     },
   }
 
+// -----------------------ADMIN API ---------------------
+
 export const AdminSignin = (data) => {
     var submitData = qs.stringify({
         'email': data.email,
@@ -57,6 +59,8 @@ export const Adminsignup = (data) => {
     })
 }
 
+// -----------------------------BANNER API -------------------------
+
 export const AddBanner = (data) => {
     console.log("data",data)
     const configs = {
@@ -77,16 +81,7 @@ export const AddBanner = (data) => {
     })
 }
 
-export const AddProduct = () => {
-    return new Promise((resolve, reject) => {
-        axios.post(BASE_URL + "admin/" , config)
-            .then(({ status, data }) => {
-                resolve(status == 200 && data ? data : null)
-            })
-            .catch(reject)
-    })
-}
-
+//------------------------------PROJECT TITLE API ------------------------------
 export const AddProjectTitle = () => {
     return new Promise((resolve, reject) => {
         axios.post(BASE_URL + "admin/" , config)
@@ -96,6 +91,9 @@ export const AddProjectTitle = () => {
             .catch(reject)
     })
 }
+
+
+//--------------------------SHOP API ---------------------------------------------
 
 export const AddShop = () => {
     return new Promise((resolve, reject) => {
@@ -107,6 +105,7 @@ export const AddShop = () => {
     })
 }
 
+//-------------------------------------------SLIDDER API ---------------------------
 
 export const AddSlider = (data) => {
     console.log("data",data)
@@ -127,6 +126,8 @@ export const AddSlider = (data) => {
             .catch(reject)
     })
 }
+
+//------------------------------PROJECT TITLE API ------------------------------
 
 export const AddTitle = (data) => {
     
@@ -202,4 +203,12 @@ export const DeleteCategoryBy = (id) => {
 
 //-----------------------Product Api------------------
 
-
+export const AddProduct = () => {
+    return new Promise((resolve, reject) => {
+        axios.post(BASE_URL + "admin/" , config)
+            .then(({ status, data }) => {
+                resolve(status == 200 && data ? data : null)
+            })
+            .catch(reject)
+    })
+}

@@ -12,13 +12,5 @@ code {
     monospace;
 }
 
-.MuiGrid-root.MuiGrid-item{
-  width: 100% !important;
-}
-
-.MuiPaper-root.MuiCard-root{
-  margin-top: 0px;
-}
-
 
 
