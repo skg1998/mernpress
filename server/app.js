@@ -24,6 +24,7 @@ const TitleRoutes = require("./routes/Title.routes");
 const CategoryRoutes = require("./routes/Category.routes");
 const BannerRoutes = require("./routes/Banner.routes");
 const ReviewsRoutes = require("./routes/reviews.routes")
+const HeaderRoutes = require("./routes/Header.routes")
 
 var app = express(); 
 
@@ -61,6 +62,7 @@ app.use("/api/v1/title",TitleRoutes);
 app.use("/api/v1/category",CategoryRoutes);
 app.use("/api/v1/banner",BannerRoutes);
 app.use("/api/v1/reviews",ReviewsRoutes);  
+app.use("/api/v1/header",HeaderRoutes);
 
 //swagger api
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
