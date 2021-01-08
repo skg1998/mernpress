@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button,Card ,CardHeader, Grid , withStyles } from '@material-ui/core';
 import * as Api from '../../Api';
+import Snackbar from "../../components/Snackbar/Snackbar"
 
 const useStyles = (theme) => ({
     card: {
@@ -20,7 +21,8 @@ class AddBanner extends Component {
     constructor() {
         super();
         this.state = {
-          files:[]
+          files:[],
+          notification:false
         }
       }
     handleSubmit = event => {
@@ -41,7 +43,9 @@ class AddBanner extends Component {
             } else {
                 console.log(data)
             }
-            })
+        })
+
+        this.setState({notification:true})
     }
     
     handleChange = (e) => {
@@ -49,8 +53,11 @@ class AddBanner extends Component {
             files: e.target.files 
         });
     }
-
-
+    
+    handleClose = (e) => {
+        this.setState({notification:false})
+    } 
+    
     render() { 
         const { classes } = this.props;
         return (
@@ -69,6 +76,14 @@ class AddBanner extends Component {
                             <input className={classes.imageupload} style={{display:'none'}}  type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
                         </Grid>
                         <Button  variant="contained" color="primary" type = "submit" style={{ marginTop:'10px',width:'100%'}}> Add Banner Image </Button>
+                        <Snackbar 
+                           message={"Button Click"}
+                           color="success"
+                           close={true}
+                           place="tr"
+                           open={this.state.notification}
+                           closeNotification = {this.handleClose}
+                        />
                     </form>
                 </Card>
             </Grid> 
