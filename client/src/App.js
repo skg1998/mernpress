@@ -3,15 +3,16 @@ import "./App.css";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { indigo, pink } from "@material-ui/core/colors";
 import MainRouter from "./MainRouter";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
+import {history} from "./store/helpers"
 
 const App = () =>{
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <MuiThemeProvider theme={theme}>
         <MainRouter />
       </MuiThemeProvider>
-    </BrowserRouter>
+    </Router>
   );
 }
 
