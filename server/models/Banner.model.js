@@ -2,9 +2,10 @@ const mongoose = require('mongoose')
 
 const BannerSchema = new mongoose.Schema({
   images: [{
-    data: Buffer,
-    contentType: String
-     }],
+    path: Buffer,
+    contentType: String,
+    size:Number
+  }],
   flag:{
     type: Boolean,
     default:false
@@ -12,7 +13,7 @@ const BannerSchema = new mongoose.Schema({
   updated: Date,
   created: {
     type: Date,
-    default: Date.now
+    default: Date.now 
   }
 })
 
