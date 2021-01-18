@@ -1,7 +1,7 @@
 const Banner = require('../models/Banner.model');
-const Upload = require('../helpers/uploadFile');
 const errorHandler =require('../helpers/dbErrorHandler');
 const fs = require('fs');
+const path = require('path');
   
 const create = (req, res ) => {
     if(req.file == undefined){
@@ -9,12 +9,17 @@ const create = (req, res ) => {
         message: "Image could not be uploaded"
       })
     }else{
-      var fullPath = "files/"+req.file.filename;
-      var imgPath = fs.readFileSync(fullPath);
-      var encImg = imgPath.toString('base64');
+      try {
+        var fullPath = "public/files/"+req.file.filename;
+        var imgPath = fs.readFileSync(fullPath , 'utf8');
+        var encImg = imgPath.toString('base64');
+      }
+      catch (e) {
+        console.log(e);
+      }
       var banner = {
         image: {
-          path:Buffer(encImg, 'base64'),
+          path:Buffer(encImg , 'base64'),
           contentType: req.file.mimetype,
           size: req.file.size
         }, 
