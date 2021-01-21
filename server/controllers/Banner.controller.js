@@ -1,30 +1,37 @@
 const Banner = require('../models/Banner.model');
 const errorHandler =require('../helpers/dbErrorHandler');
 const fs = require('fs');
-const path = require('path');
   
 const create = (req, res ) => {
-    if(req.file == undefined){
+  console.log("req.file",req.files)
+    if(!req.file || !req.body){
       return res.status(400).json({
         message: "Image could not be uploaded"
       })
     }else{
+      let images = []
       try {
-        var fullPath = "public/files/"+req.file.filename;
-        var imgPath = fs.readFileSync(fullPath , 'utf8');
-        var encImg = imgPath.toString('base64');
-      }
-      catch (e) {
+        const files = req.files;
+        for(const file of files){
+          var fullPath = "public/files/"+ file.filename;
+          var imgPath = fs.readFileSync(fullPath , 'utf8');
+          var encImg = imgPath.toString('base64');
+          var image = {
+            path:Buffer(encImg , 'base64'),
+            contentType: file.mimetype,
+            size: file.size
+          }
+          images.push(image)
+        }
+      }catch (e) {
         console.log(e);
       }
-      var banner = {
-        image: {
-          path:Buffer(encImg , 'base64'),
-          contentType: req.file.mimetype,
-          size: req.file.size
-        }, 
+
+      const banner = {
+        images:images,
         flag:req.body.flag
-      };
+      }
+     
       var addBanner = new Banner(banner); 
       addBanner.save((err, result) => {
         if (err) {
@@ -59,7 +66,7 @@ const create = (req, res ) => {
     })
   }  
 
-  const update = (req,res) =>{
+  const update = (req,res) => {
     if(req.file == undefined){
       return res.status(400).json({
         message: "Image could not be uploaded"
@@ -89,7 +96,7 @@ const create = (req, res ) => {
   }
   
   const remove = (req,res) =>{
-    Banner.removeById({_id: req.params.id},(err, deletedBannerImage) => {
+    Banner.findByIdAndDelete({_id: req.params.id},(err, deletedBannerImage) => {
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
@@ -97,8 +104,17 @@ const create = (req, res ) => {
       }
       res.json(deletedBannerImage)
     })
+    // Banner.findByIdAndDelete({_id:req.params.id })
+    // .then((deletedBannerImage) =>{
+    //   res.json(deletedBannerImage)
+    // })
+    // .catch((err)=>{
+    //   res.status(400).json({
+    //     error: errorHandler.getErrorMessage(err)
+    //   })
+    // })
   }
-  
+   
  
   
   module.exports = {
