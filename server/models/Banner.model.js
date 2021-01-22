@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
 
 const BannerSchema = new mongoose.Schema({
-  images: [{
+  images: {
+    type:[],
     path: Buffer,
     contentType: String,
     size:Number
-  }],
+  },
   flag:{
     type: Boolean,
     default:false
