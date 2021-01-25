@@ -1,5 +1,5 @@
 import { authHeader } from '../helpers';
-const BASE_URL = "http://api.masonicsprig.com/";
+const BASE_URL = " ";
 export const userService = {
     login,
     logout,
