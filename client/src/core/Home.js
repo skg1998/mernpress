@@ -6,7 +6,6 @@ import Suggestions from '../containers/product/Suggestions'
 import {listLatest, listCategories} from '../containers/product/api-product.js'
 import Categories from '../containers/product/Categories'
 import MainSlidder from '../components/Slidder/MainSlidder'
-import ProductSlidder from '../components/Slidder/ProductSlidder'
 import CategorySlidder from '../components/Slidder/CategorySlidder'
 import CategoriesBar from '../components/Slidder/CategoriesBar'
 import SEO from '../components/SEO/Seo'
@@ -64,7 +63,6 @@ class Home extends Component {
             </Grid>
           </Grid>
           <CategorySlidder />
-          <ProductSlidder />
         </div>
       </div>
     )

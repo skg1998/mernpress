@@ -1,13 +1,10 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {withStyles} from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import GridList  from '@material-ui/core/GridList'
-import { GridListTile, GridListTileBar } from '@material-ui/core/';
-import {Link} from 'react-router-dom'
-import DisplayRating from '../../components/Rating/DisplayRating'
-import AddToCart from '../cart/AddToCart'
-import CartImage from '../../assets/img/shopping_cart_racing.png'
+import GridList from '@material-ui/core/GridList'
+import ProductCard from '../../components/Card/ProductCard'
+import AddToCart from "../../containers/cart/AddToCart"
 
 const styles = theme => ({
   root: {
@@ -29,7 +26,7 @@ const styles = theme => ({
     padding: '16px 0 10px'
   },
   title: {
-    padding:`${theme.spacing.unit * 3}px ${theme.spacing.unit * 2.5}px ${theme.spacing.unit * 2}px`,
+    padding: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 2.5}px ${theme.spacing.unit * 2}px`,
     color: theme.palette.openTitle,
     width: '100%'
   },
@@ -44,42 +41,29 @@ const styles = theme => ({
     textAlign: 'left'
   },
   tileTitle: {
-    fontSize:'1.1em',
-    marginBottom:'5px',
-    color:'rgb(189, 222, 219)',
-    display:'block'
+    fontSize: '1.1em',
+    marginBottom: '5px',
+    color: 'rgb(189, 222, 219)',
+    display: 'block'
   }
 })
 class Products extends Component {
   render() {
-    const {classes} = this.props
-    console.log("this.props.products",this.props.products)
+    const { classes } = this.props
+    console.log("this.props.products", this.props.products)
     return (
       <div className={classes.root}>
-      {this.props.products.length > 0 ?
-        (<div className={classes.container}>
-          <GridList cellHeight={200} className={classes.gridList} cols={3}>
-          {this.props.products.map((product, i) => (
-            <GridListTile key={i} className={classes.tile}>
-              <Link to={"/product/"+product._id}>
-                {product.image ? <img className={classes.image} src={'/api/v1/products/photo/'+product._id} alt={product.name} />:<img className={classes.image} src={CartImage} alt={product.name} />}
-                <img className={classes.image} src={'/api/v1/products/photo/'+product._id} alt={product.name} />
-                </Link>
-              <GridListTileBar className={classes.tileBar}
-                title={<Link to={"/product/"+product._id} className={classes.tileTitle}>{product.name}</Link>}
-                subtitle={
-                 <div>
-                   <span>{<DisplayRating rating={product.sortOrder} nunumReviews={27}/>}</span>
-                   <span>$ {product.price}</span>
-                 </div>
-                }
-                actionIcon={
-                  <AddToCart item={product}/>
-                }
-              />
-            </GridListTile>
-          ))}
-        </GridList></div>) : this.props.searched && (<Typography type="subheading" component="h4" className={classes.title}>No products found! :(</Typography>)}
+        {this.props.products.length > 0 ?
+          (<div className={classes.container}>
+            <GridList cellHeight={200} className={classes.gridList} cols={3}>
+              {this.props.products.map((product, i) => (
+                <ProductCard
+                  product={product}
+                  key={i}
+                  addToCart={<AddToCart item={product} />}
+                />
+              ))}
+            </GridList></div>) : this.props.searched && (<Typography type="subheading" component="h4" className={classes.title}>No products found! :(</Typography>)}
       </div>)
   }
 }

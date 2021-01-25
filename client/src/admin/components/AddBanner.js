@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button,Card ,CardHeader, Grid , withStyles } from '@material-ui/core';
+import { Button,Card ,CardHeader, Grid , withStyles,Select , MenuItem} from '@material-ui/core';
 import * as Api from '../../Api';
 import Snackbar from "../../components/Snackbar/Snackbar"
 
@@ -22,20 +22,19 @@ class AddBanner extends Component {
         super();
         this.state = {
           files:[],
+          flag:false,
           notification:false
         }
       }
     handleSubmit = event => {
         event.preventDefault();
-        const { files } = this.state;
-
-        console.log("files",files);
-
+        const { files , flag } = this.state;
         let formData = new FormData();
 
         for (let i = 0; i < files.length; i++) {
             formData.append(`files[${i}]`, files[i])
         }
+        formData.append(`flag`, flag);
 
         Api.AddBanner(formData).then((data) => {
             if (data.error) {
@@ -70,10 +69,22 @@ class AddBanner extends Component {
                 justify="center"
             >
                 <Card style={{padding:'20px'}}>
-                <form onSubmit = { this.handleSubmit } noValidate autoComplete="off">
+                    <form onSubmit = { this.handleSubmit } noValidate autoComplete="off">
                         <CardHeader style={{color:'#3f51b5'}} title="Add Banner Image" />
                         <Grid item xs={12}>    
                             <input className={classes.imageupload} style={{display:'none'}}  type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
+                        </Grid>
+                        <Grid item xs={12}>    
+                            <Select
+                                name="flag"
+                                onChange= {this.handleChange}
+                                label="Banner"
+                                variant="outlined"
+                                style={{marginTop:'10px', width:'100%'}}
+                                >
+                                <MenuItem value="false"><em>disable</em></MenuItem>
+                                <MenuItem value="true"><em>visible</em></MenuItem>
+                            </Select>
                         </Grid>
                         <Button  variant="contained" color="primary" type = "submit" style={{ marginTop:'10px',width:'100%'}}> Add Banner Image </Button>
                         <Snackbar 

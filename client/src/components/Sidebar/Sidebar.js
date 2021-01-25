@@ -82,9 +82,10 @@ export default function Sidebar(props) {
           );
         }else{
           return (
-            <Accordion className={activePro + classes.item}>
+            <Accordion className={classes.accordion}>
             <AccordionSummary
-              // expandIcon={<ExpandMoreIcon />}
+              className= {classes.accordionSummary}
+              //expandIcon={<ExpandMoreIcon className={classes.expandIcon}/>}
               aria-controls="panel1a-content"
             >
               <ListItem button className={classes.itemLink + listItemClasses}>
@@ -112,7 +113,7 @@ export default function Sidebar(props) {
                 />
               </ListItem>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails className ={classes.accordionDetail}>
                 {prop.subItem.map(e => (
                     <NavLink
                     to={prop.layout + prop.path + e.path}

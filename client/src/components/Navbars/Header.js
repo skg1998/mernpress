@@ -1,6 +1,5 @@
 import React from 'react'
 import SideMenu from './SideMenu';
-import './navbar.css';
 
 const routes =[
   {

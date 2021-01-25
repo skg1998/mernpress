@@ -14,7 +14,7 @@ import {fade} from "@material-ui/core/styles";
 
 const headerStyle = (theme) => ({
   appBar: {
-    backgroundColor: "transparent",
+    backgroundColor: "#459cb3",
     boxShadow: "none",
     borderBottom: "0",
     marginBottom: "0",
@@ -153,5 +153,5 @@ const headerStyle = (theme) => ({
     borderRadius:"5px"
   }
 });
-
+ 
 export default headerStyle;

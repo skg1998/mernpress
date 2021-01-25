@@ -146,7 +146,6 @@ const sidebarStyle = theme => ({
     }
   },
   itemLink: {
-    width: "auto",
     transition: "all 300ms linear",
     margin: "10px 15px 0",
     borderRadius: "3px",
@@ -295,7 +294,23 @@ const sidebarStyle = theme => ({
       width: "100%",
       bottom: "13px"
     }
+  },
+  accordion:{
+    padding: "0px",
+    background:"transparent"
+  },
+  expandIcon:{
+    color:"white"
+  },
+  accordionSummary:{
+    padding: "0px",
+    margin: "0px",
+  },
+  accordionDetail:{
+    margin:"0px",
+    display:"block" 
   }
+
 });
 
 export default sidebarStyle;

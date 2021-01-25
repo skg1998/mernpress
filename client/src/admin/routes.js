@@ -4,16 +4,16 @@ import PagesIcon from '@material-ui/icons/Pages';
 import DashboardPage from "../containers/Dashboard/Dashboard.js";
 import UserProfile from "../containers/UserProfile/UserProfile.js";
 import UserList from "../containers/TableList/TableList.js";
-import AddBanner from "./component/AddBanner";
-import AddCategory from "./component/AddCategory";
-import AddProduct from "./component/AddProduct";
-import AddTitle from "./component/AddProjectTitle"
-import AddShop from "./component/AddShop";
-import AddSlidder from "./component/AddSliderImage"
-import AddBasicDesign from "./component/AddBasicDesign"
-import AddPaymentMethod from "./component/AddPaymentMethod"
-import AddFooter from "./component/AddFooter";
-import AddHeader from "./component/AddHeader";
+import AddBanner from "./components/AddBanner";
+import AddCategory from "./components/AddCategory";
+import AddProduct from "./components/AddProduct";
+import AddTitle from "./components/AddProjectTitle"
+import AddShop from "./components/AddShop";
+import AddSlidder from "./components/AddSliderImage"
+import AddBasicDesign from "./components/AddBasicDesign"
+import AddPaymentMethod from "./components/AddPaymentMethod"
+import AddFooter from "./components/AddFooter";
+import AddHeader from "./components/AddHeader";
 
 const dashboardRoutes = [
   {

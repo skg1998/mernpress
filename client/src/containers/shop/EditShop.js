@@ -13,7 +13,7 @@ import {withStyles} from '@material-ui/core/styles'
 import {read, update} from './api-shop.js'
 import {Redirect} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
-import MyProducts from '../product/MyProducts'
+import MyProducts from '../product/MyProduct'
 
 const styles = theme => ({
   root: {

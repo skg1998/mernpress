@@ -26,9 +26,6 @@ const switchRoutes = (
             />
           );
         }else{
-
-          console.log(
-            prop.subItem.map(d => prop.layout + prop.path + d.path) )
           return (
               prop.subItem.map(e => (
                 <Route

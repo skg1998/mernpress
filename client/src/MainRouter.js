@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Switch,Redirect } from "react-router-dom";
 import Home from "./core/Home";
 import Users from './containers/user/Users';
@@ -24,9 +24,9 @@ import AdminLogin from './admin/Pages/AdminLogin';
 import AdminSignup from './admin/Pages/AdminSignup'
 import Admin from "./admin/Pages/Admin";
 
-class MainRouter extends Component {
-  render() {
-    let pathName=window.location.pathname;
+const MainRouter = () => {
+
+  let pathName=window.location.pathname;
     console.log('pathName==>',pathName);
     let adminloginpath = pathName==='/adminlogin'
     let adminsignupath = pathName === '/adminsignup'
@@ -57,12 +57,11 @@ class MainRouter extends Component {
           <Route path="/cart" component={Cart}/>
           <Route path="/seller/stripe/connect" component={StripeConnect}/>
           <PrivateRoute path="/seller/orders/:shop/:shopId" component={ShopOrders}/>
-          <Redirect from="/" to="/admin/dashboard" />
+          
         </Switch>
-        <Footer />
+        {(adminsignupath || adminloginpath) ? "" : <Footer />}
       </div>
     );
-  }
 }
 
 export default MainRouter;

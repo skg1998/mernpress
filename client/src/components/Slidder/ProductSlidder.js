@@ -3,7 +3,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import MobileDetect from "mobile-detect";
 import Card from "../Card/ProductCard";
-import Image from "../Image/Image";
 import Carousel from "react-multi-carousel";
 import "./style.css";
 import "react-multi-carousel/lib/styles.css";
@@ -96,7 +95,7 @@ class ProductSlidder extends Component {
           deviceType={this.props.deviceType}
         >
           {fakerData.map(card => {
-            return <Card isMoving={this.state.isMoving} {...card} />;
+            return <Card {...card} />;
           })}
         </Carousel>
       </div>
