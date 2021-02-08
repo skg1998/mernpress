@@ -2,6 +2,7 @@ const express = require("express");
 const authCtrl = require("../controllers/auth.controller");
 const productCtrl = require("../controllers/product.controller");
 const shopCtrl = require("../controllers/shop.controller");
+const reviewCtrl = require("../controllers/reviews.controllers");
 
 const router = express.Router();
 
@@ -19,20 +20,25 @@ router.route("/today-deals").get(productCtrl.todayDeals);
 router.route("/viewLog-list").get(productCtrl.viewLogList);
 router.route("/photo/:productId").get(productCtrl.photo);
 
-router
-  .route("/:shopId/:productId")
-  .put( productCtrl.updateProduct);
+//Reviews
+router.route("/:productId/reviews").get(reviewCtrl.getAllReviews);
+router.route("/:productId/review").post(authCtrl.verifyToken, reviewCtrl.addReviews);
+router.route("/:productId/review").put(authCtrl.verifyToken, reviewCtrl.updateReviews);
+router.route("/:productId/review").delete(authCtrl.verifyToken, reviewCtrl.deleteReviews);
 
 router
   .route("/:shopId/:productId")
-  .delete( productCtrl.deleteProduct);
+  .put(productCtrl.updateProduct);
+
+router
+  .route("/:shopId/:productId")
+  .delete(productCtrl.deleteProduct);
 
 router
   .route("/shop/:shopId")
-  .post( productCtrl.addProduct);
-
+  .post(productCtrl.addProduct);
 
 module.exports = router;
- 
-  
+
+
 

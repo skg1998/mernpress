@@ -21,6 +21,18 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+
+/**
+ * Socket Connection
+ */
+
+// connect socket 
+const socket = require('socket.io')(server);
+// On every Client Connection
+socket.on('connection', socket => {
+    console.log(`Socket: client connected ${socket}`);
+});
+
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -80,7 +92,6 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'

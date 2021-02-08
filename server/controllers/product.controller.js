@@ -1,8 +1,8 @@
-const Product =require( '../models/product.model')
-const _ =require( 'lodash')
-const errorHandler =require( '../helpers/dbErrorHandler')
-const formidable =require( 'formidable')
-const fs =require( 'fs')
+const Product = require('../models/product.model')
+const _ = require('lodash')
+const errorHandler = require('../helpers/dbErrorHandler')
+const formidable = require('formidable')
+const fs = require('fs')
 
 
 // Create Product API
@@ -71,8 +71,8 @@ const addProduct = (req, res, next) => {
       })
     }
     let product = new Product(fields)
-    product.shop= req.shop
-    if(files.image){
+    product.shop = req.shop
+    if (files.image) {
       product.image.data = fs.readFileSync(files.image.path)
       product.image.contentType = files.image.type
     }
@@ -82,7 +82,7 @@ const addProduct = (req, res, next) => {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
         })
-      }else{
+      } else {
         const productdata = {
           status: 1,
           message: 'Successfully created Product',
@@ -121,19 +121,19 @@ const productByID = (req, res, next, id) => {
  * @apiErrorExample {json} productDetail error
  * HTTP/1.1 500 Internal Server Error
  */
-const productDetail = (req,res,next)=>{
-  Product.find({_id : req.param.id},(err,product)=>{
-    if(err){
+const productDetail = (req, res, next) => {
+  Product.find({ _id: req.param.id }, (err, product) => {
+    if (err) {
       return res.status('400').json({
         error: "Product not found"
       })
-    }else{
+    } else {
       const productdata = {
         status: 1,
         message: 'Successfully get Product Detail',
         data: product,
       }
-      res.status(200).send(productdata);  
+      res.status(200).send(productdata);
     }
   })
 }
@@ -209,7 +209,7 @@ const updateProduct = (req, res, next) => {
     let product = req.product
     product = _.extend(product, fields)
     product.updated = Date.now()
-    if(files.image){
+    if (files.image) {
       product.image.data = fs.readFileSync(files.image.path)
       product.image.contentType = files.image.type
     }
@@ -274,10 +274,10 @@ const deleteProduct = (req, res, next) => {
  */
 const list = (req, res) => {
   const query = {}
-  if(req.query.search)
-    query.name = {'$regex': req.query.search, '$options': "i"}
-  if(req.query.category && req.query.category != 'All')
-    query.category =  req.query.category
+  if (req.query.search)
+    query.name = { '$regex': req.query.search, '$options': "i" }
+  if (req.query.category && req.query.category != 'All')
+    query.category = req.query.category
   Product.find(query, (err, products) => {
     if (err) {
       return res.status(400).json({
@@ -305,7 +305,7 @@ const list = (req, res) => {
  * HTTP/1.1 500 Internal Server Error
  */
 const listByShop = (req, res) => {
-  Product.find({shop: req.shop._id}, (err, products) => {
+  Product.find({ shop: req.shop._id }, (err, products) => {
     if (err) {
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
@@ -359,7 +359,7 @@ const listLatest = (req, res) => {
  * HTTP/1.1 500 Internal Server Error
  */
 const listCategories = (req, res) => {
-  Product.distinct('category',{},(err, products) => {
+  Product.distinct('category', {}, (err, products) => {
     if (err) {
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
@@ -386,7 +386,7 @@ const listCategories = (req, res) => {
  * HTTP/1.1 500 Internal Server Error
  */
 const listBrand = () => {
-  
+
 }
 
 //  Related Product List API
@@ -406,7 +406,7 @@ const listBrand = () => {
  * HTTP/1.1 500 Internal Server Error
  */
 const RelatedProduct = (req, res) => {
-  Product.find({ "_id": { "$ne": req.product }, "category": req.product.category}).limit(5).populate('shop', '_id name').exec((err, products) => {
+  Product.find({ "_id": { "$ne": req.product }, "category": req.product.category }).limit(5).populate('shop', '_id name').exec((err, products) => {
     if (err) {
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
@@ -432,7 +432,7 @@ const RelatedProduct = (req, res) => {
  * @apiErrorExample {json} top selling product error
  * HTTP/1.1 500 Internal Server Error
  */
-const topSellingProductList = () =>{
+const topSellingProductList = () => {
 
 }
 
@@ -475,7 +475,7 @@ const recentSellingProductList = () => {
  * @apiErrorExample {json} todayDeals error
  * HTTP/1.1 500 Internal Server Error
  */
-const todayDeals = () =>{
+const todayDeals = () => {
 
 }
 
@@ -522,9 +522,9 @@ const viewLogList = () => {
  * HTTP/1.1 500 Internal Server Error
  */
 
- const customerProductViewList = () => {
+const customerProductViewList = () => {
 
- }
+}
 
 // Product Details Excel Document download
 /**
@@ -541,13 +541,13 @@ const viewLogList = () => {
  * @apiSampleRequest /api/v1/product/product-excel-list
  * @apiErrorExample {json} product Excel List error
  * HTTP/1.1 500 Internal Server Error
- */ 
-const productExcelDocument = () =>{
-   
+ */
+const productExcelDocument = () => {
+
 }
 
 const photo = (req, res, next) => {
-  if(req.product.image.data){
+  if (req.product.image.data) {
     res.set("Content-Type", req.product.image.contentType)
     return res.send(req.product.image.data)
   }
@@ -568,24 +568,24 @@ const read = (req, res) => {
 const decreaseQuantity = (req, res, next) => {
   let bulkOps = req.body.order.products.map((item) => {
     return {
-        "updateOne": {
-            "filter": { "_id": item.product._id } ,
-            "update": { "$inc": {"quantity": -item.quantity} }
-        }
+      "updateOne": {
+        "filter": { "_id": item.product._id },
+        "update": { "$inc": { "quantity": -item.quantity } }
+      }
     }
-   })
-   Product.bulkWrite(bulkOps, {}, (err, products) => {
-     if(err){
-       return res.status(400).json({
-         error: "Could not update product"
-       })
-     }
-     next()
-   })
+  })
+  Product.bulkWrite(bulkOps, {}, (err, products) => {
+    if (err) {
+      return res.status(400).json({
+        error: "Could not update product"
+      })
+    }
+    next()
+  })
 }
 
 const increaseQuantity = (req, res, next) => {
-  Product.findByIdAndUpdate(req.product._id, {$inc: {"quantity": req.body.quantity}}, {new: true})
+  Product.findByIdAndUpdate(req.product._id, { $inc: { "quantity": req.body.quantity } }, { new: true })
     .exec((err, result) => {
       if (err) {
         return res.status(400).json({
@@ -620,4 +620,3 @@ module.exports = {
   increaseQuantity,
 }
 
- 

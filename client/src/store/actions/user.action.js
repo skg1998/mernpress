@@ -8,7 +8,7 @@ export const userActions = {
     logout,
     getAll
 };
-
+ 
 function login(username, password) {
     return dispatch => {
         dispatch(request({ username }));

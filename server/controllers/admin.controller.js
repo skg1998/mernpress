@@ -4,7 +4,6 @@ const errorHandler = require("../helpers/dbErrorHandler");
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 const config = require('../config/config');
-//const jwtSecret = "sdghjak82374ihury83yr3yr2u3h"
 const jwtSecret = process.env.JWT_SECRET
 
 //Admin Signup API
@@ -91,7 +90,6 @@ const AdminLogin = (req, res) => {
         {
           _id: user._id
         },
-        // config.jwtSecret
         jwtSecret
       );
       res.cookie("t", token, {
