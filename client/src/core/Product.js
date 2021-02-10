@@ -10,7 +10,7 @@ import {read, listRelated} from '../containers/product/api-product.js'
 import {Link} from 'react-router-dom'
 import Suggestions from '../containers/product/Suggestions'
 import AddToCart from '../containers/cart/AddToCart'
-import SubmitReview from '../components/Rating/SubmitRating'
+import Review from '../components/Rating/Review'
 import SEO from '../components/SEO/Seo'
 
 const styles = theme => ({
@@ -59,6 +59,9 @@ const styles = theme => ({
   action: {
     margin: '8px 24px',
     display: 'inline-block'
+  },
+  review:{
+    marginTop:'30px'
   }
 })
 
@@ -141,7 +144,7 @@ class Product extends Component {
               )
             }
           </Grid>
-          <SubmitReview />
+          <Review className={classes.review} />
         </div>
     )
   }

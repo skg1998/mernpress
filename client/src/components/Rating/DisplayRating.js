@@ -13,7 +13,7 @@ const DisplayRating = (props) => {
         :rating>=0.5
         ? <StarHalfIcon />
         : <StarBorderOutlinedIcon /> 
-        }
+        } 
       </span>
       <span>
         {rating>=2
