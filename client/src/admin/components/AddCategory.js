@@ -156,7 +156,7 @@ const CategoriesTable = ({ categories = [], addCategory, updateCategory,handleCh
                 <TableRow key={category._id}>
                     <TableCell component="th" scope="category">{category._id} </TableCell>
                     <TableCell align="left">{category.name}</TableCell>
-                    <TableCell align="left"><img src={category.files}/></TableCell>
+                    <TableCell align="left"><img src={category.files} alt="files" /></TableCell>
                     <TableCell align="left">{category.created.toString()}</TableCell>
                     <TableCell align="left">
                         <Button onClick={() => updateCategory(key)}><EditIcon/></Button>

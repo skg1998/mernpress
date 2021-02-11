@@ -12,7 +12,6 @@ const footerStyle = {
     textTransform: "uppercase",
     borderRadius: "3px",
     textDecoration: "none",
-    position: "relative",
     display: "block",
     ...defaultFont,
     fontWeight: "500",
@@ -31,7 +30,9 @@ const footerStyle = {
     listStyleType:"none"
   },
   footer: {
+    left: "0",
     bottom: "0",
+    width: "100%",
     borderTop: "1px solid " + grayColor[11],
     padding: "15px 0",
     ...defaultFont
@@ -75,8 +76,7 @@ const footerStyle = {
     justifyContent: "space-between",
     width: "80%",
     marginLeft: "auto",
-    marginRight: "auto",
-    paddingTop: "2em",
+    marginRight: "auto"
   },
   logo:{
     textTransform: "uppercase",

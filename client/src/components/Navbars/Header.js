@@ -16,34 +16,34 @@ const routes =[
         name: "Shop by Category",
       },
       {
-        path: "/category",
+        path: "/today-deals",
         name: "Today deals",
       },
       {
-        path: "/category",
+        path: "/order",
         name: "Your Order",
       },
       {
-        path: "/category",
+        path: "/buy-again",
         name: "Buy Agains",
       },
       {
-        path: "/category",
+        path: "/wishlist",
         name: "Your wishList",
       },
       {
-        path: "/category",
+        path: "/buy-again",
         name: "Buy Agains",
       },
       {
-        path: "/category",
+        path: "/account",
         name: "Your Acount",
       },
       {
         path: "/adminsignup",
         name: "Sell on yourSelf",
       },{
-        path: "/category",
+        path: "/setting",
         name: "Setting",
       }
     ]
