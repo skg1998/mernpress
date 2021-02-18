@@ -8,14 +8,13 @@ const compress = require("compression");
 const cors = require("cors");
 const helmet = require("helmet");
 const connectDB = require("./config/db");
-const swaggerUi = require("swagger-ui-express"); 
+const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-require('dotenv').config()
- 
+require('dotenv').config();
+
 const indexRouter = require("./routes/index.routes");
 const usersRouter = require("./routes/users.routes");
 const AdminRouter = require('./routes/admin.routes');
-const authRouter = require("./routes/auth.routes");
 const shopRouter = require("./routes/shop.routes");
 const productRoutes = require("./routes/product.routes");
 const orderRoutes = require("./routes/order.routes");
@@ -25,7 +24,7 @@ const CategoryRoutes = require("./routes/Category.routes");
 const BannerRoutes = require("./routes/Banner.routes");
 const HeaderRoutes = require("./routes/Header.routes")
 
-var app = express(); 
+var app = express();
 
 // open mongoose connection
 connectDB();
@@ -51,16 +50,15 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/api/v1/users", usersRouter);
-app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/shops/", shopRouter);
 app.use("/api/v1/products", productRoutes);
 app.use('/api/v1/orders', orderRoutes);
-app.use("/api/v1/admin",AdminRouter);
+app.use("/api/v1/admin", AdminRouter);
 app.use("/api/v1/slidder", slidderRoutes);
-app.use("/api/v1/title",TitleRoutes);
-app.use("/api/v1/category",CategoryRoutes);
-app.use("/api/v1/banner",BannerRoutes);  
-app.use("/api/v1/header",HeaderRoutes);
+app.use("/api/v1/title", TitleRoutes);
+app.use("/api/v1/category", CategoryRoutes);
+app.use("/api/v1/banner", BannerRoutes);
+app.use("/api/v1/header", HeaderRoutes);
 
 //swagger api
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -72,12 +70,12 @@ app.use((err, req, res, next) => {
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
