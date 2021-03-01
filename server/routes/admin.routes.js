@@ -9,10 +9,10 @@ router
 
 router
   .route("/login")
-  .post(adminCtrl.AdminLogin); 
+  .post(adminCtrl.AdminLogin);
 
 router
-  .route("/signout")
-  .get(adminCtrl.Adminsignout);  
+  .route("/logout")
+  .get(adminCtrl.Adminsignout);
 
 module.exports = router;

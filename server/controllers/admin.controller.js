@@ -31,22 +31,38 @@ const jwtSecret = process.env.JWT_SECRET
  * HTTP/1.1 500 Internal Server Error
  */
 const Adminsignup = (req, res, next) => {
-  var admin = new Admin({
-      name:req.body.name,
-      email:req.body.email,
-      password:req.body.password
+  console.log("req.body", req.body)
+  var NewAdmin = new Admin({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
   });
-  admin.save((err, result) => {
-      if (err) {
-        return res.status(400).json({
-          error: errorHandler.getErrorMessage(err)
-        });
+
+  Admin.findOne({
+    email: req.body.email
+  })
+    .then(admin => {
+      if (!admin) {
+        NewAdmin.setPassword(String(req.body.password));
+        NewAdmin.save().then(user => {
+          res.json({
+            message: user.email + "Successfully signed up!",
+            status: "1"
+          });
+        })
+          .catch(err => {
+            res.send('error: ' + err);
+          })
+      } else {
+        errors.push({ msg: 'User already exists' });
+        res.json({ errors });
       }
-      res.status(200).json({
-        message: "Successfully signed up!"
-      });
-    });
-  };
+
+    })
+    .catch(err => {
+      res.send('error:' + err);
+    })
+};
 
 //Admin Login API
 /**
@@ -70,7 +86,7 @@ const Adminsignup = (req, res, next) => {
  * @apiSampleRequest /api/v1/admin/Login
  * @apiErrorExample {json} Admin error
  * HTTP/1.1 500 Internal Server Error
- */  
+ */
 const AdminLogin = (req, res) => {
   Admin.findOne(
     {
@@ -81,7 +97,7 @@ const AdminLogin = (req, res) => {
         return res.status("401").json({
           error: "User not found"
         });
-      if (!user.authenticate(req.body.password)) {
+      if (!user.validPassword(String(req.body.password))) {
         return res.status("401").send({
           error: "Email and password don't match."
         });
@@ -125,9 +141,9 @@ const Adminsignout = (req, res) => {
   });
 };
 
-  module.exports = {
-    Adminsignup,
-    AdminLogin,
-    Adminsignout
-  };
+module.exports = {
+  Adminsignup,
+  AdminLogin,
+  Adminsignout
+};
 

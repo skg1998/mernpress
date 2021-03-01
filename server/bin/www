@@ -21,22 +21,9 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-
-/**
- * Socket Connection
- */
-
-// connect socket 
-const socket = require('socket.io')(server);
-// On every Client Connection
-socket.on('connection', socket => {
-    console.log(`Socket: client connected ${socket}`);
-});
-
 /**
  * Listen on provided port, on all network interfaces.
  */
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
