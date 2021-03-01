@@ -16,7 +16,10 @@ const AdminSchema = new mongoose.Schema({
   },
   hash: String,
   salt: String,
-  updated: Date,
+  updated_At: {
+    type: Date,
+    default: Date.now
+  },
   isVerified: {
     type: Boolean,
     default: false
@@ -30,7 +33,7 @@ const AdminSchema = new mongoose.Schema({
     type: Date,
     required: false
   },
-  created: {
+  created_At: {
     type: Date,
     default: Date.now
   }

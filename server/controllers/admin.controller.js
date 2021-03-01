@@ -2,8 +2,6 @@ const Admin = require("../models/admin.model");
 const _ = require("lodash");
 const errorHandler = require("../helpers/dbErrorHandler");
 const jwt = require("jsonwebtoken");
-const expressJwt = require("express-jwt");
-const config = require('../config/config');
 const jwtSecret = process.env.JWT_SECRET
 
 //Admin Signup API
@@ -31,7 +29,6 @@ const jwtSecret = process.env.JWT_SECRET
  * HTTP/1.1 500 Internal Server Error
  */
 const Adminsignup = (req, res, next) => {
-  console.log("req.body", req.body)
   var NewAdmin = new Admin({
     name: req.body.name,
     email: req.body.email,
@@ -112,8 +109,19 @@ const AdminLogin = (req, res) => {
         expire: new Date() + 9999
       });
       return res.json({
-        token,
-        user: { _id: user._id, name: user.name, email: user.email }
+        message: "Successfully Login!",
+        data: {
+          token,
+          user: {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            created_At: user.created_At,
+            updated_At: user.updated_At,
+            isVerified: user.isVerified
+          }
+        },
+        status: "1"
       });
     }
   );
@@ -137,7 +145,8 @@ const AdminLogin = (req, res) => {
 const Adminsignout = (req, res) => {
   res.clearCookie("t");
   return res.status("200").json({
-    message: "signed out"
+    message: "Successfully Logout!",
+    status: "1"
   });
 };
 

@@ -28,8 +28,12 @@ process.on('SIGINT', () => {
  * @public
  */
 const connectDB = () => {
-    Mongoose.connect(config.development.database.url, {useUnifiedTopology: true, useNewUrlParser: true , useCreateIndex:true})
+  Mongoose.connect(config.development.database.url, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true
+  })
     .then(() => console.log('mongoDB connected...'));
-    return Mongoose.connection;
+  return Mongoose.connection;
 }
 module.exports = connectDB;
