@@ -15,4 +15,8 @@ router
   .route("/logout")
   .get(adminCtrl.Adminsignout);
 
+router
+  .route("/all-admin")
+  .get(adminCtrl.allAdmin);
+
 module.exports = router;

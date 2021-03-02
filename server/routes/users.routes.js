@@ -1,6 +1,6 @@
 const express = require("express");
 const userCtrl = require("../controllers/user.controller");
-const authCtrl = require("../controllers/auth.controller");
+const authCtrl = require("../helpers/auth");
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ router
   .get(authCtrl.requireSignin, userCtrl.read)
   .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
   .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove);
-  
+
 router.param("userId", userCtrl.userByID);
 
 module.exports = router;

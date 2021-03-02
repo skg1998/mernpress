@@ -1,7 +1,7 @@
 const express = require("express");
 const orderCtrl = require("../controllers/order.controller");
 const productCtrl = require("../controllers/product.controller");
-const authCtrl = require("../controllers/auth.controller");
+const authCtrl = require("../helpers/auth");
 const shopCtrl = require("../controllers/shop.controller");
 const userCtrl = require("../controllers/user.controller");
 

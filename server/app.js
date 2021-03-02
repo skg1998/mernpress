@@ -33,7 +33,7 @@ connectDB();
 app.use(bodyParser.json());
 
 //support parsing of application/x-www-form-urlencoded post data
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

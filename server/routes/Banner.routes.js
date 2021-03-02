@@ -4,22 +4,22 @@ const BannerCtrl = require("../controllers/Banner.controller");
 
 const router = express.Router();
 
-router.post("/", Upload.any('images',10) , BannerCtrl.create);
+router.post("/", Upload.any('images', 10), BannerCtrl.create);
 
 router
   .route("/")
   .get(BannerCtrl.read);
-  
+
 router
   .route("/:id")
-  .get(BannerCtrl.readById);  
-  
+  .get(BannerCtrl.readById);
+
 router
   .route("/:id")
-  .put(BannerCtrl.update); 
-  
+  .put(BannerCtrl.update);
+
 router
   .route("/:id")
-  .delete(BannerCtrl.remove);  
+  .delete(BannerCtrl.remove);
 
 module.exports = router;   

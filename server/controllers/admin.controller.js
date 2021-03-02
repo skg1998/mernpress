@@ -1,6 +1,5 @@
 const Admin = require("../models/admin.model");
 const _ = require("lodash");
-const errorHandler = require("../helpers/dbErrorHandler");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET
 
@@ -150,9 +149,40 @@ const Adminsignout = (req, res) => {
   });
 };
 
+//Alladmin API
+/**
+ * @api {get} /api/v1/admin/all-admin fetch all admin API
+ * @apiGroup Admin
+ * @apiHeader  Authorization
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * {
+ *      "message": "Successfully fetch all Admin!",
+ *      "status": "1"
+ * }
+ * @apiSampleRequest /api/v1/admin/all-admin
+ * @apiErrorExample {json} Admin error
+ * HTTP/1.1 500 Internal Server Error
+ */
+const allAdmin = (req, res) => {
+  Admin.find({})
+    .projection({})
+    .sort({ _id: -1 })
+    .limit(100).then(admins => {
+      res.json({
+        message: "Successfully fetch all Admin",
+        data: { admins },
+        status: "1"
+      })
+    }).catch(err => {
+      res.send('error: ' + err);
+    })
+}
+
 module.exports = {
   Adminsignup,
   AdminLogin,
-  Adminsignout
+  Adminsignout,
+  allAdmin
 };
 
