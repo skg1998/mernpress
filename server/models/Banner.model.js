@@ -2,20 +2,23 @@ const mongoose = require('mongoose')
 
 const BannerSchema = new mongoose.Schema({
   images: {
-    type:[],
+    type: [],
     path: Buffer,
     contentType: String,
-    size:Number
+    size: Number
   },
-  flag:{
+  flag: {
     type: Boolean,
-    default:false
-  },   
+    default: false
+  },
+  targetPath: {
+    type: String
+  },
   updated: Date,
   created: {
     type: Date,
-    default: Date.now 
+    default: Date.now
   }
 })
 
-module.exports =  mongoose.model('Banner', BannerSchema);
+module.exports = mongoose.model('Banner', BannerSchema);
