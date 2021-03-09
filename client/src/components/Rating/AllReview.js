@@ -21,6 +21,12 @@ const allReview = [
         username: 'Sahil Gupta',
         date: '10-02-2021',
         comment: "Guys plz don't purchase this product ,it's a humble request . I purchased this product twice nd i gained around 8kgs in short span of time but i faced hell lots of problem , i faced gas and bloating issue then i thought it would be due to my diet i changed my diet but then too i suffered the same ,then i realised it's due to this supplement. This supplement contains maltodextrin which spikes your sugar level and causes gas bloating and all stuff. So guys plz avoid this product spend little more amount and purchase maltodextrin free supplements"
+    },
+    {
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTliBAU1q0DVXx1wjb4Wtg8sf0aTDGqJ0g2lBQN7eFX_j6R5V9bcg9lEl07nXjrBw-8nQvIuqC&usqp=CAc',
+        username: 'Sahil Gupta',
+        date: '10-02-2021',
+        comment: "Guys plz don't purchase this product ,it's a humble request . I purchased this product twice nd i gained around 8kgs in short span of time but i faced hell lots of problem , i faced gas and bloating issue then i thought it would be due to my diet i changed my diet but then too i suffered the same ,then i realised it's due to this supplement. This supplement contains maltodextrin which spikes your sugar level and causes gas bloating and all stuff. So guys plz avoid this product spend little more amount and purchase maltodextrin free supplements"
     }
 ]
 
@@ -44,33 +50,33 @@ const AllReviews = () => {
                         </Card>
                     </Grid>
                 ) : (
-                        allReview.map(review => (
-                            <Grid item xs={12}>
-                                <Card>
-                                    <CardContent>
-                                        <div>
-                                            <Grid container>
-                                                <Grid xs={12} className={classes.reviewHeader}>
-                                                    <Grid xs={2}>
-                                                        <Grid xs={12}>
-                                                            <img className={classes.imageAvatar} src={review.image} />
-                                                        </Grid>
-                                                    </Grid>
-                                                    <Grid xs={10}>
-                                                        <Grid xs={12}> {review.username} </Grid>
-                                                        <Grid xs={12}> {review.date} </Grid>
+                    allReview.map(review => (
+                        <Grid item xs={12}>
+                            <Card>
+                                <CardContent>
+                                    <div>
+                                        <Grid container>
+                                            <Grid xs={12} className={classes.reviewHeader}>
+                                                <Grid xs={2}>
+                                                    <Grid xs={12}>
+                                                        <img className={classes.imageAvatar} src={review.image} />
                                                     </Grid>
                                                 </Grid>
-                                                <Grid xs={12}>
-                                                    {review.comment}
+                                                <Grid xs={10}>
+                                                    <Grid xs={12}> {review.username} </Grid>
+                                                    <Grid xs={12}> {review.date} </Grid>
                                                 </Grid>
                                             </Grid>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        ))
-                    )
+                                            <Grid xs={12}>
+                                                {review.comment}
+                                            </Grid>
+                                        </Grid>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))
+                )
                 }
             </Grid>
         </div>

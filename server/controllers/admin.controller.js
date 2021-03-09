@@ -5,7 +5,7 @@ const jwtSecret = process.env.JWT_SECRET
 
 //Admin Signup API
 /**
- * @api {get} /api/v1/admin/signup Admin Register API
+ * @api {post} /api/v1/admin/signup Admin Register API
  * @apiGroup Admin
  * @apiHeader  Authorization
  * @apiParam (Request body)  name Admin name
@@ -62,7 +62,7 @@ const Adminsignup = (req, res, next) => {
 
 //Admin Login API
 /**
- * @api {get} /api/v1/admin/Login Admin Login API
+ * @api {post} /api/v1/admin/Login Admin Login API
  * @apiGroup Admin
  * @apiHeader  Authorization
  * @apiParam (Request body)  email Admin  email

@@ -60,7 +60,7 @@ const MainRouter = () => {
         <Route path="/shops/:shopId" component={Shop} />
         <PrivateRoute path="/seller/shop/edit/:shopId" component={EditShop} />
         <PrivateRoute path="/seller/:shopId/products/new" component={NewProduct} />
-        <Route path="/product/:productId" component={Product} />
+        <Route path="/product-detail/:productId" component={Product} />
         <PrivateRoute path="/seller/:shopId/:productId/edit" component={EditProduct} />
         <Route path="/cart" component={Cart} />
         <Route path="/seller/stripe/connect" component={StripeConnect} />
