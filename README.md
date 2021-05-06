@@ -16,10 +16,12 @@ $ # node modules installation (Windows based systems)
 $ # in server folder to run node backend
 $ project_folder/server
 $ npm i
+$ npm run dev
 $
 $ # in server folder to run node client (React)
 $ project_folder/client
 $ npm i
+$ npm run dev
 $
 $ # Start the application (development mode)
 $ npm run dev # default port 3000
