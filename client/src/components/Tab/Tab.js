@@ -62,13 +62,14 @@ function ScrollableTabsButtonAuto() {
         <Tabs
           value={value}
           onChange={handleChange}
+          orientation="vertical"
           indicatorColor="primary"
           textColor="primary"
           variant="scrollable"
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
+          <Tab label="Item One"  {...a11yProps(0)} />
           <Tab label="Item Two" {...a11yProps(1)} />
           <Tab label="Item Three" {...a11yProps(2)} />
           <Tab label="Item Four" {...a11yProps(3)} />

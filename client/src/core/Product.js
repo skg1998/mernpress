@@ -12,7 +12,7 @@ import PropTypes from 'prop-types'
 import { read, listRelated } from '../containers/product/api-product.js'
 
 
-//Components 
+//Components  
 import Suggestions from '../containers/product/Suggestions'
 import AddToCart from '../containers/cart/AddToCart'
 import Review from '../components/Rating/Review';

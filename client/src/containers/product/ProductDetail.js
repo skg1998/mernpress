@@ -10,5 +10,5 @@ const ProductDetail = (props) => {
         </div>
     )
 }
-
+ 
 export default ProductDetail;
