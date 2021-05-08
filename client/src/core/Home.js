@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 
+import Header from '../components/Navbars/Header'
 import MainSlidder from '../components/Slidder/MainSlidder'
 import CategoriesBar from '../components/Slidder/CategoriesBar'
 import BannerContainer from '../containers/Banner/BannerContainer'
+import Footer from '../components/Footer/Footer';
+
 import SEO from '../components/SEO/Seo'
 
 const styles = theme => ({
@@ -25,13 +28,15 @@ class Home extends Component {
     return (
       <div>
         <SEO title="MernPress - Ecommerce site " description="A Multi-vendor ecommerce site" />
+        <Header />
         <div className={classes.root}>
-          <CategoriesBar className={classes.categories} />
+          {/* <CategoriesBar className={classes.categories} /> */}
           {/* Main-slidder */}
           <MainSlidder />
           {/* Main-banner */}
           <BannerContainer />
         </div>
+        <Footer />
       </div>
     )
   }
