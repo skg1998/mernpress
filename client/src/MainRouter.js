@@ -4,10 +4,6 @@ import { PrivateRoute } from "./store/components";
 
 import Shops from './containers/shop/Shops';
 
-//Main
-import Header from './components/Navbars/Header';
-import Footer from './components/Footer/Footer';
-
 //Pages
 import Home from "./core/Home";
 import Product from './core/Product';
@@ -24,16 +20,8 @@ import Admin from "./admin/Pages/Admin";
 
 const MainRouter = () => {
 
-  let pathName = window.location.pathname;
-  console.log('pathName==>', pathName);
-  let adminloginpath = pathName === '/adminlogin'
-  let adminsignupath = pathName === '/adminsignup'
-  let adminpath = pathName === '/admin'
-  let dashboardpath = pathName === '/admin/dashboard'
-
   return (
     <div>
-      {(adminpath || dashboardpath || adminsignupath || adminloginpath) ? "" : <Header />}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/adminlogin" component={AdminLogin} />
@@ -47,7 +35,6 @@ const MainRouter = () => {
         <Route path="/cart" component={Cart} />
         <Route path="/category" component={Categories} />
       </Switch>
-      {(adminsignupath || adminloginpath) ? "" : <Footer />}
     </div>
   );
 }
