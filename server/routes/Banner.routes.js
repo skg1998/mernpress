@@ -4,7 +4,7 @@ const BannerCtrl = require("../controllers/Banner.controller");
 
 const router = express.Router();
 
-router.post("/", Upload.any('images', 10), BannerCtrl.create);
+router.post("/", Upload.array('images', 2), BannerCtrl.create);
 
 router
   .route("/")
@@ -22,4 +22,4 @@ router
   .route("/:id")
   .delete(BannerCtrl.remove);
 
-module.exports = router;   
+module.exports = router;
