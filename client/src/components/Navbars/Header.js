@@ -1,12 +1,12 @@
 import React from 'react'
 import SideMenu from './SideMenu';
 
-const routes =[
+const routes = [
   {
     name: "MernPress",
     logo: "MernPress",
-    style:"",
-    route:[
+    style: "",
+    route: [
       {
         path: "/",
         name: "Home",
@@ -42,7 +42,7 @@ const routes =[
       {
         path: "/adminsignup",
         name: "Sell on yourSelf",
-      },{
+      }, {
         path: "/setting",
         name: "Setting",
       }
@@ -50,24 +50,21 @@ const routes =[
   }
 ]
 
-const Header = ({...rest}) => {
+const Header = ({ ...rest }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen); 
-  }; 
+    setMobileOpen(!mobileOpen);
+  };
 
-  return(
-    <div className="main-menu">
-      <SideMenu
-          routes={routes}
-          handleDrawerToggle={handleDrawerToggle}
-          {...rest}
-      />
-  </div>
+  return (
+    <SideMenu
+      routes={routes}
+      handleDrawerToggle={handleDrawerToggle}
+      {...rest}
+    />
   )
 }
 
 export default Header
 
 
-  
