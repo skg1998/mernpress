@@ -1,65 +1,91 @@
-const AddTitle = require("../models/Title.model");
-const _ = require("lodash");
+const Title = require("../models/Title.model");
 const errorHandler = require("../helpers/dbErrorHandler");
-const formidable = require("formidable");
 const fs = require("fs");
 
-const addTitle = (req, res, next) => {
-  console.log("add title",req.body);
-  let form = new formidable.IncomingForm();
-  form.keepExtensions = true;
-  form.parse(req, (err, fields, files) => {
-    if (err) {
-      res.status(400).json({
-        message: "Image could not be uploaded"
-      });
+const addTitle = (req, res) => {
+  if (!req.file || !req.body) {
+    return res.status(400).json({
+      message: "Image could not be uploaded"
+    })
+  } else {
+    let images = []
+    try {
+      const files = req.files;
+      for (const file of files) {
+        var fullPath = "public/files/" + file.filename;
+        var imgPath = fs.readFileSync(fullPath, 'utf8');
+        var encImg = imgPath.toString('base64');
+        var image = {
+          path: Buffer(encImg, 'base64'),
+          contentType: file.mimetype,
+          size: file.size
+        }
+        images.push(image)
+      }
+    } catch (e) {
+      console.log(e);
     }
-    let addtitle = new AddTitle(fields);
-    if (files.image) {
-      addtitle.image.data = fs.readFileSync(files.image.path);
-      addtitle.image.contentType = files.image.type;
+
+    const title = {
+      name: req.body.name,
+      images: images
     }
-    addtitle.save((err, result) => {
+
+    var newtitle = new Title(title);
+    newtitle.save((err, result) => {
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
-        });
+        })
       }
       res.status(200).json(result);
-    });
-  });
+    })
+  }
 };
 
-const updateTitle = (req,res,next) =>{
-  let form = new formidable.IncomingForm()
-  form.keepExtensions = true
-  form.parse(req, (err, fields, files) => {
-    if (err) {
-      return res.status(400).json({
-        message: "Photo could not be uploaded"
-      })
+const updateTitle = (req, res) => {
+  if (!req.file || !req.body) {
+    return res.status(400).json({
+      message: "Image could not be uploaded"
+    })
+  } else {
+    let images = []
+    try {
+      const files = req.files;
+      for (const file of files) {
+        var fullPath = "public/files/" + file.filename;
+        var imgPath = fs.readFileSync(fullPath, 'utf8');
+        var encImg = imgPath.toString('base64');
+        var image = {
+          path: Buffer(encImg, 'base64'),
+          contentType: file.mimetype,
+          size: file.size
+        }
+        images.push(image)
+      }
+    } catch (e) {
+      console.log(e);
     }
-    let addtitle = req.addtitle
-    addtitle = _.extend(addtitle, fields)
-    addtitle.updated = Date.now()
-    if(files.image){
-      addtitle.image.data = fs.readFileSync(files.image.path)
-      addtitle.image.contentType = files.image.type
+
+    const title = {
+      name: req.body.name,
+      images: images
     }
-    addtitle.save((err, result) => {
+
+    var newtitle = new Title(title);
+    newtitle.save((err, result) => {
       if (err) {
-        return res.status(400).send({
+        return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
         })
       }
-      res.json(result)
+      res.status(200).json(result);
     })
-  })
+  }
 }
 
-const deleteTitle = (req,res,next) =>{
-  let title = req.title
-  title.remove((err, deletedtitle) => {
+const deleteTitle = (req, res, next) => {
+  Title.remove((err, deletedtitle) => {
     if (err) {
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
@@ -69,8 +95,8 @@ const deleteTitle = (req,res,next) =>{
   })
 }
 
-const readTitle = (req,res,next) =>{
-  AddTitle.find().exec((err, title) => {
+const readTitle = (req, res, next) => {
+  Title.find().exec((err, title) => {
     if (err) {
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
@@ -81,9 +107,9 @@ const readTitle = (req,res,next) =>{
 }
 
 module.exports = {
-    addTitle,
-    updateTitle,
-    deleteTitle,
-    readTitle
+  addTitle,
+  updateTitle,
+  deleteTitle,
+  readTitle
 }
 

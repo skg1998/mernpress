@@ -13,12 +13,12 @@ const addTitleSchema = new mongoose.Schema({
   },
 
   updated: Date,
-  
+
   created: {
     type: Date,
     default: Date.now
   }
 })
 
-module.exports =  mongoose.model('addTitle', addTitleSchema)
+module.exports = mongoose.model('addTitle', addTitleSchema);
 

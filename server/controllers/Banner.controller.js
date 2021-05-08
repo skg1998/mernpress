@@ -14,7 +14,7 @@ const fs = require('fs');
  * {
  *      "images" : "",
  *      "flag" : "",
- *      "targetPath" : ""
+ *      "targetPath" : "" 
  * }
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200 OK
@@ -52,7 +52,8 @@ const create = (req, res) => {
 
     const banner = {
       images: images,
-      flag: req.body.flag
+      flag: req.body.flag,
+      targetPath: req.body.targetPath
     }
 
     var addBanner = new Banner(banner);
@@ -152,4 +153,4 @@ module.exports = {
   readById,
   update,
   remove,
-} 
+}

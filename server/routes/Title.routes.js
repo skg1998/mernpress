@@ -1,23 +1,21 @@
 const express = require("express");
 const addTitleCtrl = require("../controllers/Title.controller");
+const Upload = require('../helpers/uploadFile');
 
 const router = express.Router();
 
-router
-  .route("/")
-  .post(addTitleCtrl.addTitle);
+router.post('/addtitle', Upload.array('images', 2), addTitleCtrl.addTitle);
 
 router
-  .route("/")
+  .route("/readtitle")
   .get(addTitleCtrl.readTitle);
 
 router
-  .route("/")
-  .put(addTitleCtrl.updateTitle);  
+  .route("/updatetitle")
+  .put(addTitleCtrl.updateTitle);
 
 router
-  .route("/")
+  .route("/deletetitle")
   .delete(addTitleCtrl.deleteTitle);
-    
 
-module.exports = router;  
+module.exports = router;

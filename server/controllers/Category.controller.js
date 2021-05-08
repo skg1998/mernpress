@@ -1,4 +1,4 @@
-const Category = require("../models/Category.model");
+const Category = require("../models/Category.model")
 const _ = require("lodash");
 const errorHandler = require("../helpers/dbErrorHandler");
 const formidable = require("formidable");
@@ -84,26 +84,26 @@ const addCategory = (req, res, next) => {
  * @apiErrorExample {json} Category error
  * HTTP/1.1 500 Internal Server Error
  */
-const categorylist = (req,res,next) =>{
-    Category.find({}).exec((err, category) => {
-      if (err) {
-        return res.status(400).json({
-          error: errorHandler.getErrorMessage(err)
-        })
-      }
-      console.log("category",category);
-      res.json(category)
-    })
+const categorylist = (req, res, next) => {
+  Category.find({}).exec((err, category) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    console.log("category", category);
+    res.json(category)
+  })
 }
 
-const categorylistById = (req,res,next,id) =>{
-    Category.findById(id).exec((err, category) => {
-        if (err || !category)
-          return res.status(400).json({
-            error: "Category not found"
-          })
-        res.json(category);
+const categorylistById = (req, res, next, id) => {
+  Category.findById(id).exec((err, category) => {
+    if (err || !category)
+      return res.status(400).json({
+        error: "Category not found"
       })
+    res.json(category);
+  })
 }
 
 // Category List Tree API
@@ -127,8 +127,8 @@ const categorylistById = (req,res,next,id) =>{
  * @apiErrorExample {json} Category error
  * HTTP/1.1 500 Internal Server Error
  */
-const categoryListIntree = (req,res,next) =>{
-  
+const categoryListIntree = (req, res, next) => {
+
 }
 
 // Update Category API
@@ -165,7 +165,7 @@ const categoryListIntree = (req,res,next) =>{
  * @apiErrorExample {json} Category error
  * HTTP/1.1 500 Internal Server Error
  */
-const updateCategory = (req,res,id,next) =>{
+const updateCategory = (req, res, id, next) => {
   let form = new formidable.IncomingForm()
   form.keepExtensions = true
   form.parse(req, (err, fields, files) => {
@@ -177,11 +177,11 @@ const updateCategory = (req,res,id,next) =>{
     let category = req.category
     category = _.extend(category, fields)
     category.updated = Date.now()
-    if(files.image){
+    if (files.image) {
       category.image.data = fs.readFileSync(files.image.path)
       category.image.contentType = files.image.type
     }
-    category.updateById(req.params.id,(err, result) => {
+    category.updateById(req.params.id, (err, result) => {
       if (err) {
         return res.status(400).send({
           error: errorHandler.getErrorMessage(err)
@@ -212,9 +212,9 @@ const updateCategory = (req,res,id,next) =>{
  * @apiErrorExample {json} Category error
  * HTTP/1.1 500 Internal Server Error
  */
-const deleteCategory = (req,res,id,next) =>{
+const deleteCategory = (req, res, id, next) => {
   let category = req.category
-  category.removeById({_id: req.params.id},(err, deletedCategory) => {
+  category.removeById({ _id: req.params.id }, (err, deletedCategory) => {
     if (err) {
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err),
@@ -226,12 +226,12 @@ const deleteCategory = (req,res,id,next) =>{
 }
 
 module.exports = {
-    addCategory,
-    categorylist,
-    categorylistById,
-    categoryListIntree,
-    updateCategory,
-    deleteCategory
+  addCategory,
+  categorylist,
+  categorylistById,
+  categoryListIntree,
+  updateCategory,
+  deleteCategory
 }
 
 
