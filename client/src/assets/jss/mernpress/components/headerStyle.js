@@ -10,7 +10,7 @@ import {
   whiteColor,
   grayColor
 } from "../../mernpress.js";
-import {fade} from "@material-ui/core/styles";
+import { fade } from "@material-ui/core/styles";
 
 const headerStyle = (theme) => ({
   appBar: {
@@ -18,9 +18,9 @@ const headerStyle = (theme) => ({
     boxShadow: "none",
     borderBottom: "0",
     marginBottom: "0",
-    position: "absolute",
     width: "100%",
     paddingTop: "10px",
+    position: "relative",
     zIndex: "1029",
     color: grayColor[7],
     border: "0",
@@ -144,14 +144,14 @@ const headerStyle = (theme) => ({
       display: 'none',
     },
   },
-  listitem:{
-    margin:"10px",
+  listitem: {
+    margin: "10px",
     "&:hover": {
       boxShadow: "0 12px 20px -10px rgba(0, 172, 193,.28), 0 4px 20px 0 rgba(0, 0, 0,.12), 0 7px 8px -5px rgba(0, 172, 193,.2)",
       backgroundColor: "#00acc1",
     },
-    borderRadius:"5px"
+    borderRadius: "5px"
   }
 });
- 
+
 export default headerStyle;
