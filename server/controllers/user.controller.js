@@ -5,19 +5,38 @@ const config = require('../config/config');
 const stripe = require("stripe");
 const myStripe = stripe(config.stripe_test_secret_key);
 
-const create = (req, res, next) => {
-  const user = new User(req.body);
-  user.save((err, result) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      });
+
+const create = async (req, res, next) => {
+  try {
+    const { username, email, password } = req.body;
+    const data = {
+      username: username,
+      email: email,
+      password: password
     }
-    res.status(200).json({
-      message: "Successfully signed up!"
-    });
-  });
+
+    const checkEmail = await User.findOne(email);
+    if (checkEmail) {
+      res.status(400).json({
+        status: "fail",
+        message: "email is already in use , Please try with other email"
+      })
+    } else {
+      const newUser = await User.create(data);
+      res.status(200).json({
+        status: "succes",
+        message: "succesfull signup !",
+        data: newUser
+      })
+    }
+  } catch (e) {
+    res.status(404).json({
+      status: "fail",
+      message: " bad request"
+    })
+  }
 };
+
 
 const list = (req, res) => {
   User.find((err, users) => {
@@ -112,41 +131,41 @@ const stripe_auth = (req, res, next) => {
 };
 
 const stripeCustomer = (req, res, next) => {
-  if(req.profile.stripe_customer){
-      //update stripe customer
-      myStripe.customers.update(req.profile.stripe_customer, {
-          source: req.body.token
-      }, (err, customer) => {
-        if(err){
-          return res.status(400).send({
-            error: "Could not update charge details"
-          })
-        }
-        req.body.order.payment_id = customer.id
-        next()
-      })
-  }else{
-      myStripe.customers.create({
-            email: req.profile.email,
-            source: req.body.token
-      }).then((customer) => {
-          User.update({'_id':req.profile._id},
-            {'$set': { 'stripe_customer': customer.id }},
-            (err, order) => {
-              if (err) {
-                return res.status(400).send({
-                  error: errorHandler.getErrorMessage(err)
-                })
-              }
-              req.body.order.payment_id = customer.id
-              next()
+  if (req.profile.stripe_customer) {
+    //update stripe customer
+    myStripe.customers.update(req.profile.stripe_customer, {
+      source: req.body.token
+    }, (err, customer) => {
+      if (err) {
+        return res.status(400).send({
+          error: "Could not update charge details"
+        })
+      }
+      req.body.order.payment_id = customer.id
+      next()
+    })
+  } else {
+    myStripe.customers.create({
+      email: req.profile.email,
+      source: req.body.token
+    }).then((customer) => {
+      User.update({ '_id': req.profile._id },
+        { '$set': { 'stripe_customer': customer.id } },
+        (err, order) => {
+          if (err) {
+            return res.status(400).send({
+              error: errorHandler.getErrorMessage(err)
             })
-      })
+          }
+          req.body.order.payment_id = customer.id
+          next()
+        })
+    })
   }
 }
 
 const createCharge = (req, res, next) => {
-  if(!req.profile.stripe_seller){
+  if (!req.profile.stripe_seller) {
     return res.status('400').json({
       error: "Please connect your Stripe account"
     })
@@ -156,15 +175,15 @@ const createCharge = (req, res, next) => {
   }, {
     stripe_account: req.profile.stripe_seller.stripe_user_id,
   }).then((token) => {
-      myStripe.charges.create({
-        amount: req.body.amount * 100, //amount in cents
-        currency: "usd",
-        source: token.id,
-      }, {
-        stripe_account: req.profile.stripe_seller.stripe_user_id,
-      }).then((charge) => {
-        next()
-      })
+    myStripe.charges.create({
+      amount: req.body.amount * 100, //amount in cents
+      currency: "usd",
+      source: token.id,
+    }, {
+      stripe_account: req.profile.stripe_seller.stripe_user_id,
+    }).then((charge) => {
+      next()
+    })
   })
 }
 
