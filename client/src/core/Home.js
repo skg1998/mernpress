@@ -6,9 +6,14 @@ import Header from '../components/Navbars/Header'
 import MainSlidder from '../components/Slidder/MainSlidder'
 import CategoriesBar from '../components/Slidder/CategoriesBar'
 import BannerContainer from '../containers/Banner/BannerContainer'
-import Footer from '../components/Footer/Footer';
+import Footer from '../components/Footer/Footer'
+import Products from '../containers/product/Products'
 
-import SEO from '../components/SEO/Seo'
+import SEO from '../components/SEO/Seo';
+
+const data = [
+  { _id: "1" }
+]
 
 const styles = theme => ({
   root: {
@@ -35,6 +40,8 @@ class Home extends Component {
           <MainSlidder />
           {/* Main-banner */}
           <BannerContainer />
+          {/* (Product) */}
+          <Products products={data} />
         </div>
         <Footer />
       </div>
