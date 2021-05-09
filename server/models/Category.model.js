@@ -1,5 +1,13 @@
 const mongoose = require('mongoose')
 
+const catalogSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    trim: true,
+  }
+})
+const Catalog = mongoose.model('Catalog', catalogSchema);
+
 const CategorySchema = new mongoose.Schema({
   name: {
     type: String,
@@ -10,22 +18,26 @@ const CategorySchema = new mongoose.Schema({
     data: Buffer,
     contentType: String
   },
-  child_Category:{
+  child_Category: {
     type: [],
     default: undefined
   },
-  parent_Category:{
+  parent_Category: {
     type: [],
     default: undefined
   },
-  updated: Date,
-  created: {
+  modified_at: {
     type: Date,
     default: Date.now
   },
-  catalog:{type: mongoose.Schema.ObjectId, ref: 'Catalog'}
+  created_at: {
+    type: Date,
+    default: Date.now
+  },
+  catalog: { type: mongoose.Schema.ObjectId, ref: 'Catalog' }
 })
 
-module.exports =  mongoose.model('Category', CategorySchema); 
-   
+module.exports = mongoose.model('Category', CategorySchema);
+
+
 

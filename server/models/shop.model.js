@@ -19,7 +19,8 @@ const ShopSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  owner: {type: mongoose.Schema.ObjectId, ref: 'User'}
+  deleted_at: Date,
+  owner: { type: mongoose.Schema.ObjectId, ref: 'Admin' }
 })
 
-module.exports =  mongoose.model('Shop', ShopSchema);
+module.exports = mongoose.model('Shop', ShopSchema);

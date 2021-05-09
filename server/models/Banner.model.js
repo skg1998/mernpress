@@ -22,3 +22,4 @@ const BannerSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model('Banner', BannerSchema);
+

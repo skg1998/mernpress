@@ -1,33 +1,30 @@
 const mongoose = require('mongoose')
+
 const ProductSchema = new mongoose.Schema({
-  productName: {
+  name: {
     type: String,
     trim: true,
     required: 'Product Name is required'
   },
   image: {
     data: Buffer,
-    contentType: String,
+    contentType: String
   },
-  productDescription: {
+  description: {
     type: String,
     trim: true
   },
-  sku:{
-     type:String
+  sku: {
+    type: String
   },
-  metaTagTitle:{
-    type:String
+  metaTagTitle: {
+    type: String
   },
-  upc:{
-    type:String
+  upc: {
+    type: String
   },
-  modal:{
-   type:String
-  },
-  category: {
-    type: mongoose.Schema.ObjectId,
-    ref:'Category'
+  modal: {
+    type: String
   },
   quantity: {
     type: Number,
@@ -37,33 +34,37 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     required: "Price is required"
   },
-  outOfStockStatus:{
-    type:Number
+  outOfStockStatus: {
+    type: Boolean
   },
-  requiredShipping:{
-    type:Number
+  requiredShipping: {
+    type: Number
   },
-  dateAvailable:{
-    type:String
+  dateAvailable: {
+    type: String
   },
-  condition:[{
-    type:String
+  condition: [{
+    type: String
   }],
-  status:{
-    type:Number
+  status: {
+    type: Number
   },
-  sortOrder:{
-    type:Number
+  sortOrder: {
+    type: Number
   },
-  updated: Date,
+  category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
+  review: { type: mongoose.Schema.ObjectId, ref: 'Review' },
+  discount: { type: mongoose.Schema.ObjectId, ref: 'Discount' },
+  shop: { type: mongoose.Schema.ObjectId, ref: 'Shop' },
+  updated_at: Date,
   created: {
     type: Date,
     default: Date.now
   },
-  shop : {type: mongoose.Schema.ObjectId, ref: 'Shop'},
-  review:{type:mongoose.Schema.ObjectId, ref:'Review'}
+  deleted_at: Date
 })
 
-module.exports =  mongoose.model('Product', ProductSchema) 
+module.exports = mongoose.model('Product', ProductSchema);
 
-  
+
+
