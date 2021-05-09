@@ -9,8 +9,8 @@ import Home from "./core/Home";
 import Product from './core/Product';
 import Categories from './core/Categories';
 import Cart from './containers/cart/cart';
-import Signup from './containers/user/Signup';
-import Signin from './containers/auth/Signin';
+import Signup from './core/signup';
+import Signin from './core/login';
 import Profile from './containers/user/Profile';
 
 //Admin

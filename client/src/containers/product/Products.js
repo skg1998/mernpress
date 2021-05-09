@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import GridList from '@material-ui/core/GridList'
-import ProductCard from '../../components/Card/ProductCard'
+import ProductCard from '../../components/Product/Product'
 import AddToCart from "../../containers/cart/AddToCart"
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -46,26 +46,26 @@ const styles = theme => ({
     color: 'rgb(189, 222, 219)',
     display: 'block'
   }
-})
-class Products extends Component {
-  render() {
-    const { classes } = this.props
-    console.log("this.props.products", this.props.products)
-    return (
-      <div className={classes.root}>
-        {this.props.products.length > 0 ?
-          (<div className={classes.container}>
-            <GridList cellHeight={200} className={classes.gridList} cols={3}>
-              {this.props.products.map((product, i) => (
-                <ProductCard
-                  product={product}
-                  key={i}
-                  addToCart={<AddToCart item={product} />}
-                />
-              ))}
-            </GridList></div>) : this.props.searched && (<Typography type="subheading" component="h4" className={classes.title}>No products found! :(</Typography>)}
-      </div>)
-  }
+}))
+
+const Products = (props) => {
+  const { products, searched } = props;
+  const classes = useStyles();
+  return (
+    <div className={classes.root}>
+      {products.length > 0 ?
+        (<div className={classes.container}>
+          <GridList cellHeight={200} className={classes.gridList} cols={3}>
+            {products.map((product, i) => (
+              <ProductCard
+                product={product}
+                key={i}
+                addToCart={<AddToCart item={product} />}
+              />
+            ))}
+          </GridList>
+        </div>) : searched && (<Typography type="subheading" component="h4" className={classes.title}>No products found! :(</Typography>)}
+    </div>)
 }
 Products.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -73,4 +73,4 @@ Products.propTypes = {
   searched: PropTypes.bool.isRequired
 }
 
-export default withStyles(styles)(Products)
+export default Products
