@@ -9,7 +9,7 @@ const DisplayRating = (props) => {
     <div className="rating">
       <span>
         {rating >= 1
-          ? <StarIcon />
+          ? <StarIcon style={{ color: 'yellow' }} />
           : rating >= 0.5
             ? <StarHalfIcon />
             : <StarBorderOutlinedIcon />
@@ -17,7 +17,7 @@ const DisplayRating = (props) => {
       </span>
       <span>
         {rating >= 2
-          ? <StarIcon />
+          ? <StarIcon style={{ color: 'yellow' }} />
           : rating >= 1.5
             ? <StarHalfIcon />
             : <StarBorderOutlinedIcon />
@@ -25,7 +25,7 @@ const DisplayRating = (props) => {
       </span>
       <span>
         {rating >= 3
-          ? <StarIcon />
+          ? <StarIcon style={{ color: 'yellow' }} />
           : rating >= 2.5
             ? <StarHalfIcon />
             : <StarBorderOutlinedIcon />
@@ -33,7 +33,7 @@ const DisplayRating = (props) => {
       </span>
       <span>
         {rating >= 4
-          ? <StarIcon />
+          ? <StarIcon style={{ color: 'yellow' }} />
           : rating >= 3.5
             ? <StarHalfIcon />
             : <StarBorderOutlinedIcon />
@@ -41,7 +41,7 @@ const DisplayRating = (props) => {
       </span>
       <span>
         {rating >= 5
-          ? <StarIcon />
+          ? <StarIcon style={{ color: 'yellow' }} />
           : rating >= 4.5
             ? <StarHalfIcon />
             : <StarBorderOutlinedIcon />
