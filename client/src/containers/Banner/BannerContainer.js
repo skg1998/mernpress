@@ -36,8 +36,8 @@ const BannerContianer = (props) => {
     return (
         <div className={classes.root}>
             <Grid container spacing={3}>
-                {data.map((banner) => (
-                    <Grid item md={4}>
+                {data.map((banner, i) => (
+                    <Grid item md={4} key={i}>
                         <ImageBanner
                             text={banner.text}
                             image={banner.image}

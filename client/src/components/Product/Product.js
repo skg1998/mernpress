@@ -7,6 +7,7 @@ import Card from "@material-ui/core/Card"
 import IconButton from '@material-ui/core/IconButton'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import Grid from '@material-ui/core/Grid'
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import CartImage from '../../assets/img/shopping_cart_racing.png'
 import DisplayRating from '../Rating/DisplayRating'
@@ -57,7 +58,7 @@ const ProductCard = (props) => {
                 <Grid item md={12} style={{ position: 'relative' }}>
                     <Grid item md={8}>
                         <Grid item md={12}>{product.price}</Grid>
-                        <Grid item md={12}><Link to={`/product-detail/${product._id}`}>More</Link></Grid>
+                        <Grid item md={12}><Link to={`/product-detail/${product._id}`}>More <span><ArrowRightAltIcon /></span></Link></Grid>
                     </Grid>
                     <Grid item md={4}>
                         <div className="buy__btn">{addToCart ? addToCart : ""}</div>
