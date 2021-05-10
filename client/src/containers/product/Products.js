@@ -91,9 +91,8 @@ Products.getInitialProps = ({ req }) => {
 };
 
 Products.propTypes = {
-  classes: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
-  searched: PropTypes.bool.isRequired
+  name: PropTypes.string.isRequired
 }
 
 export default Products
