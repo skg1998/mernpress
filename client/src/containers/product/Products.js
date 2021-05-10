@@ -1,72 +1,95 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import GridList from '@material-ui/core/GridList'
+
+import MobileDetect from "mobile-detect";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
 import ProductCard from '../../components/Product/Product'
 import AddToCart from "../../containers/cart/AddToCart"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    background: theme.palette.background.paper,
     textAlign: 'left',
     padding: '0 8px'
   },
-  container: {
-    minWidth: '100%',
-    paddingBottom: '14px'
-  },
-  gridList: {
-    width: '100%',
-    minHeight: 200,
-    padding: '16px 0 10px'
-  },
-  title: {
-    padding: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 2.5}px ${theme.spacing.unit * 2}px`,
-    color: theme.palette.openTitle,
-    width: '100%'
-  },
-  tile: {
-    textAlign: 'center'
-  },
-  image: {
-    height: '100%'
-  },
-  tileBar: {
-    backgroundColor: 'rgba(0, 0, 0, 0.72)',
-    textAlign: 'left'
-  },
-  tileTitle: {
-    fontSize: '1.1em',
-    marginBottom: '5px',
-    color: 'rgb(189, 222, 219)',
-    display: 'block'
+  header: {
+    fontSize: "30px",
+    fontWeight: "bold"
   }
 }))
 
 const Products = (props) => {
-  const { products, searched } = props;
+  const { products, name, deviceType } = props;
   const classes = useStyles();
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 5,
+      slidesToSlide: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3,
+      slidesToSlide: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2,
+      slidesToSlide: 1
+    }
+  }
+
   return (
-    <div className={classes.root}>
-      {products.length > 0 ?
-        (<div className={classes.container}>
-          <GridList cellHeight={200} className={classes.gridList} cols={3}>
+    <div >
+      <div className={classes.header}> {name} </div>
+      {
+        products.length > 0 ?
+          (<Carousel
+            className="product-slidder"
+            swipeable={true}
+            draggable={true}
+            responsive={responsive}
+            ssr={true}
+            infinite={false}
+            containerClass="first-carousel-container container"
+            deviceType={deviceType}
+          >
             {products.map((product, i) => (
               <ProductCard
                 product={product}
                 key={i}
                 addToCart={<AddToCart item={product} />}
               />
-            ))}
-          </GridList>
-        </div>) : searched && (<Typography type="subheading" component="h4" className={classes.title}>No products found! :(</Typography>)}
+            ))
+            }
+          </Carousel>) : " "
+      }
     </div>)
 }
+
+Products.getInitialProps = ({ req }) => {
+  let userAgent;
+  let deviceType;
+  if (req) {
+    userAgent = req.headers["user-agent"];
+  } else {
+    userAgent = navigator.userAgent;
+  }
+  const md = new MobileDetect(userAgent);
+  if (md.tablet()) {
+    deviceType = "tablet";
+  } else if (md.mobile()) {
+    deviceType = "mobile";
+  } else {
+    deviceType = "desktop";
+  }
+  return { deviceType };
+};
+
 Products.propTypes = {
   classes: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,

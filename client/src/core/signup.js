@@ -11,6 +11,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
 import { DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core"
 
+import SEO from '../components/SEO/Seo';
+
+
 const useStyles = makeStyles((theme) => ({
     card: {
         maxWidth: 600,
@@ -61,6 +64,7 @@ const Signup = () => {
 
     return (
         <div>
+            <SEO title="Signup - Mernpress " description="A Multi-vendor ecommerce site" />
             <form onSubmit={handleSubmit}>
                 <Card className={classes.card}>
                     <CardContent>

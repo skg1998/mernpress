@@ -1,5 +1,5 @@
 import { Card, CardContent, Grid, Typography } from '@material-ui/core';
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Facebook } from 'react-content-loader'
 
@@ -59,7 +59,7 @@ const AllReviews = () => {
                                             <Grid xs={12} className={classes.reviewHeader}>
                                                 <Grid xs={2}>
                                                     <Grid xs={12}>
-                                                        <img className={classes.imageAvatar} src={review.image} />
+                                                        <img className={classes.imageAvatar} src={review.image} alt="" />
                                                     </Grid>
                                                 </Grid>
                                                 <Grid xs={10}>

@@ -1,8 +1,9 @@
-import React, {Component} from 'react'
-import {withStyles} from '@material-ui/core/styles'
+import React, { Component } from 'react'
+import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
+import Button from '@material-ui/core/Button'
+import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton'
-import AddCartIcon from '@material-ui/icons/AddShoppingCart'
 import DisabledCartIcon from '@material-ui/icons/RemoveShoppingCart'
 import cart from './cart-helper.js'
 import { Redirect } from 'react-router-dom'
@@ -25,23 +26,23 @@ class AddToCart extends Component {
   }
   addToCart = () => {
     cart.addItem(this.props.item, () => {
-      this.setState({redirect:true})
+      this.setState({ redirect: true })
     })
   }
   render() {
     if (this.state.redirect) {
-      return (<Redirect to={'/cart'}/>)
+      return (<Redirect to={'/cart'} />)
     }
-    const {classes} = this.props
-    return (<span>
+    const { classes } = this.props
+    return (<>
       {this.props.item.quantity >= 0 ?
-        <IconButton color="secondary" dense="dense" onClick={this.addToCart}>
-          <AddCartIcon className={this.props.cartStyle || classes.iconButton}/>
-        </IconButton> :
+        <Button color="secondary" dense="dense" onClick={this.addToCart}>
+          <AddIcon className={this.props.cartStyle || classes.iconButton} />
+        </Button> :
         <IconButton disabled={true} color="secondary" dense="dense">
-          <DisabledCartIcon className={this.props.cartStyle || classes.disabledIconButton}/>
+          <DisabledCartIcon className={this.props.cartStyle || classes.disabledIconButton} />
         </IconButton>}
-      </span>)
+    </>)
   }
 }
 
