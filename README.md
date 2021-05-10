@@ -21,7 +21,7 @@ $
 $ # in server folder to run node client (React)
 $ project_folder/client
 $ npm i
-$ npm run dev
+$ npm run start
 $
 $ # Start the application (development mode)
 $ npm run dev # default port 3000
