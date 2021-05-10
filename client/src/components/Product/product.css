@@ -1,7 +1,17 @@
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+}
+
 .product {
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-  margin: 5px 40px;
+  /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.1) !important; */
+  box-shadow: none !important;
+  border: none !important;
+  margin: 5px 20px;
   min-height: 350px;
+  padding: 0 20px;
 }
 .buy__btn {
   width: 100px;
@@ -11,7 +21,7 @@
   place-items: center;
   position: absolute;
   bottom: -20px;
-  right: -20px;
+  right: -40px;
   background: #fff;
   border-radius: 50%;
   font-size: 40px;

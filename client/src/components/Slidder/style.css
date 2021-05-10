@@ -1,83 +1,81 @@
 .image-item {
-    padding: 10px;
-  }
+  padding: 10px;
+}
 
-.slidder-image{
+.slidder-image {
   padding-bottom: 15px;
-}  
-  .container-with-dots {
-    margin-top: 20px;
-    padding-bottom: 10px;
-  }
-  .react-multi-carousel-dot-list {
-    bottom: 0px !important;
-  }
-  #__next {
-    overflow: scroll;
-    margin-bottom: 40px;
-  }
-  .react-multi-carousel-dot button {
-    border-color: grey !important;
-  }
-  
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+}
+.container-with-dots {
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+.react-multi-carousel-dot-list {
+  bottom: 0px !important;
+}
+#__next {
+  overflow: scroll;
+  margin-bottom: 40px;
+}
+.react-multi-carousel-dot button {
+  border-color: grey !important;
+}
 
-  .react-multi-carousel-list{
-     height: 100%;
-  }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-  .react-multi-carousel-list ul li a .CategoryCard-card-47{
-    margin: 5px !important;
-    border-radius: 10px;
- }
+.react-multi-carousel-list {
+  height: 100%;
+}
 
- .react-multi-carousel-list ul li a .ProductCard-card-49{
+.react-multi-carousel-list ul li a .CategoryCard-card-47 {
   margin: 5px !important;
   border-radius: 10px;
 }
 
-  @media only screen and (max-width: 3000px) {
-    .react-multi-carousel-list:not(.categories){
-      height: 350px;
-      border-radius:25px;
-      margin-bottom: 25px;
-    }
-  }
+.react-multi-carousel-list ul li a .ProductCard-card-49 {
+  margin: 5px !important;
+  border-radius: 10px;
+}
 
-  @media only screen and (max-width: 1024px) {
-    .react-multi-carousel-list{
-      height: 100%;
-    }
+@media only screen and (max-width: 3000px) {
+  .react-multi-carousel-list:not(.product-slidder) {
+    height: 350px;
+    border-radius: 25px;
+    margin-bottom: 25px;
   }
+}
 
-  @media only screen and (max-width: 464px) {
-    .react-multi-carousel-list{
-      height: 100%;
-    }
+@media only screen and (max-width: 1024px) {
+  .react-multi-carousel-list {
+    height: 100%;
   }
+}
 
-.MuiFormControl-marginNormal{
+@media only screen and (max-width: 464px) {
+  .react-multi-carousel-list {
+    height: 100%;
+  }
+}
+
+.MuiFormControl-marginNormal {
   margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
 
-.categories ul{
+.categories ul {
   margin-top: 75px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .categories ul{
+  .categories ul {
     margin-top: 125px;
   }
 }
 
 @media only screen and (max-width: 464px) {
-  .categories ul{
+  .categories ul {
     margin-top: 125px;
   }
 }
-
-

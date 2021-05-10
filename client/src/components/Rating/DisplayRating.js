@@ -8,49 +8,49 @@ const DisplayRating = (props) => {
   return (
     <div className="rating">
       <span>
-        {rating>=1
-        ?<StarIcon />
-        :rating>=0.5
-        ? <StarHalfIcon />
-        : <StarBorderOutlinedIcon /> 
-        } 
-      </span>
-      <span>
-        {rating>=2
-        ?<StarIcon />
-        :rating>=1.5
-        ? <StarHalfIcon />
-        : <StarBorderOutlinedIcon/>  
+        {rating >= 1
+          ? <StarIcon />
+          : rating >= 0.5
+            ? <StarHalfIcon />
+            : <StarBorderOutlinedIcon />
         }
       </span>
       <span>
-        {rating>=3
-        ?<StarIcon />
-        :rating>=2.5
-        ? <StarHalfIcon />
-        : <StarBorderOutlinedIcon/>  
+        {rating >= 2
+          ? <StarIcon />
+          : rating >= 1.5
+            ? <StarHalfIcon />
+            : <StarBorderOutlinedIcon />
         }
       </span>
       <span>
-        {rating>=4
-        ?<StarIcon />
-        :rating>=3.5
-        ? <StarHalfIcon />
-        : <StarBorderOutlinedIcon/>  
+        {rating >= 3
+          ? <StarIcon />
+          : rating >= 2.5
+            ? <StarHalfIcon />
+            : <StarBorderOutlinedIcon />
         }
       </span>
       <span>
-        {rating>=5
-        ?<StarIcon />
-        :rating>=4.5
-        ? <StarHalfIcon />
-        : <StarBorderOutlinedIcon/>  
+        {rating >= 4
+          ? <StarIcon />
+          : rating >= 3.5
+            ? <StarHalfIcon />
+            : <StarBorderOutlinedIcon />
+        }
+      </span>
+      <span>
+        {rating >= 5
+          ? <StarIcon />
+          : rating >= 4.5
+            ? <StarHalfIcon />
+            : <StarBorderOutlinedIcon />
         }
       </span>
       {caption ? (
         <span>{caption}</span>
       ) : (
-        <span>{numReviews + ' reviews'}</span>
+        <span title="Reviews">{numReviews}</span>
       )}
     </div>
   );

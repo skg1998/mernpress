@@ -4,30 +4,16 @@ import PropTypes from 'prop-types'
 
 import { withStyles } from "@material-ui/core/styles"
 import Card from "@material-ui/core/Card"
-import CardActionArea from "@material-ui/core/CardActionArea"
-import CardActions from "@material-ui/core/CardActions"
-import CardContent from "@material-ui/core/CardContent"
-import CardMedia from "@material-ui/core/CardMedia"
-import Typography from "@material-ui/core/Typography"
 import IconButton from '@material-ui/core/IconButton'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import Grid from '@material-ui/core/Grid'
 
 import CartImage from '../../assets/img/shopping_cart_racing.png'
 import DisplayRating from '../Rating/DisplayRating'
+import './product.css'
 
 
 const styles = {
-    card: {
-        margin: "0 20px"
-    },
-    media: {
-        height: 140
-    },
-    bottombutton: {
-        display: "block",
-        margin: "auto"
-    },
     icon: {
         color: 'green',
     },
@@ -39,10 +25,6 @@ const styles = {
 const ProductCard = (props) => {
     const { classes, product, key, addToCart } = props;
 
-    function imageLoaded() {
-
-    }
-
     function toggleLike() {
 
     }
@@ -52,41 +34,37 @@ const ProductCard = (props) => {
     }
 
     return (
-        <Link to={`/product-detail/${product._id}`}>
-            <Card className={classes.card} key={key}>
-                {
-                    isLiked()
-                        ? <IconButton onClick={toggleLike}>
-                            <FavoriteIcon className={classes.likedicon} />
-                        </IconButton>
-                        : <IconButton onClick={toggleLike}>
-                            <FavoriteIcon />
-                        </IconButton>
-                }
-                <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image={product.image ? product.image : CartImage}
-                    />
-                    <CardContent>
-                        <Typography component="p">{product.name}</Typography>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions className={classes.bottombutton}>
-                    <Grid item xs={12}>
-                        <Grid item xs={9}>
-                            <div>
-                                <span>{<DisplayRating rating={product.rating} nunumReviews={product.totalreview} />}</span>
-                                <span>$ {product.price}</span>
-                            </div>
-                        </Grid>
-                        <Grid item xs={3}>
-                            {addToCart ? addToCart : ""}
-                        </Grid>
+        <Card className="product" key={key}>
+            {
+                isLiked()
+                    ? <IconButton onClick={toggleLike}>
+                        <FavoriteIcon className={classes.likedicon} />
+                    </IconButton>
+                    : <IconButton onClick={toggleLike}>
+                        <FavoriteIcon />
+                    </IconButton>
+            }
+            <Grid container>
+                <Grid item md={12}>
+                    <Grid item md={12}>
+                        <img src={product.image ? product.image : CartImage} className="center" alt="" />
                     </Grid>
-                </CardActions>
-            </Card>
-        </Link>
+                    <Grid item md={12}> <h4>{product.name}</h4></Grid>
+                    <Grid item md={12}>
+                        {<DisplayRating rating={product.review.rating} numReviews={product.review.totalreview} />}
+                    </Grid>
+                </Grid>
+                <Grid item md={12} style={{ position: 'relative' }}>
+                    <Grid item md={8}>
+                        <Grid item md={12}>{product.price}</Grid>
+                        <Grid item md={12}><Link to={`/product-detail/${product._id}`}>More</Link></Grid>
+                    </Grid>
+                    <Grid item md={4}>
+                        <div className="buy__btn">{addToCart ? addToCart : ""}</div>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Card>
     );
 }
 
