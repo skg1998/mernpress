@@ -98,7 +98,7 @@ const data = [
     category: [],
     discount: [],
     shop: [],
-    review: { rating: 4, totalreview: 445 }
+    review: { rating: 3.5, totalreview: 445 }
   },
   {
     _id: "1",
