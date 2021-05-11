@@ -5,10 +5,10 @@ import ImageBanner from '../../components/Banner/ImageBanner';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
+        flexGrow: 1
     },
     control: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(2)
     },
 }));
 
@@ -37,7 +37,7 @@ const BannerContianer = (props) => {
         <div className={classes.root}>
             <Grid container spacing={3}>
                 {data.map((banner, i) => (
-                    <Grid item md={4} key={i}>
+                    <Grid item md={4} key={i} >
                         <ImageBanner
                             text={banner.text}
                             image={banner.image}
