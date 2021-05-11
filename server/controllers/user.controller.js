@@ -15,7 +15,7 @@ const create = async (req, res, next) => {
       password: password
     }
 
-    const checkEmail = await User.findOne(email);
+    const checkEmail = await User.findOne({ email: email });
     if (checkEmail) {
       res.status(400).json({
         status: "fail",
@@ -30,12 +30,28 @@ const create = async (req, res, next) => {
       })
     }
   } catch (e) {
+    console.log(e)
     res.status(404).json({
       status: "fail",
       message: " bad request"
     })
   }
 };
+
+const login = (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const data = {
+      email: email,
+      password: password
+    }
+  } catch (e) {
+    res.status(404).json({
+      status: "fail",
+      message: " bad request"
+    })
+  }
+}
 
 
 const list = (req, res) => {
