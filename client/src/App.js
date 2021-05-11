@@ -3,10 +3,10 @@ import "./App.css";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { indigo, pink } from "@material-ui/core/colors";
 import MainRouter from "./MainRouter";
-import { Router } from "react-router-dom";
-import {history} from "./store/helpers"
+import { BrowserRouter as Router } from "react-router-dom";
+import { history } from "./store/helpers"
 
-const App = () =>{
+const App = () => {
   return (
     <Router history={history}>
       <MuiThemeProvider theme={theme}>
