@@ -58,7 +58,7 @@ const ProductCard = (props) => {
                 <Grid item md={12} style={{ position: 'relative' }}>
                     <Grid item md={8}>
                         <Grid item md={12}>{product.price}</Grid>
-                        <Grid item md={12}><Link to={`/product-detail/${product._id}`}>More <span><ArrowRightAltIcon /></span></Link></Grid>
+                        <Grid item md={12}><Link to={`/product/${product._id}`}>More <span><ArrowRightAltIcon /></span></Link></Grid>
                     </Grid>
                     <Grid item md={4}>
                         <div className="buy__btn">{addToCart ? addToCart : ""}</div>

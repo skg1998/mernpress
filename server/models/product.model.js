@@ -38,7 +38,7 @@ const ProductSchema = new mongoose.Schema({
     type: Boolean
   },
   requiredShipping: {
-    type: Number
+    type: Boolean
   },
   dateAvailable: {
     type: String

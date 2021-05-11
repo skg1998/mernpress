@@ -12,6 +12,7 @@ import Cart from './containers/cart/cart';
 import Signup from './core/signup';
 import Signin from './core/login';
 import Profile from './containers/user/Profile';
+import NotFound from './core/NotFound';
 
 //Admin
 import { AdminLogin } from './admin/Pages/AdminLogin';
@@ -31,9 +32,10 @@ const MainRouter = () => {
         <Route path="/signin" component={Signin} />
         <Route path="/user/:userId" component={Profile} />
         <Route path="/shops/all" component={Shops} />
-        <Route path="/product-detail/:productId" component={Product} />
+        <Route path="/product/:productId" component={Product} />
         <Route path="/cart" component={Cart} />
         <Route path="/category" component={Categories} />
+        <Route component={NotFound} />
       </Switch>
     </div>
   );
