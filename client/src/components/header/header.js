@@ -1,6 +1,7 @@
-import React from 'react';
+
 import { FavoriteBorderOutlined, MenuRounded, PersonOutlined, SearchOutlined, ShoppingCartOutlined } from '@material-ui/icons';
-import '../header/header.css';
+import CategoryComponent from './categoryComponent';
+
 function header() {
   return (
     <div class = "NavHome">
@@ -13,7 +14,8 @@ function header() {
           <FavoriteBorderOutlined className="categoryIcon"></FavoriteBorderOutlined>
           <ShoppingCartOutlined className="categoryIcon"></ShoppingCartOutlined>
         </div>
-        </div>       
+        </div>
+        <CategoryComponent/>        
             
     </div>
     
