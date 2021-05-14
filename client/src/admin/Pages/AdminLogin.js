@@ -1,21 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { connect } from "react-redux";
-import { useDispatch } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import { connect, useDispatch } from "react-redux";
 import { adminActions } from '../../store/actions';
-import { Button, TextField, Card, CardHeader, Grid, withStyles } from '@material-ui/core';
+import { Button, TextField, Card, Grid, makeStyles, Typography } from '@material-ui/core';
 import SEO from "../../components/SEO/Seo";
 
-const useStyles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
     card: {
-        flexGrow: 1,
-        maxWidth: "40%",
-        minHeight: "20vh",
-        display: "flex",
-        alignItems: "center"
+        padding: '10px',
+        boxShadow: '0 4px 9px 0 rgba(0,0,0,0.2)'
     },
-});
+    error: {
+        verticalAlign: 'middle'
+    },
+    title: {
+        color: '#4C3A98',
+        display: 'flex',
+        justifyContent: 'center',
+        height: '20%',
+        fontSize: '3rem',
+        fontWeight: 'bold',
+    },
+    textField: {
+        marginTop: '10px',
+        width: '100%'
+    },
+    submit: {
+        backgroundColor: '#ff0c0c',
+        padding: '10px',
+        width: '100%',
+        textAlign: 'center',
+        color: '#FFFFFF',
+        border: 'none',
+        borderRadius: ' 15px',
+        boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
+        marginTop: '10px'
+    }
+}))
 
 function WarningAlert(props) {
     return <div {...props} />
@@ -47,7 +68,6 @@ const Login = (props) => {
             <SEO title="Admin - Login " description="A Multi-vendor ecommerce site" />
             <Grid
                 container
-                className={classes.card}
                 spacing={0}
                 alignItems="center"
                 justify="center"
@@ -58,14 +78,20 @@ const Login = (props) => {
                     transform: 'translate(-50%, -50%)'
                 }}
             >
-                <Card style={{ padding: '20px' }}>
+                <Card className={classes.card}>
                     {error && (
                         <WarningAlert severity="error" onClick={() => setError(null)}>
                             {props.error || error}
                         </WarningAlert>
                     )}
                     <form onSubmit={handleSubmit} noValidate autoComplete="off">
-                        <CardHeader style={{ color: '#3f51b5' }} title="Login" />
+                        <Typography
+                            type="headline"
+                            component="h2"
+                            className={classes.title}
+                        >
+                            Sign In
+                        </Typography>
                         <Grid item xs={12}>
                             <TextField
                                 id="outlined-basic"
@@ -74,8 +100,8 @@ const Login = (props) => {
                                 type="email"
                                 name="email"
                                 value={email}
+                                className={classes.textField}
                                 onChange={e => setEmail(e.target.value)}
-                                style={{ marginTop: '10px', width: '100%' }}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -86,15 +112,15 @@ const Login = (props) => {
                                 type="password"
                                 name="password"
                                 value={password}
+                                className={classes.textField}
                                 onChange={e => setPassword(e.target.value)}
-                                style={{ marginTop: '10px', width: '100%' }}
                             />
                         </Grid>
                         <Button
                             variant="contained"
                             color="primary"
                             type="submit"
-                            style={{ marginTop: '10px', width: '100%' }}
+                            className={classes.submit}
                         > SignIn </Button>
                     </form>
                     <Link to="/adminsignup">Sing Up</Link>
@@ -112,4 +138,4 @@ function mapStateToProps(state) {
 }
 
 const connectedLoginPage = connect(mapStateToProps)(Login);
-export { connectedLoginPage as AdminLogin }; 
+export { connectedLoginPage as AdminLogin };
