@@ -1,5 +1,5 @@
 const express = require("express");
-const Upload = require('../helpers/uploadFile');
+const Upload = require('../util/uploadFile');
 const BannerCtrl = require("../controllers/Banner.controller");
 
 const router = express.Router();

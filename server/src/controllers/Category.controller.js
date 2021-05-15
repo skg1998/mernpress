@@ -1,6 +1,6 @@
 const Category = require("../models/Category.model")
 const _ = require("lodash");
-const errorHandler = require("../helpers/dbErrorHandler");
+const errorHandler = require("../util/dbErrorHandler");
 const formidable = require("formidable");
 const fs = require("fs");
 

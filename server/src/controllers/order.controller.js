@@ -1,6 +1,6 @@
 const { Order, CartItem } = require("../models/order.model");
 const _ = require("lodash");
-const errorHandler = require("../helpers/dbErrorHandler");
+const errorHandler = require("../util/dbErrorHandler");
 
 const create = (req, res) => {
   req.body.order.user = req.profile;
@@ -83,7 +83,7 @@ const read = (req, res) => {
   return res.json(req.order);
 };
 
-module.exports =  {
+module.exports = {
   create,
   listByShop,
   update,

@@ -2,16 +2,16 @@ const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const bodyParser = require('body-parser')
 const logger = require("morgan");
-const compress = require("compression");
 const cors = require("cors");
 const helmet = require("helmet");
-const connectDB = require("./config/db");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger.json");
 require('dotenv').config();
 
+const connectDB = require("./config/db");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("../swagger.json");
+
+// Routes File
 const indexRouter = require("./routes/index.routes");
 const usersRouter = require("./routes/users.routes");
 const AdminRouter = require('./routes/admin.routes');
@@ -29,12 +29,6 @@ var app = express();
 // open mongoose connection
 connectDB();
 
-// support parsing of application/json type post data
-app.use(bodyParser.json());
-
-//support parsing of application/x-www-form-urlencoded post data
-app.use(bodyParser.urlencoded({ extended: false }));
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -43,17 +37,16 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(compress());
 app.use(helmet());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/api/v1/admin", AdminRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/shops/", shopRouter);
 app.use("/api/v1/products", productRoutes);
 app.use('/api/v1/orders', orderRoutes);
-app.use("/api/v1/admin", AdminRouter);
 app.use("/api/v1/slidder", slidderRoutes);
 app.use("/api/v1/title", TitleRoutes);
 app.use("/api/v1/category", CategoryRoutes);

@@ -1,6 +1,6 @@
 const Reviews = require("../models/reviews.model");
 const _ = require("lodash");
-const errorHandler = require("../helpers/dbErrorHandler");
+const errorHandler = require("../util/dbErrorHandler");
 
 // Create Review API
 /**
@@ -64,9 +64,9 @@ const updateReviews = (req, res) => {
 
 
 const deleteReviews = (req, res) => {
-   Reviews.deleteOne({id:req.params._id})
-   .then(deldata => res.send(deldata))
-   .catch(err => res.status(401).json(err))
+  Reviews.deleteOne({ id: req.params._id })
+    .then(deldata => res.send(deldata))
+    .catch(err => res.status(401).json(err))
 };
 
 module.exports = {

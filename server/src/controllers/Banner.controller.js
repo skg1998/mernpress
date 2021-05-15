@@ -1,5 +1,5 @@
 const Banner = require('../models/Banner.model');
-const errorHandler = require('../helpers/dbErrorHandler');
+const errorHandler = require('../util/dbErrorHandler');
 const fs = require('fs');
 
 //Banner Create API

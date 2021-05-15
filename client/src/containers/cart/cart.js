@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
-import {withStyles} from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles'
 import CartItems from './Cart-items';
-import {StripeProvider} from 'react-stripe-elements'
+import { StripeProvider } from 'react-stripe-elements'
 // import config from '../config/config'
 import Checkout from './Checkout'
 // import StripeConnect from '../user/StripeConnect';
@@ -32,26 +32,26 @@ class Cart extends Component {
   //   }
   // }
 
-  setCheckout = val =>{
-    this.setState({checkout: val})
+  setCheckout = val => {
+    this.setState({ checkout: val })
   }
 
   render() {
-    const {classes} = this.props
+    const { classes } = this.props
     return (<div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={6} sm={6}>
           <CartItems checkout={this.state.checkout}
-                     setCheckout={this.setCheckout}/>
+            setCheckout={this.setCheckout} />
         </Grid>
         {this.state.checkout &&
           <Grid item xs={6} sm={6}>
             <StripeProvider stripe={this.state.stripe}>
-              <Checkout/>
+              <Checkout />
             </StripeProvider>
           </Grid>}
-        </Grid>
-      </div>)
+      </Grid>
+    </div>)
   }
 }
 

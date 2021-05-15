@@ -1,6 +1,6 @@
 const User = require("../models/user.model");
 const _ = require("lodash");
-const errorHandler = require("../helpers/dbErrorHandler");
+const errorHandler = require("../util/dbErrorHandler");
 const config = require('../config/config');
 const stripe = require("stripe");
 const myStripe = stripe(config.stripe_test_secret_key);
@@ -38,7 +38,7 @@ const create = async (req, res, next) => {
   }
 };
 
-const login = (req, res, next) => {
+const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const data = {

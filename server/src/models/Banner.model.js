@@ -1,9 +1,12 @@
 const mongoose = require('mongoose')
 
 const BannerSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "name is required"]
+  },
   images: {
-    type: [],
-    path: Buffer,
+    data: Buffer,
     contentType: String,
     size: Number
   },
@@ -12,7 +15,8 @@ const BannerSchema = new mongoose.Schema({
     default: false
   },
   targetPath: {
-    type: String
+    type: String,
+    required: [true, "target Path is required"]
   },
   updated: Date,
   created: {
