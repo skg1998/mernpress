@@ -12,6 +12,7 @@ const fs = require('fs');
  * @apiParam (Request body)  targetPath Banner targetPath
  * @apiParamExample {json} Input
  * {
+ *      "name": ""
  *      "images" : "",
  *      "flag" : "",
  *      "targetPath" : "" 
@@ -20,7 +21,7 @@ const fs = require('fs');
  * HTTP/1.1 200 OK
  * {
  *      "message": "Successfully created a banner!",
- *      "status": "1"
+ *      "status": true
  * }
  * @apiSampleRequest /api/v1/banner/create
  * @apiErrorExample {json} Banner error
@@ -84,67 +85,99 @@ const create = (req, res) => {
  * @apiErrorExample {json} Banner error
  * HTTP/1.1 500 Internal Server Error
  */
-const read = (req, res) => {
-  Banner.find().exec((err, BannerImage) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.status(200).json(BannerImage)
-  })
-}
-
-const readById = (req, res) => {
-  Banner.findById({ _id: req.params.id }).exec((err, BannerImage) => {
-    if (err) {
-      return res.status(400).json({
-        error: "Banner of this id not found"
-      })
-    }
-    res.status(200).json(BannerImage)
-  })
-}
-
-const update = (req, res) => {
-  if (req.file == undefined) {
-    return res.status(400).json({
-      message: "Image could not be uploaded"
+const read = async (req, res, next) => {
+  try {
+    const banner = await Banner.find();
+    res.status(201).json({
+      succes: true,
+      length: banner.length,
+      data: banner,
+      message: `All Banner has been find succesfully !`
     })
-  } else {
-    var fullPath = "files/" + req.file.filename;
-    var imgPath = fs.readFileSync(fullPath);
-    var encImg = imgPath.toString('base64');
-    var banner = {
-      image: {
-        path: Buffer(encImg, 'base64'),
-        contentType: req.file.mimetype,
-        size: req.file.size
-      },
-      flag: req.body.flag
-    };
-    var addBanner = new Banner(banner);
-    addBanner.save((err, result) => {
-      if (err) {
-        return res.status(400).json({
-          error: errorHandler.getErrorMessage(err)
-        })
-      }
-      res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({
+      status: false,
+      message: "Sometihng went wrong, Try after someTime"
     })
   }
 }
 
-const remove = (req, res) => {
-  Banner.findByIdAndDelete({ _id: req.params.id })
-    .then((deletedBannerImage) => {
-      res.json(deletedBannerImage)
-    })
-    .catch((err) => {
-      res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
+const readById = async (req, res, next) => {
+  try {
+    const banner = await Banner.findById(req.params.id)
+    if (!banner) {
+      return res.status(200).json({
+        succes: false,
+        length: banner.length,
+        data: banner,
+        message: `Banner of given id: ${req.params.id} not found`
       })
+    }
+    res.status(200).json({
+      succes: true,
+      length: banner.length,
+      data: banner,
+      message: `Banner of given id: ${req.params.id} has been find succesfully`
     })
+  } catch (err) {
+    res.status(400).json({
+      status: false,
+      message: "Sometihng went wrong, Try after someTime"
+    })
+  }
+}
+
+const update = async (req, res) => {
+  try {
+    const banner = await Banner.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    })
+    if (!banner) {
+      return res.status(401).json({
+        status: false,
+        length: banner.length,
+        data: banner,
+        message: `Banner of given id: ${req.params.id} not found`
+      })
+    }
+    res.status(201).json({
+      status: true,
+      length: banner.length,
+      data: banner,
+      message: `Banner of given id: ${req.params.id} has been updated succesfully`
+    })
+  } catch (err) {
+    res.status(400).json({
+      status: false,
+      message: "Sometihng went wrong, Try after someTime"
+    })
+  }
+}
+
+const remove = async (req, res, next) => {
+  try {
+    const banner = await Banner.findByIdAndDelete(req.params.id);
+    if (!banner) {
+      return res.status(401).json({
+        status: false,
+        length: banner.length,
+        data: banner,
+        message: `Banner of given id: ${req.params.id} not found`
+      })
+    }
+    res.status(201).json({
+      status: true,
+      length: banner.length,
+      data: banner,
+      message: `Banner of given id: ${req.params.id} has been deleted succesfully !`
+    })
+  } catch (err) {
+    res.status(400).json({
+      status: false,
+      message: "Sometihng went wrong, Try after someTime"
+    })
+  }
 }
 
 module.exports = {
