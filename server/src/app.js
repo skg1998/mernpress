@@ -9,7 +9,7 @@ require('dotenv').config();
 
 const connectDB = require("./config/db");
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger.json");
+const swaggerDocument = require("../swagger.json");
 
 // Routes File
 const indexRouter = require("./routes/index.routes");

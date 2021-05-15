@@ -1,5 +1,5 @@
 const Title = require("../models/Title.model");
-const errorHandler = require("../helpers/dbErrorHandler");
+const errorHandler = require("../util/dbErrorHandler");
 const fs = require("fs");
 
 const addTitle = (req, res) => {
