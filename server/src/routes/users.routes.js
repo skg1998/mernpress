@@ -7,7 +7,9 @@ const router = express.Router();
 router
   .route("/")
   .get(userCtrl.list)
-  .post(userCtrl.create);
+
+router.post('/signup', userCtrl.create);
+router.post('/signin', userCtrl.login);
 
 router
   .route("/stripe_auth/:userId")
@@ -20,10 +22,8 @@ router
 
 router
   .route("/:userId")
-  .get(authCtrl.requireSignin, userCtrl.read)
+  .get(userCtrl.userByID)
   .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
   .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove);
-
-router.param("userId", userCtrl.userByID);
 
 module.exports = router;
