@@ -1,5 +1,4 @@
 const User = require("../models/user.model");
-const _ = require("lodash");
 const errorHandler = require("../util/dbErrorHandler");
 const config = require('../config/config');
 const stripe = require("stripe");
@@ -17,22 +16,23 @@ const create = async (req, res, next) => {
 
     const checkEmail = await User.findOne({ email: email });
     if (checkEmail) {
-      res.status(400).json({
+      return res.status(400).json({
         status: "fail",
         message: "email is already in use , Please try with other email"
       })
-    } else {
-      const newUser = await User.create(data);
-      res.status(200).json({
-        status: "succes",
-        message: "succesfull signup !",
-        data: newUser
-      })
     }
-  } catch (e) {
-    console.log(e)
+
+    const newUser = await User.create(data);
+
+    res.status(200).json({
+      status: "succes",
+      data: newUser,
+      message: "succesfull signup !",
+    })
+
+  } catch (err) {
     res.status(404).json({
-      status: "fail",
+      status: false,
       message: " bad request"
     })
   }
@@ -45,81 +45,117 @@ const login = async (req, res, next) => {
       email: email,
       password: password
     }
-  } catch (e) {
+    const user = await User.findOne(req.body.email);
+    if (!user) {
+      return res.status("401").json({
+        status: false,
+        message: `User Not found by given email: ${req.body.email}`
+      });
+    }
+
+  } catch (err) {
     res.status(404).json({
-      status: "fail",
-      message: " bad request"
+      status: false,
+      message: "Something went wrong, try after some time"
     })
   }
 }
 
 
-const list = (req, res) => {
-  User.find((err, users) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      });
-    }
-    res.json(users);
-  }).select("name email updated created");
-};
-
-const userByID = (req, res, next, id) => {
-  User.findById(id).exec((err, user) => {
-    if (err || !user)
-      return res.status("400").json({
-        error: "User not found"
-      });
-    req.profile = user;
-    next();
-  });
-};
-
-const read = (req, res) => {
-  req.profile.hashed_password = undefined;
-  req.profile.salt = undefined;
-  return res.json(req.profile);
-};
-
-const update = (req, res, next) => {
-  let user = req.profile;
-  user = _.extend(user, req.body);
-  user.updated = Date.now();
-  user.save(err => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      });
-    }
-    user.hashed_password = undefined;
-    user.salt = undefined;
-    res.json(user);
-  });
-};
-
-const remove = (req, res, next) => {
-  let user = req.profile;
-  user.remove((err, deletedUser) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      });
-    }
-    deletedUser.hashed_password = undefined;
-    deletedUser.salt = undefined;
-    res.json(deletedUser);
-  });
-};
-
-const isSeller = (req, res, next) => {
-  const isSeller = req.profile && req.profile.seller;
-  if (!isSeller) {
-    return res.status("403").json({
-      error: "User is not a seller"
-    });
+const list = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    res.status(201).json({
+      status: false,
+      count: users.length,
+      data: users,
+      message: `All Users found succesfully`
+    })
+  } catch (err) {
+    res.status(400).json({
+      status: false,
+      message: `Something went wrong`
+    })
   }
-  next();
+};
+
+const userByID = (req, res, next) => {
+  try {
+    const user = await User.find(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({
+        status: false,
+        message: `User not found by given id: ${req.params.id}`
+      })
+    }
+
+    res.status(201).json({
+      status: true,
+      data: user,
+      message: `All Users found succesfully !`
+    })
+
+  } catch (err) {
+    res.status(400).json({
+      status: false,
+      message: `Something went wrong`
+    })
+  }
+};
+
+const update = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    })
+
+    if (!user) {
+      return res.status(404).json({
+        status: false,
+        data: user,
+        message: `User profile of given id: ${req.params.id} not found`
+      })
+    }
+
+    res.status(200).json({
+      status: true,
+      data: user,
+      message: `User profile Update succesfull!`
+    })
+
+  } catch (err) {
+    res.status(400).json({
+      status: false,
+      message: `User not fount of given id: ${req.params.id}`
+    })
+  }
+};
+
+const remove = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id)
+
+    if (!user) {
+      return res.status(404).json({
+        status: false,
+        message: `User profile of given id: ${req.params.id} not found`
+      })
+    }
+
+    res.status(200).json({
+      status: true,
+      data: user,
+      message: `User profile Deleted succesfull!`
+    })
+
+  } catch (err) {
+    res.status(400).json({
+      status: false,
+      message: `User not fount of given id: ${req.params.id}`
+    })
+  }
 };
 
 const stripe_auth = (req, res, next) => {
@@ -145,6 +181,7 @@ const stripe_auth = (req, res, next) => {
     }
   );
 };
+
 
 const stripeCustomer = (req, res, next) => {
   if (req.profile.stripe_customer) {
@@ -180,6 +217,7 @@ const stripeCustomer = (req, res, next) => {
   }
 }
 
+
 const createCharge = (req, res, next) => {
   if (!req.profile.stripe_seller) {
     return res.status('400').json({
@@ -206,8 +244,8 @@ const createCharge = (req, res, next) => {
 module.exports = {
   isSeller,
   create,
+  login,
   userByID,
-  read,
   list,
   remove,
   update,

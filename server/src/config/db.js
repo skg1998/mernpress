@@ -28,7 +28,7 @@ process.on('SIGINT', () => {
  * @public
  */
 const connectDB = () => {
-  Mongoose.connect(config.development.database.url, {
+  Mongoose.connect(process.env.MONGO_URI_LOCAL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true
