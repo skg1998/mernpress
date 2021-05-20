@@ -1,7 +1,7 @@
 const express = require("express");
 const orderCtrl = require("../controllers/order.controller");
 const productCtrl = require("../controllers/product.controller");
-const authCtrl = require("../util/auth");
+const { hasAuthorization } = require('../middleware/hasAuth')
 const shopCtrl = require("../controllers/shop.controller");
 const userCtrl = require("../controllers/user.controller");
 
@@ -10,16 +10,16 @@ const router = express.Router();
 router
   .route("/:userId")
   .post(
-    authCtrl.requireSignin,
+    hasAuthorization,
     productCtrl.decreaseQuantity,
     orderCtrl.create
   );
 
 router
   .route("/shop/:shopId")
-  .get(authCtrl.requireSignin, shopCtrl.isOwner, orderCtrl.listByShop);
+  .get(hasAuthorization, shopCtrl.isOwner, orderCtrl.listByShop);
 
-router.route("/user/:userId").get(authCtrl.requireSignin, orderCtrl.listByUser);
+router.route("/user/:userId").get(hasAuthorization, orderCtrl.listByUser);
 
 router.route("/status_values").get(orderCtrl.getStatusValues);
 
@@ -27,7 +27,7 @@ router.route("/status_values").get(orderCtrl.getStatusValues);
 router
   .route("/:shopId/cancel/:productId")
   .put(
-    authCtrl.requireSignin,
+    hasAuthorization,
     shopCtrl.isOwner,
     productCtrl.increaseQuantity,
     orderCtrl.update
@@ -36,14 +36,14 @@ router
 router
   .route("/:orderId/charge/:userId/:shopId")
   .put(
-    authCtrl.requireSignin,
+    hasAuthorization,
     shopCtrl.isOwner,
     orderCtrl.update
   );
 
 router
   .route("/status/:shopId")
-  .put(authCtrl.requireSignin, shopCtrl.isOwner, orderCtrl.update);
+  .put(hasAuthorization, shopCtrl.isOwner, orderCtrl.update);
 
 router.route("/:orderId").get(orderCtrl.read);
 
