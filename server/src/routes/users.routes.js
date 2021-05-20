@@ -1,29 +1,20 @@
 const express = require("express");
-const userCtrl = require("../controllers/user.controller");
-const authCtrl = require("../util/auth");
+const { create, login, update, remove, list, userByID } = require("../controllers/user.controller");
+const { hasAuthorization } = require('../middleware/hasAuth')
 
 const router = express.Router();
 
 router
   .route("/")
-  .get(userCtrl.list)
+  .get(list)
 
-router.post('/signup', userCtrl.create);
-router.post('/signin', userCtrl.login);
-
-router
-  .route("/stripe_auth/:userId")
-  .put(
-    authCtrl.requireSignin,
-    authCtrl.hasAuthorization,
-    userCtrl.stripe_auth,
-    userCtrl.update
-  );
+router.post('/signup', create);
+router.post('/signin', login);
 
 router
-  .route("/:userId")
-  .get(userCtrl.userByID)
-  .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
-  .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove);
+  .route("/:id")
+  .get(userByID)
+  .put(hasAuthorization, update)
+  .delete(hasAuthorization, remove);
 
 module.exports = router;
