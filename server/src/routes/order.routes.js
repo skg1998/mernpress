@@ -11,7 +11,6 @@ router
   .route("/:userId")
   .post(
     authCtrl.requireSignin,
-    userCtrl.stripeCustomer,
     productCtrl.decreaseQuantity,
     orderCtrl.create
   );
@@ -39,7 +38,6 @@ router
   .put(
     authCtrl.requireSignin,
     shopCtrl.isOwner,
-    userCtrl.createCharge,
     orderCtrl.update
   );
 
