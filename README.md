@@ -1,3 +1,29 @@
+# MERNPRESS
+
+> Full stack application, which is a multi-vendor E-Commerce site using mongodb, express, reactjs, nodejs
+
+## Usage
+
+Clone app in your local
+
+## Install Dependencies
+
+```
+# project_folder/server
+npm install
+
+# project_folder/client
+npm i
+```
+
+## Run App
+
+```
+# Run server
+npm run dev
+
+# Run Frontend
+npm start
 ```
 
 ## Access
