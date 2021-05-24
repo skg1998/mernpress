@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.send({ status: 'ok' });
-});
+router.get('/', (req, res, next) => {
+    res.status(201).json({ success: true, message: "welocome to MernPress" })
+})
 
 module.exports = router;
