@@ -1,39 +1,22 @@
 const Mongoose = require('mongoose');
-const debug = require('debug')('myapp:db');
-const config = require('./config');
-
-// Use native ES6 promises
-Mongoose.Promise = global.Promise;
-
-// Exit application on error
-Mongoose.connection.on('error', () => {
-  debug(`MongoDB connection error ${config.mongoUri} \nPlease make sure MongoDB is running.`);
-  process.exit();
-});
-
-Mongoose.connection.once('open', () => {
-  debug('MongoDB connection with database succeeded.');
-});
-
-process.on('SIGINT', () => {
-  db.close(() => {
-    debug('MongoDB connection disconnected through app termination.');
-    process.exit();
-  });
-});
 
 /**
- * Connect to mongo db
+ * @desc Connect to mongo db
  * @returns {object} Mongoose connection
  * @public
  */
-const connectDB = () => {
-  Mongoose.connect(process.env.MONGO_URI_LOCAL, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true
-  })
-    .then(() => console.log('mongoDB connected...'));
-  return Mongoose.connection;
+const connectDB = async () => {
+  try {
+    const conn = await Mongoose.connect(process.env.MONGO_URI_LOCAL, {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true
+    })
+    console.log(`MongoDB Connected: ${conn.connection.host}`)
+  } catch (err) {
+    console.log(`Error occure in database connection: ${err}`)
+  }
 }
+
 module.exports = connectDB;

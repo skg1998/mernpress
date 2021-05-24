@@ -1,6 +1,6 @@
 {
   "name": "mernpress",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./src/bin/www",
@@ -10,11 +10,8 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
-    "debug": "^4.1.1",
     "dotenv": "^8.2.0",
-    "email-templates": "^8.0.3",
     "express": "~4.17.1",
-    "express-jwt": "^5.3.1",
     "express-validator": "^6.9.2",
     "formidable": "^1.2.1",
     "helmet": "^3.21.2",

@@ -1,8 +1,6 @@
 const express = require("express");
 const { hasAuthorization } = require('../middleware/hasAuth')
 const productCtrl = require("../controllers/product.controller");
-const reviewCtrl = require("../controllers/reviews.controllers");
-
 const router = express.Router();
 
 router.route("/").get(productCtrl.list);
@@ -18,12 +16,6 @@ router.route("/recent-selling-product-list").get(productCtrl.recentSellingProduc
 router.route("/today-deals").get(productCtrl.todayDeals);
 router.route("/viewLog-list").get(productCtrl.viewLogList);
 router.route("/photo/:productId").get(productCtrl.photo);
-
-//Reviews
-router.route("/:productId/reviews").get(reviewCtrl.getAllReviews);
-router.route("/:productId/review").post(hasAuthorization, reviewCtrl.addReviews);
-router.route("/:productId/review").put(hasAuthorization, reviewCtrl.updateReviews);
-router.route("/:productId/review").delete(hasAuthorization, reviewCtrl.deleteReviews);
 
 router
   .route("/:shopId/:productId")

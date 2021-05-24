@@ -12,7 +12,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
 
 // Routes File
-const indexRouter = require("./routes/index.routes");
+const IndexRoutes = require('./routes/index.routes')
 const usersRouter = require("./routes/users.routes");
 const AdminRouter = require('./routes/admin.routes');
 const shopRouter = require("./routes/shop.routes");
@@ -37,7 +37,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+app.use("/", IndexRoutes);
 app.use("/api/v1/admin", AdminRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/shops", shopRouter);
