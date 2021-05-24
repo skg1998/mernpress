@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
+const geocoder = require('../util/geoCoder');
 
+//Cart item
 const CartItemSchema = new mongoose.Schema({
   product: { type: mongoose.Schema.ObjectId, ref: "Product" },
   quantity: Number,
@@ -11,6 +13,32 @@ const CartItemSchema = new mongoose.Schema({
 });
 
 const CartItem = mongoose.model("CartItem", CartItemSchema);
+
+// user_payment
+const UserPaymentSchema = new mongoose.Schema({
+  user_id: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User"
+  },
+  payment_type: {
+    type: String
+  },
+  provider: {
+    type: String
+  },
+  account_no: {
+    type: Number
+  },
+  updated_At: {
+    type: Date
+  },
+  created_At: {
+    type: Date,
+    default: Date.now
+  }
+})
+
+const UserPayment = mongoose.model("UserPayment", UserPaymentSchema);
 
 const OrderSchema = new mongoose.Schema({
   products: [CartItemSchema],
@@ -32,15 +60,15 @@ const OrderSchema = new mongoose.Schema({
     zipcode: { type: String, required: "Zip Code is required" },
     country: { type: String, required: "Country is required" }
   },
-  payment_id: {},
+  user: { type: mongoose.Schema.ObjectId, ref: "User" },
+  payment: { type: mongoose.Schema.ObjectId, ref: "UserPayment" },
   updated: Date,
   created: {
     type: Date,
     default: Date.now
-  },
-  user: { type: mongoose.Schema.ObjectId, ref: "User" }
+  }
 });
 
 const Order = mongoose.model("Order", OrderSchema);
 
-module.exports = { Order, CartItem };
+module.exports = { Order, CartItem, UserPayment };
