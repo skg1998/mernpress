@@ -16,7 +16,6 @@ exports.hasAuthorization = async (req, res, next) => {
     try {
         //verify token
         const decode = jwt.verify(token, process.env.JWT_SECRET);
-        console.log(decode)
         req.user = await User.find(decode.id)
     } catch (err) {
         return next(new ErrorResponse('Not Authorized to access this route', 401))
