@@ -4,16 +4,11 @@ import PagesIcon from '@material-ui/icons/Pages';
 import DashboardPage from "../containers/Dashboard/Dashboard.js";
 import UserProfile from "../containers/UserProfile/UserProfile.js";
 import UserList from "../containers/TableList/TableList.js";
-import AddBanner from "./components/AddBanner";
 import AddCategory from "./components/AddCategory";
 import AddProduct from "./components/AddProduct";
-import AddTitle from "./components/AddProjectTitle"
 import AddShop from "./components/AddShop";
-import AddSlidder from "./components/AddSliderImage"
-import AddBasicDesign from "./components/AddBasicDesign"
 import AddPaymentMethod from "./components/AddPaymentMethod"
-import AddFooter from "./components/AddFooter";
-import AddHeader from "./components/AddHeader";
+import BasicDesign from './components/BasicDesign'
 
 const dashboardRoutes = [
   {
@@ -21,7 +16,7 @@ const dashboardRoutes = [
     name: "Dashboard",
     icon: Dashboard,
     component: DashboardPage,
-    subItem:[],
+    subItem: [],
     layout: "/admin",
   },
   {
@@ -29,52 +24,22 @@ const dashboardRoutes = [
     name: "Admin Profile",
     icon: Person,
     component: UserProfile,
-    subItem:[],
+    subItem: [],
     layout: "/admin",
   },
   {
-    path: "/design",
-    name: "Design",
+    path: "/Design",
+    name: "Basic Design",
     icon: PagesIcon,
-    subItem :[
-      {
-        path: "/addbasicdesign",
-        name: "Basic Design",
-        component: AddBasicDesign,
-      },
-      {
-        path: "/addTitle",
-        name: "Title",
-        component: AddTitle,
-      },
-      {
-        path: "/addbanner", 
-        name: "Banner",
-        component: AddBanner,
-      },
-      {
-        path: "/addslidder",
-        name: "Slidder",
-        component: AddSlidder,
-      },
-      {
-        path: "/addFooter",
-        name: "Footer",
-        component: AddFooter,
-      },
-      {
-        path: "/addHeader",
-        name: "Header",
-        component: AddHeader,
-      }
-    ],
+    component: BasicDesign,
+    subItem: [],
     layout: "/admin",
   },
   {
     path: "/page",
     name: "Page",
     icon: PagesIcon,
-    subItem :[
+    subItem: [
       {
         path: "/addcategory",
         name: "Add Category",
@@ -104,7 +69,7 @@ const dashboardRoutes = [
     icon: "content_paste",
     component: UserList,
     layout: "/admin",
-    subItem:[]
+    subItem: []
   }
 ];
 
