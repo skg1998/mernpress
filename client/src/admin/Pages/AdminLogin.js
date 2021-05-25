@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
 import { adminActions } from '../../store/actions';
 import { Button, TextField, Card, Grid, makeStyles, Typography } from '@material-ui/core';
@@ -49,6 +49,7 @@ const Login = (props) => {
     const dispatch = useDispatch();
     const location = useLocation();
     const classes = useStyles();
+    const history = useHistory();
 
     // reset login status
     useEffect(() => {
@@ -60,7 +61,7 @@ const Login = (props) => {
         if (email === '' || password === '') {
             setError("Feilds are Required");
         }
-        props.dispatch(adminActions.login(email, password));
+        props.dispatch(adminActions.login(email, password))
     }
 
     return (

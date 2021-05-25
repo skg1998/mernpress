@@ -1,35 +1,35 @@
 import axios from 'axios';
 import qs from 'query-string';
 
-const BASE_URL = '/api/v1/';
+const BASE_URL = 'http://localhost:5000/api/v1/';
 
 let config = {
     headers: {
         Accept: "application/json",
     },
-  }
+}
 
 // -----------------------ADMIN API ---------------------
 
 export const AdminSignin = (data) => {
     var submitData = qs.stringify({
         'email': data.email,
-        'password':data.password,
+        'password': data.password,
     });
 
     const configs = {
         method: 'post',
         url: BASE_URL + "admin/login",
-        headers: { 
-          'Content-Type': 'application/x-www-form-urlencoded'
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
-        data : submitData
-      };
+        data: submitData
+    };
 
     return new Promise((resolve, reject) => {
         axios(configs).then(({ status, data }) => {
-                resolve(status == 200 && data ? data : null)
-            })
+            resolve(status == 200 && data ? data : null)
+        })
             .catch(reject)
     })
 }
@@ -39,22 +39,22 @@ export const Adminsignup = (data) => {
     var submitData = qs.stringify({
         'name': data.name,
         'email': data.email,
-        'password':data.password,
+        'password': data.password,
     });
 
     const configs = {
         method: 'post',
         url: BASE_URL + "admin/signup",
-        headers: { 
-          'Content-Type': 'application/x-www-form-urlencoded'
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
-        data : submitData
-      };
+        data: submitData
+    };
 
     return new Promise((resolve, reject) => {
         axios(configs).then(({ status, data }) => {
-                resolve(status == 200 && data ? data : null)
-            })
+            resolve(status == 200 && data ? data : null)
+        })
             .catch(reject)
     })
 }
@@ -62,15 +62,15 @@ export const Adminsignup = (data) => {
 // -----------------------------BANNER API -------------------------
 
 export const AddBanner = (data) => {
-    console.log("data",data)
+    console.log("data", data)
     const configs = {
         method: 'post',
         url: BASE_URL + "banner/",
-        headers: { 
+        headers: {
             Accept: "application/json",
         },
-        data : data
-      };
+        data: data
+    };
 
     return new Promise((resolve, reject) => {
         axios(configs)
@@ -84,7 +84,7 @@ export const AddBanner = (data) => {
 //------------------------------PROJECT TITLE API ------------------------------
 export const AddProjectTitle = () => {
     return new Promise((resolve, reject) => {
-        axios.post(BASE_URL + "admin/" , config)
+        axios.post(BASE_URL + "admin/", config)
             .then(({ status, data }) => {
                 resolve(status == 200 && data ? data : null)
             })
@@ -97,7 +97,7 @@ export const AddProjectTitle = () => {
 
 export const AddShop = () => {
     return new Promise((resolve, reject) => {
-        axios.post(BASE_URL + "admin/" , config)
+        axios.post(BASE_URL + "admin/", config)
             .then(({ status, data }) => {
                 resolve(status == 200 && data ? data : null)
             })
@@ -108,15 +108,15 @@ export const AddShop = () => {
 //-------------------------------------------SLIDDER API ---------------------------
 
 export const AddSlider = (data) => {
-    console.log("data",data)
+    console.log("data", data)
     const configs = {
         method: 'post',
         url: BASE_URL + "slidder/",
-        headers: { 
+        headers: {
             Accept: "application/json",
         },
-        data : data
-      };
+        data: data
+    };
 
     return new Promise((resolve, reject) => {
         axios(configs)
@@ -130,15 +130,15 @@ export const AddSlider = (data) => {
 //------------------------------PROJECT TITLE API ------------------------------
 
 export const AddTitle = (data) => {
-    
+
     const configs = {
         method: 'post',
         url: BASE_URL + "title/",
-        headers: { 
+        headers: {
             Accept: "application/json",
         },
-        data : data
-      };
+        data: data
+    };
 
     return new Promise((resolve, reject) => {
         axios(configs)
@@ -152,15 +152,15 @@ export const AddTitle = (data) => {
 //-----------------------Category Api------------------
 
 export const AddCategory = (data) => {
-    console.log("data",data)
+    console.log("data", data)
     const configs = {
         method: 'post',
         url: BASE_URL + "category/",
-        headers: { 
+        headers: {
             Accept: "application/json",
         },
-        data : data
-      };
+        data: data
+    };
 
     return new Promise((resolve, reject) => {
         axios(configs)
@@ -173,7 +173,7 @@ export const AddCategory = (data) => {
 
 export const Category = () => {
     return new Promise((resolve, reject) => {
-        axios.get(BASE_URL + "category/" , config)
+        axios.get(BASE_URL + "category/", config)
             .then(({ status, data }) => {
                 resolve(status == 200 && data ? data : null)
             })
@@ -182,15 +182,15 @@ export const Category = () => {
 }
 
 export const DeleteCategoryBy = (id) => {
-    console.log("id",id)
+    console.log("id", id)
     const configs = {
         method: 'delete',
         url: BASE_URL + "category/",
-        headers: { 
+        headers: {
             Accept: "application/json",
         },
-        data : id
-      };
+        data: id
+    };
     return new Promise((resolve, reject) => {
         axios(configs)
             .then(({ status, data }) => {
@@ -205,7 +205,7 @@ export const DeleteCategoryBy = (id) => {
 
 export const AddProduct = () => {
     return new Promise((resolve, reject) => {
-        axios.post(BASE_URL + "admin/" , config)
+        axios.post(BASE_URL + "admin/", config)
             .then(({ status, data }) => {
                 resolve(status == 200 && data ? data : null)
             })
