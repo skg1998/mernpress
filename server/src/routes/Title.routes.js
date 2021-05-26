@@ -1,6 +1,6 @@
 const express = require("express");
 const addTitleCtrl = require("../controllers/Title.controller");
-const Upload = require('../util/uploadFile');
+const Upload = require('../middleware/uploadFile');
 
 const router = express.Router();
 
