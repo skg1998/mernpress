@@ -1,69 +1,50 @@
 const mongoose = require('mongoose')
-const slugify = require('slugify')
+const slugify = require('slugify');
+
+let Sizes = new mongoose.Schema({
+  size: { type: String, required: true },
+  available: { type: Number, required: true, min: 0, max: 1000 },
+  sku: { type: String, required: true },
+  price: { type: Number, required: true, min: 0 }
+});
+
+let Images = new mongoose.Schema({
+  kind: {
+    type: String,
+    enum: ['thumbnail', 'catalog', 'detail', 'zoom'],
+    required: true
+  },
+  url: { type: String, required: true }
+});
+
+let Variants = new mongoose.Schema({
+  color: String,
+  images: [Images],
+  sizes: [Sizes]
+});
+
+let Catalogs = new mongoose.Schema({
+  name: String
+});
 
 const ProductSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    trim: true,
-    required: 'Product Name is required'
-  },
-  image: {
-    data: Buffer,
-    contentType: String
-  },
-  description: {
-    type: String,
-    trim: true
-  },
-  sku: {
-    type: String
-  },
-  metaTagTitle: {
-    type: String
-  },
-  modal: {
-    type: String
-  },
-  quantity: {
-    type: Number,
-    required: "Quantity is required"
-  },
-  price: {
-    type: Number,
-    required: "Price is required"
-  },
-  outOfStockStatus: {
-    type: Boolean
-  },
-  requiredShipping: {
-    type: Boolean
-  },
-  dateAvailable: {
-    type: String
-  },
-  condition: [{
-    type: String
-  }],
-  status: {
-    type: Number
-  },
-  sortOrder: {
-    type: Number
-  },
-  slug: String,
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  images: [Images],
+  variants: [Variants],
+  brand: { type: String },
+  catalogs: [Catalogs],
   category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
-  review: { type: mongoose.Schema.ObjectId, ref: 'Review' },
   discount: { type: mongoose.Schema.ObjectId, ref: 'Discount' },
-  shop: { type: mongoose.Schema.ObjectId, ref: 'Shop' },
-  updated_at: Date,
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  deleted_at: Date
+  shop: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  review: { type: mongoose.Schema.ObjectId, ref: 'Review' },
+  averageRating: String,
+  totalUserRating: Number,
+  slug: String,
+  modified: { type: Date, default: Date.now },
+  created: { type: Date, default: Date.now }
 })
 
-//slug genrate
 ProductSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true })
   next();
