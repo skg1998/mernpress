@@ -7,19 +7,25 @@ const CategorySchema = new mongoose.Schema({
     trim: true,
     required: [true, 'Name is required']
   },
-  slug: String,
+  slug: { type: String, index: true },
   image: {
     data: Buffer,
     contentType: String
   },
-  child_Category: {
-    type: [String],
-    default: undefined
+  parent: {
+    type: mongoose.Schema.Types.ObjectId,
+    default: null,
+    ref: 'Category'
   },
-  parent_Category: {
-    type: [String],
-    default: undefined
-  },
+  ancestors: [{
+    _id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      index: true
+    },
+    name: String,
+    slug: String
+  }],
   modified_at: Date,
   created_at: {
     type: Date,
@@ -27,6 +33,7 @@ const CategorySchema = new mongoose.Schema({
   }
 })
 
+//Creating a slug from name
 CategorySchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true })
   next();
