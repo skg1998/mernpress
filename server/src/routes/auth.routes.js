@@ -10,7 +10,7 @@ const {
     logout,
     forgotPassword,
     resetPassword
-} = require("../controllers/user.controller");
+} = require("../controllers/auth.controller");
 
 const { hasAuthorization } = require('../middleware/hasAuth')
 

@@ -13,9 +13,7 @@ const swaggerDocument = require("../swagger.json");
 
 // Routes File
 const IndexRoutes = require('./routes/index.routes')
-const usersRouter = require("./routes/users.routes");
-const AdminRouter = require('./routes/admin.routes');
-const shopRouter = require("./routes/shop.routes");
+const authRouter = require("./routes/auth.routes");
 const productRoutes = require("./routes/product.routes");
 const orderRoutes = require("./routes/order.routes");
 const slidderRoutes = require("./routes/Slidder.routes");
@@ -38,9 +36,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", IndexRoutes);
-app.use("/api/v1/admin", AdminRouter);
-app.use("/api/v1/users", usersRouter);
-app.use("/api/v1/shops", shopRouter);
+app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/products", productRoutes);
 app.use('/api/v1/orders', orderRoutes);
 app.use("/api/v1/slidder", slidderRoutes);
