@@ -8,7 +8,7 @@ const ErrorResponse = require('../util/errorResponse');
  */
 exports.addCategory = async (req, res, next) => {
   let parent = req.body.parent ? req.body.parent : null;
-  const category = new Category({ name: req.body.name, parent })
+  const category = new Category({ name: req.body.name, image: req.file.path, parent })
   try {
     let newCategory = await category.save();
     buildAncestors(newCategory._id, parent)

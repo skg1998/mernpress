@@ -1,6 +1,7 @@
 const express = require("express");
+const uploadfile = require('../middleware/uploadFile');
 const { hasAuthorization } = require('../middleware/hasAuth')
-const { list, read, productDetail, RelatedProduct, listBrand, listByShop, listCategories, listLatest, addProduct, updateProduct, deleteProduct, todayDeals, topSellingProductList, viewLogList, photo, recentSellingProductList } = require("../controllers/product.controller");
+const { list, read, productDetail, RelatedProduct, listBrand, listCategories, listLatest, addProduct, updateProduct, deleteProduct, todayDeals, topSellingProductList, viewLogList, photo, recentSellingProductList } = require("../controllers/product.controller");
 const router = express.Router();
 
 router.route("/").get(list);
@@ -27,7 +28,7 @@ router
 
 router
   .route("/shop/:shopId")
-  .post(hasAuthorization, addProduct);
+  .post(hasAuthorization, uploadfile.array("images", { maxCount: 4 }), addProduct);
 
 module.exports = router;
 
