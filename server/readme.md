@@ -129,7 +129,7 @@ Create the backend for a e-commerce website. All of the functionality below need
 - Use Swagger to create documentation
 - for swagger /api-docs for the api
 
-## Deployment (Digital Ocean)
+## Deployment (Digital Ocean) [Click here for complete deployment](https://gist.github.com/skg1998/9dff22f9fe8746f20c94371aededb2a9)
 
 - Push to Github
 - Create a droplet
