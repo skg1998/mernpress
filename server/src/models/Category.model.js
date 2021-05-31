@@ -9,8 +9,8 @@ const CategorySchema = new mongoose.Schema({
   },
   slug: { type: String, index: true },
   image: {
-    data: Buffer,
-    contentType: String
+    data: String,
+    cloudnaryId: String
   },
   parent: {
     type: mongoose.Schema.Types.ObjectId,
