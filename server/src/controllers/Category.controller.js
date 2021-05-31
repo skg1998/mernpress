@@ -1,5 +1,6 @@
 const Category = require('../models/Category.model');
 const ErrorResponse = require('../util/errorResponse');
+const Cloudnary = require('../util/cloudnary');
 
 /**
  * @desc Create new category
@@ -7,11 +8,25 @@ const ErrorResponse = require('../util/errorResponse');
  * @access Private
  */
 exports.addCategory = async (req, res, next) => {
-  let parent = req.body.parent ? req.body.parent : null;
-  const category = new Category({ name: req.body.name, image: req.file.path, parent })
   try {
+    console.log(req.body, req.file)
+    if (!req.file) {
+      return next(new ErrorResponse('Please upload image', 400))
+    }
+
+    const fileUrl = await Cloudnary.uploader.upload(req.file.path);
+
+    let parent = req.body.parent ? req.body.parent : null;
+    const category = new Category({
+      name: req.body.name,
+      image: { data: fileUrl.secure_url, cloudnaryId: fileUrl.public_id },
+      parent
+    })
+
     let newCategory = await category.save();
+
     buildAncestors(newCategory._id, parent)
+
     res.status(200).json({
       success: true,
       data: newCategory,
@@ -93,18 +108,30 @@ exports.descendants = async (req, res, next) => {
  */
 exports.updateCategories = async (req, res, next) => {
   try {
-    const category = await Category.findByIdAndRemove(req.params.id, req.body, {
+    let category = await Category.findById(req.params.id)
+    if (category) {
+      return next(new ErrorResponse('Given category id not found', 400))
+    }
+    await Cloudnary.uploader.destroy(category.image.cloudnaryId);
+
+    const result = await Cloudnary.uploader.upload(req.file.path);
+
+    const data = {
+      name: req.body.name || category.name,
+      image: {
+        data: result.secure_url || category.image.data,
+        cloudnaryId: result.public_id || category.image.cloudnaryId
+      },
+    }
+
+    category = await Category.findByIdAndRemove(req.params.id, data, {
       new: true,
       runValidators: true
     });
 
-    if (category) {
-      return next(new ErrorResponse('Given category id not found', 400))
-    }
-
     res.status(200).json({
       success: true,
-      data: result,
+      data: category,
       message: 'Get all categories Successfully !'
     })
   } catch (err) {
@@ -119,11 +146,15 @@ exports.updateCategories = async (req, res, next) => {
  */
 exports.deleteCategories = async (req, res, next) => {
   try {
-    const err = await Category.findByIdAndRemove(category_id);
-    if (err) {
+    let category = await Category.findById(req.params.id);
+
+    if (category) {
       return next(new ErrorResponse('Given category id not found', 400))
     }
-    const result = await Category.deleteMany({ "ancestors._id": category_id });
+    await cloudinary.uploader.destroy(category.image.cloudnaryId);
+    await Category.findByIdAndRemove(req.params.id);
+
+    const result = await Category.deleteMany({ "ancestors._id": req.params.id });
 
     res.status(200).json({
       success: true,

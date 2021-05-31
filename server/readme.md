@@ -151,3 +151,4 @@ Create the backend for a e-commerce website. All of the functionality below need
 - Use async/await
 - Create a database seeder to import and destroy data
 - Payment Gateway Integration
+- multer cloudnary for fileupload
