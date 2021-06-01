@@ -48,3 +48,4 @@ Thumbs.db
 
 # env
 server/.env
+server/public
