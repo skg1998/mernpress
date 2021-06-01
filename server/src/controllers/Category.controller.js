@@ -76,6 +76,27 @@ exports.getCategories = async (req, res, next) => {
 }
 
 /**
+ * @desc Get category by id
+ * @route GET api/v1/category/:id
+ * @access Public
+ */
+exports.getCategory = async (req, res, next) => {
+  try {
+    const result = await Category.findById(req.params.id)
+    if (!result) {
+      return next(new ErrorResponse('Given category id not found', 400))
+    }
+    res.status(200).json({
+      success: true,
+      data: result,
+      message: 'Get all categories Successfully !'
+    })
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
  * @desc Get All category
  * @route GET api/v1/category/
  * @access Public
@@ -109,7 +130,7 @@ exports.descendants = async (req, res, next) => {
 exports.updateCategories = async (req, res, next) => {
   try {
     let category = await Category.findById(req.params.id)
-    if (category) {
+    if (!category) {
       return next(new ErrorResponse('Given category id not found', 400))
     }
     await Cloudnary.uploader.destroy(category.image.cloudnaryId);
@@ -148,10 +169,10 @@ exports.deleteCategories = async (req, res, next) => {
   try {
     let category = await Category.findById(req.params.id);
 
-    if (category) {
+    if (!category) {
       return next(new ErrorResponse('Given category id not found', 400))
     }
-    await cloudinary.uploader.destroy(category.image.cloudnaryId);
+    await Cloudnary.uploader.destroy(category.image.cloudnaryId);
     await Category.findByIdAndRemove(req.params.id);
 
     const result = await Category.deleteMany({ "ancestors._id": req.params.id });
@@ -159,7 +180,7 @@ exports.deleteCategories = async (req, res, next) => {
     res.status(200).json({
       success: true,
       data: result,
-      message: 'Get all categories Successfully !'
+      message: 'Delete category Successfully !'
     })
   } catch (err) {
     next(err);
