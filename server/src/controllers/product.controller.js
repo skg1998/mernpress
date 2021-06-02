@@ -1,5 +1,6 @@
 const Product = require('../models/product.model')
 const ErrorResponse = require('../util/errorResponse');
+const Cloudnary = require('../util/cloudnary');
 
 /**
  * 
@@ -9,7 +10,31 @@ const ErrorResponse = require('../util/errorResponse');
  */
 exports.addProduct = async (req, res, next) => {
   try {
-    const product = await Product.create(req.body);
+    let files = req.files;
+    if (files.length <= 0) {
+      return next(new ErrorResponse('Please upload images', 400))
+    }
+
+    const images = []
+    file.map(async file => {
+      const fileUrl = await Cloudnary.uploader.upload(file.path);
+      images.push(fileUrl);
+    })
+
+    const product = new Product({
+      title: req.body.title,
+      description: req.body.description,
+      images: images,
+      variants: variants,
+      brand: req.body.brand,
+      catalogs: catalogs,
+      category: req.body.category,
+      discount: req.body.discount,
+      shop: req.body.shop
+    })
+
+    await product.save();
+
     res.status(200).json({
       success: true,
       data: product,
@@ -20,56 +45,101 @@ exports.addProduct = async (req, res, next) => {
   }
 }
 
-exports.productByID = (req, res, next, id) => {
-  Product.findById(id).populate('shop', '_id name').exec((err, product) => {
-    if (err || !product)
-      return res.status('400').json({
-        error: "Product not found"
-      })
-    req.product = product
-    next()
-  })
+/**
+ * 
+ * @desc      Get list of Product
+ * @route     GET /api/v1/products/?query
+ * @access    Public
+ */
+exports.list = async (req, res, next) => {
+  try {
+    const query = {}
+    if (req.query.search)
+      query.name = { '$regex': req.query.search, '$options': "i" }
+    if (req.query.category && req.query.category != 'All')
+      query.category = req.query.category
+
+    const product = await Product.find(query).populate('category').populate('discount').populate('review');
+
+    res.status(200).json({
+      success: true,
+      count: product.length,
+      data: product,
+      message: 'All data fetch successfully !'
+    })
+  } catch (err) {
+    next(err);
+  }
 }
 
-exports.productDetail = (req, res, next) => {
-  Product.find({ _id: req.param.id }, (err, product) => {
-    if (err) {
-      return res.status('400').json({
-        error: "Product not found"
-      })
-    } else {
-      const productdata = {
-        status: 1,
-        message: 'Successfully get Product Detail',
-        data: product,
-      }
-      res.status(200).send(productdata);
+/**
+ * 
+ * @desc      Get Product by id
+ * @route     GET /api/v1/products/:id
+ * @access    Public
+ */
+exports.productDetail = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id).populate('category').populate('discount').populate('review');
+
+    if (!product) {
+      return next(new ErrorResponse(`product detail of given id not found`, 400));
     }
-  })
+
+    res.status(200).json({
+      success: true,
+      data: product,
+      message: `Product detail of given id: ${req.params.id} found succesfully !`
+    })
+  } catch (err) {
+    next(err);
+  }
 }
 
-exports.updateProduct = (req, res, next) => {
-
-}
-
-exports.deleteProduct = (req, res, next) => {
-
-}
-
-exports.list = (req, res) => {
-  const query = {}
-  if (req.query.search)
-    query.name = { '$regex': req.query.search, '$options': "i" }
-  if (req.query.category && req.query.category != 'All')
-    query.category = req.query.category
-  Product.find(query, (err, products) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
+/**
+ * 
+ * @desc      Update Product
+ * @route     PUT /api/v1/products/:id
+ * @access    Private
+ */
+exports.updateProduct = async (req, res, next) => {
+  try {
+    let product = await Product.findById(req.params.id);
+    if (!product) {
+      return next(new ErrorResponse(`Product of given id: ${req.params.id} not found`, 400))
     }
-    res.json(products)
-  }).populate('shop', '_id name').select('-image')
+
+    await Product.findByIdAndupdate(req.params.id, data, { new: true, runValidators: true });
+    res.status(200).json({
+      success: true,
+      message: `delete product by id: ${req.params.id} successfully !`
+    })
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ * 
+ * @desc      Delete Product
+ * @route     DELETE /api/v1/products/
+ * @access    Private
+ */
+exports.deleteProduct = async (req, res, next) => {
+  try {
+    let product = await Product.findById(req.params.id);
+    if (!product) {
+      return next(new ErrorResponse(`Product of given id: ${req.params.id} not found`, 400))
+    }
+
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      success: true,
+      message: `delete product by id: ${req.params.id} successfully !`
+    })
+  } catch (err) {
+    next(err);
+  }
 }
 
 
@@ -147,24 +217,6 @@ exports.customerProductViewList = () => {
 exports.productExcelDocument = () => {
 
 }
-
-exports.photo = (req, res, next) => {
-  if (req.product.image.data) {
-    res.set("Content-Type", req.product.image.contentType)
-    return res.send(req.product.image.data)
-  }
-  next()
-}
-
-exports.defaultPhoto = (req, res) => {
-  return res.sendFile(process.cwd())
-}
-
-exports.read = (req, res) => {
-  req.product.image = undefined
-  return res.json(req.product)
-}
-
 
 exports.decreaseQuantity = (req, res, next) => {
   let bulkOps = req.body.order.products.map((item) => {

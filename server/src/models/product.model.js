@@ -36,7 +36,7 @@ const ProductSchema = new mongoose.Schema({
   catalogs: [Catalogs],
   category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
   discount: { type: mongoose.Schema.ObjectId, ref: 'Discount' },
-  shop: { type: mongoose.Schema.ObjectId, ref: 'Admin' },
+  shop: { type: mongoose.Schema.ObjectId, ref: 'Shop' },
   review: { type: mongoose.Schema.ObjectId, ref: 'Review' },
   averageRating: String,
   totalUserRating: Number,

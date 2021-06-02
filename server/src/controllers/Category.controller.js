@@ -9,7 +9,6 @@ const Cloudnary = require('../util/cloudnary');
  */
 exports.addCategory = async (req, res, next) => {
   try {
-    console.log(req.body, req.file)
     if (!req.file) {
       return next(new ErrorResponse('Please upload image', 400))
     }
@@ -145,7 +144,7 @@ exports.updateCategories = async (req, res, next) => {
       },
     }
 
-    category = await Category.findByIdAndRemove(req.params.id, data, {
+    category = await Category.findByIdAndUpdate(req.params.id, data, {
       new: true,
       runValidators: true
     });
