@@ -22,3 +22,13 @@ exports.hasAuthorization = async (req, res, next) => {
     }
 }
 
+//Grant access to role
+exports.authorize = (...roles) => {
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            return next(new ErrorResponse(`User role ${req.user.role} is Not Authorized to access this route`, 403))
+        }
+        next();
+    }
+}
+
