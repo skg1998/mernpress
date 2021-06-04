@@ -87,7 +87,7 @@ const sidebarStyle = theme => ({
     textDecoration: "none",
     backgroundColor: "transparent",
     "&,&:hover": {
-      color: whiteColor
+      color: blackColor
     }
   },
   logoLinkRTL: {
@@ -142,12 +142,12 @@ const sidebarStyle = theme => ({
     display: "block",
     textDecoration: "none",
     "&:hover,&:focus,&:visited,&": {
-      color: whiteColor
+      color: blackColor
     }
   },
   itemLink: {
     transition: "all 300ms linear",
-    margin: "10px 15px 0",
+    marginBottom: "10px",
     borderRadius: "3px",
     position: "relative",
     display: "block",
@@ -295,20 +295,20 @@ const sidebarStyle = theme => ({
       bottom: "13px"
     }
   },
-  accordion:{
+  accordion: {
     padding: "0px",
-    background:"transparent"
+    background: "transparent"
   },
-  expandIcon:{
-    color:"white"
+  expandIcon: {
+    color: "white"
   },
-  accordionSummary:{
+  accordionSummary: {
     padding: "0px",
     margin: "0px",
   },
-  accordionDetail:{
-    margin:"0px",
-    display:"block" 
+  accordionDetail: {
+    margin: "0px",
+    display: "block"
   }
 
 });

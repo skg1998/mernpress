@@ -3,7 +3,6 @@ import Person from "@material-ui/icons/Person";
 import PagesIcon from '@material-ui/icons/Pages';
 import DashboardPage from "../containers/Dashboard/Dashboard.js";
 import UserProfile from "../containers/UserProfile/UserProfile.js";
-import UserList from "../containers/TableList/TableList.js";
 import AddCategory from "./components/AddCategory";
 import AddProduct from "./components/AddProduct";
 import AddShop from "./components/AddShop";
@@ -63,14 +62,14 @@ const dashboardRoutes = [
     ],
     layout: "/admin",
   },
-  {
-    path: "/user",
-    name: "User List",
-    icon: "content_paste",
-    component: UserList,
-    layout: "/admin",
-    subItem: []
-  }
+  // {
+  //   path: "/user",
+  //   name: "User List",
+  //   icon: "content_paste",
+  //   component: UserList,
+  //   layout: "/admin",
+  //   subItem: []
+  // }
 ];
 
 export default dashboardRoutes;
