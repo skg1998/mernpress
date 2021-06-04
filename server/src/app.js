@@ -20,7 +20,8 @@ const slidderRoutes = require("./routes/Slidder.routes");
 const TitleRoutes = require("./routes/Title.routes");
 const CategoryRoutes = require("./routes/Category.routes");
 const BannerRoutes = require("./routes/Banner.routes");
-const HeaderRoutes = require("./routes/Header.routes")
+const HeaderRoutes = require("./routes/Header.routes");
+const ShopRoutes = require('./routes/shop.routes')
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", IndexRoutes);
 app.use("/api/v1/auth", authRouter);
+app.use('/api/v1/shop', ShopRoutes)
 app.use("/api/v1/products", productRoutes);
 app.use('/api/v1/orders', orderRoutes);
 app.use("/api/v1/slidder", slidderRoutes);
