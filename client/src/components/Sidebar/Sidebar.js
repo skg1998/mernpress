@@ -9,7 +9,6 @@ import Hidden from "@material-ui/core/Hidden";
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -19,135 +18,108 @@ import styles from "../../assets/jss/mernpress/components/sidebarStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function Sidebar(props) {
+const Sidebar = (props) => {
+  const { color, logo, routes } = props;
   const classes = useStyles();
+
   function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   }
-  const { color, logo, image, logoText, routes } = props;
-  
+
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
-        var activePro = " ";
         var listItemClasses;
         if (prop.path === "/upgrade-to-pro") {
-          activePro = classes.activePro + " ";
-          listItemClasses = classNames({
-            [" " + classes[color]]: true
-          });
+
         } else {
           listItemClasses = classNames({
             [" " + classes[color]]: activeRoute(prop.layout + prop.path)
           });
         }
 
-        const whiteFontClasses = classNames({
-          [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path)
-        });
-
-        if(prop.subItem.length == 0){
+        if (prop.subItem.length == 0) {
           return (
             <NavLink
               to={prop.layout + prop.path}
-              className={activePro + classes.item}
+              className={classes.item}
               activeClassName="active"
               key={key}
             >
               <ListItem button className={classes.itemLink + listItemClasses}>
                 {typeof prop.icon === "string" ? (
                   <Icon
-                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                      [classes.itemIconRTL] : props.rtlActive
-                    })}
+                    className={classNames(classes.itemIcon)}
                   >
                     {prop.icon}
                   </Icon>
                 ) : (
                   <prop.icon
-                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                      [classes.itemIconRTL]: props.rtlActive
-                    })}
-                  />
+                    className={classNames(classes.itemIcon)} />
                 )}
                 <ListItemText
                   primary={prop.name}
-                  className={classNames(classes.itemText, whiteFontClasses, {
-                    [classes.itemTextRTL]: props.rtlActive
-                  })}
+                  className={classNames(classes.itemText)}
                   disableTypography={true}
                 />
               </ListItem>
             </NavLink>
           );
-        }else{
+        } else {
           return (
             <Accordion className={classes.accordion}>
-            <AccordionSummary
-              className= {classes.accordionSummary}
-              //expandIcon={<ExpandMoreIcon className={classes.expandIcon}/>}
-              aria-controls="panel1a-content"
-            >
-              <ListItem button className={classes.itemLink + listItemClasses}>
-                {typeof prop.icon === "string" ? (
-                  <Icon
-                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                      [classes.itemIconRTL] : props.rtlActive
-                    })}
-                  >
-                    {prop.icon}
-                  </Icon>
-                ) : (
-                  <prop.icon
-                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                      [classes.itemIconRTL]: props.rtlActive
-                    })}
+              <AccordionSummary
+                className={classes.accordionSummary}
+                aria-controls="panel1a-content"
+              >
+                <ListItem button className={classes.itemLink + listItemClasses}>
+                  {typeof prop.icon === "string" ? (
+                    <Icon
+                      className={classNames(classes.itemIcon)}
+
+                    >{prop.icon}</Icon>
+                  ) : (
+                    <prop.icon
+                    />
+                  )}
+                  <ListItemText
+                    primary={prop.name}
+                    className={classNames(classes.itemText)}
+                    disableTypography={true}
                   />
-                )}
-                <ListItemText
-                  primary={prop.name}
-                  className={classNames(classes.itemText, whiteFontClasses, {
-                    [classes.itemTextRTL]: props.rtlActive
-                  })}
-                  disableTypography={true}
-                />
-              </ListItem>
-            </AccordionSummary>
-            <AccordionDetails className ={classes.accordionDetail}>
+                </ListItem>
+              </AccordionSummary>
+              <AccordionDetails className={classes.accordionDetail}>
                 {prop.subItem.map(e => (
-                    <NavLink
+                  <NavLink
                     to={prop.layout + prop.path + e.path}
-                    className={activePro + classes.item}
+                    className={classes.item}
                     activeClassName="active"
-                    //key={key}
+                  //key={key}
                   >
                     <ListItem button className={classes.itemLink + listItemClasses}>
                       <ListItemText
                         primary={e.name}
-                        className={classNames(classes.itemText, whiteFontClasses, {
-                          [classes.itemTextRTL]: props.rtlActive
-                        })}
+                        className={classNames(classes.itemText)}
                         disableTypography={true}
                       />
                     </ListItem>
                   </NavLink>
                 ))}
-            </AccordionDetails>
-          </Accordion>
+              </AccordionDetails>
+            </Accordion>
           );
         }
       })}
     </List>
   );
- 
+
 
   var brand = (
     <div className={classes.logo}>
       <a
         href="#"
-        className={classNames(classes.logoLink, {
-          [classes.logoLinkRTL]: props.rtlActive
-        })}
+        className={classNames(classes.logoLink)}
         target="_blank"
       >
         <div className={classes.logoImage}>
@@ -173,7 +145,7 @@ export default function Sidebar(props) {
           }}
           onClose={props.handleDrawerToggle}
           ModalProps={{
-            keepMounted: true 
+            keepMounted: true
           }}
         >
           {brand}
@@ -181,12 +153,6 @@ export default function Sidebar(props) {
             <AdminNavbarLinks />
             {links}
           </div>
-          {image !== undefined ? (
-            <div
-              className={classes.background}
-              style={{ backgroundImage: "url(" + image + ")" }}
-            />
-          ) : null}
         </Drawer>
       </Hidden>
       <Hidden smDown implementation="css">
@@ -202,12 +168,6 @@ export default function Sidebar(props) {
         >
           {brand}
           <div className={classes.sidebarWrapper}>{links}</div>
-          {image !== undefined ? (
-            <div
-              className={classes.background}
-              style={{ backgroundImage: "url(" + image + ")" }}
-            />
-          ) : null}
         </Drawer>
       </Hidden>
     </div>
@@ -215,12 +175,13 @@ export default function Sidebar(props) {
 }
 
 Sidebar.propTypes = {
-  rtlActive: PropTypes.bool,
   handleDrawerToggle: PropTypes.func,
-  bgColor: PropTypes.oneOf(["purple", "blue", "green", "orange", "red"]),
   logo: PropTypes.string,
   image: PropTypes.string,
   logoText: PropTypes.string,
   routes: PropTypes.arrayOf(PropTypes.object),
   open: PropTypes.bool
 };
+
+
+export default Sidebar;
