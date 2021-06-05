@@ -13,15 +13,12 @@ const swaggerDocument = require("../swagger.json");
 
 // Routes File
 const IndexRoutes = require('./routes/index.routes')
-const authRouter = require("./routes/auth.routes");
+const authRoutes = require("./routes/auth.routes");
 const productRoutes = require("./routes/product.routes");
 const orderRoutes = require("./routes/order.routes");
-const slidderRoutes = require("./routes/Slidder.routes");
-const TitleRoutes = require("./routes/Title.routes");
 const CategoryRoutes = require("./routes/Category.routes");
-const BannerRoutes = require("./routes/Banner.routes");
-const HeaderRoutes = require("./routes/Header.routes");
-const ShopRoutes = require('./routes/shop.routes')
+const ShopRoutes = require('./routes/shop.routes');
+const BasicDesign = require('./routes/basicDesign.routes');
 
 var app = express();
 
@@ -37,15 +34,12 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", IndexRoutes);
-app.use("/api/v1/auth", authRouter);
-app.use('/api/v1/shop', ShopRoutes)
-app.use("/api/v1/products", productRoutes);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/shop', ShopRoutes);
+app.use('/api/v1/category', CategoryRoutes);
+app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/orders', orderRoutes);
-app.use("/api/v1/slidder", slidderRoutes);
-app.use("/api/v1/title", TitleRoutes);
-app.use("/api/v1/category", CategoryRoutes);
-app.use("/api/v1/banner", BannerRoutes);
-app.use("/api/v1/header", HeaderRoutes);
+app.use('/api/v1/basicdesign', BasicDesign);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(errorHandler);
