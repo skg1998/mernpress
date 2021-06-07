@@ -1,14 +1,23 @@
 const mongoose = require('mongoose');
 
+let Images = new mongoose.Schema({
+    targetPath: {
+        type: String
+    },
+    flag: {
+        type: Boolean,
+        default: false
+    },
+    url: { type: String, required: true }
+});
+
 const TitleSchema = new mongoose.Schema({
     tile: {
         type: String,
         trim: true,
         required: 'Name is required'
     },
-    logo: {
-        data: String,
-    },
+    logo: { type: String, required: true },
     updated: Date,
     created: {
         type: Date,
@@ -30,14 +39,8 @@ const HeaderSchema = new mongoose.Schema({
 })
 
 const SlidderSchema = new mongoose.Schema({
-    images: [Images],
-
-    flag: {
-        type: Boolean,
-        default: false
-    },
+    images: Images,
     updated: Date,
-
     created: {
         type: Date,
         default: Date.now
@@ -49,11 +52,7 @@ const BannerSchema = new mongoose.Schema({
         type: String,
         required: [true, "name is required"]
     },
-    images: [Images],
-    flag: {
-        type: Boolean,
-        default: false
-    },
+    images: Images,
     updated: Date,
     created: {
         type: Date,
