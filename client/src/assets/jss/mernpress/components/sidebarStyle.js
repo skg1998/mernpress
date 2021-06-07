@@ -138,6 +138,7 @@ const sidebarStyle = theme => ({
     position: "unset"
   },
   item: {
+    margin: '7px',
     position: "relative",
     display: "block",
     textDecoration: "none",
@@ -150,9 +151,9 @@ const sidebarStyle = theme => ({
     marginBottom: "10px",
     borderRadius: "3px",
     position: "relative",
-    display: "block",
+    display: "flex",
     padding: "10px 15px",
-    backgroundColor: "transparent",
+    backgroundColor: "#d0d0e1",
     ...defaultFont
   },
   itemIcon: {
@@ -303,8 +304,8 @@ const sidebarStyle = theme => ({
     color: "white"
   },
   accordionSummary: {
-    padding: "0px",
-    margin: "0px",
+    padding: "7px",
+    margin: "0px !important",
   },
   accordionDetail: {
     margin: "0px",

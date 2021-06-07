@@ -69,6 +69,7 @@ const Sidebar = (props) => {
           return (
             <Accordion className={classes.accordion}>
               <AccordionSummary
+                style={{ margin: '0px' }}
                 className={classes.accordionSummary}
                 aria-controls="panel1a-content"
               >
@@ -76,11 +77,12 @@ const Sidebar = (props) => {
                   {typeof prop.icon === "string" ? (
                     <Icon
                       className={classNames(classes.itemIcon)}
-
-                    >{prop.icon}</Icon>
+                    >
+                      {prop.icon}
+                    </Icon>
                   ) : (
                     <prop.icon
-                    />
+                      className={classNames(classes.itemIcon)} />
                   )}
                   <ListItemText
                     primary={prop.name}
