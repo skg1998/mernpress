@@ -3,6 +3,7 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
@@ -13,6 +14,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
+
 import AdminNavbarLinks from "../../components/Navbars/AdminNavbarLinks.js";
 import styles from "../../assets/jss/mernpress/components/sidebarStyle.js";
 
@@ -46,7 +48,7 @@ const Sidebar = (props) => {
               activeClassName="active"
               key={key}
             >
-              <ListItem button className={classes.itemLink + listItemClasses}>
+              <ListItem button className={classes.itemLink + listItemClasses} >
                 {typeof prop.icon === "string" ? (
                   <Icon
                     className={classNames(classes.itemIcon)}
@@ -69,11 +71,9 @@ const Sidebar = (props) => {
           return (
             <Accordion className={classes.accordion}>
               <AccordionSummary
-                style={{ margin: '0px' }}
                 className={classes.accordionSummary}
-                aria-controls="panel1a-content"
               >
-                <ListItem button className={classes.itemLink + listItemClasses}>
+                <ListItem button className={classes.itemLink + listItemClasses} style={{ margin: '0px' }}>
                   {typeof prop.icon === "string" ? (
                     <Icon
                       className={classNames(classes.itemIcon)}

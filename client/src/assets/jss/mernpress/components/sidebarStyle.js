@@ -17,6 +17,7 @@ import {
 
 const sidebarStyle = theme => ({
   drawerPaper: {
+    background: "#459cb3",
     border: "none",
     position: "fixed",
     top: "0",
@@ -85,6 +86,7 @@ const sidebarStyle = theme => ({
     fontWeight: "400",
     lineHeight: "30px",
     textDecoration: "none",
+    color: "white !important",
     backgroundColor: "transparent",
     "&,&:hover": {
       color: blackColor
@@ -98,7 +100,7 @@ const sidebarStyle = theme => ({
     display: "inline-block",
     maxHeight: "30px",
     marginLeft: "10px",
-    marginRight: "15px"
+    marginRight: "15px",
   },
   img: {
     width: "35px",
@@ -153,7 +155,6 @@ const sidebarStyle = theme => ({
     position: "relative",
     display: "flex",
     padding: "10px 15px",
-    backgroundColor: "#d0d0e1",
     ...defaultFont
   },
   itemIcon: {
@@ -287,7 +288,8 @@ const sidebarStyle = theme => ({
     overflow: "auto",
     width: "260px",
     zIndex: "4",
-    overflowScrolling: "touch"
+    overflowScrolling: "touch",
+    background: "#459cb3"
   },
   activePro: {
     [theme.breakpoints.up("md")]: {
@@ -305,7 +307,6 @@ const sidebarStyle = theme => ({
   },
   accordionSummary: {
     padding: "7px",
-    margin: "0px !important",
   },
   accordionDetail: {
     margin: "0px",
