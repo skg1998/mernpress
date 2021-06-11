@@ -1,5 +1,5 @@
 import { authHeader } from '../helpers';
-const BASE_URL = "http://localhost:5000/";
+const BASE_URL = "http://localhost:5000/api/v1/";
 export const userService = {
     login,
     logout,
@@ -13,7 +13,7 @@ function login(email, password) {
         body: JSON.stringify({ email, password })
     };
 
-    return fetch(`${BASE_URL}api/v1/users/signin`, requestOptions)
+    return fetch(`${BASE_URL}auth/signin`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // login successful if there's a jwt token in the response

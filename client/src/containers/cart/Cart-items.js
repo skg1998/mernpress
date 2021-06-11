@@ -130,64 +130,65 @@ class CartItems extends Component {
 
   render() {
     const { classes } = this.props
-    return (<Card className={classes.card}>
-      <Typography type="title" className={classes.title}>
-        Shopping Cart
-      </Typography>
-      {this.state.cartItems.length > 0 ? (<span>
-        {this.state.cartItems.map((item, i) => {
-          return <span key={i}><Card className={classes.cart}>
-            <CardMedia
-              className={classes.cover}
-              image={item.product.image}
-              title={item.product.name}
-            />
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Link to={'/product/' + item.product._id}><Typography type="title" component="h3" className={classes.productTitle} color="primary">{item.product.name}</Typography></Link>
-                <div>
-                  <Typography type="subheading" component="h3" className={classes.price} color="primary">$ {item.product.price}</Typography>
-                  <span className={classes.itemTotal}>${item.product.price * item.quantity}</span>
-                  <span className={classes.itemShop}>Shop: {item.product.shop.name}</span>
+    return (
+      <Card className={classes.card}>
+        <Typography type="title" className={classes.title}>
+          Shopping Cart
+        </Typography>
+        {this.state.cartItems.length > 0 ? (<span>
+          {this.state.cartItems.map((item, i) => {
+            return <span key={i}><Card className={classes.cart}>
+              <CardMedia
+                className={classes.cover}
+                image={item.product.image}
+                title={item.product.name}
+              />
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Link to={'/product/' + item.product._id}><Typography type="title" component="h3" className={classes.productTitle} color="primary">{item.product.name}</Typography></Link>
+                  <div>
+                    <Typography type="subheading" component="h3" className={classes.price} color="primary">$ {item.product.price}</Typography>
+                    <span className={classes.itemTotal}>${item.product.price * item.quantity}</span>
+                    <span className={classes.itemShop}>Shop: {item.product.shop.name}</span>
+                  </div>
+                </CardContent>
+                <div className={classes.subheading}>
+                  Quantity: <TextField
+                    value={item.quantity}
+                    onChange={this.handleChange(i)}
+                    type="number"
+                    inputProps={{
+                      min: 1
+                    }}
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    margin="normal" />
+                  <Button className={classes.removeButton} color="primary" onClick={this.removeItem(i)}>x Remove</Button>
                 </div>
-              </CardContent>
-              <div className={classes.subheading}>
-                Quantity: <TextField
-                  value={item.quantity}
-                  onChange={this.handleChange(i)}
-                  type="number"
-                  inputProps={{
-                    min: 1
-                  }}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  margin="normal" />
-                <Button className={classes.removeButton} color="primary" onClick={this.removeItem(i)}>x Remove</Button>
               </div>
-            </div>
-          </Card>
-            <Divider />
-          </span>
-        })
+            </Card>
+              <Divider />
+            </span>
+          })
+          }
+          <div className={classes.checkout}>
+            <span className={classes.total}>Total: ${this.getTotal()}</span>
+            {!this.props.checkout && (auth.isAuthenticated() ?
+              <Button color="secondary" variant="raised" onClick={this.openCheckout}>Checkout</Button>
+              :
+              <Link to="/signin">
+                <Button color="primary" variant="raised">Sign in to checkout</Button>
+              </Link>)}
+            <Link to='/' className={classes.continueBtn}>
+              <Button variant="raised">Continue Shopping</Button>
+            </Link>
+          </div>
+        </span>) :
+          <Typography type="subheading" component="h3" color="primary">No items added to your cart.</Typography>
         }
-        <div className={classes.checkout}>
-          <span className={classes.total}>Total: ${this.getTotal()}</span>
-          {!this.props.checkout && (auth.isAuthenticated() ?
-            <Button color="secondary" variant="raised" onClick={this.openCheckout}>Checkout</Button>
-            :
-            <Link to="/signin">
-              <Button color="primary" variant="raised">Sign in to checkout</Button>
-            </Link>)}
-          <Link to='/' className={classes.continueBtn}>
-            <Button variant="raised">Continue Shopping</Button>
-          </Link>
-        </div>
-      </span>) :
-        <Typography type="subheading" component="h3" color="primary">No items added to your cart.</Typography>
-      }
-    </Card>)
+      </Card>)
   }
 }
 

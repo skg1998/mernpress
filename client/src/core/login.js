@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useHistory } from 'react-router-dom'
 
-import Card from '@material-ui/core/Card';
-import { CardActions, CardContent } from '@material-ui/core';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
-import Dialog from '@material-ui/core/Dialog'
 import Grid from '@material-ui/core/Grid'
-import { DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core"
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Card, CardActions, CardContent } from "@material-ui/core"
+
+import { connect, useDispatch } from "react-redux";
+import { userActions } from '../store/actions'
 
 import SEO from '../components/SEO/Seo';
 
@@ -46,27 +46,29 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Signin = () => {
-    const [input, setInput] = useState({ email: '', password: '' });
+const Login = (props) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState("");
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const classes = useStyles();
+    const history = useHistory();
 
-    const handleChange = name => event => {
-        setInput({ [name]: event.target.value });
-    };
+    // reset login status
+    useEffect(() => {
+        dispatch(userActions.logout());
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (email === '' || password === '') {
+            setError("Feilds are Required");
+        }
+        props.dispatch(userActions.login(email, password))
         setSubmitted(true);
-        const user = {
-            name: input.name || undefined,
-            email: input.email || undefined,
-            password: input.password || undefined
-        };
-
-        console.log(user);
     };
-
-    const classes = useStyles();
 
     return (
         <div>
@@ -99,8 +101,8 @@ const Signin = () => {
                                 label="Email"
                                 variant="outlined"
                                 className={classes.textField}
-                                value={input.email}
-                                onChange={handleChange}
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
                             />
                             <TextField
                                 id="password"
@@ -108,8 +110,8 @@ const Signin = () => {
                                 label="Password"
                                 variant="outlined"
                                 className={classes.textField}
-                                value={input.password}
-                                onChange={handleChange}
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
                             />
                         </CardContent>
                         <CardActions>
@@ -144,8 +146,16 @@ const Signin = () => {
     );
 }
 
-Signin.propTypes = {
+function mapStateToProps(state) {
+    const { loggingIn } = state.authentication;
+    return {
+        loggingIn
+    };
+}
+
+Login.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-export default Signin
+const connectedLoginPage = connect(mapStateToProps)(Login);
+export { connectedLoginPage as Signin };

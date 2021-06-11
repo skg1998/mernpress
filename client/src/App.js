@@ -6,6 +6,9 @@ import MainRouter from "./MainRouter";
 import { BrowserRouter as Router } from "react-router-dom";
 import { history } from "./store/helpers"
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.js";
+
 const App = () => {
   return (
     <Router history={history}>
