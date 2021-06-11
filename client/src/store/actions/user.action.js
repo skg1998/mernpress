@@ -1,26 +1,21 @@
 import { userConstants } from '../constant';
 import { userService } from '../Services';
 import { alertActions } from './';
-import { history } from '../helpers';
 
 export const userActions = {
     login,
-    logout,
-    getAll
+    logout
 };
- 
+
 function login(username, password) {
     return dispatch => {
         dispatch(request({ username }));
 
         userService.login(username, password)
             .then(
-                user => { 
-                    console.log("user",user)
+                user => {
+                    console.log("user", user)
                     dispatch(success(user));
-                    setTimeout(()=>{
-                        history.push('/admin');
-                    });
                 },
                 error => {
                     dispatch(failure(error));
@@ -37,20 +32,4 @@ function login(username, password) {
 function logout() {
     userService.logout();
     return { type: userConstants.LOGOUT };
-}
-
-function getAll() {
-    return dispatch => {
-        dispatch(request());
-
-        userService.getAll()
-            .then(
-                users => dispatch(success(users)),
-                error => dispatch(failure(error))
-            );
-    };
-
-    function request() { return { type: userConstants.GETALL_REQUEST } }
-    function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
-    function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
 }

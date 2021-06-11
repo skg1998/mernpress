@@ -8,11 +8,12 @@ import Shops from './containers/shop/Shops';
 import Home from "./core/Home";
 import Product from './core/Product';
 import Categories from './core/Categories';
-import Cart from './containers/cart/cart';
+import Cart from './core/Cart';
 import Signup from './core/signup';
-import Signin from './core/login';
+import { Signin } from './core/login';
 import Profile from './containers/user/Profile';
 import NotFound from './core/NotFound';
+import Checkout from "./core/Checkout";
 
 //Admin
 import { AdminLogin } from './admin/Pages/AdminLogin';
@@ -34,6 +35,7 @@ const MainRouter = () => {
         <Route path="/shops/all" component={Shops} />
         <Route path="/product/:productId" component={Product} />
         <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
         <Route path="/category" component={Categories} />
         <Route component={NotFound} />
       </Switch>

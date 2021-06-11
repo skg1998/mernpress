@@ -4,17 +4,17 @@ const auth = {
   isAuthenticated() {
     if (typeof window == "undefined") return false;
 
-    if (sessionStorage.getItem("jwt"))
-      return JSON.parse(sessionStorage.getItem("jwt"));
+    if (localStorage.getItem("jwt"))
+      return JSON.parse(localStorage.getItem("jwt"));
     else return false;
   },
   authenticate(jwt, cb) {
     if (typeof window !== "undefined")
-      sessionStorage.setItem("jwt", JSON.stringify(jwt));
+      localStorage.setItem("jwt", JSON.stringify(jwt));
     cb();
   },
   signout(cb) {
-    if (typeof window !== "undefined") sessionStorage.removeItem("jwt");
+    if (typeof window !== "undefined") localStorage.removeItem("jwt");
     cb();
     //optional
     signout().then(data => {
@@ -23,10 +23,10 @@ const auth = {
   },
   updateUser(user, cb) {
     if (typeof window !== "undefined") {
-      if (sessionStorage.getItem("jwt")) {
-        let auth = JSON.parse(sessionStorage.getItem("jwt"));
+      if (localStorage.getItem("jwt")) {
+        let auth = JSON.parse(localStorage.getItem("jwt"));
         auth.user = user;
-        sessionStorage.setItem("jwt", JSON.stringify(auth));
+        localStorage.setItem("jwt", JSON.stringify(auth));
         cb();
       }
     }

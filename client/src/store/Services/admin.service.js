@@ -14,16 +14,16 @@ function signup(username, email, password) {
         body: JSON.stringify({ username, email, password })
     };
 
-    return fetch(`${BASE_URL}api/v1/admin/signup`, requestOptions)
+    return fetch(`${BASE_URL}api/v1/auth/signup`, requestOptions)
         .then(handleResponse)
-        .then(user => {
+        .then(admin => {
             // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
+            if (admin.token) {
+                // store admin details and jwt token in local storage to keep admin logged in between page refreshes
+                localStorage.setItem('admin', JSON.stringify(admin));
             }
 
-            return user;
+            return admin;
         });
 }
 
@@ -34,22 +34,22 @@ function login(email, password) {
         body: JSON.stringify({ email, password })
     };
 
-    return fetch(`${BASE_URL}api/v1/admin/login`, requestOptions)
+    return fetch(`${BASE_URL}api/v1/auth/signin`, requestOptions)
         .then(handleResponse)
-        .then(user => {
+        .then(admin => {
             // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
+            if (admin.token) {
+                // store admin details and jwt token in local storage to keep admin logged in between page refreshes
+                localStorage.setItem('admin', JSON.stringify(admin));
             }
 
-            return user;
+            return admin;
         });
 }
 
 function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    localStorage.removeItem('admin');
 }
 
 function getAll() {

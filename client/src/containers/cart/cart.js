@@ -44,12 +44,15 @@ class Cart extends Component {
           <CartItems checkout={this.state.checkout}
             setCheckout={this.setCheckout} />
         </Grid>
-        {this.state.checkout &&
+        {/* {this.state.checkout &&
           <Grid item xs={6} sm={6}>
             <StripeProvider stripe={this.state.stripe}>
               <Checkout />
             </StripeProvider>
-          </Grid>}
+          </Grid>} */}
+        <Grid item xs={6} sm={6}>
+          <Checkout />
+        </Grid>
       </Grid>
     </div>)
   }
