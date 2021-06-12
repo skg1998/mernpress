@@ -2,13 +2,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "../../assets/jss/mernpress/components/footerStyle.js";
-import VisaImage from "../../assets/img/Payment/ic_visa.png"
-import MastercardImage from "../../assets/img/Payment/ic_mastercard.png"
-import PaypalImage from "../../assets/img/Payment/ic_paypal.png"
 import FacebookImage from "../../assets/img/Social_Media/ic_facebook.png"
 import InstragramImage from "../../assets/img/Social_Media/ic_instagram.png"
 import TwitterImage from "../../assets/img/Social_Media/ic_twitter.png"
 import YoutubeImage from "../../assets/img/Social_Media/ic_youtube.png"
+
+
+import CardImg from '../../assets/img/cards.webp';
 
 const useStyles = makeStyles(styles);
 
@@ -34,7 +34,7 @@ export default function Footer(props) {
         </div>
         <div className={classes.lineDiv}></div>
         <div className={classes.bottomFooter}>
-          <ul className={classes.left , classes.credibility}>
+          <ul className={classes.left, classes.credibility}>
             <li className={classes.text}>
               <p>
                 <span>
@@ -52,15 +52,13 @@ export default function Footer(props) {
             <li className={classes.text}>Privacy Policy</li>
             <li className={classes.text}>Terms of Use</li>
           </ul>
-          <ul className={classes.paymentMethods , classes.right}>
+          <ul className={classes.right}>
             <li><p className={classes.desc}>Accepted payment methods</p></li>
             <li>
-              <img src={VisaImage} alt="visa" />
-              <img src={MastercardImage} alt="mastercard" />
-              <img src={PaypalImage} alt="paypal" />
+              <img src={CardImg} />
             </li>
           </ul>
-        </div>  
+        </div>
       </div>
     </footer>
   )
