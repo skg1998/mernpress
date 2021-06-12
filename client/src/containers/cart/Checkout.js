@@ -1,112 +1,455 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
-import Icon from '@material-ui/core/Icon'
-import auth from '../auth/auth-helper'
-import cart from './cart-helper.js'
-import PlaceOrder from './PlaceOrder'
-import { Elements } from 'react-stripe-elements'
+import React from 'react';
 
-const styles = theme => ({
+import { ReactComponent as IconEnvelope } from "bootstrap-icons/icons/envelope.svg";
+import { ReactComponent as IconTruck } from "bootstrap-icons/icons/truck.svg";
+import { ReactComponent as IconReceipt } from "bootstrap-icons/icons/receipt.svg";
+import { ReactComponent as IconCreditCard2Front } from "bootstrap-icons/icons/credit-card-2-front.svg";
+import { ReactComponent as IconCart3 } from "bootstrap-icons/icons/cart3.svg";
+
+import CardImg from '../../assets/img/cards.webp';
+import PaypalImg from '../../assets/img/paypal_64.webp'
+
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from "@material-ui/core/TextField";
+import Radio from '@material-ui/core/Radio';
+import CardHeader from "@material-ui/core/CardHeader";
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Badge from '@material-ui/core/Badge';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+
+const defaultProps = {
+  color: 'secondary',
+};
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 345,
+  },
   card: {
-    margin: '24px 0px',
-    padding: '16px 40px 90px 40px',
-    backgroundColor: '#80808017'
+    marginBottom: '15px'
   },
-  title: {
-    margin: '24px 16px 8px 0px',
-    color: theme.palette.openTitle
+  headerColor: {
+    background: '#efeff5'
   },
-  subheading: {
-    color: 'rgba(88, 114, 128, 0.87)',
-    marginTop: "20px",
-  },
-  addressField: {
-    marginTop: "4px",
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: "45%"
-  },
-  streetField: {
-    marginTop: "4px",
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: "93%"
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: "90%"
+  button: {
+    width: '100%',
+    background: '#459cb3'
   }
-})
+}));
 
-class Checkout extends Component {
-  state = {
-    checkoutDetails: {
-      customer_name: '',
-      customer_email: '',
-      delivery_address: { street: '', city: '', state: '', zipcode: '', country: '' }
-    },
-    error: ''
-  }
-  componentDidMount = () => {
-    let user = auth.isAuthenticated()
-    console.log("user", user)
-    let checkoutDetails = this.state.checkoutDetails
-    checkoutDetails.products = cart.getCart()
-    checkoutDetails.customer_name = user.name
-    checkoutDetails.customer_email = user.email
-    this.setState({ checkoutDetails: checkoutDetails })
-  }
+const currencies = [
+  {
+    value: 'USD',
+    label: '$',
+  },
+  {
+    value: 'EUR',
+    label: '€',
+  },
+  {
+    value: 'BTC',
+    label: '฿',
+  },
+  {
+    value: 'JPY',
+    label: '¥',
+  },
+];
 
-  handleCustomerChange = name => event => {
-    let checkoutDetails = this.state.checkoutDetails
-    checkoutDetails[name] = event.target.value || undefined
-    this.setState({ checkoutDetails: checkoutDetails })
-  }
 
-  handleAddressChange = name => event => {
-    let checkoutDetails = this.state.checkoutDetails
-    checkoutDetails.delivery_address[name] = event.target.value || undefined
-    this.setState({ checkoutDetails: checkoutDetails })
-  }
+const Checkout = (props) => {
+  const [currency, setCurrency] = React.useState('EUR');
 
-  render() {
-    const { classes } = this.props
-    return (
-      <Card className={classes.card}>
-        <Typography type="title" className={classes.title}>
-          Checkout
-        </Typography>
-        <TextField id="name" label="Name" className={classes.textField} value={this.state.checkoutDetails.customer_name} onChange={this.handleCustomerChange('customer_name')} margin="normal" /><br />
-        <TextField id="email" type="email" label="Email" className={classes.textField} value={this.state.checkoutDetails.customer_email} onChange={this.handleCustomerChange('customer_email')} margin="normal" /><br />
-        <Typography type="subheading" component="h3" className={classes.subheading}>
-          Delivery Address
-        </Typography>
-        <TextField id="street" label="Street Address" className={classes.streetField} value={this.state.checkoutDetails.delivery_address.street} onChange={this.handleAddressChange('street')} margin="normal" /><br />
-        <TextField id="city" label="City" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.city} onChange={this.handleAddressChange('city')} margin="normal" />
-        <TextField id="state" label="State" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.state} onChange={this.handleAddressChange('state')} margin="normal" /><br />
-        <TextField id="zipcode" label="Zip Code" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.zipcode} onChange={this.handleAddressChange('zipcode')} margin="normal" />
-        <TextField id="country" label="Country" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.country} onChange={this.handleAddressChange('country')} margin="normal" />
-        <br /> {
-          this.state.error && (<Typography component="p" color="error">
-            <Icon color="error" className={classes.error}>error</Icon>
-            {this.state.error}</Typography>)
-        }
-        <div>
-          <Elements>
-            <PlaceOrder checkoutDetails={this.state.checkoutDetails} />
-          </Elements>
-        </div>
-      </Card>)
-  }
+  const handleChange = (event) => {
+    setCurrency(event.target.value);
+  };
+  const classes = useStyles();
+  return (
+    <Grid container spacing={3} >
+      <Grid item lg={9} sm={9} xl={9} xs={9}>
+        <form noValidate autoComplete="off">
+          <Card className={classes.card}>
+            <CardHeader className={classes.headerColor} avatar={<IconEnvelope />} title="Contact Info" />
+            <CardContent>
+              <Grid container spacing={3}>
+                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+
+          <Card className={classes.card}>
+            <CardHeader className={classes.headerColor} avatar={<IconTruck />} title="Shipping Infomation" />
+            <CardContent>
+              <Grid container spacing={3}>
+                <Grid item lg={12} sm={12} xl={12} xs={12}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
+                  <TextField
+                    id="outlined-select-currency-native"
+                    select
+                    fullWidth
+                    value={currency}
+                    onChange={handleChange}
+                    SelectProps={{
+                      native: true,
+                    }}
+                    variant="outlined"
+                  >
+                    {currencies.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
+                  <TextField
+                    id="outlined-select-currency-native"
+                    select
+                    fullWidth
+                    value={currency}
+                    onChange={handleChange}
+                    SelectProps={{
+                      native: true,
+                    }}
+                    variant="outlined"
+                  >
+                    {currencies.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+
+          <Card className={classes.card}>
+            <CardHeader className={classes.headerColor} avatar={<IconReceipt />} title="Billing Infomation" />
+            <CardContent>
+              <Grid container spacing={3}>
+                <Grid item lg={12} sm={12} xl={12} xs={12}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
+                  <TextField
+                    id="outlined-select-currency-native"
+                    select
+                    fullWidth
+                    value={currency}
+                    onChange={handleChange}
+                    SelectProps={{
+                      native: true,
+                    }}
+                    variant="outlined"
+                  >
+                    {currencies.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
+                  <TextField
+                    id="outlined-select-currency-native"
+                    select
+                    fullWidth
+                    value={currency}
+                    onChange={handleChange}
+                    SelectProps={{
+                      native: true,
+                    }}
+                    variant="outlined"
+                  >
+                    {currencies.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+
+          <Card className={classes.card}>
+            <CardHeader className={classes.headerColor} avatar={<IconCreditCard2Front />} title="Payment Method" />
+            <CardContent>
+              <Grid container spacing={3}>
+                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                  <Radio
+                    label="Credit Card"
+                    value="a"
+                    name="radio-button-demo"
+                    inputProps={{ 'aria-label': 'A' }}
+                  />
+                </Grid>
+                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                  <Radio
+                    value="a"
+                    name="radio-button-demo"
+                    inputProps={{ 'aria-label': 'A' }}
+                  />
+                </Grid>
+              </Grid>
+
+              <Grid container spacing={3}>
+                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
+                  <TextField
+                    id="outlined-select-currency-native"
+                    select
+                    fullWidth
+                    value={currency}
+                    onChange={handleChange}
+                    SelectProps={{
+                      native: true,
+                    }}
+                    variant="outlined"
+                  >
+                    {currencies.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
+                  <TextField
+                    id="outlined-select-currency-native"
+                    select
+                    fullWidth
+                    value={currency}
+                    onChange={handleChange}
+                    SelectProps={{
+                      native: true,
+                    }}
+                    variant="outlined"
+                  >
+                    {currencies.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Placeholder"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item lg={12} sm={12} xl={12} xs={12}>
+                  <Button variant="contained" className={classes.button}>
+                    Secondary
+                  </Button>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+
+        </form>
+      </Grid>
+      <Grid item lg={3} sm={3} xl={3} xs={3}>
+        <Card style={{ width: '100%' }}>
+          <CardContent>
+            <Box display="flex" p={1} className={classes.headerColor}>
+              <Box p={1} flexGrow={1}>
+                <IconCart3 />{"  "} <strong>CART</strong>
+              </Box>
+              <Box p={1}>
+                <Badge badgeContent={1000} max={999} {...defaultProps} />
+              </Box>
+            </Box>
+            <Box display="flex" p={1} bgcolor="background.paper">
+              <Box p={1} flexGrow={1} bgcolor="grey.300">
+                Product
+              </Box>
+              <Box p={1} bgcolor="grey.300">
+                amount
+              </Box>
+            </Box>
+            <Box display="flex" p={1} bgcolor="background.paper">
+              <Box p={1} flexGrow={1} bgcolor="grey.300">
+                Promotion Code
+              </Box>
+              <Box p={1} bgcolor="grey.300">
+                Amount
+              </Box>
+            </Box>
+            <Box display="flex" p={1} bgcolor="background.paper">
+              <Box p={1} flexGrow={1} bgcolor="grey.300">
+                <strong>Total</strong>
+              </Box>
+              <Box p={1} bgcolor="grey.300">
+                <strong>Amount</strong>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
+  )
 }
 
-Checkout.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles)(Checkout)
+export default Checkout;
