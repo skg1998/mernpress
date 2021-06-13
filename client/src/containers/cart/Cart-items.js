@@ -1,21 +1,26 @@
-import React, { Component } from 'react'
-import auth from '../auth/auth-helper'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
+import { ReactComponent as IconChevronRight } from "bootstrap-icons/icons/chevron-right.svg";
+import { ReactComponent as IconChevronLeft } from "bootstrap-icons/icons/chevron-left.svg";
+
+import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card';
 import { CardContent, CardMedia } from '@material-ui/core/';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
 import Divider from '@material-ui/core/Divider'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import cart from './cart-helper.js'
-import { Link } from 'react-router-dom'
+import Box from '@material-ui/core/Box';
 
-const styles = theme => ({
+import cart from './cart-helper.js'
+import auth from '../auth/auth-helper'
+
+
+const useStyles = makeStyles((theme) => ({
   card: {
-    margin: '24px 0px',
     padding: '16px 40px 60px 40px',
-    backgroundColor: '#80808017'
   },
   title: {
     margin: theme.spacing.unit * 2,
@@ -88,114 +93,126 @@ const styles = theme => ({
   removeButton: {
     fontSize: '0.8em'
   }
-})
+}))
 
-class CartItems extends Component {
-  state = {
-    cartItems: [],
-  }
+const CartItem = (props) => {
 
-  componentDidMount = () => {
-    this.setState({ cartItems: cart.getCart() })
-  }
+  const [cartItems, setCartItems] = useState(cart.getCart());
+  const classes = useStyles();
 
-  handleChange = index => event => {
-    let cartItems = this.state.cartItems
+  const handleChange = index => event => {
+    let cartItems = cartItems
     if (event.target.value === 0) {
       cartItems[index].quantity = 1
     } else {
       cartItems[index].quantity = event.target.value
     }
-    this.setState({ cartItems: cartItems })
+    setCartItems(cartItems)
     cart.updateCart(index, event.target.value)
   }
 
-  getTotal() {
-    return this.state.cartItems.reduce((a, b) => {
+  const getTotal = () => {
+    return cartItems.reduce((a, b) => {
       return a + (b.quantity * b.product.price)
     }, 0)
   }
 
-  removeItem = index => event => {
+  const removeItem = index => event => {
     let cartItems = cart.removeItem(index)
     if (cartItems.length === 0) {
-      this.props.setCheckout(false)
+      props.setCheckout(false)
     }
-    this.setState({ cartItems: cartItems })
+    setCartItems(cartItems)
   }
 
-  openCheckout = () => {
-    this.props.setCheckout(true)
+  const openCheckout = () => {
+    props.setCheckout(true)
   }
 
-  render() {
-    const { classes } = this.props
-    return (
-      <Card className={classes.card}>
-        <Typography type="title" className={classes.title}>
-          Shopping Cart
-        </Typography>
-        {this.state.cartItems.length > 0 ? (<span>
-          {this.state.cartItems.map((item, i) => {
-            return <span key={i}><Card className={classes.cart}>
-              <CardMedia
-                className={classes.cover}
-                image={item.product.image}
-                title={item.product.name}
-              />
-              <div className={classes.details}>
-                <CardContent className={classes.content}>
-                  <Link to={'/product/' + item.product._id}><Typography type="title" component="h3" className={classes.productTitle} color="primary">{item.product.name}</Typography></Link>
-                  <div>
-                    <Typography type="subheading" component="h3" className={classes.price} color="primary">$ {item.product.price}</Typography>
-                    <span className={classes.itemTotal}>${item.product.price * item.quantity}</span>
-                    <span className={classes.itemShop}>Shop: {item.product.shop.name}</span>
-                  </div>
-                </CardContent>
-                <div className={classes.subheading}>
-                  Quantity: <TextField
-                    value={item.quantity}
-                    onChange={this.handleChange(i)}
-                    type="number"
-                    inputProps={{
-                      min: 1
-                    }}
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    margin="normal" />
-                  <Button className={classes.removeButton} color="primary" onClick={this.removeItem(i)}>x Remove</Button>
+  return (
+    <Card className={classes.card}>
+      <Typography type="title" className={classes.title}>
+        Shopping Cart
+      </Typography>
+      {cartItems.length > 0 ? (<span>
+        {cartItems.map((item, i) => {
+          return <span key={i}><Card className={classes.cart}>
+            <CardMedia
+              className={classes.cover}
+              image={item.product.image}
+              title={item.product.name}
+            />
+            <div className={classes.details}>
+              <CardContent className={classes.content}>
+                <Link to={'/product/' + item.product._id}><Typography type="title" component="h3" className={classes.productTitle} color="primary">{item.product.name}</Typography></Link>
+                <div>
+                  <Typography type="subheading" component="h3" className={classes.price} color="primary">$ {item.product.price}</Typography>
+                  <span className={classes.itemTotal}>${item.product.price * item.quantity}</span>
+                  <span className={classes.itemShop}>Shop: {item.product.shop.name}</span>
                 </div>
+              </CardContent>
+              <div className={classes.subheading}>
+                Quantity: <TextField
+                  value={item.quantity}
+                  onChange={handleChange(i)}
+                  type="number"
+                  inputProps={{
+                    min: 1
+                  }}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  margin="normal" />
+                <Button className={classes.removeButton} color="primary" onClick={removeItem(i)}>x Remove</Button>
               </div>
-            </Card>
-              <Divider />
-            </span>
-          })
-          }
-          <div className={classes.checkout}>
-            <span className={classes.total}>Total: ${this.getTotal()}</span>
-            {!this.props.checkout && (auth.isAuthenticated() ?
-              <Button color="secondary" variant="raised" onClick={this.openCheckout}>Checkout</Button>
-              :
-              <Link to="/signin">
-                <Button color="primary" variant="raised">Sign in to checkout</Button>
-              </Link>)}
-            <Link to='/' className={classes.continueBtn}>
-              <Button variant="raised">Continue Shopping</Button>
-            </Link>
-          </div>
-        </span>) :
-          <Typography type="subheading" component="h3" color="primary">No items added to your cart.</Typography>
+            </div>
+          </Card>
+            <Divider />
+          </span>
+        })
         }
-      </Card>)
-  }
+        <div>
+          <Box display="flex" p={1}>
+            {
+              !props.checkout && (auth.isAuthenticated() ?
+                <Box p={1} flexGrow={1} >
+                  <Button variant="contained" color="primary">
+                    <Link to="/checkout" >
+                      Make Purchase <IconChevronRight />
+                    </Link>
+                  </Button>
+                </Box>
+                :
+                <Box p={1} flexGrow={1} >
+                  <Button variant="contained" color="primary">
+                    <Link to="/signin" >
+                      Sign in to checkout
+                    </Link>
+                  </Button>
+                </Box>
+              )
+            }
+            <Box p={1} bgcolor="grey.300">
+              <Button variant="contained" color="secondary">
+                <Link to="/">
+                  <IconChevronLeft /> Continue shopping
+                </Link>
+              </Button>
+            </Box>
+          </Box>
+        </div>
+      </span>) :
+        <Typography type="subheading" component="h3" color="primary">No items added to your cart.</Typography>
+      }
+    </Card>
+  )
 }
 
-CartItems.propTypes = {
+CartItem.propTypes = {
   classes: PropTypes.object.isRequired,
   checkout: PropTypes.bool.isRequired,
   setCheckout: PropTypes.func.isRequired
 }
 
-export default withStyles(styles)(CartItems)
+export default CartItem

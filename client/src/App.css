@@ -5,3 +5,7 @@ body {
 .MuiAccordionSummary-content {
   margin: 0px !important;
 }
+
+.MuiOutlinedInput-input {
+  padding: 8.5px 14px !important;
+}
