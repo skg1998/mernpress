@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { Link, useHistory } from 'react-router-dom'
 
 import { ReactComponent as IconChevronRight } from "bootstrap-icons/icons/chevron-right.svg";
 import { ReactComponent as IconChevronLeft } from "bootstrap-icons/icons/chevron-left.svg";
@@ -14,7 +13,6 @@ import TextField from '@material-ui/core/TextField'
 import Divider from '@material-ui/core/Divider'
 import Box from '@material-ui/core/Box';
 
-import cart from './cart-helper.js'
 import auth from '../auth/auth-helper'
 
 
@@ -96,37 +94,16 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CartItem = (props) => {
-
-  const [cartItems, setCartItems] = useState(cart.getCart());
+  const { cartItems, onChange, removeItem, getTotal } = props;
   const classes = useStyles();
+  const history = useHistory();
 
-  const handleChange = index => event => {
-    let cartItems = cartItems
-    if (event.target.value === 0) {
-      cartItems[index].quantity = 1
-    } else {
-      cartItems[index].quantity = event.target.value
-    }
-    setCartItems(cartItems)
-    cart.updateCart(index, event.target.value)
+  const handlePurchase = () => {
+    history.push({ pathname: "/checkout", state: { cartItems: cartItems, getTotal: getTotal(), user: { name: "test", email: "test@gmail", phone: 9222222222 } } })
   }
 
-  const getTotal = () => {
-    return cartItems.reduce((a, b) => {
-      return a + (b.quantity * b.product.price)
-    }, 0)
-  }
-
-  const removeItem = index => event => {
-    let cartItems = cart.removeItem(index)
-    if (cartItems.length === 0) {
-      props.setCheckout(false)
-    }
-    setCartItems(cartItems)
-  }
-
-  const openCheckout = () => {
-    props.setCheckout(true)
+  function handleChange(event) {
+    onChange(event.target.value);
   }
 
   return (
@@ -154,7 +131,7 @@ const CartItem = (props) => {
               <div className={classes.subheading}>
                 Quantity: <TextField
                   value={item.quantity}
-                  onChange={handleChange(i)}
+                  onChange={handleChange}
                   type="number"
                   inputProps={{
                     min: 1
@@ -174,17 +151,22 @@ const CartItem = (props) => {
         }
         <div>
           <Box display="flex" p={1}>
+            <Box p={1} flexGrow={1}>
+              <Button variant="contained" color="secondary">
+                <Link to="/">
+                  <IconChevronLeft /> Continue shopping
+                </Link>
+              </Button>
+            </Box>
             {
-              !props.checkout && (auth.isAuthenticated() ?
-                <Box p={1} flexGrow={1} >
-                  <Button variant="contained" color="primary">
-                    <Link to="/checkout" >
-                      Make Purchase <IconChevronRight />
-                    </Link>
+              (auth.isAuthenticated() ?
+                <Box p={1}  >
+                  <Button variant="contained" color="primary" onClick={handlePurchase}>
+                    Make Purchase <IconChevronRight />
                   </Button>
                 </Box>
                 :
-                <Box p={1} flexGrow={1} >
+                <Box p={1}  >
                   <Button variant="contained" color="primary">
                     <Link to="/signin" >
                       Sign in to checkout
@@ -193,13 +175,6 @@ const CartItem = (props) => {
                 </Box>
               )
             }
-            <Box p={1} bgcolor="grey.300">
-              <Button variant="contained" color="secondary">
-                <Link to="/">
-                  <IconChevronLeft /> Continue shopping
-                </Link>
-              </Button>
-            </Box>
           </Box>
         </div>
       </span>) :
@@ -207,12 +182,6 @@ const CartItem = (props) => {
       }
     </Card>
   )
-}
-
-CartItem.propTypes = {
-  classes: PropTypes.object.isRequired,
-  checkout: PropTypes.bool.isRequired,
-  setCheckout: PropTypes.func.isRequired
 }
 
 export default CartItem

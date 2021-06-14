@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ReactComponent as IconEnvelope } from "bootstrap-icons/icons/envelope.svg";
 import { ReactComponent as IconTruck } from "bootstrap-icons/icons/truck.svg";
@@ -8,6 +8,8 @@ import { ReactComponent as IconCart3 } from "bootstrap-icons/icons/cart3.svg";
 
 import CardImg from '../../assets/img/cards.webp';
 import PaypalImg from '../../assets/img/paypal_64.webp'
+
+import { useLocation } from "react-router-dom";
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from "@material-ui/core/TextField";
@@ -61,24 +63,80 @@ const currencies = [
 
 
 const Checkout = (props) => {
-  const [currency, setCurrency] = React.useState('EUR');
+  const location = useLocation();
+  const [currency, setCurrency] = useState('EUR');
+  const [cartItem, setCartItem] = useState();
+  const [userData, setUserData] = useState();
+  const [totalAmount, setTotalAmount] = useState();
+
+  const classes = useStyles();
+
+  const loadData = async () => {
+    await setCartItem(location.state.cartItems);
+    await setTotalAmount(location.state.getTotal);
+    await setUserData(location.state.user)
+  }
+
+  useEffect(() => {
+    loadData();
+    return () => { }
+  }, [location]);
+
+  const [personalDetail, setPersonalDetail] = useState({
+    name: (userData ? userData.name : ''),
+    email: '',
+    phone: ''
+  });
+
+  const [address, setAddress] = useState({
+    compelete_address: '',
+    district: '',
+    city: '',
+    country: '',
+    zipcode: '',
+    state: ''
+  });
 
   const handleChange = (event) => {
     setCurrency(event.target.value);
   };
-  const classes = useStyles();
+
+  const handleSubmit = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+  }
+
+  const handleInputChange = (event) => {
+    event.persist();
+    setPersonalDetail(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
+  }
+
   return (
     <Grid container spacing={3} >
       <Grid item lg={9} sm={9} xl={9} xs={9}>
-        <form noValidate autoComplete="off">
+        <form onSubmit={handleSubmit} noValidate autoComplete="off">
           <Card className={classes.card}>
             <CardHeader className={classes.headerColor} avatar={<IconEnvelope />} title="Contact Info" />
             <CardContent>
               <Grid container spacing={3}>
-                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
                   <TextField
                     id="outlined-full-width"
-                    placeholder="Placeholder"
+                    placeholder="Name"
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    name="name"
+                    key={personalDetail.name}
+                    defaultValue={personalDetail.name}
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
+                  <TextField
+                    id="outlined-full-width"
+                    placeholder="Email"
                     fullWidth
                     margin="normal"
                     InputLabelProps={{
@@ -87,10 +145,10 @@ const Checkout = (props) => {
                     variant="outlined"
                   />
                 </Grid>
-                <Grid item lg={6} sm={6} xl={6} xs={6}>
+                <Grid item lg={4} sm={4} xl={4} xs={4}>
                   <TextField
                     id="outlined-full-width"
-                    placeholder="Placeholder"
+                    placeholder="Phone"
                     fullWidth
                     margin="normal"
                     InputLabelProps={{
@@ -418,17 +476,21 @@ const Checkout = (props) => {
                 <IconCart3 />{"  "} <strong>CART</strong>
               </Box>
               <Box p={1}>
-                <Badge badgeContent={1000} max={999} {...defaultProps} />
+                <Badge badgeContent={1000} max={cartItem && cartItem.length} {...defaultProps} />
               </Box>
             </Box>
-            <Box display="flex" p={1} bgcolor="background.paper">
-              <Box p={1} flexGrow={1} bgcolor="grey.300">
-                Product
-              </Box>
-              <Box p={1} bgcolor="grey.300">
-                amount
-              </Box>
-            </Box>
+            {
+              cartItem && cartItem.map((item, index) => (
+                <Box display="flex" p={1} bgcolor="background.paper" key={index}>
+                  <Box p={1} flexGrow={1} bgcolor="grey.300">
+                    {item.product.name}
+                  </Box>
+                  <Box p={1} bgcolor="grey.300">
+                    {item.product.price}
+                  </Box>
+                </Box>
+              ))
+            }
             <Box display="flex" p={1} bgcolor="background.paper">
               <Box p={1} flexGrow={1} bgcolor="grey.300">
                 Promotion Code
@@ -442,7 +504,7 @@ const Checkout = (props) => {
                 <strong>Total</strong>
               </Box>
               <Box p={1} bgcolor="grey.300">
-                <strong>Amount</strong>
+                <strong>{totalAmount} </strong>
               </Box>
             </Box>
           </CardContent>

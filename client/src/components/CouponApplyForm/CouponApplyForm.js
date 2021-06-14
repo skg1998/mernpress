@@ -1,26 +1,34 @@
 import React from "react";
 
+import { TextField, Button, Card, CardContent } from "@material-ui/core";
+
 const CouponApplyForm = (props) => {
     const { handleSubmit, submitting, onSubmit, submitFailed } = props;
     return (
-        <form
-            className={`needs-validation ${submitFailed ? "was-validated" : ""}`}
-            noValidate
-        >
-            <input
-                name="coupon"
-                type="text"
-                label="Have coupon?"
-                placeholder="Coupon code"
-            />
-            <button
-                type="submit"
-                className="btn btn-sm btn-primary mt-3 float-right"
-                disabled={submitting}
-            >
-                Apply
-            </button>
-        </form>
+        <Card>
+            <CardContent>
+                <h3>Have Coupons ?</h3>
+                <form
+                    className={`needs-validation ${submitFailed ? "was-validated" : ""}`}
+                    noValidate
+                >
+                    <TextField
+                        name="coupon"
+                        type="text"
+                        placeholder="Coupon code"
+                        id="outlined-basic" variant="outlined"
+                        style={{ marginBottom: '5px' }}
+                    />
+                    <Button
+                        type="submit"
+                        disabled={submitting}
+                        variant="contained" color="primary"
+                    >
+                        Apply
+                    </Button>
+                </form>
+            </CardContent>
+        </Card>
     );
 };
 

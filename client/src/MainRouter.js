@@ -35,7 +35,7 @@ const MainRouter = () => {
         <Route path="/shops/all" component={Shops} />
         <Route path="/product/:productId" component={Product} />
         <Route path="/cart" component={Cart} />
-        <Route path="/checkout" component={Checkout} />
+        <PrivateRoute path="/checkout" component={Checkout} />
         <Route path="/category" component={Categories} />
         <Route component={NotFound} />
       </Switch>
