@@ -1,16 +1,34 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
+import { yellow, purple } from '@material-ui/core/colors';
+
+const AddToCartButton = withStyles((theme) => ({
+    root: {
+        color: theme.palette.getContrastText(yellow[500]),
+        backgroundColor: yellow[500],
+        '&:hover': {
+            backgroundColor: yellow[700],
+        },
+    },
+}))(Button);
+
+const WishListButton = withStyles((theme) => ({
+    root: {
+        color: theme.palette.getContrastText(purple[500]),
+        backgroundColor: purple[500],
+        '&:hover': {
+            backgroundColor: purple[700],
+        },
+    },
+}))(Button);
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
-        margin: '10px',
-        borderRadius: '15px',
-        padding: '20px'
+        minWidth: '100%',
+        borderRadius: '10px'
     },
     button: {
         width: '100%',
@@ -23,23 +41,15 @@ const ProductAction = (props) => {
     const { data } = props;
     return (
         <Card className={classes.root} variant="outlined">
-            <Grid container spacing={40}>
+            <Grid container spacing={40} style={{ padding: '10px' }}>
                 <Grid item xs={12} sm={12}>
-                    <Button className={classes.button} variant="contained" >Add To Cart</Button>
+                    <AddToCartButton className={classes.button} variant="contained">Add To Cart</AddToCartButton>
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                    <h4>Secure Transaction</h4>
+                    <Button className={classes.button} variant="contained" color="primary">Buy Now</Button>
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                    <Button className={classes.button} variant="contained" >Buy Now</Button>
-                </Grid>
-                <Divider />
-                <Grid item xs={12} sm={12}>
-                    <h4>Select Delivery location</h4>
-                </Grid>
-                <Divider />
-                <Grid item xs={12} sm={12}>
-                    <Button className={classes.button} variant="contained">Add To WishList</Button>
+                    <WishListButton className={classes.button} variant="contained">Add To WishList</WishListButton>
                 </Grid>
             </Grid>
         </Card>
