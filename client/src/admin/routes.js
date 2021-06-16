@@ -1,10 +1,8 @@
 import Dashboard from "@material-ui/icons/Dashboard";
-import Person from "@material-ui/icons/Person";
 import PagesIcon from '@material-ui/icons/Pages';
 import DescriptionIcon from '@material-ui/icons/Description';
 
 import DashboardPage from "../containers/Dashboard/Dashboard.js";
-import UserProfile from "../containers/UserProfile/UserProfile.js";
 import AddCategory from "./components/AddCategory";
 import AddProduct from "./components/AddProduct";
 import AddShop from "./components/AddShop";
@@ -20,14 +18,14 @@ const dashboardRoutes = [
     subItem: [],
     layout: "/admin",
   },
-  {
-    path: "/admin",
-    name: "Admin Profile",
-    icon: Person,
-    component: UserProfile,
-    subItem: [],
-    layout: "/admin",
-  },
+  // {
+  //   path: "/admin",
+  //   name: "Admin Profile",
+  //   icon: Person,
+  //   component: UserProfile,
+  //   subItem: [],
+  //   layout: "/admin",
+  // },
   {
     path: "/Design",
     name: "Basic Design",
