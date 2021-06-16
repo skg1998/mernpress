@@ -16,7 +16,6 @@ import CartItems from './Cart-items'
 import CouponApplyForm from '../../components/CouponApplyForm/CouponApplyForm'
 
 import cart from './cart-helper.js'
-import auth from '../auth/auth-helper'
 
 const defaultProps = {
   color: 'secondary',

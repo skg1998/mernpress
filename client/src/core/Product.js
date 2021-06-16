@@ -27,10 +27,8 @@ const Product = (props) => {
       <Header />
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <Grid item xs={4} sm={4}>
+          <Grid item xs={10} sm={10}>
             <ProductDetail />
-          </Grid>
-          <Grid item xs={6} sm={6}>
           </Grid>
           <Grid item xs={2} sm={2}>
             <ProductAction />
