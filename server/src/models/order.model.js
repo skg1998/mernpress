@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const geocoder = require('../util/geoCoder');
 
 //Cart item
 const CartItemSchema = new mongoose.Schema({
@@ -7,8 +6,8 @@ const CartItemSchema = new mongoose.Schema({
   quantity: Number,
   status: {
     type: String,
-    default: "Not processed",
-    enum: ["Not processed", "Processing", "Shipped", "Delivered", "Cancelled"]
+    enum: ["Not processed", "Processing", "Shipped", "Delivered", "Cancelled"],
+    default: "Not processed"
   }
 });
 
@@ -21,7 +20,8 @@ const UserPaymentSchema = new mongoose.Schema({
     ref: "User"
   },
   payment_type: {
-    type: String
+    type: String,
+    default: 'COD'
   },
   provider: {
     type: String
@@ -52,6 +52,10 @@ const OrderSchema = new mongoose.Schema({
     trim: true,
     match: [/.+\@.+\..+/, "Please fill a valid email address"],
     required: "Email is required"
+  },
+  customer_phone: {
+    type: Number,
+    required: "Phone is required"
   },
   delivery_address: {
     street: { type: String, required: "Street is required" },
