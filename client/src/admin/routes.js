@@ -8,6 +8,9 @@ import AddProduct from "./components/AddProduct";
 import AddShop from "./components/AddShop";
 import AddPaymentMethod from "./components/AddPaymentMethod"
 import BasicDesign from './components/BasicDesign'
+import LatestOrder from './components/LatestOrder'
+import Admin from './Pages/AdminProfile';
+import PersonIcon from '@material-ui/icons/Person';
 
 const dashboardRoutes = [
   {
@@ -18,14 +21,14 @@ const dashboardRoutes = [
     subItem: [],
     layout: "/admin",
   },
-  // {
-  //   path: "/admin",
-  //   name: "Admin Profile",
-  //   icon: Person,
-  //   component: UserProfile,
-  //   subItem: [],
-  //   layout: "/admin",
-  // },
+  {
+    path: "/admin",
+    name: "Admin Profile",
+    icon: PersonIcon,
+    component: Admin,
+    subItem: [],
+    layout: "/admin",
+  },
   {
     path: "/Design",
     name: "Basic Design",
@@ -61,6 +64,14 @@ const dashboardRoutes = [
       }
     ],
     layout: "/admin",
+  },
+  {
+    path: "/latest-order",
+    name: "Latest Order",
+    icon: PagesIcon,
+    component: LatestOrder,
+    layout: "/admin",
+    subItem: []
   },
   // {
   //   path: "/user",

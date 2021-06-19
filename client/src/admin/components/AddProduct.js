@@ -1,127 +1,112 @@
-import React, { Component } from 'react';
-import { Button,TextField ,Card ,CardHeader, Grid , withStyles,Select,MenuItem } from '@material-ui/core';
-import * as Api from '../../Api';
+import React from 'react';
+import { v4 as uuid } from 'uuid';
+import {
+    Box,
+    Container,
+    Grid
+} from '@material-ui/core';
+import ProductListToolbar from '../../components/Product/ProductListToolbar';
+import ProductCard from '../../components/Product/ProductCard';
 
-
-const useStyles = (theme) => ({
-    card: {
-        alignItems: "center"
-      },
-      imageupload:{
-        padding : "18.5px 0px",
-        borderRadius: "3px",
-        width: "100%",
-        borderWidth: "1px",
-        borderStyle: 'inset',
-        borderColor: 'rgb(173 173 173 / 76%)'
-    }  
-  });
-
-class AddProduct extends Component {
-    state = {
-        name: '',
-        files:'',
-        description:'',
-        category:'',
-        quantity:'',
-        price:'',
-        fetchCategory:[]
-    };
-
-
-    componentDidMount() {
-        Api.Category()
-        .then(categoryData => {
-            console.log(categoryData)
-            this.setState({ fetchCategory: categoryData });
-        });
+const products = [
+    {
+        id: uuid(),
+        createdAt: '27/03/2019',
+        description: 'Dropbox is a file hosting service that offers cloud storage, file synchronization, a personal cloud.',
+        media: '/static/images/products/product_1.png',
+        title: 'Dropbox',
+        totalDownloads: '594'
+    },
+    {
+        id: uuid(),
+        createdAt: '31/03/2019',
+        description: 'Medium is an online publishing platform developed by Evan Williams, and launched in August 2012.',
+        media: '/static/images/products/product_2.png',
+        title: 'Medium Corporation',
+        totalDownloads: '625'
+    },
+    {
+        id: uuid(),
+        createdAt: '03/04/2019',
+        description: 'Slack is a cloud-based set of team collaboration tools and services, founded by Stewart Butterfield.',
+        media: '/static/images/products/product_3.png',
+        title: 'Slack',
+        totalDownloads: '857'
+    },
+    {
+        id: uuid(),
+        createdAt: '04/04/2019',
+        description: 'Lyft is an on-demand transportation company based in San Francisco, California.',
+        media: '/static/images/products/product_4.png',
+        title: 'Lyft',
+        totalDownloads: '406'
+    },
+    {
+        id: uuid(),
+        createdAt: '04/04/2019',
+        description: 'GitHub is a web-based hosting service for version control of code using Git.',
+        media: '/static/images/products/product_5.png',
+        title: 'GitHub',
+        totalDownloads: '835'
+    },
+    {
+        id: uuid(),
+        createdAt: '04/04/2019',
+        description: 'Squarespace provides software as a service for website building and hosting. Headquartered in NYC.',
+        media: '/static/images/products/product_6.png',
+        title: 'Squarespace',
+        totalDownloads: '835'
     }
-
-    handleSubmit = event => {
-        event.preventDefault();
-        const {name, files, description, category, quantity, price} = this.state;
-        let formData = new FormData();
-
-        for (let i = 0; i < files.length; i++) {
-            formData.append(`files[${i}]`, files[i])
-        }
-
-        formData.append("name",name)
-        formData.append("description",description)
-        formData.append("category",category)
-        formData.append("quantity",quantity)
-        formData.append("price",price)
+];
 
 
-        // Api.addProduct(formData).then((data) => {
-            // if (data.error) {
-            //     console.log(data.error)
-            // } else {
-            //     console.log(data)
-            // }
-        // })
-    }
-    
-    handleChange = (event) => {
-        const target = event.target;
-        const field =  target.name;
-        const value = target.value
-
-        this.setState({
-            [field]:  value
-        });
-    }
-
-    render() { 
-        const { classes } = this.props;
-        return (
-        <div > 
-            <Grid
-               container
-                className={classes.card}
-                spacing={0}
-                alignItems="center"
-                justify="center"
+const ProductList = () => {
+    return (
+        <>
+            <Box
+                sx={{
+                    backgroundColor: 'background.default',
+                    minHeight: '100%',
+                    py: 3
+                }}
             >
-                <Card style={{padding:'20px'}}>
-                    <form onSubmit = { this.handleSubmit } noValidate autoComplete="off">
-                        <CardHeader style={{color:'#3f51b5'}} title="Add Product" />
-                        <Grid item xs={12}>
-                            <TextField  label="Product Name" variant="outlined"  type = "text" name = "name" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
-                        </Grid>
-                        <Grid item xs={12}>    
-                            <input  className={classes.imageupload} type = "file" accept="image/*" multiple name = "files" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField  label="Description" variant="outlined"  type = "text" name = "description" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Select
-                                name="category"
-                                onChange= {this.handleChange}
-                                label="Category"
-                                variant="outlined"
-                                style={{marginTop:'10px', width:'100%'}}
+                <Container maxWidth={false}>
+                    <ProductListToolbar />
+                    <Box sx={{ pt: 3 }}>
+                        <Grid
+                            container
+                            spacing={3}
+                        >
+                            {products.map((product) => (
+                                <Grid
+                                    item
+                                    key={product.id}
+                                    lg={4}
+                                    md={6}
+                                    xs={12}
                                 >
-                                <MenuItem value=""><em>None</em> </MenuItem>
-                                {this.state.fetchCategory.map(data =>
-                                    <MenuItem value={data._id}>{data.name}</MenuItem>
-                                )}
-                            </Select>
+                                    <ProductCard product={product} />
+                                </Grid>
+                            ))}
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField  label="Quantity" variant="outlined"  type = "text" name = "quantity" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField  label="Price" variant="outlined"  type = "text" name = "price" onChange= {this.handleChange} style={{marginTop:'10px', width:'100%'}}/>
-                        </Grid>
-                        <Button  variant="contained" color="primary" type = "submit" style={{ marginTop:'10px',width:'100%'}}> Submit </Button>
-                    </form>
-                </Card>
-            </Grid> 
-        </div>
-        );
-  }
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            pt: 3
+                        }}
+                    >
+                        {/* <Pagination
+                        color="primary"
+                        count={3}
+                        size="small"
+                    /> */}
+                    </Box>
+                </Container>
+            </Box>
+        </>
+    )
 }
 
-export default withStyles(useStyles)(AddProduct);
+export default ProductList;

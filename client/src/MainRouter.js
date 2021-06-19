@@ -11,6 +11,7 @@ import Signup from './core/signup';
 import { Signin } from './core/login';
 import NotFound from './core/NotFound';
 import Checkout from "./core/Checkout";
+import Profile from './core/UserProfile';
 
 //Admin
 import { AdminLogin } from './admin/Pages/AdminLogin';
@@ -28,6 +29,7 @@ const MainRouter = () => {
         <PrivateRoute path="/admin" component={Admin} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
+        <Route path="/profile" component={Profile} />
         <Route path="/product/:productId" component={Product} />
         <Route path="/cart" component={Cart} />
         <PrivateRoute path="/checkout" component={Checkout} />

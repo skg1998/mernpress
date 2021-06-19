@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import Menu from "@material-ui/icons/Menu";
 import AdminNavbarLinks from "./AdminNavbarLinks.js";
-import Button from "../../components/CustomButtons/Button.js";
+import Button from "@material-ui/core/Button";
 import styles from "../../assets/jss/mernpress/components/headerStyle.js";
 
 const useStyles = makeStyles(styles);
@@ -33,12 +33,12 @@ export default function Header(props) {
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
         <div className={classes.flex}>
-          <Button color="transparent" href="#" className={classes.title}>
+          <Button className={classes.title}>
             {makeBrand()}
           </Button>
         </div>
         <Hidden smDown implementation="css">
-           <AdminNavbarLinks />
+          <AdminNavbarLinks />
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton
