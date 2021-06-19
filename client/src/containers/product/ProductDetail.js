@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent';
+import Badge from '@material-ui/core/Badge';
 
 import { ReactComponent as IconStarFill } from "bootstrap-icons/icons/star-fill.svg";
 
@@ -11,6 +14,68 @@ import RatingsReviews from '../../components/Others/RatingsReviews';
 import QuestionAnswer from '../../components/Others/QuestionAnswer';
 import ShippingReturns from '../../components/Others/ShippingReturns';
 import Details from '../../components/Others/Details';
+import ImageMagnifier from '../../components/Image/ImageMagnifier';
+
+const data = {
+    _id: "1",
+    title: "Redmi Note 9 Pro Max",
+    image: ["https://images-na.ssl-images-amazon.com/images/I/71usqWEJleL._SL1500_.jpg",
+        "https://images-na.ssl-images-amazon.com/images/I/71usqWEJleL._SL1500_.jpg",
+        "https://images-na.ssl-images-amazon.com/images/I/71usqWEJleL._SL1500_.jpg"
+    ],
+    description: "Country Of Origin - India 64MP quad rear camera with ultra-wide, macro mode, super macro, portrait, night mode, 960fps slowmotion, ai scene recognition, pro color, HDR, pro mode | 32MP front camera 16.94 centimeters (6.67 inch) FHD+ LCD multi-touch capacitive touchscreen, full screen dot display with 2400 x 1080 pixels resolution, 400 ppi pixel density and 20:9 aspect ratio | 2.5D curved glass",
+    catalogs: "(Champagne Gold, 6GB RAM, 64GB Storage) - 64MP Quad Camera & Latest 8nm Snapdragon 720G & Alexa Hands-Free",
+    variants: [
+        {
+            color: 'red',
+            images: [
+                "https://images-na.ssl-images-amazon.com/images/I/71usqWEJleL._SL1500_.jpg",
+                "https://images-na.ssl-images-amazon.com/images/I/71usqWEJleL._SL1500_.jpg",
+                "https://images-na.ssl-images-amazon.com/images/I/71usqWEJleL._SL1500_.jpg"
+            ],
+            sizes: [
+                {
+                    size: '4.5 inch',
+                    available: 5,
+                    sku: 'KS935FGH',
+                    price: 10499
+                },
+                {
+                    size: '5.5 inch',
+                    available: 2,
+                    sku: 'KS935FGH',
+                    price: 10493
+                }
+            ]
+        },
+        {
+            color: 'blue',
+            images: [
+                "https://images-na.ssl-images-amazon.com/images/I/71usqWEJleL._SL1500_.jpg",
+                "https://images-na.ssl-images-amazon.com/images/I/71usqWEJleL._SL1500_.jpg",
+                "https://images-na.ssl-images-amazon.com/images/I/71usqWEJleL._SL1500_.jpg"
+            ],
+            sizes: [
+                {
+                    size: '5.5 inch',
+                    available: 5,
+                    sku: 'KS935FGH',
+                    price: 10499
+                }
+            ]
+        }
+    ],
+    brand: "Redmi",
+    requiredShipping: true,
+    dateAvailable: "",
+    condition: [],
+    category: [],
+    discount: [],
+    shop: [],
+    review: { rating: 4, totalreview: 445 },
+    totalUserRating: 45,
+    averageRating: '4.4',
+}
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -57,139 +122,66 @@ const ProductDetail = (props) => {
                 <Grid item md={12}>
                     <Grid container spacing={3}>
                         <Grid item md={4}>
-                            <img
-                                src="../../images/products/tshirt_red_480x400.webp"
-                                className="img-fluid mb-3"
-                                alt=""
-                            />
-                            <img
-                                src="../../images/products/tshirt_grey_480x400.webp"
-                                className="border border-secondary mr-2" width="75"
-                                alt="..."
-                            />
-                            <img
-                                src="../../images/products/tshirt_black_480x400.webp"
-                                className="border border-secondary mr-2" width="75"
-                                alt="..."
-                            />
-                            <img
-                                src="../../images/products/tshirt_green_480x400.webp"
-                                className="border border-secondary mr-2" width="75"
-                                alt="..."
-                            />
+                            <Card >
+                                <Grid container spacing={3}>
+                                    <Grid item md={12} >
+                                        <ImageMagnifier data={data.image[0]} />
+                                    </Grid>
+                                    <Grid item md={12}>
+                                        <Grid container spacing={3}>
+                                            {data && data.image.map((img, i) => (
+                                                <Grid md={4} key={i}>
+                                                    <Card style={{ width: "100px", height: "100px" }}>
+                                                        <img src={img} style={{ backgroundSize: 'cover' }} />
+                                                    </Card>
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Card>
                         </Grid>
                         <Grid item md={8}>
-                            <h1 className="h5 d-inline mr-2">
-                                Great product name goes here
-                            </h1>
-                            <span className="badge bg-success mr-2">New</span>
-                            <span className="badge bg-danger mr-2">Hot</span>
-                            <div className="mb-3">
-                                <IconStarFill className="text-warning mr-1" />
-                                <IconStarFill className="text-warning mr-1" />
-                                <IconStarFill className="text-warning mr-1" />
-                                <IconStarFill className="text-warning mr-1" />
-                                <IconStarFill className="text-secondary mr-1" />|{" "}
-                                <span className="text-muted small">
-                                    42 ratings and 4 reviews
-                                </span>
-                            </div>
-                            <dl className="row small mb-3">
-                                <dt className="col-sm-3">Availability</dt>
-                                <dd className="col-sm-9">In stock</dd>
-                                <dt className="col-sm-3">Sold by</dt>
-                                <dd className="col-sm-9">Authorised Store</dd>
-                                <dt className="col-sm-3">Size</dt>
-                                <dd className="col-sm-9">
-                                    <div className="form-check form-check-inline">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            name="size"
-                                            id="sizes"
-                                            disabled
-                                        />
-                                        <label className="form-check-label" htmlFor="sizes">
-                                            S
-                                        </label>
-                                    </div>
-                                    <div className="form-check form-check-inline">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            name="size"
-                                            id="sizem"
-                                            disabled
-                                        />
-                                        <label className="form-check-label" htmlFor="sizem">
-                                            M
-                                        </label>
-                                    </div>
-                                    <div className="form-check form-check-inline">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            name="size"
-                                            id="sizel"
-                                        />
-                                        <label className="form-check-label" htmlFor="sizel">
-                                            L
-                                        </label>
-                                    </div>
-                                    <div className="form-check form-check-inline">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            name="size"
-                                            id="sizexl"
-                                        />
-                                        <label className="form-check-label" htmlFor="sizexl">
-                                            XL
-                                        </label>
-                                    </div>
-                                    <div className="form-check form-check-inline">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            name="size"
-                                            id="sizexxl"
-                                        />
-                                        <label className="form-check-label" htmlFor="sizexxl">
-                                            XXL
-                                        </label>
-                                    </div>
-                                </dd>
-                                <dt className="col-sm-3">Color</dt>
-                                <dd className="col-sm-9">
-                                    <button className="btn btn-sm btn-primary p-2 mr-2"></button>
-                                    <button className="btn btn-sm btn-secondary p-2 mr-2"></button>
-                                    <button className="btn btn-sm btn-success p-2 mr-2"></button>
-                                    <button className="btn btn-sm btn-danger p-2 mr-2"></button>
-                                    <button className="btn btn-sm btn-warning p-2 mr-2"></button>
-                                    <button className="btn btn-sm btn-info p-2 mr-2"></button>
-                                    <button className="btn btn-sm btn-dark p-2 mr-2"></button>
-                                </dd>
-                            </dl>
+                            <Grid contianer spacing={3}>
+                                <Card>
+                                    <CardContent >
+                                        <Grid item md={12}>
 
-                            <div className="mb-3">
-                                <span className="font-weight-bold h5 mr-2">$1900</span>
-                                <del className="small text-muted mr-2">$2000</del>
-                                <span className="rounded p-1 bg-warning  mr-2 small">
-                                    -$100
-                                </span>
-                            </div>
-                            <div>
-                                <p className="font-weight-bold mb-2 small">
-                                    Product Highlights
-                                </p>
-                                <ul className="small">
-                                    <li>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    </li>
-                                    <li>Etiam ullamcorper nibh eget faucibus dictum.</li>
-                                    <li>Cras consequat felis ut vulputate porttitor.</li>
-                                </ul>
-                            </div>
+                                            <Badge color="secondary" badgeContent={"New"} >
+                                                <h1>
+                                                    {data.title}
+                                                </h1>
+                                            </Badge>
+                                            <Grid container spacing={3}>
+                                                <Grid item md={12}>
+                                                    <div className="mb-3">
+                                                        <IconStarFill className="text-warning mr-1" />
+                                                        <IconStarFill className="text-warning mr-1" />
+                                                        <IconStarFill className="text-warning mr-1" />
+                                                        <IconStarFill className="text-warning mr-1" />
+                                                        <IconStarFill className="text-secondary mr-1" />|{" "}
+                                                        <span className="text-muted small">
+                                                            42 ratings and 4 reviews
+                                                        </span>
+                                                    </div>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item md={12}>
+                                            <Grid container spacing={3}>
+                                                {data && data.variants.map((varient, i) => (
+                                                    <Grid md={1} key={1}>
+                                                        <div style={{ background: varient.color, height: '25px', width: '25px' }}></div>
+                                                    </Grid>
+                                                ))}
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item md={12}>
+
+                                        </Grid>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
                         </Grid>
                     </Grid>
                     <Grid container spacing={3}>

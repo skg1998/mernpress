@@ -12,7 +12,7 @@ import Divider from "@material-ui/core/Divider";
 import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
 import Dashboard from "@material-ui/icons/Dashboard";
-import Button from "../CustomButtons/Button";
+import Button from "@material-ui/core/Button";
 import styles from "../../assets/jss/mernpress/components/headerLinksStyle.js";
 
 const useStyles = makeStyles(styles);
@@ -46,9 +46,6 @@ export default function AdminNavbarLinks() {
       <div className={classes.searchWrapper}>
       </div>
       <Button
-        color={window.innerWidth > 959 ? "transparent" : "white"}
-        justIcon={window.innerWidth > 959}
-        simple={!(window.innerWidth > 959)}
         aria-label="Dashboard"
         className={classes.buttonLink}
       >
@@ -59,9 +56,6 @@ export default function AdminNavbarLinks() {
       </Button>
       <div className={classes.manager}>
         <Button
-          color={window.innerWidth > 959 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
           aria-owns={openNotification ? "notification-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickNotification}
@@ -137,9 +131,6 @@ export default function AdminNavbarLinks() {
       </div>
       <div className={classes.manager}>
         <Button
-          color={window.innerWidth > 959 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
           aria-owns={openProfile ? "profile-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickProfile}

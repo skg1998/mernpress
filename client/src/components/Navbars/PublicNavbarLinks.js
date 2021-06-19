@@ -12,7 +12,7 @@ import Divider from "@material-ui/core/Divider";
 import Person from "@material-ui/icons/Person";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import Button from "../CustomButtons/Button";
+import Button from "@material-ui/core/Button";
 import styles from "../../assets/jss/mernpress/components/headerLinksStyle.js";
 import { Link } from "react-router-dom";
 
@@ -32,14 +32,11 @@ export default function PublicNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
-  
+
   return (
     <div>
       <div className={classes.manager}>
         <Button
-          color={window.innerWidth > 959 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
           aria-haspopup="true"
           className={classes.buttonLink}
         >
@@ -47,12 +44,9 @@ export default function PublicNavbarLinks() {
           <span className={classes.notifications}>5</span>
         </Button>
       </div>
-      
-      
+
+
       <Button
-        color={window.innerWidth > 959 ? "transparent" : "white"}
-        justIcon={window.innerWidth > 959}
-        simple={!(window.innerWidth > 959)}
         aria-label="Cart"
         className={classes.buttonLink}
       >
@@ -62,13 +56,10 @@ export default function PublicNavbarLinks() {
         <Hidden mdUp implementation="css">
           <p className={classes.linkText}>Cart</p>
         </Hidden>
-      </Button>  
+      </Button>
 
       <div className={classes.manager}>
         <Button
-          color={window.innerWidth > 959 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
           aria-owns={openProfile ? "profile-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickProfile}
@@ -131,4 +122,3 @@ export default function PublicNavbarLinks() {
     </div>
   );
 }
-   

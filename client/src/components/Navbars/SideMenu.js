@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,7 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Hidden from "@material-ui/core/Hidden";
 import Menu from "@material-ui/icons/Menu";
 import PublicNavbarLinks from "./PublicNavbarLinks.js";
-import Button from "../../components/CustomButtons/Button.js";
+import Button from "@material-ui/core/Button";
 import styles from "../../assets/jss/mernpress/components/headerStyle.js";
 import InputBase from '@material-ui/core/InputBase';
 import { Link } from "react-router-dom";
@@ -48,17 +48,17 @@ function SideMenu(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-          {
-            props.routes.map((items)=>(
-              items.route.map((item,index)=>(
-                <ListItem className={classes.listitem} button key={index} >
-                      <Link to={item.path}>
-                        <ListItemText primary={ item.name} />
-                      </Link>
-                </ListItem>
-              ))
+        {
+          props.routes.map((items) => (
+            items.route.map((item, index) => (
+              <ListItem className={classes.listitem} button key={index} >
+                <Link to={item.path}>
+                  <ListItemText primary={item.name} />
+                </Link>
+              </ListItem>
             ))
-          }
+          ))
+        }
       </List>
     </div>
   );
@@ -81,12 +81,12 @@ function SideMenu(props) {
       <CssBaseline />
       <AppBar className={classes.appBar + appBarClasses}>
         <Toolbar className={classes.container}>
-          <IconButton  color="inherit" onClick={toggleDrawer('left',true)}> <Menu /> </IconButton>
-          <Drawer anchor="left" open={drawerState['left']} onClose={toggleDrawer('left',false)}>
-              {list('left')}
+          <IconButton color="inherit" onClick={toggleDrawer('left', true)}> <Menu /> </IconButton>
+          <Drawer anchor="left" open={drawerState['left']} onClose={toggleDrawer('left', false)}>
+            {list('left')}
           </Drawer>
           <div className={classes.flex}>
-            <Button color="transparent" href="#" className={classes.title}>
+            <Button className={classes.title}>
               {makeBrand()}
             </Button>
           </div>
@@ -110,7 +110,7 @@ function SideMenu(props) {
         </Toolbar>
       </AppBar>
     </div>
-    
+
   );
 }
 
@@ -120,5 +120,5 @@ SideMenu.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default SideMenu   
+export default SideMenu
 
