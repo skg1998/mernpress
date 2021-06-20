@@ -5,8 +5,10 @@ import {
     Container,
     Grid
 } from '@material-ui/core';
-import ProductListToolbar from '../../components/Product/ProductListToolbar';
-import ProductCard from '../../components/Product/ProductCard';
+
+import DialogComponent from '../../components/DailogComponent/DailogComponent'
+import ProductListToolbar from '../../components/Card/CardToolBox';
+import ProductCard from '../../components/Card/CustomCard';
 
 const products = [
     {
@@ -61,6 +63,18 @@ const products = [
 
 
 const ProductList = () => {
+    const [open, setOpen] = React.useState(false);
+    const [selectedValue, setSelectedValue] = React.useState();
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (value) => {
+        setOpen(false);
+        setSelectedValue(value);
+    };
+
     return (
         <>
             <Box
@@ -71,7 +85,7 @@ const ProductList = () => {
                 }}
             >
                 <Container maxWidth={false}>
-                    <ProductListToolbar />
+                    <ProductListToolbar clickHandler={handleClickOpen} title={"Add Product"} />
                     <Box sx={{ pt: 3 }}>
                         <Grid
                             container
@@ -85,7 +99,7 @@ const ProductList = () => {
                                     md={6}
                                     xs={12}
                                 >
-                                    <ProductCard product={product} />
+                                    <ProductCard product={product} onClick={handleClickOpen} />
                                 </Grid>
                             ))}
                         </Grid>
@@ -105,6 +119,7 @@ const ProductList = () => {
                     </Box>
                 </Container>
             </Box>
+            <DialogComponent selectedValue={selectedValue} open={open} onClose={handleClose} />
         </>
     )
 }
