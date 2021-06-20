@@ -1,46 +1,71 @@
 import React from 'react';
-
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import PersonIcon from '@material-ui/icons/Person';
+import AddIcon from '@material-ui/icons/Add';
+import { blue } from '@material-ui/core/colors';
+
+const emails = ['username@gmail.com', 'user02@gmail.com'];
+
+const useStyles = makeStyles({
+    avatar: {
+        backgroundColor: blue[100],
+        color: blue[600],
+    },
+});
 
 const DialogComponent = (props) => {
-    const { open, handleClose } = props;
-    function handlechange() {
-        props.onClick();
-    }
+    const classes = useStyles();
+    const { onClose, selectedValue, open } = props;
+
+    const handleClose = () => {
+        onClose(selectedValue);
+    };
+
+    const handleListItemClick = (value) => {
+        onClose(value);
+    };
     return (
-        <Dialog open={open} onClose={handlechange} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-            <DialogContent>
-                <DialogContentText>
-                    To subscribe to this website, please enter your email address here. We will send updates
-                    occasionally.
-            </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Email Address"
-                    type="email"
-                    fullWidth
-                />
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                    Cancel
-            </Button>
-                <Button onClick={handleClose} color="primary">
-                    Subscribe
-                </Button>
-            </DialogActions>
+        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+            <List>
+                {emails.map((email) => (
+                    <ListItem button onClick={() => handleListItemClick(email)} key={email}>
+                        <ListItemAvatar>
+                            <Avatar className={classes.avatar}>
+                                <PersonIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary={email} />
+                    </ListItem>
+                ))}
+
+                <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
+                    <ListItemAvatar>
+                        <Avatar>
+                            <AddIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary="Add account" />
+                </ListItem>
+            </List>
         </Dialog>
+
     );
 }
+
+DialogComponent.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
+    selectedValue: PropTypes.string.isRequired,
+};
 
 export default DialogComponent;
 
