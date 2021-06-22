@@ -2,24 +2,24 @@ import PropType from 'prop-types';
 import React, { useState } from 'react';
 
 const ColorChooser = (props) => {
-    const { availableColors, onSelectedColorChange } = props;
+    const { color, onSelectedColorChange } = props;
+    console.log("color", color)
     const [selectedColor, setSelectedColor] = useState('');
 
-    const setColor = (color) => {
-        setSelectedColor(color);
-        onSelectedColorChange(color);
+    const setColor = (newcolor) => {
+        setSelectedColor(newcolor);
+        onSelectedColorChange(newcolor);
     };
+
     return (
         <div className="color-chooser">
-            {availableColors.map((color) => (
-                <div
-                    className={selectedColor === color ? 'color-item color-item-selected' : 'color-item'}
-                    key={color}
-                    onClick={() => setColor(color)}
-                    style={{ backgroundColor: color }}
-                    role="presentation"
-                />
-            ))}
+            <div
+                className={selectedColor === color ? 'color-item color-item-selected' : 'color-item'}
+                key={color}
+                onClick={() => setColor(color)}
+                style={{ backgroundColor: color }}
+                role="presentation"
+            />
         </div>
     );
 };

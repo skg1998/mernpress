@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent';
 import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button'
 
 import { ReactComponent as IconStarFill } from "bootstrap-icons/icons/star-fill.svg";
 
@@ -15,6 +16,7 @@ import QuestionAnswer from '../../components/Others/QuestionAnswer';
 import ShippingReturns from '../../components/Others/ShippingReturns';
 import Details from '../../components/Others/Details';
 import ImageMagnifier from '../../components/Image/ImageMagnifier';
+import colorChooser from '../../common/colorChooser/colorChooser'
 
 const data = {
     _id: "1",
@@ -110,12 +112,13 @@ const useStyles = makeStyles({
 
 const ProductDetail = (props) => {
     const classes = useStyles();
-
+    const [selectedColor, setSelectedColor] = useState('');
+    const [varient, setVarient] = useState(0);
     const [value, setValue] = useState(0);
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
     return (
         <div className="container-fluid mt-3">
             <Grid container spacing={3}>
@@ -146,12 +149,9 @@ const ProductDetail = (props) => {
                                 <Card>
                                     <CardContent >
                                         <Grid item md={12}>
-
-                                            <Badge color="secondary" badgeContent={"New"} >
-                                                <h1>
-                                                    {data.title}
-                                                </h1>
-                                            </Badge>
+                                            <h1>
+                                                {data.title}
+                                            </h1>
                                             <Grid container spacing={3}>
                                                 <Grid item md={12}>
                                                     <div className="mb-3">
@@ -168,16 +168,46 @@ const ProductDetail = (props) => {
                                             </Grid>
                                         </Grid>
                                         <Grid item md={12}>
+                                            <h3> Price: Price </h3>
+                                        </Grid>
+                                        <Grid item md={12}>
+                                            <h3> Brand: {data.brand} </h3>
+                                        </Grid>
+                                        <Grid item md={12}>
+                                            <h3> Available: Available </h3>
+                                        </Grid>
+                                        <Grid item md={12}>
+                                            <h3> shop: shop </h3>
+                                        </Grid>
+                                        <Grid item md={12}>
                                             <Grid container spacing={3}>
-                                                {data && data.variants.map((varient, i) => (
-                                                    <Grid md={1} key={1}>
-                                                        <div style={{ background: varient.color, height: '25px', width: '25px' }}></div>
-                                                    </Grid>
-                                                ))}
+                                                <h3> Color :
+                                                    {data && data.variants.map((varient, i) => (
+                                                        <span key={i}>
+                                                            <colorChooser
+                                                                color={varient.color}
+                                                                onSelectedColorChange={varient.color}
+                                                            />
+                                                        </span>
+                                                    ))}
+                                                </h3>
                                             </Grid>
                                         </Grid>
                                         <Grid item md={12}>
-
+                                            <Grid container spacing={3}>
+                                                {data && data.variants[varient].sizes.map((size, i) => (
+                                                    <Grid md={3}>
+                                                        <Card style={{ margin: '10px' }}>
+                                                            <CardContent>
+                                                                <p> Price: {size.price} </p>
+                                                                <p> Available: {size.available} </p>
+                                                                <p> Size: {size.size} </p>
+                                                                <p> Sku: {size.sku} </p>
+                                                            </CardContent>
+                                                        </Card>
+                                                    </Grid>
+                                                ))}
+                                            </Grid>
                                         </Grid>
                                     </CardContent>
                                 </Card>
