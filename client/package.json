@@ -29,7 +29,6 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
     "react-image-magnifiers": "^1.4.0",
-    "react-material-ui-carousel": "^2.0.2",
     "react-multi-carousel": "^2.5.5",
     "react-perfect-scrollbar": "^1.5.8",
     "react-redux": "^7.2.2",
@@ -62,5 +61,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
