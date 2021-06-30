@@ -9,57 +9,41 @@
   "basePath": "/api/v1",
   "tags": [
     {
-      "name": "users",
-      "description": "Users"
-    },
-    {
-      "name": "admin",
-      "description": "Admin"
+      "name": "auth",
+      "description": "All Auth api for authentication and authrization"
     },
     {
       "name": "shops",
-      "description": "Shops"
+      "description": "Shops CRUD Api"
     },
     {
       "name": "products",
-      "description": "Products"
-    },
-    {
-      "name": "title",
-      "description": "Title"
+      "description": "All Products CRUD Api"
     },
     {
       "name": "category",
-      "description": "Category"
-    },
-    {
-      "name": "banner",
-      "description": "Banner"
-    },
-    {
-      "name": "slidder",
-      "description": "Slidder"
+      "description": "All Category CRUD Api"
     },
     {
       "name": "review",
-      "description": "Review"
+      "description": "All Review CRUD Api"
     }
   ],
-  "schemes": ["http"],
+  "schemes": ["http", "https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/users": {
+    "/auth": {
       "get": {
-        "tags": ["users"],
-        "x-swagger-router-controller": "users",
+        "tags": ["auth"],
+        "x-swagger-router-controller": "auth",
         "operationId": "GET",
-        "description": "Returns a list of userss",
+        "description": "Returns a list of auth",
         "responses": {
           "200": {
-            "description": "Users list",
+            "description": "auth list",
             "schema": {
-              "$ref": "#/definitions/Users"
+              "$ref": "#/definitions/auth"
             }
           },
           "default": {
@@ -71,26 +55,26 @@
         }
       },
       "post": {
-        "tags": ["users"],
-        "x-swagger-router-controller": "users",
+        "tags": ["auth"],
+        "x-swagger-router-controller": "auth",
         "operationId": "POST",
-        "description": "Create users",
+        "description": "Create auth",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "description": "The users details",
+            "description": "The auth details",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/users"
+              "$ref": "#/definitions/auth"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Newly created users",
+            "description": "Newly created auth",
             "schema": {
-              "$ref": "#/definitions/users"
+              "$ref": "#/definitions/auth"
             }
           },
           "default": {
@@ -102,26 +86,26 @@
         }
       }
     },
-    "/users/{id}": {
+    "/auth/{id}": {
       "get": {
-        "tags": ["users"],
-        "x-swagger-router-controller": "users",
+        "tags": ["auth"],
+        "x-swagger-router-controller": "auth",
         "operationId": "GET",
-        "description": "Fetch a users",
+        "description": "Fetch a auth",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The users ID to fetch",
+            "description": "The auth ID to fetch",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "users details",
+            "description": "auth details",
             "schema": {
-              "$ref": "#/definitions/users"
+              "$ref": "#/definitions/auth"
             }
           },
           "default": {
@@ -133,33 +117,33 @@
         }
       },
       "put": {
-        "tags": ["users"],
-        "x-swagger-router-controller": "users",
+        "tags": ["auth"],
+        "x-swagger-router-controller": "auth",
         "operationId": "PUT",
-        "description": "Update a users",
+        "description": "Update a auth",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The users ID to update",
+            "description": "The auth ID to update",
             "required": true,
             "type": "integer"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "The users details for the update",
+            "description": "The auth details for the update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/users"
+              "$ref": "#/definitions/auth"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated users details",
+            "description": "Updated auth details",
             "schema": {
-              "$ref": "#/definitions/users"
+              "$ref": "#/definitions/auth"
             }
           },
           "default": {
@@ -171,33 +155,33 @@
         }
       },
       "delete": {
-        "tags": ["users"],
-        "x-swagger-router-controller": "users",
+        "tags": ["auth"],
+        "x-swagger-router-controller": "auth",
         "operationId": "PUT",
-        "description": "Update a users",
+        "description": "Update a auth",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The users ID to update",
+            "description": "The auth ID to update",
             "required": true,
             "type": "integer"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "The users details for the update",
+            "description": "The auth details for the update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/users"
+              "$ref": "#/definitions/auth"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated users details",
+            "description": "Updated auth details",
             "schema": {
-              "$ref": "#/definitions/users"
+              "$ref": "#/definitions/auth"
             }
           },
           "default": {
@@ -209,17 +193,17 @@
         }
       }
     },
-    "/admin": {
+    "/review": {
       "get": {
-        "tags": ["admin"],
-        "x-swagger-router-controller": "admin",
+        "tags": ["review"],
+        "x-swagger-router-controller": "review",
         "operationId": "GET",
-        "description": "Returns a list of admin",
+        "description": "Returns a list of review",
         "responses": {
           "200": {
-            "description": "Users list",
+            "description": "auth list",
             "schema": {
-              "$ref": "#/definitions/Admin"
+              "$ref": "#/definitions/review"
             }
           },
           "default": {
@@ -231,26 +215,26 @@
         }
       },
       "post": {
-        "tags": ["admin"],
-        "x-swagger-router-controller": "admin",
+        "tags": ["review"],
+        "x-swagger-router-controller": "review",
         "operationId": "POST",
-        "description": "Create users",
+        "description": "Create auth",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "description": "The admin details",
+            "description": "The review details",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Admin"
+              "$ref": "#/definitions/review"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Newly created admin",
+            "description": "Newly created review",
             "schema": {
-              "$ref": "#/definitions/admin"
+              "$ref": "#/definitions/review"
             }
           },
           "default": {
@@ -262,26 +246,26 @@
         }
       }
     },
-    "/admin/{id}": {
+    "/review/{id}": {
       "get": {
-        "tags": ["admin"],
-        "x-swagger-router-controller": "admin",
+        "tags": ["review"],
+        "x-swagger-router-controller": "review",
         "operationId": "GET",
-        "description": "Fetch a admin",
+        "description": "Fetch a review",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The admin ID to fetch",
+            "description": "The review ID to fetch",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "admin details",
+            "description": "review details",
             "schema": {
-              "$ref": "#/definitions/admin"
+              "$ref": "#/definitions/review"
             }
           },
           "default": {
@@ -293,33 +277,33 @@
         }
       },
       "put": {
-        "tags": ["admin"],
-        "x-swagger-router-controller": "admin",
+        "tags": ["review"],
+        "x-swagger-router-controller": "review",
         "operationId": "PUT",
-        "description": "Update a admin",
+        "description": "Update a review",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The admin ID to update",
+            "description": "The review ID to update",
             "required": true,
             "type": "integer"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "The admin details for the update",
+            "description": "The review details for the update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/admin"
+              "$ref": "#/definitions/review"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated admin details",
+            "description": "Updated review details",
             "schema": {
-              "$ref": "#/definitions/admin"
+              "$ref": "#/definitions/review"
             }
           },
           "default": {
@@ -331,33 +315,33 @@
         }
       },
       "delete": {
-        "tags": ["admin"],
-        "x-swagger-router-controller": "admin",
+        "tags": ["review"],
+        "x-swagger-router-controller": "review",
         "operationId": "PUT",
-        "description": "Update a admin",
+        "description": "Update a review",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The admin ID to update",
+            "description": "The review ID to update",
             "required": true,
             "type": "integer"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "The admin details for the update",
+            "description": "The review details for the update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/admin"
+              "$ref": "#/definitions/review"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated admin details",
+            "description": "Updated review details",
             "schema": {
-              "$ref": "#/definitions/admin"
+              "$ref": "#/definitions/review"
             }
           },
           "default": {
@@ -377,7 +361,7 @@
         "description": "Returns a list of shops",
         "responses": {
           "200": {
-            "description": "Users list",
+            "description": "auth list",
             "schema": {
               "$ref": "#/definitions/shops"
             }
@@ -394,7 +378,7 @@
         "tags": ["shops"],
         "x-swagger-router-controller": "shops",
         "operationId": "POST",
-        "description": "Create users",
+        "description": "Create auth",
         "parameters": [
           {
             "name": "body",
@@ -528,6 +512,326 @@
           }
         }
       }
+    },
+    "/category": {
+      "get": {
+        "tags": ["category"],
+        "x-swagger-router-controller": "category",
+        "operationId": "GET",
+        "description": "Returns a list of category",
+        "responses": {
+          "200": {
+            "description": "auth list",
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["category"],
+        "x-swagger-router-controller": "category",
+        "operationId": "POST",
+        "description": "Create auth",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The category details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Newly created category",
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/category/{id}": {
+      "get": {
+        "tags": ["category"],
+        "x-swagger-router-controller": "category",
+        "operationId": "GET",
+        "description": "Fetch a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The category ID to fetch",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "category details",
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["category"],
+        "x-swagger-router-controller": "category",
+        "operationId": "PUT",
+        "description": "Update a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The category ID to update",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The category details for the update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated category details",
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["category"],
+        "x-swagger-router-controller": "category",
+        "operationId": "PUT",
+        "description": "Update a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The category ID to update",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The category details for the update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated category details",
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": ["products"],
+        "x-swagger-router-controller": "products",
+        "operationId": "GET",
+        "description": "Returns a list of products",
+        "responses": {
+          "200": {
+            "description": "auth list",
+            "schema": {
+              "$ref": "#/definitions/products"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["products"],
+        "x-swagger-router-controller": "products",
+        "operationId": "POST",
+        "description": "Create auth",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The products details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/products"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Newly created products",
+            "schema": {
+              "$ref": "#/definitions/products"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": ["products"],
+        "x-swagger-router-controller": "products",
+        "operationId": "GET",
+        "description": "Fetch a products",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The products ID to fetch",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "products details",
+            "schema": {
+              "$ref": "#/definitions/products"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["products"],
+        "x-swagger-router-controller": "products",
+        "operationId": "PUT",
+        "description": "Update a products",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The products ID to update",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The products details for the update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/products"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated products details",
+            "schema": {
+              "$ref": "#/definitions/products"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["products"],
+        "x-swagger-router-controller": "products",
+        "operationId": "PUT",
+        "description": "Update a products",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The products ID to update",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The products details for the update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/products"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated products details",
+            "schema": {
+              "$ref": "#/definitions/products"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -555,7 +859,7 @@
         }
       }
     },
-    "users": {
+    "auth": {
       "required": ["name"],
       "properties": {
         "id": {
@@ -574,7 +878,7 @@
         }
       }
     },
-    "admin": {
+    "review": {
       "required": ["name"],
       "properties": {
         "id": {
@@ -594,6 +898,44 @@
       }
     },
     "shops": {
+      "required": ["name"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["finance", "accounts", "sales", "leads"]
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "category": {
+      "required": ["name"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["finance", "accounts", "sales", "leads"]
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "products": {
       "required": ["name"],
       "properties": {
         "id": {

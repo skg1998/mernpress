@@ -1,11 +1,11 @@
 const express = require('express');
-const { getReviews, addReview, getReview, updateReview, deleteReview } = require('../controllers/reviews.controllers');
 const Review = require('../models/reviews.model');
+const { getReviews, addReview, getReview, updateReview, deleteReview } = require('../controllers/reviews.controllers');
 
 const router = express.Router({ mergeParams: true });
 
 const advancedResults = require('../middleware/advancedResult');
-const { protect, authorize } = require('../middleware/hasAuth');
+const { hasAuthorization, authorize } = require('../middleware/hasAuth');
 
 router
     .route('/')
@@ -16,12 +16,12 @@ router
         }),
         getReviews
     )
-    .post(protect, authorize('user', 'admin'), addReview);
+    .post(hasAuthorization, authorize('user', 'admin'), addReview);
 
 router
     .route('/:id')
     .get(getReview)
-    .put(protect, authorize('user', 'admin'), updateReview)
-    .delete(protect, authorize('user', 'admin'), deleteReview);
+    .put(hasAuthorization, authorize('user', 'admin'), updateReview)
+    .delete(hasAuthorization, authorize('user', 'admin'), deleteReview);
 
 module.exports = router;
