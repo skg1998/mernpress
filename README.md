@@ -13,7 +13,10 @@ Clone app in your local
 npm install
 
 # project_folder/client
-npm i
+npm install
+
+# project_folder/mernpress-dashboard
+npm install
 ```
 
 ## Run App
@@ -24,6 +27,9 @@ npm run dev
 
 # Run Frontend
 npm start
+
+# Run Dashboard
+npm start
 ```
 
 ## Access
@@ -32,8 +38,8 @@ npm start
  # Access the web app in browser:
  http://localhost:3000
 
- # Access the admin portion:
- http://localhost:3000/admin
+ # Access the Dashboard(admin) portion:
+ http://localhost:3000
 
  # Access the Server:
  http://localhost:5000/
