@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "../../assets/jss/mernpress/components/footerStyle.js";
