@@ -1,5 +1,5 @@
 import React from "react";
-import globalStyles from "../styles/styles";
+import globalStyles from "../../styles/styles";
 
 const DashboardPage = () => {
   return (

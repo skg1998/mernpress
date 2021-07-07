@@ -3,17 +3,34 @@ import { Route, Switch } from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles, ThemeProvider } from "@material-ui/core/styles";
+import ButtonBase from "@material-ui/core/ButtonBase";
+
+// Layout component
 import Header from "../components/Header";
 import LeftDrawer from "../components/LeftDrawer";
 import RightDrawer from "../components/RightDrawer";
-import Data from "../data";
-import Dashboard from "./DashboardPage";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import Form from "./FormPage";
-import BasicTable from "./Table/BasicTables";
-import DataTable from "./Table/DataTables";
+
+//Dashboard component
+import Dashboard from "./Dashboard/DashboardPage";
+import UserProfile from './Dashboard/UserProfile';
+import Category from "./Dashboard/Category";
+import Product from './Dashboard/Products';
+import Order from './Dashboard/Order';
+import InventryManagement from './Dashboard/InventoryManagement';
+import Customer from './Dashboard/Customers';
+import Chart from './Dashboard/Chart';
+
+import Blog from './Dashboard/Apps/Blog';
+import Calender from './Dashboard/Apps/Calender';
+import ChatBox from './Dashboard/Apps/ChatBox';
+import Inbox from './Dashboard/Apps/Inbox';
+import Invoice from './Dashboard/Apps/InvoiceBuilder';
+import Todo from './Dashboard/Apps/Todo';
+
 import NotFound from "./NotFoundPage";
+
 import defaultTheme, { customTheme } from "../styles/theme";
+import { routes } from '../routes';
 
 const styles = () => ({
   container: {
@@ -95,7 +112,7 @@ class App extends React.Component {
         <LeftDrawer
           navDrawerOpen={navDrawerOpen}
           handleChangeNavDrawer={this.handleChangeNavDrawer}
-          menus={Data.menus}
+          menus={routes}
         />
         <ButtonBase
           color="inherit"
@@ -113,9 +130,19 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Dashboard} />
             <Route path="/dashboard" component={Dashboard} />
-            <Route path="/form" component={Form} />
-            <Route path="/table/basic" component={BasicTable} />
-            <Route path="/table/data" component={DataTable} />
+            <Route path="/user-profile" component={UserProfile} />
+            <Route path="/inventory-management" component={InventryManagement} />
+            <Route path="/customers" component={Customer} />
+            <Route path="/products" component={Product} />
+            <Route path="/category" component={Category} />
+            <Route path="/orders" component={Order} />
+            <Route path="/app/blog" component={Blog} />
+            <Route path="/app/calender" component={Calender} />
+            <Route path="/app/chatbox" component={ChatBox} />
+            <Route path="/app/inbox" component={Inbox} />
+            <Route path="/app/invoice" component={Invoice} />
+            <Route path="/app/todo" component={Todo} />
+            <Route path="/chart" component={Chart} />
             <Route component={NotFound} />
           </Switch>
         </div>
