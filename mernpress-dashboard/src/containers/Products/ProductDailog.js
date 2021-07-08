@@ -10,9 +10,9 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-
-
-const emails = ['username@gmail.com', 'user02@gmail.com'];
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 
 const useStyles = makeStyles({
     avatar: {
@@ -32,7 +32,7 @@ const ProductDailog = (props) => {
         [{
             color: '',
             images: [],
-            size: [{
+            sizes: [{
                 size: '',
                 availabe: true,
                 sku: '',
@@ -52,8 +52,55 @@ const ProductDailog = (props) => {
         onClose(value);
     };
 
-    const submitHandler = () => {
+    const submitHandler = (e) => {
 
+    }
+
+    // handle click event of the Remove button
+    const handleVarientRemoveClick = index => {
+        const list = [...varients];
+        list.splice(index, 1);
+        setVarients(list);
+    };
+
+    // handle click event of the Add button
+    const handleVarientAddClick = () => {
+        setVarients([...varients, [{ color: "", images: [], sizes: [] }]]);
+    };
+
+    const varient = () => {
+        return (
+            <>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <TextField
+                            id="outlined-full-width"
+                            placeholder="Color"
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            variant="outlined"
+
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            id="outlined-full-width"
+                            placeholder="Images"
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            variant="outlined"
+
+                        />
+                    </Grid>
+                </Grid>
+            </>
+        )
     }
 
     return (
@@ -151,6 +198,34 @@ const ProductDailog = (props) => {
                                     onChange={e => setDiscount(e.target.value)}
                                 />
                             </Grid>
+                        </Grid>
+                        <Grid container spacing={3}>
+                            {varients.map((x, i) => (
+                                <Grid item item md={12}>
+                                    <Card>
+                                        <CardContent>
+                                            <Grid container spacing={3}>
+                                                <Grid item xs={10}>
+                                                    {varient()}
+                                                </Grid>
+                                                <Grid item xs={2}>
+                                                    <Grid container spacing={3}>
+                                                        <Grid item xs={12}>
+                                                            {varients.length - 1 === i && <IconButton onClick={handleVarientAddClick}><AddCircleIcon /></IconButton>}
+                                                        </Grid>
+                                                        <Grid item xs={12}>
+                                                            {varients.length !== 1 && <IconButton
+                                                                className="mr10"
+                                                                onClick={() => handleVarientRemoveClick(i)}
+                                                            ><RemoveCircleIcon /></IconButton>}
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            ))}
                         </Grid>
                         <Grid container spacing={3}>
                             <Button variant="contained" color="primary" type="submit">Submit</Button>
