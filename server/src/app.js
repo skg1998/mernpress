@@ -21,6 +21,7 @@ const CategoryRoutes = require("./routes/Category.routes");
 const ShopRoutes = require('./routes/shop.routes');
 const BasicDesignRoutes = require('./routes/basicDesign.routes');
 const ReviewRoutes = require('./routes/review.routes');
+const BlogRoutes = require('./routes/blog.routes');
 
 var app = express();
 
@@ -44,6 +45,7 @@ app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/orders', orderRoutes);
 app.use('/api/v1/basicdesign', BasicDesignRoutes);
 app.use('/api/v1/review', ReviewRoutes);
+app.use('/api/v1/blog', ReviewRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(errorHandler);
