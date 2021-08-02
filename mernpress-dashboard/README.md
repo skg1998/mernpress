@@ -9,7 +9,9 @@
 - [x] folder sturcture
 - [ ] Redux setup
 - [ ] Dashboard Page
-- [ ] User Profile
+- [X] Signup
+- [X] Login
+- [X] User Profile
 - [ ] Inventory Management
 - [ ] Customer
 - [ ] Product
