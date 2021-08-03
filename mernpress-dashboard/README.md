@@ -11,11 +11,12 @@
 - [ ] Dashboard Page
 - [X] Signup
 - [X] Login
+- [X] Forget Password
 - [X] User Profile
 - [ ] Inventory Management
-- [ ] Customer
-- [ ] Product
-- [ ] Category
+- [X] Customer
+- [ ] Product   *=> 30% complete*
+- [ ] Category  *=> start work on it*
 - [ ] Order
 - [ ] charts & graph
 - [ ] Apps/ Todo
@@ -23,4 +24,5 @@
 - [ ] Apps/ chatbox
 - [ ] Apps/ invoice generator
 - [ ] Apps/ calender
-- [ ] Apps/ Blog
+- [ ] Apps/ Blog   *=> 30% complete*
+- [ ] Api Integration
