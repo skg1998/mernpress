@@ -103,6 +103,10 @@ const ProductDailog = (props) => {
         )
     }
 
+    const sizes = () => {
+
+    }
+
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             <DialogTitle id="simple-dialog-title">Add New Product</DialogTitle>

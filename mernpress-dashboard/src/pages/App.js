@@ -6,9 +6,9 @@ import { withStyles, ThemeProvider } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 
 // Layout component
-import Header from "../components/Header";
-import LeftDrawer from "../components/LeftDrawer";
-import RightDrawer from "../components/RightDrawer";
+import Header from "../components/Header/Header";
+import LeftDrawer from "../components/SideBar/LeftDrawer";
+import RightDrawer from "../components/SideBar/RightDrawer";
 
 //Dashboard component
 import Dashboard from "./Dashboard/DashboardPage";
@@ -20,7 +20,9 @@ import InventryManagement from './Dashboard/InventoryManagement';
 import Customer from './Dashboard/Customers';
 import Chart from './Dashboard/Chart';
 
+//Dashboard/App component 
 import Blog from './Dashboard/Apps/Blog';
+import BlogDetail from '../containers/Blog/BlogDetail'
 import Calender from './Dashboard/Apps/Calender';
 import ChatBox from './Dashboard/Apps/ChatBox';
 import Inbox from './Dashboard/Apps/Inbox';
@@ -137,6 +139,7 @@ class App extends React.Component {
             <Route path="/category" component={Category} />
             <Route path="/orders" component={Order} />
             <Route path="/app/blog" component={Blog} />
+            <Route exact path="/app/blog/:blogId" component={BlogDetail} />
             <Route path="/app/calender" component={Calender} />
             <Route path="/app/chatbox" component={ChatBox} />
             <Route path="/app/inbox" component={Inbox} />

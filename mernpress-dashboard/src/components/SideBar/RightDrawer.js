@@ -5,7 +5,7 @@ import Drawer from "@material-ui/core/Drawer";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
-import { availableThemes } from "../styles/theme";
+import { availableThemes } from "../../styles/theme";
 
 const style = () => ({
   BackdropRoot: {

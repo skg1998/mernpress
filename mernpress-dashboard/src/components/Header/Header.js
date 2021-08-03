@@ -11,7 +11,7 @@ import MoreIcon from "@material-ui/icons/MoreVert"
 import Badge from "@material-ui/core/Badge"
 import { Toolbar } from "@material-ui/core"
 import { withStyles } from "@material-ui/core/styles"
-import SearchBox from './SearchBox';
+import SearchBox from '../SearchBox/SearchBox';
 
 const styles = (theme) => ({
   appBar: {
