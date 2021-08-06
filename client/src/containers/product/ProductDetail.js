@@ -16,7 +16,8 @@ import QuestionAnswer from '../../components/Others/QuestionAnswer';
 import ShippingReturns from '../../components/Others/ShippingReturns';
 import Details from '../../components/Others/Details';
 import ImageMagnifier from '../../components/Image/ImageMagnifier';
-import colorChooser from '../../common/colorChooser/colorChooser'
+import colorChooser from '../../common/colorChooser/colorChooser';
+import ProductAction from './ProductAction';
 
 const data = {
     _id: "1",
@@ -207,6 +208,11 @@ const ProductDetail = (props) => {
                                                         </Card>
                                                     </Grid>
                                                 ))}
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item md={12}>
+                                            <Grid container spacing={3}>
+                                                <ProductAction />
                                             </Grid>
                                         </Grid>
                                     </CardContent>

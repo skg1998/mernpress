@@ -36,7 +36,7 @@ const routes = [
         name: "Buy Agains",
       },
       {
-        path: "/account",
+        path: "/profile",
         name: "Your Acount",
       },
       {
