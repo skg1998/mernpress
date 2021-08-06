@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 //Pages
 import Dashboard from "./pages/App";
-import Login from './pages/LoginPage';
+import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import NotFound from './pages/NotFoundPage';
