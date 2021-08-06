@@ -21,11 +21,11 @@ const MainRouter = () => {
         <Route exact path="/" component={Home} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
-        <Route path="/profile" component={Profile} />
+        <Route path="/category" component={Categories} />
         <Route path="/product/:productId" component={Product} />
         <Route path="/cart" component={Cart} />
         <PrivateRoute path="/checkout" component={Checkout} />
-        <Route path="/category" component={Categories} />
+        <PrivateRoute path="/profile" component={Profile} />
         <Route component={NotFound} />
       </Switch>
     </div>

@@ -8,6 +8,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
+    "faker": "^5.5.3",
     "font-awesome": "^4.7.0",
     "moment": "^2.29.1",
     "mui-datatables": "^3.7.7",

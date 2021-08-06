@@ -30,7 +30,6 @@ const RightDrawer = ({ rightDrawerOpen, handleChangeRightDrawer, handleChangeThe
     anchor={"right"}
     open={rightDrawerOpen}
     onClose={handleChangeRightDrawer}
-    // use transparent background
     ModalProps={{
       BackdropProps: {
         classes: { root: classes.BackdropRoot }

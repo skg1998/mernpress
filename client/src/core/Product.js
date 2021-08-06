@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid'
 //Components  
 import Header from '../components/Navbars/Header'
 import Review from '../components/Rating/Review';
-import ProductAction from '../containers/product/ProductAction';
+//import ProductAction from '../containers/product/ProductAction';
 import ProductDetail from '../containers/product/ProductDetail';
 import SEO from '../components/SEO/Seo';
 import Footer from '../components/Footer/Footer'
@@ -27,12 +27,12 @@ const Product = (props) => {
       <Header />
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <Grid item xs={10} sm={10}>
+          <Grid item xs={12} sm={12}>
             <ProductDetail />
           </Grid>
-          <Grid item xs={2} sm={2}>
+          {/* <Grid item xs={2} sm={2}>
             <ProductAction />
-          </Grid>
+          </Grid> */}
         </Grid>
       </div>
       <Review />
