@@ -93,7 +93,7 @@ const Signup = () => {
                                 className={classes.title}
                             >
                                 Sign Up
-                        </Typography>
+                            </Typography>
                             <TextField
                                 id="name"
                                 label="Name"
@@ -129,7 +129,7 @@ const Signup = () => {
                                 className={classes.submit}
                             >
                                 Submit
-                        </Button>
+                            </Button>
                         </CardActions>
                     </Card>
                 </form>
@@ -138,13 +138,13 @@ const Signup = () => {
                     <DialogContent>
                         <DialogContentText>
                             New account successfully created.
-                    </DialogContentText>
+                        </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Link to="/signin">
                             <Button color="primary" autoFocus="autoFocus" variant="raised">
                                 Sign In
-                        </Button>
+                            </Button>
                         </Link>
                     </DialogActions>
                 </Dialog>

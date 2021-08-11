@@ -33,6 +33,11 @@ export default function PublicNavbarLinks() {
     setOpenProfile(null);
   };
 
+  const logoutHandler = () => {
+    // call logout api 
+    console.log('successfully logout')
+  }
+
   return (
     <div>
       <div className={classes.manager}>
@@ -52,6 +57,7 @@ export default function PublicNavbarLinks() {
       >
         <Link to="/cart">
           <ShoppingCartIcon className={classes.icons} />
+          <span className={classes.notifications}>2</span>
         </Link>
         <Hidden mdUp implementation="css">
           <p className={classes.linkText}>Cart</p>
@@ -97,17 +103,21 @@ export default function PublicNavbarLinks() {
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
-                      Profile
+                      <Link to="/profile">
+                        Profile
+                      </Link>
                     </MenuItem>
                     <MenuItem
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
-                      Settings
+                      <Link to="/setting">
+                        Setting
+                      </Link>
                     </MenuItem>
                     <Divider light />
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={logoutHandler}
                       className={classes.dropdownItem}
                     >
                       Logout

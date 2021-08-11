@@ -61,6 +61,14 @@ const currencies = [
   },
 ];
 
+const country = [
+  { value: 'india', label: 'India' }
+]
+
+const state = [
+  { value: 'delhi', label: 'Delhi' }
+]
+
 
 const Checkout = (props) => {
   const location = useLocation();
@@ -68,20 +76,6 @@ const Checkout = (props) => {
   const [cartItem, setCartItem] = useState();
   const [userData, setUserData] = useState();
   const [totalAmount, setTotalAmount] = useState();
-
-  const classes = useStyles();
-
-  const loadData = async () => {
-    await setCartItem(location.state.cartItems);
-    await setTotalAmount(location.state.getTotal);
-    await setUserData(location.state.user)
-  }
-
-  useEffect(() => {
-    loadData();
-    return () => { }
-  }, [location]);
-
   const [personalDetail, setPersonalDetail] = useState({
     name: (userData ? userData.name : ''),
     email: '',
@@ -96,6 +90,19 @@ const Checkout = (props) => {
     zipcode: '',
     state: ''
   });
+
+  const classes = useStyles();
+
+  const loadData = async () => {
+    await setCartItem(location.state.cartItems);
+    await setTotalAmount(location.state.getTotal);
+    await setUserData(location.state.user)
+  }
+
+  useEffect(() => {
+    loadData();
+    return () => { }
+  }, [location]);
 
   const handleChange = (event) => {
     setCurrency(event.target.value);
@@ -168,7 +175,7 @@ const Checkout = (props) => {
                 <Grid item lg={12} sm={12} xl={12} xs={12}>
                   <TextField
                     id="outlined-full-width"
-                    placeholder="Placeholder"
+                    placeholder="Street"
                     fullWidth
                     margin="normal"
                     InputLabelProps={{
@@ -182,7 +189,7 @@ const Checkout = (props) => {
                 <Grid item lg={6} sm={6} xl={6} xs={6}>
                   <TextField
                     id="outlined-full-width"
-                    placeholder="Placeholder"
+                    placeholder="City"
                     fullWidth
                     margin="normal"
                     InputLabelProps={{
@@ -194,7 +201,7 @@ const Checkout = (props) => {
                 <Grid item lg={6} sm={6} xl={6} xs={6}>
                   <TextField
                     id="outlined-full-width"
-                    placeholder="Placeholder"
+                    placeholder="District"
                     fullWidth
                     margin="normal"
                     InputLabelProps={{
@@ -217,7 +224,7 @@ const Checkout = (props) => {
                     }}
                     variant="outlined"
                   >
-                    {currencies.map((option) => (
+                    {country.map((option) => (
                       <option key={option.value} value={option.value}>
                         {option.label}
                       </option>
@@ -236,7 +243,7 @@ const Checkout = (props) => {
                     }}
                     variant="outlined"
                   >
-                    {currencies.map((option) => (
+                    {state.map((option) => (
                       <option key={option.value} value={option.value}>
                         {option.label}
                       </option>
@@ -246,7 +253,7 @@ const Checkout = (props) => {
                 <Grid item lg={4} sm={4} xl={4} xs={4}>
                   <TextField
                     id="outlined-full-width"
-                    placeholder="Placeholder"
+                    placeholder="Pin code"
                     fullWidth
                     margin="normal"
                     InputLabelProps={{
@@ -258,105 +265,6 @@ const Checkout = (props) => {
               </Grid>
             </CardContent>
           </Card>
-
-          <Card className={classes.card}>
-            <CardHeader className={classes.headerColor} avatar={<IconReceipt />} title="Billing Infomation" />
-            <CardContent>
-              <Grid container spacing={3}>
-                <Grid item lg={12} sm={12} xl={12} xs={12}>
-                  <TextField
-                    id="outlined-full-width"
-                    placeholder="Placeholder"
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    variant="outlined"
-                  />
-                </Grid>
-              </Grid>
-              <Grid container spacing={3}>
-                <Grid item lg={6} sm={6} xl={6} xs={6}>
-                  <TextField
-                    id="outlined-full-width"
-                    placeholder="Placeholder"
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item lg={6} sm={6} xl={6} xs={6}>
-                  <TextField
-                    id="outlined-full-width"
-                    placeholder="Placeholder"
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    variant="outlined"
-                  />
-                </Grid>
-              </Grid>
-              <Grid container spacing={3}>
-                <Grid item lg={4} sm={4} xl={4} xs={4}>
-                  <TextField
-                    id="outlined-select-currency-native"
-                    select
-                    fullWidth
-                    value={currency}
-                    onChange={handleChange}
-                    SelectProps={{
-                      native: true,
-                    }}
-                    variant="outlined"
-                  >
-                    {currencies.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </TextField>
-                </Grid>
-                <Grid item lg={4} sm={4} xl={4} xs={4}>
-                  <TextField
-                    id="outlined-select-currency-native"
-                    select
-                    fullWidth
-                    value={currency}
-                    onChange={handleChange}
-                    SelectProps={{
-                      native: true,
-                    }}
-                    variant="outlined"
-                  >
-                    {currencies.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </TextField>
-                </Grid>
-                <Grid item lg={4} sm={4} xl={4} xs={4}>
-                  <TextField
-                    id="outlined-full-width"
-                    placeholder="Placeholder"
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    variant="outlined"
-                  />
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-
           <Card className={classes.card}>
             <CardHeader className={classes.headerColor} avatar={<IconCreditCard2Front />} title="Payment Method" />
             <CardContent>
