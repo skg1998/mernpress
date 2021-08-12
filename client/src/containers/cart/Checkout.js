@@ -83,7 +83,7 @@ const Checkout = (props) => {
   });
 
   const [address, setAddress] = useState({
-    compelete_address: '',
+    street: '',
     district: '',
     city: '',
     country: '',
@@ -109,14 +109,33 @@ const Checkout = (props) => {
   };
 
   const handleSubmit = (event) => {
-    if (event) {
-      event.preventDefault();
+    event.preventDefault();
+    const data = {
+      products: [cartItem],
+      customer_name: personalDetail.name,
+      customer_email: personalDetail.email,
+      customer_phone: personalDetail.phone,
+      delivery_address: {
+        street: address.street,
+        city: address.city,
+        state: address.state,
+        zipcode: address.zipcode,
+        country: address.country
+      },
+      payment: {}
     }
+
+    console.log("data", data);
   }
 
   const handleInputChange = (event) => {
     event.persist();
     setPersonalDetail(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
+  }
+
+  const handleAddressChange = (event) => {
+    event.persist();
+    setAddress(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
   }
 
   return (
@@ -146,10 +165,11 @@ const Checkout = (props) => {
                     placeholder="Email"
                     fullWidth
                     margin="normal"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
                     variant="outlined"
+                    name="email"
+                    key={personalDetail.email}
+                    defaultValue={personalDetail.email}
+                    onChange={handleInputChange}
                   />
                 </Grid>
                 <Grid item lg={4} sm={4} xl={4} xs={4}>
@@ -158,10 +178,11 @@ const Checkout = (props) => {
                     placeholder="Phone"
                     fullWidth
                     margin="normal"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
                     variant="outlined"
+                    name="phone"
+                    key={personalDetail.phone}
+                    defaultValue={personalDetail.phone}
+                    onChange={handleInputChange}
                   />
                 </Grid>
               </Grid>
@@ -178,10 +199,11 @@ const Checkout = (props) => {
                     placeholder="Street"
                     fullWidth
                     margin="normal"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
                     variant="outlined"
+                    name="street"
+                    key={address.street}
+                    defaultValue={address.street}
+                    onChange={handleAddressChange}
                   />
                 </Grid>
               </Grid>
@@ -192,10 +214,11 @@ const Checkout = (props) => {
                     placeholder="City"
                     fullWidth
                     margin="normal"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
                     variant="outlined"
+                    name="city"
+                    key={address.city}
+                    defaultValue={address.city}
+                    onChange={handleAddressChange}
                   />
                 </Grid>
                 <Grid item lg={6} sm={6} xl={6} xs={6}>
@@ -204,10 +227,11 @@ const Checkout = (props) => {
                     placeholder="District"
                     fullWidth
                     margin="normal"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
                     variant="outlined"
+                    name="district"
+                    key={address.district}
+                    defaultValue={address.district}
+                    onChange={handleAddressChange}
                   />
                 </Grid>
               </Grid>
@@ -223,6 +247,10 @@ const Checkout = (props) => {
                       native: true,
                     }}
                     variant="outlined"
+                    name="country"
+                    key={address.country}
+                    defaultValue={address.country}
+                    onChange={handleAddressChange}
                   >
                     {country.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -242,6 +270,10 @@ const Checkout = (props) => {
                       native: true,
                     }}
                     variant="outlined"
+                    name="state"
+                    key={address.state}
+                    defaultValue={address.state}
+                    onChange={handleAddressChange}
                   >
                     {state.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -253,13 +285,17 @@ const Checkout = (props) => {
                 <Grid item lg={4} sm={4} xl={4} xs={4}>
                   <TextField
                     id="outlined-full-width"
-                    placeholder="Pin code"
+                    placeholder="Zip code"
                     fullWidth
                     margin="normal"
                     InputLabelProps={{
                       shrink: true,
                     }}
                     variant="outlined"
+                    name="zipcode"
+                    key={address.zipcode}
+                    defaultValue={address.zipcode}
+                    onChange={handleAddressChange}
                   />
                 </Grid>
               </Grid>
@@ -366,7 +402,7 @@ const Checkout = (props) => {
               </Grid>
               <Grid container spacing={3}>
                 <Grid item lg={12} sm={12} xl={12} xs={12}>
-                  <Button variant="contained" className={classes.button}>
+                  <Button type="submit" variant="contained" className={classes.button}>
                     Secondary
                   </Button>
                 </Grid>
