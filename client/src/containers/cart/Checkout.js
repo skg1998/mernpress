@@ -124,7 +124,6 @@ const Checkout = (props) => {
       },
       payment: {}
     }
-
     console.log("data", data);
   }
 
@@ -243,9 +242,6 @@ const Checkout = (props) => {
                     fullWidth
                     value={currency}
                     onChange={handleChange}
-                    SelectProps={{
-                      native: true,
-                    }}
                     variant="outlined"
                     name="country"
                     key={address.country}
@@ -266,9 +262,6 @@ const Checkout = (props) => {
                     fullWidth
                     value={currency}
                     onChange={handleChange}
-                    SelectProps={{
-                      native: true,
-                    }}
                     variant="outlined"
                     name="state"
                     key={address.state}
