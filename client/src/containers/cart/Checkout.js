@@ -21,6 +21,7 @@ import Badge from '@material-ui/core/Badge';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import UserForm from './PlaceOrder/UserForm'
 
 const defaultProps = {
   color: 'secondary',
@@ -140,7 +141,8 @@ const Checkout = (props) => {
   return (
     <Grid container spacing={3} >
       <Grid item lg={9} sm={9} xl={9} xs={9}>
-        <form onSubmit={handleSubmit} noValidate autoComplete="off">
+        <UserForm />
+        {/* <form onSubmit={handleSubmit} noValidate autoComplete="off">
           <Card className={classes.card}>
             <CardHeader className={classes.headerColor} avatar={<IconEnvelope />} title="Contact Info" />
             <CardContent>
@@ -403,7 +405,7 @@ const Checkout = (props) => {
             </CardContent>
           </Card>
 
-        </form>
+        </form> */}
       </Grid>
       <Grid item lg={3} sm={3} xl={3} xs={3}>
         <Card style={{ width: '100%' }}>
