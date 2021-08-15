@@ -1,7 +1,14 @@
 const { Order, CartItem } = require("../models/order.model");
 const _ = require("lodash");
 const errorHandler = require("../util/dbErrorHandler");
+const stripe = require('stripe')(config.get(process.env.STRIPE_KEY));
 
+/**
+ * 
+ * @desc create Order
+ * @route POST api/v1/order/
+ * @access Private
+ */
 const create = (req, res) => {
   req.body.order.user = req.profile;
   const order = new Order(req.body.order);
@@ -15,6 +22,12 @@ const create = (req, res) => {
   });
 };
 
+/**
+ * 
+ * @desc get list of shop
+ * @route GET api/v1/order/list-by-shop
+ * @access Public
+ */
 const listByShop = (req, res) => {
   Order.find({ "products.shop": req.shop._id })
     .populate({ path: "products.product", select: "_id name price" })
@@ -29,6 +42,12 @@ const listByShop = (req, res) => {
     });
 };
 
+/**
+ * 
+ * @desc update order detail
+ * @route PUT api/v1/order/
+ * @access Private
+ */
 const update = (req, res) => {
   Order.update(
     { "products._id": req.body.cartItemId },
@@ -48,10 +67,17 @@ const update = (req, res) => {
   );
 };
 
+
 const getStatusValues = (req, res) => {
   res.json(CartItem.schema.path("status").enumValues);
 };
 
+/**
+ * 
+ * @desc get order by id
+ * @route POST api/v1/order/order-by-id
+ * @access Public
+ */
 const orderByID = (req, res, next, id) => {
   Order.findById(id)
     .populate("products.product", "name price")
@@ -66,6 +92,12 @@ const orderByID = (req, res, next, id) => {
     });
 };
 
+/**
+ * 
+ * @desc Order list by user
+ * @route GET api/v1/order/order-list-by-user
+ * @access Public
+ */
 const listByUser = (req, res) => {
   Order.find({ user: req.profile._id })
     .sort("-created")
@@ -79,9 +111,32 @@ const listByUser = (req, res) => {
     });
 };
 
-const read = (req, res) => {
-  return res.json(req.order);
+const read = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const order = await Order.find(userId).sort({ date: -1 })
+
+    if (!order) {
+      return res.status(404).json({
+        status: false,
+        message: `Order not found by given id: ${userId}`
+      })
+    }
+
+    res.status(201).json({
+      status: true,
+      message: `Order found by given id: ${userId}`,
+      data: order
+    })
+
+  } catch (err) {
+    next(err);
+  }
 };
+
+exports.charge = (req, res, next) => {
+
+}
 
 module.exports = {
   create,
