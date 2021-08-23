@@ -1,6 +1,6 @@
 # MERNPRESS API
 
-> Backend API for MERNPRESS application, which is a multi-vendor e-commerce website
+> Backend API for MERNPRESS application, which is a multi-vendor e-commerce website. Project based on MVC architecture
 
 ## Usage
 
