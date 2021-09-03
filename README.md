@@ -4,7 +4,7 @@
 
 ## First Release
 > [Frontend](https://mernpress-api.herokuapp.com/api-docs/)  
-> [Dashboard](https://mernpress-api.herokuapp.com/api-docs/)  
+> [Dashboard](https://mernpress-dashboard.herokuapp.com/)  
 > [backend-api](https://mernpress-api.herokuapp.com/api-docs/)
 
 ## Usage
