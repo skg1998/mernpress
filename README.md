@@ -2,6 +2,11 @@
 
 > Full stack application, which is a multi-vendor E-Commerce site using mongodb, express, reactjs, nodejs
 
+## First Release
+> [Frontend](https://mernpress-api.herokuapp.com/api-docs/)  
+> [Dashboard](https://mernpress-api.herokuapp.com/api-docs/)  
+> [backend-api](https://mernpress-api.herokuapp.com/api-docs/)
+
 ## Usage
 
 Clone app in your local
