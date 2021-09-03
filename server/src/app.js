@@ -14,9 +14,10 @@ const swaggerDocument = require("../swagger.json");
 
 // Routes File
 const IndexRoutes = require('./routes/index.routes');
-const authRoutes = require("./routes/auth.routes");
-const productRoutes = require("./routes/product.routes");
-const orderRoutes = require("./routes/order.routes");
+const AuthRoutes = require("./routes/auth.routes");
+const AdminRoutes = require('./routes/admin.routes');
+const ProductRoutes = require("./routes/product.routes");
+const OrderRoutes = require("./routes/order.routes");
 const CategoryRoutes = require("./routes/Category.routes");
 const ShopRoutes = require('./routes/shop.routes');
 const BasicDesignRoutes = require('./routes/basicDesign.routes');
@@ -37,15 +38,17 @@ app.use(cors());
 app.use(compression());
 app.use(express.static(path.join(__dirname, "public")));
 
+//all API
 app.use("/", IndexRoutes);
-app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/auth', AuthRoutes);
+app.use('/api/v1/admin', AdminRoutes);
 app.use('/api/v1/shop', ShopRoutes);
 app.use('/api/v1/category', CategoryRoutes);
-app.use('/api/v1/products', productRoutes);
-app.use('/api/v1/orders', orderRoutes);
+app.use('/api/v1/products', ProductRoutes);
+app.use('/api/v1/orders', OrderRoutes);
 app.use('/api/v1/basicdesign', BasicDesignRoutes);
 app.use('/api/v1/review', ReviewRoutes);
-app.use('/api/v1/blog', ReviewRoutes);
+app.use('/api/v1/blog', BlogRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(errorHandler);

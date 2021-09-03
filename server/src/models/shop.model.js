@@ -15,9 +15,9 @@ const ShopSchema = new mongoose.Schema({
         required: [true, "please add a description"],
         maxLength: [500, "Description can not be more than 500 character"]
     },
-    user: {
+    admin: {
         type: mongoose.Schema.ObjectId,
-        ref: 'User',
+        ref: 'Admin',
         required: true
     }
 })

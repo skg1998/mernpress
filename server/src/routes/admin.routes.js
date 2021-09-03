@@ -5,7 +5,7 @@ const {
     update,
     remove,
     list,
-    userByID,
+    adminByID,
     getMyProfile,
     logout,
     forgotPassword,
@@ -17,7 +17,7 @@ const { hasAuthorization } = require('../middleware/hasAuth')
 const router = express.Router();
 
 router.route("/").get(list)
-router.route("/:id").get(userByID)
+router.route("/:id").get(adminByID)
 router.route('/signup').post(create);
 router.route('/signin').post(login);
 router.route('/logout').get(logout);

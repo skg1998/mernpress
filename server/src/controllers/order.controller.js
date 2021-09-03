@@ -1,7 +1,7 @@
 const { Order, CartItem } = require("../models/order.model");
 const _ = require("lodash");
 const errorHandler = require("../util/dbErrorHandler");
-const stripe = require('stripe')(config.get(process.env.STRIPE_KEY));
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 /**
  * 
@@ -134,8 +134,17 @@ const read = async (req, res) => {
   }
 };
 
-exports.charge = (req, res, next) => {
-
+exports.charge = async (req, res, next) => {
+  try {
+    let { status } = await stripe.charges.create({
+      amount: req.body.amount,
+      currency: 'usd',
+      source: req.body.token,
+    })
+    return res.json({ status })
+  } catch (err) {
+    next(err);
+  }
 }
 
 module.exports = {
