@@ -11,6 +11,7 @@ const crypto = require('crypto');
  */
 exports.create = async (req, res, next) => {
     try {
+        console.log(req.body);
         const { username, email, password } = req.body;
         const admin = await Admin.create({ username, email, password });
         sendTokenResponse(admin, 200, res, "account has been created successfully !");

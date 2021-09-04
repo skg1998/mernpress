@@ -1,6 +1,6 @@
 const express = require("express");
 const uploadfile = require('../middleware/uploadFile');
-const { hasAuthorization, authorize } = require('../middleware/hasAuth')
+const { hasAuthentication, authorize } = require('../middleware/hasAuth')
 const { list, productDetail, RelatedProduct, listBrand, listCategories, listLatest, addProduct, updateProduct, deleteProduct, todayDeals, topSellingProductList, viewLogList, recentSellingProductList } = require("../controllers/product.controller");
 const router = express.Router();
 
@@ -17,13 +17,13 @@ router.route("/viewLog-list").get(viewLogList);
 
 router
   .route("/shop/:shopId")
-  .post(hasAuthorization, authorize('admin'), uploadfile.array("images", { maxCount: 4 }), addProduct);
+  .post(hasAuthentication(['admin']), authorize('admin'), uploadfile.array("images", { maxCount: 4 }), addProduct);
 
 router
   .route("/:shopId/:productId")
-  .get(hasAuthorization, productDetail)
-  .put(hasAuthorization, authorize('admin'), updateProduct)
-  .delete(hasAuthorization, authorize('admin'), deleteProduct);
+  .get(hasAuthentication(['admin']), productDetail)
+  .put(hasAuthentication(['admin']), authorize('admin'), updateProduct)
+  .delete(hasAuthentication(['admin']), authorize('admin'), deleteProduct);
 
 
 module.exports = router;

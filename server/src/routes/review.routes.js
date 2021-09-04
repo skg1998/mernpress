@@ -5,7 +5,7 @@ const { getReviews, addReview, getReview, updateReview, deleteReview } = require
 const router = express.Router({ mergeParams: true });
 
 const advancedResults = require('../middleware/advancedResult');
-const { hasAuthorization, authorize } = require('../middleware/hasAuth');
+const { hasAuthentication } = require('../middleware/hasAuth');
 
 router
     .route('/')
@@ -16,12 +16,12 @@ router
         }),
         getReviews
     )
-    .post(hasAuthorization, authorize('user', 'admin'), addReview);
+    .post(hasAuthentication(), addReview);
 
 router
     .route('/:id')
     .get(getReview)
-    .put(hasAuthorization, authorize('user', 'admin'), updateReview)
-    .delete(hasAuthorization, authorize('user', 'admin'), deleteReview);
+    .put(hasAuthentication(), updateReview)
+    .delete(hasAuthentication(), deleteReview);
 
 module.exports = router;

@@ -14,7 +14,7 @@ const swaggerDocument = require("../swagger.json");
 
 // Routes File
 const IndexRoutes = require('./routes/index.routes');
-const AuthRoutes = require("./routes/auth.routes");
+const UserRoutes = require("./routes/user.routes");
 const AdminRoutes = require('./routes/admin.routes');
 const ProductRoutes = require("./routes/product.routes");
 const OrderRoutes = require("./routes/order.routes");
@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //all API
 app.use("/", IndexRoutes);
-app.use('/api/v1/auth', AuthRoutes);
+app.use('/api/v1/users', UserRoutes);
 app.use('/api/v1/admin', AdminRoutes);
 app.use('/api/v1/shop', ShopRoutes);
 app.use('/api/v1/category', CategoryRoutes);

@@ -12,18 +12,20 @@ const {
     resetPassword
 } = require("../controllers/admin.controller");
 
-const { hasAuthorization } = require('../middleware/hasAuth')
+const { hasAuthentication, authorize } = require('../middleware/hasAuth')
 
 const router = express.Router();
+const allowedToAll = hasAuthentication(['admin', 'superadmin']);
+const allowedToAdmin = hasAuthentication(['superadmin']);
 
-router.route("/").get(list)
+router.route("/").get(authorize('superadmin'), list)
 router.route("/:id").get(adminByID)
 router.route('/signup').post(create);
 router.route('/signin').post(login);
 router.route('/logout').get(logout);
-router.route('/myProfile').get(hasAuthorization, getMyProfile);
-router.route('/updateDetail').put(hasAuthorization, update);
-router.route('/:id').put(hasAuthorization, remove);
+router.route('/myProfile').get(allowedToAll, getMyProfile);
+router.route('/updateDetail').put(allowedToAll, update);
+router.route('/:id').put(allowedToAdmin, remove);
 router.route('/forgotPassword').post(forgotPassword);
 router.route('/resetPassword/:resetToken').put(resetPassword);
 

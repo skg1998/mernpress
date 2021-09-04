@@ -1,23 +1,23 @@
 const express = require("express");
 const orderCtrl = require("../controllers/order.controller");
 const productCtrl = require("../controllers/product.controller");
-const { hasAuthorization } = require('../middleware/hasAuth')
+const { hasAuthentication } = require('../middleware/hasAuth')
 
 const router = express.Router();
 
 router
   .route("/:userId")
   .post(
-    hasAuthorization,
+    hasAuthentication(),
     productCtrl.decreaseQuantity,
     orderCtrl.create
   );
 
 router
   .route("/shop/:shopId")
-  .get(hasAuthorization, orderCtrl.listByShop);
+  .get(hasAuthentication(), orderCtrl.listByShop);
 
-router.route("/user/:userId").get(hasAuthorization, orderCtrl.listByUser);
+router.route("/user/:userId").get(hasAuthentication(), orderCtrl.listByUser);
 
 router.route("/status_values").get(orderCtrl.getStatusValues);
 
@@ -25,7 +25,7 @@ router.route("/status_values").get(orderCtrl.getStatusValues);
 router
   .route("/:shopId/cancel/:productId")
   .put(
-    hasAuthorization,
+    hasAuthentication(),
     productCtrl.increaseQuantity,
     orderCtrl.update
   );
@@ -33,13 +33,13 @@ router
 router
   .route("/:orderId/charge/:userId/:shopId")
   .put(
-    hasAuthorization,
+    hasAuthentication(),
     orderCtrl.update
   );
 
 router
   .route("/status/:shopId")
-  .put(hasAuthorization, orderCtrl.update);
+  .put(hasAuthentication(), orderCtrl.update);
 
 router.route("/:orderId").get(orderCtrl.read);
 

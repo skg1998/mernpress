@@ -1,25 +1,46 @@
 const jwt = require('jsonwebtoken')
-const User = require('../models/auth.model');
+const User = require('../models/user.model');
 const Admin = require('../models/admin.model');
 const ErrorResponse = require('../util/errorResponse');
 
-exports.hasAuthorization = async (req, res, next) => {
-    let token;
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-        token = req.headers.authorization.split(" ")[1]
-    }
+/**
+ * 
+ * @param {*} userType ['admin','superadmin'] 
+ * @returns 
+ */
+exports.hasAuthentication = (userType = []) => {
 
-    //Make sure token exist
-    if (!token) {
-        return next(new ErrorResponse('Not Authorized to access this route', 401))
-    }
+    return async (req, res, next) => {
+        let token;
+        if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+            token = req.headers.authorization.split(" ")[1]
+        }
 
-    try {
-        //verify token
-        const decode = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = await User.find(decode.id)
-    } catch (err) {
-        return next(new ErrorResponse('Not Authorized to access this route', 401))
+        //Make sure token exist
+        if (!token) {
+            return next(new ErrorResponse('Not Authorized to access this route', 401))
+        }
+
+        try {
+            //verify token
+            const decode = jwt.verify(token, process.env.JWT_SECRET);
+            let user, role;
+            if (userType.length) {
+                user = await User.findById(decode.id);
+            } else {
+                user = await Admin.findOne({ _id: decode.id, role: { $in: [userType] } });
+            }
+
+            if (!user) throw new Error();
+
+            req.user = {
+                _id: user._id,
+                email: user.email,
+                role: user.role
+            };
+        } catch (err) {
+            return next(new ErrorResponse('Not Authorized to access this route', 401))
+        }
     }
 }
 

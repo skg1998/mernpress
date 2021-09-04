@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto')
 
-// user sechema
+// user sechema 
 const AdminSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -24,8 +24,8 @@ const AdminSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['SuperAdmin', 'Admin'],
-        default: 'Admin',
+        enum: ['superadmin', 'admin'],
+        default: 'admin',
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,

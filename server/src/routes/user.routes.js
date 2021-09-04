@@ -10,9 +10,9 @@ const {
     logout,
     forgotPassword,
     resetPassword
-} = require("../controllers/auth.controller");
+} = require("../controllers/user.controller");
 
-const { hasAuthorization } = require('../middleware/hasAuth')
+const { hasAuthentication } = require('../middleware/hasAuth')
 
 const router = express.Router();
 
@@ -21,9 +21,9 @@ router.route("/:id").get(userByID)
 router.route('/signup').post(create);
 router.route('/signin').post(login);
 router.route('/logout').get(logout);
-router.route('/myProfile').get(hasAuthorization, getMyProfile);
-router.route('/updateDetail').put(hasAuthorization, update);
-router.route('/:id').put(hasAuthorization, remove);
+router.route('/myProfile').get(hasAuthentication(), getMyProfile);
+router.route('/updateDetail').put(hasAuthentication(), update);
+router.route('/:id').put(hasAuthentication(), remove);
 router.route('/forgotPassword').post(forgotPassword);
 router.route('/resetPassword/:resetToken').put(resetPassword);
 

@@ -1,11 +1,11 @@
-const User = require("../models/auth.model");
+const User = require("../models/user.model");
 const ErrorResponse = require('../util/errorResponse');
 const sendEmail = require('../util/sendMail');
 const crypto = require('crypto');
 
 /**
  * 
- * @desc create User account
+ * @desc create User account 
  * @route POST api/v1/users/register
  * @access Public
  */
@@ -122,7 +122,7 @@ exports.list = async (req, res, next) => {
  */
 exports.userByID = async (req, res, next) => {
   try {
-    const user = await User.find(req.params.id);
+    const user = await User.findById(req.params.id);
 
     if (!user) {
       return res.status(404).json({
