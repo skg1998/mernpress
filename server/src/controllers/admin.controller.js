@@ -1,4 +1,5 @@
 const Admin = require("../models/admin.model");
+const User = require("../models/user.model");
 const ErrorResponse = require('../util/errorResponse');
 const sendEmail = require('../util/sendMail');
 const crypto = require('crypto');
@@ -114,6 +115,48 @@ exports.list = async (req, res, next) => {
     }
 };
 
+
+/**
+ * 
+ * @desc list of all user
+ * @route GET api/v1/admin/userlist
+ * @access Public
+ */
+exports.userlist = async (req, res, next) => {
+    try {
+        const user = await User.find();
+        res.status(201).json({
+            status: false,
+            count: user.length,
+            data: user,
+            message: `All user found succesfully`
+        })
+    } catch (err) {
+        next(err);
+    }
+};
+
+/**
+ * 
+ * @desc list of user by id
+ * @route GET api/v1/admin/userlist/:id
+ * @access Public
+ */
+exports.userlistById = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        res.status(201).json({
+            status: false,
+            count: user.length,
+            data: user,
+            message: `User found with given id:${req.params.id}  succesfully`
+        })
+    } catch (err) {
+        next(err);
+    }
+};
+
+
 /**
  * 
  * @desc list of admin by id
@@ -122,7 +165,7 @@ exports.list = async (req, res, next) => {
  */
 exports.adminByID = async (req, res, next) => {
     try {
-        const admin = await Admin.find(req.params.id);
+        const admin = await Admin.findById(req.params.id);
 
         if (!admin) {
             return res.status(404).json({
@@ -152,7 +195,8 @@ exports.update = async (req, res, next) => {
     try {
         const feildToUpdate = {
             username: req.body.username,
-            email: req.body.email
+            email: req.body.email,
+            role: req.body.role
         }
         const admin = await Admin.findByIdAndUpdate(req.params.id, feildToUpdate, {
             new: true,
