@@ -96,26 +96,6 @@ exports.logout = async (req, res, next) => {
 
 /**
  * 
- * @desc list of all users
- * @route GET api/v1/users/list
- * @access Public
- */
-exports.list = async (req, res, next) => {
-  try {
-    const users = await User.find();
-    res.status(201).json({
-      status: false,
-      count: users.length,
-      data: users,
-      message: `All Users found succesfully`
-    })
-  } catch (err) {
-    next(err);
-  }
-};
-
-/**
- * 
  * @desc list of user by id
  * @route POST api/v1/users/userbyid
  * @access Public
@@ -238,7 +218,6 @@ exports.forgotPassword = async (req, res, next) => {
         data: 'Email has been sent to your registered email !'
       })
     } catch (err) {
-      console.log('err', err)
       user.resetPasswordToken = undefined;
       user.resetPasswordExpire = undefined;
       await user.save({ validateBeforeSave: false })

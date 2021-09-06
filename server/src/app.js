@@ -9,8 +9,12 @@ const compression = require('compression');
 
 const connectDB = require("./config/db");
 const errorHandler = require('./middleware/error');
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("../swagger.json");
+
+//Swagger
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const SwaggerOptions = require('../swagger.json');
+const swaggerDocument = swaggerJsDoc(SwaggerOptions);
 
 // Routes File
 const IndexRoutes = require('./routes/index.routes');

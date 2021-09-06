@@ -230,7 +230,7 @@ exports.update = async (req, res, next) => {
  */
 exports.remove = async (req, res, next) => {
     try {
-        const admin = await Admin.findByIdAndDelete(req.params.id)
+        const admin = await Admin.findByIdAndDelete(req.params.id);
 
         if (!admin) {
             return res.status(404).json({
