@@ -187,7 +187,7 @@ router
  *     parameters:
  *      - in: path
  *        name: id
- *        description: Delete Product from DB.
+ *        description: Retrive Product from DB.
  *        schema:
  *          type: string
  *          required:
@@ -197,9 +197,9 @@ router
  *              type: string
  *     responses:
  *       200:
- *         description: A category by id
+ *         description: A Product by id
  *         schema:
- *           $ref: '#/definitions/Category'
+ *           $ref: '#/definitions/Product'
  */
 router.route("/:shopId/:productId").get(hasAuthentication(['admin']), productDetail)
 

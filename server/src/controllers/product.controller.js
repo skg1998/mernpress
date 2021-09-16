@@ -178,8 +178,22 @@ exports.listCategories = (req, res) => {
 }
 
 
-exports.listBrand = () => {
+exports.listBrand = async (req, res, next) => {
+  try {
+    const product = await Product.find();
+    if (!product) {
+      return next(new ErrorResponse(`Product not found`, 400))
+    }
 
+    res.status(200).json({
+      success: true,
+      lenght: product.length,
+      data: product,
+      message: `top selling product find successfully !`
+    })
+  } catch (err) {
+    next(err);
+  }
 }
 
 
