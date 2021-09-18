@@ -15,13 +15,19 @@ const { hasAuthentication } = require('../middleware/hasAuth')
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: User Management
+ */
+
 
 /**
  * @swagger
  * /users/{id}:
  *   get:
- *     tags:
- *       - Users
+ *     tags: [User]
  *     description: Retrive a single user
  *     produces:
  *       - application/json
@@ -42,14 +48,13 @@ const router = express.Router();
  *         schema:
  *           $ref: '#/definitions/Users'
  */
-router.route("/:id").get(userByID);
+router.get("/:id", userByID);
 
 /**
  * @swagger
  * /users/signup:
  *  post:
- *    tags:
- *      - Users
+ *    tags: [User]
  *    summary: create a user account
  *    description: Use to create a user account
  *    produces:
@@ -75,14 +80,13 @@ router.route("/:id").get(userByID);
  *      '200':
  *        description: Create User successfully.
  */
-router.route('/signup').post(create);
+router.post('/signup', create);
 
 /**
  * @swagger
  * /users/signin:
  *  post:
- *    tags:
- *      - Users
+ *    tags: [User]
  *    description: Use to login to account
  *    produces:
  *      - application/json
@@ -104,40 +108,37 @@ router.route('/signup').post(create);
  *      '200':
  *        description: Login successfully.
  */
-router.route('/signin').post(login);
+router.post('/signin', login);
 
 /**
  * @swagger
  * /users/logout:
  *   get:
- *     tags:
- *       - Users
+ *     tags: [User]
  *     description: Logout user 
  *     responses:
  *       200:
  *         description: Logout Sucessfully
  */
-router.route('/logout').get(logout);
+router.get('/logout', logout);
 
 /**
  * @swagger
  * /users/myProfile:
  *   get:
- *     tags:
- *       - Users
+ *     tags: [User]
  *     description: fetch user profile
  *     responses:
  *       200:
  *         description: Fetch User Profile Sucessfully
  */
-router.route('/myProfile').get(hasAuthentication(), getMyProfile);
+router.get('/myProfile', hasAuthentication(), getMyProfile);
 
 /**
  * @swagger
- * /users/updateDetail/{id}:
+ * /users/{id}:
  *   put:
- *     tags:
- *       - Users
+ *     tags: [User]
  *     description: Retrive a single user
  *     produces:
  *       - application/json
@@ -158,14 +159,13 @@ router.route('/myProfile').get(hasAuthentication(), getMyProfile);
  *         schema:
  *           $ref: '#/definitions/Users'
  */
-router.route('/updateDetail/:id').put(hasAuthentication(), update);
+router.put('/:id', hasAuthentication(), update);
 
 /**
  * @swagger
- * /users/deleteAccount/{id}:
+ * /users/{id}:
  *   delete:
- *     tags:
- *       - Users
+ *     tags: [User]
  *     description: Delete user
  *     produces:
  *       - application/json
@@ -186,14 +186,13 @@ router.route('/updateDetail/:id').put(hasAuthentication(), update);
  *         schema:
  *           $ref: '#/definitions/Users'
  */
-router.route('/deleteAccount/:id').delete(hasAuthentication(), remove);
+router.delete('/:id', hasAuthentication(), remove);
 
 /**
  * @swagger
  * /users/forgotPassword:
  *  post:
- *    tags:
- *      - Users
+ *    tags: [User]
  *    summary: Forget Password
  *    description: Forget Password
  *    produces:
@@ -213,14 +212,13 @@ router.route('/deleteAccount/:id').delete(hasAuthentication(), remove);
  *      '200':
  *        description: Forget Password.
  */
-router.route('/forgotPassword').post(forgotPassword);
+router.post('/forgotPassword', forgotPassword);
 
 /**
  * @swagger
  * /users/resetPassword/{resetToken}:
  *   put:
- *     tags:
- *       - Users
+ *     tags: [User]
  *     description: Reset Password
  *     produces:
  *       - application/json
@@ -241,6 +239,7 @@ router.route('/forgotPassword').post(forgotPassword);
  *         schema:
  *           $ref: '#/definitions/Users'
  */
-router.route('/resetPassword/:resetToken').put(resetPassword);
+router.put('/resetPassword/:resetToken', resetPassword);
+
 
 module.exports = router;

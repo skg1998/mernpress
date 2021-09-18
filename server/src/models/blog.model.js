@@ -23,8 +23,8 @@ const BlogSchema = new mongoose.Schema({
         required: true,
     },
     image: {
-        type: String,
-        required: false,
+        data: String,
+        cloudnaryId: String
     },
     user: {
         type: mongoose.Schema.ObjectId,

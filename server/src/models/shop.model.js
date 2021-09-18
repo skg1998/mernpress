@@ -9,6 +9,10 @@ const ShopSchema = new mongoose.Schema({
         trim: true,
         maxLength: [50, "Name can not be more than 50 character"]
     },
+    image: {
+        data: String,
+        cloudnaryId: String
+    },
     slug: String,
     description: {
         type: String,

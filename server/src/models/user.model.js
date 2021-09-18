@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema({
         minlength: 6,
         select: false
     },
+    profile_pic: {
+        data: String,
+        cloudnaryId: String
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
     updated_At: Date,

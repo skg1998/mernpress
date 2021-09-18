@@ -1,5 +1,6 @@
 {
   "swaggerDefinition": {
+    "openapi": "3.0.0",
     "info": {
       "title": "My MernPress API",
       "description": "Api for MernPress Project",

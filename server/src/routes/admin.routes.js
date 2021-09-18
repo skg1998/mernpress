@@ -22,23 +22,28 @@ const allowedToAdmin = hasAuthentication(['superadmin']);
 
 /**
  * @swagger
- * /admin/:
+ * tags:
+ *   name: Admin
+ *   description: Admin Management
+ */
+
+/**
+ * @swagger
+ * /admin:
  *   get:
- *     tags:
- *       - Admin
+ *     tags: [Admin]
  *     description: Fetch All Admin
  *     responses:
  *       200:
  *         description: Returns all the Admin
  */
-router.route("/").get(allowedToAdmin, list)
+router.get("/", allowedToAdmin, list)
 
 /**
  * @swagger
  * /admin/{id}:
  *   get:
- *     tags:
- *       - Admin
+ *     tags: [Admin]
  *     description: Retrive a single admin
  *     produces:
  *       - application/json
@@ -59,14 +64,13 @@ router.route("/").get(allowedToAdmin, list)
  *         schema:
  *           $ref: '#/definitions/Admin'
  */
-router.route("/:id").get(adminByID)
+router.get("/:id", adminByID)
 
 /**
  * @swagger
  * /admin/signup:
  *  post:
- *    tags:
- *      - Admin
+ *    tags: [Admin]
  *    summary: create a admin account
  *    description: Use to create a admin account
  *    produces:
@@ -94,14 +98,13 @@ router.route("/:id").get(adminByID)
  *      '200':
  *        description: Create Admin successfully.
  */
-router.route('/signup').post(create);
+router.post('/signup', create);
 
 /**
  * @swagger
  * /admin/signin:
  *  post:
- *    tags:
- *      - Admin
+ *    tags: [Admin]
  *    description: Use to login to account
  *    produces:
  *      - application/json
@@ -123,40 +126,37 @@ router.route('/signup').post(create);
  *      '200':
  *        description: Login successfully.
  */
-router.route('/signin').post(login);
+router.post('/signin', login);
 
 /**
  * @swagger
  * /admin/logout:
  *   get:
- *     tags:
- *       - Admin
+ *     tags: [Admin]
  *     description: Logout admin
  *     responses:
  *       200:
  *         description: Logout Sucessfully
  */
-router.route('/logout').get(logout);
+router.get('/logout', logout);
 
 /**
  * @swagger
  * /admin/myProfile:
  *   get:
- *     tags:
- *       - Admin
+ *     tags: [Admin]
  *     description: Fetch Admin Profile
  *     responses:
  *       200:
  *         description: Return my profile
  */
-router.route('/myProfile').get(allowedToAll, getMyProfile);
+router.get('/myProfile', allowedToAll, getMyProfile);
 
 /**
  * @swagger
- * /admin/updateDetail/{id}:
+ * /admin/{id}:
  *   put:
- *     tags:
- *       - Admin
+ *     tags: [Admin]
  *     description: Update a admin
  *     produces:
  *       - application/json
@@ -177,14 +177,13 @@ router.route('/myProfile').get(allowedToAll, getMyProfile);
  *         schema:
  *           $ref: '#/definitions/Admin'
  */
-router.route('/updateDetail/:id').put(allowedToAll, update);
+router.put('/:id', allowedToAll, update);
 
 /**
  * @swagger
- * /admin/deleteAccount/{id}:
+ * /admin/{id}:
  *   delete:
- *     tags:
- *       - Admin
+ *     tags: [Admin]
  *     description: Delete admin
  *     produces:
  *       - application/json
@@ -205,14 +204,13 @@ router.route('/updateDetail/:id').put(allowedToAll, update);
  *         schema:
  *           $ref: '#/definitions/Admin'
  */
-router.route('/deleteAccount/:id').delete(allowedToAdmin, remove);
+router.delete('/:id', allowedToAdmin, remove);
 
 /**
  * @swagger
  * /admin/forgotPassword:
  *  post:
- *    tags:
- *      - Admin
+ *    tags: [Admin]
  *    summary: Forget Password
  *    description: Forget Password
  *    produces:
@@ -232,14 +230,13 @@ router.route('/deleteAccount/:id').delete(allowedToAdmin, remove);
  *      '200':
  *        description: Forget Password.
  */
-router.route('/forgotPassword').post(forgotPassword);
+router.post('/forgotPassword', forgotPassword);
 
 /**
  * @swagger
  * /admin/resetPassword/{resetToken}:
  *   put:
- *     tags:
- *       - Admin
+ *     tags: [Admin]
  *     description: Reset Password
  *     produces:
  *       - application/json
@@ -260,27 +257,25 @@ router.route('/forgotPassword').post(forgotPassword);
  *         schema:
  *           $ref: '#/definitions/Admin'
  */
-router.route('/resetPassword/:resetToken').put(resetPassword);
+router.put('/resetPassword/:resetToken', resetPassword);
 
 /**
  * @swagger
  * /admin/userlist:
  *   get:
- *     tags:
- *       - Admin
+ *     tags: [Admin]
  *     description: Fetch All Admin
  *     responses:
  *       200:
  *         description: Returns all the Admin
  */
-router.route("/userlist").get(allowedToAll, userlist);
+router.get("/userlist", allowedToAll, userlist);
 
 /**
  * @swagger
  * /admin/userlist/{id}:
  *   get:
- *     tags:
- *       - Admin
+ *     tags: [Admin]
  *     description: Retrive a single admin
  *     produces:
  *       - application/json
@@ -301,6 +296,6 @@ router.route("/userlist").get(allowedToAll, userlist);
  *         schema:
  *           $ref: '#/definitions/Admin'
  */
-router.route("/userlist/:id").get(allowedToAll, userlistById);
+router.get("/userlist/:id", allowedToAll, userlistById);
 
 module.exports = router;

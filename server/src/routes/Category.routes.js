@@ -7,23 +7,28 @@ const router = express.Router();
 
 /**
  * @swagger
- * /category/getAllCategory:
+ * tags:
+ *   name: Category
+ *   description: Category Management
+ */
+
+/**
+ * @swagger
+ * /category:
  *   get:
- *     tags:
- *       - Category
+ *     tags: [Category]
  *     description: Fetch All Category
  *     responses:
  *       200:
  *         description: Returns all the category
  */
-router.route("/getAllCategory").get(getCategories)
+router.route("/").get(getCategories)
 
 /**
  * @swagger
- * /category/createCategory:
+ * /category:
  *  post:
- *    tags:
- *      - Category
+ *    tags: [Category]
  *    description: Use to Create a Category
  *    produces:
  *      - application/json
@@ -53,27 +58,25 @@ router.route("/getAllCategory").get(getCategories)
  *        schema:
  *           $ref: '#/definitions/Category'
  */
-router.route("/createCategory").post(hasAuthentication(['admin']), authorize('admin'), uploadfile.single("image"), addCategory);
+router.route("/").post(hasAuthentication(['admin']), authorize('admin'), uploadfile.single("image"), addCategory);
 
 /**
  * @swagger
  * /category/descendants:
  *   get:
- *     tags:
- *       - Category
+ *     tags: [Category]
  *     description: Fetch All Descendants
  *     responses:
  *       200:
  *         description: Returns all the descendants category
  */
-router.route('/descendants').get(descendants);
+router.get('/descendants', descendants);
 
 /**
  * @swagger
- * /category/getCategoryById/{id}:
+ * /category/{id}:
  *   get:
- *     tags:
- *       - Category
+ *     tags: [Category]
  *     description: Retrive a category by id
  *     produces:
  *       - application/json
@@ -94,14 +97,13 @@ router.route('/descendants').get(descendants);
  *         schema:
  *           $ref: '#/definitions/Category'
  */
-router.route('/getCategoryById/:id').get(getCategory)
+router.get('/:id', getCategory)
 
 /**
  * @swagger
- * /category/updateCategory/{id}:
+ * /category/{id}:
  *   put:
- *     tags:
- *       - Category
+ *     tags: [Category]
  *     description: Retrive a category by id
  *     produces:
  *       - application/json
@@ -122,14 +124,13 @@ router.route('/getCategoryById/:id').get(getCategory)
  *         schema:
  *           $ref: '#/definitions/Category'
  */
-router.route('/updateCategory/:id').put(hasAuthentication(['admin']), authorize('admin'), updateCategories)
+router.put('/:id', hasAuthentication(['admin']), authorize('admin'), updateCategories)
 
 /**
  * @swagger
- * /category/updateCategory/{id}:
+ * /category/{id}:
  *   delete:
- *     tags:
- *       - Category
+ *     tags: [Category]
  *     description: Retrive a category by id
  *     produces:
  *       - application/json
@@ -150,6 +151,6 @@ router.route('/updateCategory/:id').put(hasAuthentication(['admin']), authorize(
  *         schema:
  *           $ref: '#/definitions/Category'
  */
-router.route('/deletecategory/:id').delete(hasAuthentication(['admin']), authorize('admin'), deleteCategories)
+router.delete('/:id', hasAuthentication(['admin']), authorize('admin'), deleteCategories)
 
 module.exports = router;
