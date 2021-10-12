@@ -16,7 +16,6 @@ import GTranslateIcon from '@material-ui/icons/GTranslate';
 
 import { connect, useDispatch } from "react-redux";
 import { userActions } from '../store/actions'
-
 import SEO from '../components/SEO/Seo';
 
 const useStyles = makeStyles((theme) => ({
@@ -89,7 +88,6 @@ const Login = (props) => {
     const classes = useStyles();
     const history = useHistory();
 
-    // reset login status
     useEffect(() => {
         dispatch(userActions.logout());
     }, []);

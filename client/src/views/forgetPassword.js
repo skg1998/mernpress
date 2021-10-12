@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import { grey } from "@material-ui/core/colors";
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import TextField from "@material-ui/core/TextField";
-import { Link } from "react-router-dom";
+import SEO from '../components/SEO/Seo';
+
 
 const ForgotPassword = () => {
     const styles = {
@@ -38,6 +40,7 @@ const ForgotPassword = () => {
     return (
         <div>
             <div style={styles.loginContainer}>
+                <SEO title="Forgot Password" description="A Multi-vendor ecommerce site" />
                 <Paper style={styles.paper}>
                     <form>
                         <TextField hintText="E-mail" label="E-mail" fullWidth={true} />

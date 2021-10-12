@@ -1,34 +1,64 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { PrivateRoute } from "./store/components";
 
 //Pages
-import Home from "./core/Home";
-import Product from './core/Product';
-import Categories from './core/Categories';
-import Cart from './core/Cart';
-import Signup from './core/signup';
-import { Signin } from './core/login';
-import ForgotPassword from "./core/forgetPassword";
-import NotFound from './core/NotFound';
-import Checkout from "./core/Checkout";
-import Profile from './core/UserProfile';
+import Home from "./views/Home";
+import Product from './views/Product';
+import Categories from './views/Categories';
+import Cart from './views/Cart';
+import Signup from './views/signup';
+import { Signin } from './views/login';
+import ForgotPassword from "./views/forgetPassword";
+import NotFound from './views/NotFound';
+import Checkout from "./views/Checkout";
+import Profile from './views/UserProfile';
+
+//layout
+import BlankLayout from './layouts/BlankLayout';
+import MainLayout from './layouts/MainLayout';
+
+/*****Routes******/
+const MainRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={matchProps => (
+        <MainLayout>
+          <Component {...matchProps} />
+        </MainLayout>
+      )}
+    />
+  );
+};
+
+const BlankRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={matchProps => (
+        <BlankLayout>
+          <Component {...matchProps} />
+        </BlankLayout>
+      )}
+    />
+  );
+};
 
 const MainRouter = () => {
-
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/signin" component={Signin} />
-        <Route path="/forgot-password" component={ForgotPassword} />
-        <Route path="/category" component={Categories} />
-        <Route path="/product/:productId" component={Product} />
-        <Route path="/cart" component={Cart} />
-        <PrivateRoute path="/checkout" component={Checkout} />
-        <PrivateRoute path="/profile" component={Profile} />
-        <Route component={NotFound} />
+        <MainRoute exact path="/" component={Home} />
+        <MainRoute path="/category" component={Categories} />
+        <MainRoute path="/product/:productId" component={Product} />
+        <MainRoute path="/cart" component={Cart} />
+        <MainRoute path="/checkout" component={Checkout} />
+        <MainRoute path="/profile" component={Profile} />
+
+        <BlankRoute path="/signup" component={Signup} />
+        <BlankRoute path="/signin" component={Signin} />
+        <BlankRoute path="/forgot-password" component={ForgotPassword} />
+        <BlankRoute component={NotFound} />
       </Switch>
     </div>
   );

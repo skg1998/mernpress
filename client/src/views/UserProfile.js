@@ -5,17 +5,14 @@ import {
     Grid
 } from '@material-ui/core';
 
-import Header from '../components/Navbars/Header'
 import AccountProfile from '../components/Profile/AccountProfile';
 import AccountProfileDetails from '../components/Profile/AccountProfileDetail';
-import Footer from '../components/Footer/Footer'
 import SEO from '../components/SEO/Seo';
 
 const Profile = () => {
     return (
         <>
             <SEO />
-            <Header />
             <Box
                 sx={{
                     backgroundColor: 'background.default',
@@ -48,7 +45,6 @@ const Profile = () => {
                     </Grid>
                 </Container>
             </Box>
-            <Footer />
         </>
     )
 }

@@ -11,7 +11,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
 import Grid from '@material-ui/core/Grid'
 import { DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core"
-
 import SEO from '../components/SEO/Seo';
 
 

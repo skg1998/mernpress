@@ -9,12 +9,8 @@ let Sizes = new mongoose.Schema({
 });
 
 let Images = new mongoose.Schema({
-  kind: {
-    type: String,
-    enum: ['thumbnail', 'catalog', 'detail', 'zoom'],
-    required: true
-  },
-  url: { type: String, required: true }
+  data: String,
+  cloudnaryId: String
 });
 
 let Variants = new mongoose.Schema({
@@ -30,7 +26,6 @@ let Catalogs = new mongoose.Schema({
 const ProductSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  images: [Images],
   variants: [Variants],
   brand: { type: String },
   catalogs: [Catalogs],

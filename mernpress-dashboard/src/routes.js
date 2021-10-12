@@ -23,41 +23,41 @@ export const routes = [
     { text: "Products", icon: <ShoppingCartIcon />, link: "/products" },
     { text: "Category", icon: <CategoryIcon />, link: "/category" },
     { text: "Orders", icon: <InsertDriveFileIcon />, link: "/orders" },
-    {
-        text: "Apps",
-        icon: <GridOn />,
-        subMenus: [
-            {
-                text: "Calender",
-                icon: <EventAvailableIcon />,
-                link: "/app/calender"
-            },
-            {
-                text: "Invoice Builder",
-                icon: <FileCopyIcon />,
-                link: "/app/invoice"
-            },
-            {
-                text: "Chat Box",
-                icon: <ChatBubbleOutlineIcon />,
-                link: "/app/chatbox"
-            },
-            {
-                text: "InBox",
-                icon: <InboxIcon />,
-                link: "/app/inbox"
-            },
-            {
-                text: "Blog",
-                icon: <BookIcon />,
-                link: "/app/blog"
-            },
-            {
-                text: "Todo",
-                icon: <PlaylistAddIcon />,
-                link: "/app/todo"
-            }
-        ]
-    },
-    { text: "Charts", icon: <TimelineIcon />, link: "/chart" },
+    // {
+    //     text: "Apps",
+    //     icon: <GridOn />,
+    //     subMenus: [
+    //         {
+    //             text: "Calender",
+    //             icon: <EventAvailableIcon />,
+    //             link: "/app/calender"
+    //         },
+    //         {
+    //             text: "Invoice Builder",
+    //             icon: <FileCopyIcon />,
+    //             link: "/app/invoice"
+    //         },
+    //         {
+    //             text: "Chat Box",
+    //             icon: <ChatBubbleOutlineIcon />,
+    //             link: "/app/chatbox"
+    //         },
+    //         {
+    //             text: "InBox",
+    //             icon: <InboxIcon />,
+    //             link: "/app/inbox"
+    //         },
+    //         {
+    //             text: "Blog",
+    //             icon: <BookIcon />,
+    //             link: "/app/blog"
+    //         },
+    //         {
+    //             text: "Todo",
+    //             icon: <PlaylistAddIcon />,
+    //             link: "/app/todo"
+    //         }
+    //     ]
+    // },
+    // { text: "Charts", icon: <TimelineIcon />, link: "/chart" },
 ]

@@ -38,7 +38,7 @@ const OrderSchema = new mongoose.Schema({
     zipcode: { type: String, required: "Zip Code is required" },
     country: { type: String, required: "Country is required" }
   },
-  payment_id: {},
+  transaction_id: {},
   updated: Date,
   created: {
     type: Date,

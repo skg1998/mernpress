@@ -1,17 +1,24 @@
 import React from "react";
-import "./App.css";
-import { MuiThemeProvider } from "@material-ui/core/styles";
-import MainRouter from "./MainRouter";
 import { BrowserRouter as Router } from "react-router-dom";
-import { history } from "./store/helpers"
+import { ThemeProvider } from '@material-ui/styles';
+import MainRouter from "./MainRouter";
+import { Provider } from 'react-redux'
+import { store } from "./store/helpers"
+
+//theme
+import { theme } from './styles/Theme-variable';
+import GlobalStyles from './styles/Globalstyles';
 
 const App = () => {
   return (
-    <Router history={history}>
-      <MuiThemeProvider>
-        <MainRouter />
-      </MuiThemeProvider>
-    </Router>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Router>
+          <MainRouter />
+        </Router>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
