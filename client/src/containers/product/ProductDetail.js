@@ -6,8 +6,6 @@ import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent';
-import Badge from '@material-ui/core/Badge';
-import Button from '@material-ui/core/Button'
 
 import { ReactComponent as IconStarFill } from "bootstrap-icons/icons/star-fill.svg";
 
@@ -16,7 +14,6 @@ import QuestionAnswer from '../../components/Others/QuestionAnswer';
 import ShippingReturns from '../../components/Others/ShippingReturns';
 import Details from '../../components/Others/Details';
 import ImageMagnifier from '../../components/Image/ImageMagnifier';
-import colorChooser from '../../common/colorChooser/colorChooser';
 import ProductAction from './ProductAction';
 
 const data = {

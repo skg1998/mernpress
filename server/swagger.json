@@ -1,12 +1,12 @@
 {
   "swaggerDefinition": {
-    "openapi": "3.0.0",
+    "swagger": "2.0",
     "info": {
       "title": "My MernPress API",
       "description": "Api for MernPress Project",
       "version": "1.0.0"
     },
-    "host": "localhost:5000",
+    "host": "https://mernpress-api.herokuapp.com",
     "basePath": "/api/v1",
     "schemes": ["http", "https"]
   },
