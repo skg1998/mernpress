@@ -1,4 +1,5 @@
-const Product = require('../models/product.model')
+const Product = require('../models/product.model');
+const Image = require('../models/image.model');
 const ErrorResponse = require('../util/errorResponse');
 const Cloudnary = require('../util/cloudnary');
 
@@ -10,27 +11,36 @@ const Cloudnary = require('../util/cloudnary');
  */
 exports.addProduct = async (req, res, next) => {
   try {
-    let files = req.files;
+    const { title, desc, variants, brand, catalogs, category, discount, shop } = req.body;
+
+    let files = variants.image;
     if (files.length <= 0) {
       return next(new ErrorResponse('Please upload images', 400))
     }
 
-    const images = []
+    const images = [];
+
     file.map(async file => {
       const fileUrl = await Cloudnary.uploader.upload(file.path);
-      images.push(fileUrl);
+      const img = await Image.create({ data: fileUrl.secure_url, cloudnaryId: fileUrl.public_id });
+      images.push(img.data);
     })
 
-    const product = new Product({
-      title: req.body.title,
-      description: req.body.description,
+    const variant = {
+      color: variants.color,
       images: images,
-      variants: variants,
-      brand: req.body.brand,
+      sizes: variants.sizes
+    };
+
+    const product = new Product({
+      title: title,
+      desc: desc,
+      variants: variant,
+      brand: brand,
       catalogs: catalogs,
-      category: req.body.category,
-      discount: req.body.discount,
-      shop: req.body.shop
+      category: category,
+      discount: discount,
+      shop: shop
     })
 
     await product.save();

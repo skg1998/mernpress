@@ -8,7 +8,7 @@
     },
     "host": "https://mernpress-api.herokuapp.com",
     "basePath": "/api/v1",
-    "schemes": ["https", "http"]
+    "schemes": ["http", "https"]
   },
   "apis": ["./src/routes/*.js"]
 }

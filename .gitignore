@@ -47,5 +47,6 @@ testem.log
 Thumbs.db
 
 # env
+client/.env
 server/.env
 server/public

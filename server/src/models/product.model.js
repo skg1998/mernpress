@@ -8,14 +8,9 @@ let Sizes = new mongoose.Schema({
   price: { type: Number, required: true, min: 0 }
 });
 
-let Images = new mongoose.Schema({
-  data: String,
-  cloudnaryId: String
-});
-
 let Variants = new mongoose.Schema({
   color: String,
-  images: [Images],
+  images: [{ type: String }],
   sizes: [Sizes]
 });
 
@@ -25,7 +20,7 @@ let Catalogs = new mongoose.Schema({
 
 const ProductSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  description: { type: String, required: true },
+  desc: { type: String, required: true },
   variants: [Variants],
   brand: { type: String },
   catalogs: [Catalogs],
