@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Blog from '../../../containers/Blog/Blog'
 import globalStyles from "../../../styles/styles";
-import data from '../../../data';
+import data from '../../../data/data';
 
 // const BASE_URL = 'https://dummyapi.io/data/api';
 // const APP_ID = '60e93f89b39cbf500f16c3a8';

@@ -7,7 +7,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { withStyles } from "@material-ui/core/styles";
 
 import Menus from "./Menus";
-import data from "../../data";
+import data from "../../data/data";
 
 const drawStyles = theme => {
   return {

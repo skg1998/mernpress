@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cancelled",
+    "label": "cancelled",
+    "value": 8,
+    "color": "hsl(282, 70%, 50%)"
+  },
+  {
+    "id": "Not Processing",
+    "label": "Not Processing",
+    "value": 304,
+    "color": "hsl(117, 70%, 50%)"
+  },
+  {
+    "id": "Delivered",
+    "label": "Delivered",
+    "value": 9,
+    "color": "hsl(195, 70%, 50%)"
+  },
+  {
+    "id": "Shipped",
+    "label": "Shipped",
+    "value": 496,
+    "color": "hsl(118, 70%, 50%)"
+  }
+]
