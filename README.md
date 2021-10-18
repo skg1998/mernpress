@@ -3,9 +3,9 @@
 > Full stack application, which is a multi-vendor E-Commerce site using mongodb, express, reactjs, nodejs
 
 ## First Release  
-> [backend-api](https://mernpress-api.herokuapp.com/api-docs/)  
-> Under Process [Frontend](https://mernpress-frontend.herokuapp.com/)  
-> Under Process [Dashboard](https://mernpress-dashboard.herokuapp.com/)
+> [backend-api](http://mernpress-api.herokuapp.com/api-docs/)  
+> Under Process [Frontend](http://mernpress-frontend.herokuapp.com/)  
+> Under Process [Dashboard](http://mernpress-dashboard.herokuapp.com/)
 
 ## Usage
 
