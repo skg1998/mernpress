@@ -1,0 +1,73 @@
+html {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 15px;
+  margin: 0;
+  line-height: 24px;
+}
+
+body {
+  margin: 0;
+  background-color: #efefef;
+}
+
+body,
+html,
+#app,
+#app > div {
+  height: 100%;
+}
+
+a {
+  /* color: #ff4081; */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.m-b-15 {
+  margin-bottom: 15px;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.px-4 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mx-4 {
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+/*############################################################################*/
+/* Custom card */
+/*############################################################################*/
+.custom-card {
+  border-radius: 20px !important;
+}

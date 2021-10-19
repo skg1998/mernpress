@@ -19,7 +19,6 @@
     "font-awesome": "^4.7.0",
     "moment": "^2.29.1",
     "mui-datatables": "^3.7.7",
-    "node-sass": "^6.0.1",
     "prop-types": "*",
     "react": "^17.0.2",
     "react-dom": "*",

@@ -38,7 +38,6 @@ const drawStyles = theme => {
     },
     avatarRoot: {
       padding: "16px 0 10px 15px",
-      // backgroundImage: "url(" + require("../images/material_bg.png") + ")",
       height: 45,
       display: "flex"
     },

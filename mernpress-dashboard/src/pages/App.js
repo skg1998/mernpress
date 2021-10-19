@@ -32,7 +32,7 @@ import Todo from './Dashboard/Apps/Todo';
 import NotFound from "./NotFoundPage";
 
 import defaultTheme, { customTheme } from "../styles/theme";
-import { routes } from '../routes';
+import { routes } from '../Routes/routes';
 
 const styles = () => ({
   container: {
