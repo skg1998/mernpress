@@ -11,8 +11,11 @@ import {
     Typography
 } from '@material-ui/core';
 
+//profile image 
+import ProfileImage from '../../assets/img/profile.png';
+
 const user = {
-    avatar: '/static/images/avatars/avatar_6.png',
+    avatar: ProfileImage,
     city: 'Los Angeles',
     country: 'USA',
     jobTitle: 'Senior Developer',

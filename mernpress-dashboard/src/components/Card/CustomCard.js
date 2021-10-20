@@ -1,12 +1,10 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-
 const ProductCard = (props) => {
     const { data } = props;
-
     return (
         <Card
             style={{ borderRadius: '20px', height: '100%' }}

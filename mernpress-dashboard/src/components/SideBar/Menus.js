@@ -8,7 +8,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { withStyles } from "@material-ui/core/styles";
 import Collapse from "@material-ui/core/Collapse";
 import List from "@material-ui/core/List";
-import { fade } from "@material-ui/core/styles/colorManipulator";
+import { alpha } from "@material-ui/core/styles/colorManipulator";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 
@@ -52,7 +52,7 @@ const styles = theme => {
       margin: "0 auto",
       color: "white",
       "&:hover": {
-        backgroundColor: fade(theme.palette.common.white, 0.5)
+        backgroundColor: alpha(theme.palette.common.white, 0.5)
       },
       minWidth: "24px"
     }

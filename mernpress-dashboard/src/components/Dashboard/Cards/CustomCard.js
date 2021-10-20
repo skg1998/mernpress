@@ -10,7 +10,7 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { red } from '@material-ui/core/colors';
 
 const CustomCard = (props) => {
-    const { name, count, icons, color, iconColor, desc } = props;
+    const { name, count, icons, color, iconcolor, desc } = props;
 
     return (
         <Card
@@ -42,7 +42,7 @@ const CustomCard = (props) => {
                     </Grid>
                     <Grid item>
                         <Avatar
-                            style={{ background: color, border: `1px solid ${iconColor}` }}
+                            style={{ background: color, border: `1px solid ${iconcolor}` }}
                             sx={{
                                 backgroundColor: red[600],
                                 height: 56,

@@ -58,7 +58,7 @@ const DashboardPage = () => {
                     count={"300"}
                     icons={<PersonIcon style={{ color: "#007b55" }} />}
                     color={"#c8facd"}
-                    iconColor={"#007b55"}
+                    iconcolor={"#007b55"}
                     desc={"16% Since last month"}
                   />
                 </Grid>
@@ -74,7 +74,7 @@ const DashboardPage = () => {
                     count={"300"}
                     icons={<SupervisorAccountIcon style={{ color: "#0c53b7" }} />}
                     color={"#d0f2ff"}
-                    iconColor={"#0c53b7"}
+                    iconcolor={"#0c53b7"}
                     desc={"16% Since last month"}
                   />
                 </Grid>
@@ -90,7 +90,7 @@ const DashboardPage = () => {
                     count={"300"}
                     icons={<ProductionQuantityLimitsIcon style={{ color: "#b78103" }} />}
                     color={"#fff7cd"}
-                    iconColor={"#b78103"}
+                    iconcolor={"#b78103"}
                     desc={"16% Since last month"}
                   />
                 </Grid>
@@ -106,7 +106,7 @@ const DashboardPage = () => {
                     count={"300"}
                     icons={<CategoryIcon style={{ color: "#b72136" }} />}
                     color={"#ffe7d9"}
-                    iconColor={"#b72136"}
+                    iconcolor={"#b72136"}
                     desc={"16% Since last month"}
                     sx={{ height: '100%' }} />
                 </Grid>
