@@ -6,7 +6,7 @@ import {
     Grid
 } from '@material-ui/core';
 
-import DialogComponent from './CategoryDetail';
+import DialogComponent from './CategoryDailog';
 import ListToolbar from '../../components/Card/CardToolBox';
 import CategoryCard from '../../components/Card/CustomCard';
 
@@ -84,7 +84,7 @@ const CategoryList = () => {
                 }}
             >
                 <Container maxWidth={false}>
-                    <ListToolbar clickHandler={handleClickOpen} title={"Add Product"} />
+                    <ListToolbar clickHandler={handleClickOpen} title={"Add Category"} />
                     <Box sx={{ pt: 3 }}>
                         <Grid
                             container

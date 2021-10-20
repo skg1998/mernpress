@@ -22,14 +22,15 @@
     "prop-types": "*",
     "react": "^17.0.2",
     "react-dom": "*",
+    "react-dropzone": "^11.4.2",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^5.3.0",
     "react-scripts": "^4.0.3",
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "start": "node --max_old_space_size=4096 node_modules/.bin/react-scripts start",
-    "build": "node --max_old_space_size=4096 node_modules/.bin/react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-prebuild": "rm -rf node_modules && npm cache clean -f"
