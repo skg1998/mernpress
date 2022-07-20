@@ -2,10 +2,10 @@
 > Mernpress Frontend to view all product and purchase.
 
 ### Features (task to complete in first realease)
-- [ ] Home
-- [ ] category
-- [ ] filter
-- [ ] search
+- [X] Home
+- [X] category
+- [X] filter
+- [X] search
 - [X] Products
 - [X] Product-detail
 - [X] cart
@@ -16,5 +16,5 @@
 - [X] signup
 - [X] forgetPassword
 - [X] userProfile
-- [ ] order-history
-- [ ] order-track
+- [ ] Bidding Process
+
